@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Muszilla</title>
+
+    <link rel="stylesheet" type="text/css" href="Login_And_Signup.css" />
+
+</head>
+<body>
+
+    <!-- This logo was created by hand by Natalia, so there is no link-->
+    <div id="logo">
+        <img src="pictures/officialMuszillaLogo.jpg" width="250px" alt="Image Of Muszilla logo">
+    </div>
+
+    <!-- this is the babckground image on the sign in and sign up screen -->
+    <!-- Photo by Elviss Railijs Bitāns from Pexels. Link: https://www.pexels.com/photo/blue-vinyl-record-playing-on-turntable-1389429/ -->
+    <div class="recordBKimage">
+        <img src="pictures/record.jpg" width="1570" height="560" alt="Image of a record as the background" />
+    </div>
+
+    <div class="information">
+
+        <p id="welcome">W E L C O M E<br>T O <br> M U S Z I L L A</p>
+        <p id="info"> Listen to high quality and ad-free music on Muszilla.<br>Look up songs, save them, and build playlists. All for free.</p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="inner-box">
+
+            <div id="cf" class="cardFront">
+
+                <form id="loginForm" action="User_Homepage.html" method="post">
+
+                    <p>LOGIN</p>
+                    <input type="text" name="email" placeholder="Email" required>
+                    <input type="password" name="pass" placeholder="Password" required>
+                    <button type="submit" value ="Login" onclick="">Login</button>
+                    <button type="button" class="btn" onclick="showRegistration()">I'm New Here</button>
+                    <p id="forgotPassword">Forgot Password?<a id="link" href=""><em>Click here</em></a></p>
+
+                </form>
+
+            </div>
+
+            <div id="cb" style="display:none" class="cardBack">
+
+                <form id="registration" action="User_Homepage.html" method="post" >
+
+                    <p>SIGN-UP</p>
+                    <input type="text" name="" placeholder="Full Name" required>
+                    <input type="text" name="" placeholder="Email" required>
+                    <input type="password" name="" placeholder="Password" required>
+                    <button type="submit" onclick="">Register</button>
+                    <button type="button" class="btn1" onclick="showLogin()">I'm Already Registered</button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+        var x = document.getElementById("cb");
+        var y = document.getElementById("cf");
+
+        function showRegistration() {
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                y.style.display = "none";
+                document.getElementById('loginForm').reset();
+            }
+            else {
+                x.style.display = "none";
+            }
+        }
+
+        function showLogin() {
+
+            if (y.style.display === "none") {
+                y.style.display = "block";
+                x.style.display = "none";
+                document.getElementById('registration').reset();
+            }
+            else {
+                y.style.display = "none";
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>
