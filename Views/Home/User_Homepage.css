@@ -1,12 +1,18 @@
 ﻿@media only screen and (max-width: 1024px) {
+
 .sidebar {
     padding-top: 15px;
-    }
+    padding-left: 30px;
+   }
 
 .sidebar a {
     font-size: 18px;
     }
 
+}
+
+#logo {
+    padding-left: 10px;
 }
 
 body {
@@ -18,33 +24,123 @@ body {
     overflow-y: hidden;
 }
 
-
 .sidebar {
     height: 605px;
     width: 250px;
     position: relative;
     z-index: 1;
     top: 0;
-    left: 0;
+    left: 15px;
     background-color: black;
     overflow-x: hidden;
-    box-shadow: 0px 0px 40px 6px #33a7ee;
+    box-shadow: 0px 0px 30px 4px #33CCFF;
+    border-radius: 18px;
     padding-top: 16px;
+}
+
+.sidebar p {
+    color: #999;
+    padding-top: 20px;
+    padding-left: 25px;
+    font-family: helvetica;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.sidebar li {
+    color: #fff;
+    font-family: Arial;
+    padding-top: 5px;
+    font-weight: normal;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+li:hover {
+    color: #33a7ee;
 }
 
 .sidebar a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 20px;
-    color: #818181;
+    color: white;
+    /*border-bottom: 1px solid #33a7ee;*/
     display: block;
 }
 
 .sidebar a:hover {
     color: #33a7ee;
+    border-bottom: 1px solid #fff;
 }
 
 .main {
-    margin-left: 160px; /* Same as the width of the sidenav */
+    margin-left: 160px; 
     padding: 0px 10px;
+}
+
+.sidebar #searchBar {
+    padding-left: 20px;
+}
+
+.sidebar #contents {
+    padding: 20px;
+}
+
+input {
+    outline: none;
+}
+
+input[type=search] {
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+input::-webkit-search-decoration, input::-webkit-search-cancel-button {
+    display: none;
+}
+
+input[type=search] {
+    background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+    border: solid 2px #33a7ee;
+    padding: 9px 10px 9px 32px;
+    width: 55px;
+    -webkit-border-radius: 10em;
+    -moz-border-radius: 10em;
+    border-radius: 10em;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+}
+
+input[type=search]:focus {
+    width: 146px;
+    color: #33a7ee;
+    background-color: #fff;
+    border-color: #33a7ee;
+    -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+    -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+    box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
+
+input:-moz-placeholder {
+    color: #999;
+}
+
+input::-webkit-input-placeholder {
+    color: #999;
+}
+
+.arrow {
+    border: solid #999;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }

@@ -5,7 +5,8 @@
     <meta charset="utf-8" />
     <title>Home Page</title>
 
-    <link rel="stylesheet" type="text/css" href="User_Homepage.css" />
+    
+    <link rel="stylesheet" type="text/css" href="User_Homepage.css"/>
 
 </head>
 <body>
@@ -14,11 +15,32 @@
         <img src="pictures/officialMuszillaLogo.jpg" width="250px" alt="Image Of Muszilla logo">
     </div>
 
+    <!-- Load an icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <i class="fa fa-fw fa-user"></i> -->
     <div class="sidebar">
-        <a href="#home"><i class="fa fa-fw fa-home"></i> Home</a>
-        <a href="#services"><i class="fa fa-fw fa-wrench"></i> Services</a>
-        <a href="#clients"><i class="fa fa-fw fa-user"></i> Clients</a>
-        <a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+
+        <form id="searchBar">
+            <input type="search" placeholder="Search">
+        </form>
+
+        <div id="contents">
+            <a href="#home"> Home</a>
+            <a href="#headphones"> My Playlist</a>
+            <a href="#account"> Account</a>
+            <a href="#settings"> Settings</a>
+        </div>
+
+        <div>
+            <p>Recently Played  <i class="arrow down"></i> </p>
+
+                <ul>
+                  <li>Song 1 Name</li>
+                  <li>Song 2 Name</li>
+                  <li>Song 3 Name</li>
+                </ul> 
+
+        </div>
     </div>
 
 </body>
