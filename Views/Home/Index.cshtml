@@ -1,5 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Login Page";
+    string[] TableHeaders = new string[]
+    {
+        "Username"
+    };
 }
-<h3>Username : @ViewData["Username"]</h3>
+<div class= "table">
+    <table>
+        <thead>
+            <tr>
+                @{ 
+                    foreach (var head in TableHeaders)
+                    {
+                        <th>
+                            @head
+                        </th>
+                    }
+                }}
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
     

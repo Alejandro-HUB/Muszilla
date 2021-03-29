@@ -6,21 +6,43 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Muszilla.Models;
+using System.Data.SqlClient;
 
 namespace Muszilla.Controllers
 {
     public class HomeController : Controller
     {
+        SqlCommand com = new SqlCommand();
+        SqlDataReader dr;
+        SqlConnection con = new SqlConnection();
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        private void FetchData()
+        {
+            try
+            {
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "";
+                dr = com.ExecuteReader();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IActionResult Privacy()
