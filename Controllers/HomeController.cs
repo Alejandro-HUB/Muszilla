@@ -35,7 +35,7 @@ namespace Muszilla.Controllers
             {
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "";
+                com.CommandText = "Select TOP(100)[Song_ID],[Song_Name],[Song_Artist],[Song_Length],[Song_Genre] from Songs";
                 dr = com.ExecuteReader();
                 con.Close();
             }
