@@ -24,8 +24,8 @@ namespace Muszilla.Models
             SqlConnection connection = new SqlConnection(connectionstring);
             connection.Open();
             SqlCommand com = new SqlCommand("select count(*) from Users", connection);
-            var count = (int)com.ExecuteScalar();
-            ViewData["TotalData"] = count;
+            var Username = (int)com.ExecuteScalar();
+            ViewData["Username"] = Username;
             connection.Close();
             return View();
         }
