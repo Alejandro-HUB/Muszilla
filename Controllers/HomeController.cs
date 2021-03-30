@@ -15,6 +15,7 @@ namespace Muszilla.Controllers
         SqlCommand com = new SqlCommand();
         SqlDataReader dr;
         SqlConnection con = new SqlConnection();
+        List<SongsModel> songs = new List<SongsModel>();
 
         private readonly ILogger<HomeController> _logger;
 
@@ -26,17 +27,31 @@ namespace Muszilla.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            FetchData();
+            return View(songs);
         }
 
         private void FetchData()
         {
+            if (songs.Count > 0)
+            {
+                songs.Clear();
+            }
             try
             {
                 con.Open();
                 com.Connection = con;
                 com.CommandText = "Select TOP(100)[Song_ID],[Song_Name],[Song_Artist],[Song_Length],[Song_Genre] from Songs";
                 dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    songs.Add(new SongsModel() { Song_ID = dr["Song_ID"].ToString()
+                    ,Song_Name = dr["Song_Name"].ToString()
+                    ,Song_Artist = dr["Song_Artist"].ToString()
+                    ,Song_Length = dr["Song_Length"].ToString()
+                    ,Song_Genre = dr["Song_Genre"].ToString()
+                    });
+                }
                 con.Close();
             }
             catch (Exception ex)

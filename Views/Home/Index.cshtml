@@ -9,7 +9,7 @@
     <table>
         <thead>
             <tr>
-                @{ 
+                @{
                     foreach (var head in TableHeaders)
                     {
                         <th>
@@ -22,8 +22,26 @@
                 </th>
             </tr>
         </thead>
+        @{
+            if (Model != null)
+            {
+                foreach (var Data in Model)
+                {
+                <tr>
+                    <td>@Data.Song_ID</td>
+                    <td>@Data.Song_Name</td>
+                    <td>@Data.Song_Artist</td>
+                    <td>@Data.Song_Length</td>
+                    <td>@Data.Song_Genre</td>
+                </tr>
+                }
+            }
+        }}
+        <tr>
+            <td>
+            </td>
+        </tr>
         <tbody>
-
         </tbody>
     </table>
 </div>
