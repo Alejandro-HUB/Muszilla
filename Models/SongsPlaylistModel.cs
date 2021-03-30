@@ -7,5 +7,7 @@ namespace Muszilla.Models
 {
     public class SongsPlaylistModel
     {
+        public string playlistID { get; set; }
+        public string songsID { get; set; }
     }
 }
