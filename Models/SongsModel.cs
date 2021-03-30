@@ -7,8 +7,8 @@ namespace Muszilla.Models
 {
     public class SongsModel
     {
-        public string Song_Name { get; set;}
         public string Song_ID { get; set; }
+        public string Song_Name { get; set;}
         public string Song_Artist { get; set; }
         public string Song_Length { get; set; }
         public string Song_Genre { get; set; }
