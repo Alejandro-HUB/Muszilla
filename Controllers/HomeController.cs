@@ -22,7 +22,7 @@ namespace Muszilla.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
+            con.ConnectionString = Muszilla.Properties.Resources.ConnectionString; 
         }
 
         public IActionResult Index()

@@ -61,7 +61,7 @@ namespace Muszilla.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data Source = &quot;W10-MAZC&quot;; database=&quot;UsersDB&quot;; integrated security = SSPL;.
+        ///   Looks up a localized string similar to Data Source = &quot;W10-MAZC&quot;; database=&quot;UsersDB&quot;; integrated security = SSPI;.
         /// </summary>
         internal static string ConnectionString {
             get {
