@@ -57,7 +57,7 @@ body {
 }
 
 li:hover {
-    color: #33a7ee;
+    color: #33CCFF;
 }
 
 .sidebar a {
@@ -65,14 +65,13 @@ li:hover {
     text-decoration: none;
     font-size: 20px;
     color: white;
-    /*border-bottom: 1px solid #33a7ee;*/
     display: block;
 }
 
-.sidebar a:hover {
-    color: #33a7ee;
-    border-bottom: 1px solid #fff;
-}
+    .sidebar a:hover {
+        color: #33CCFF;
+        border-right: 3px solid #fff;
+    }
 
 .main {
     margin-left: 160px; 
@@ -144,3 +143,331 @@ input::-webkit-input-placeholder {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
 }
+
+.btn1 {
+    position: absolute;
+    width: 200px;
+    top: 45px;
+    padding: 5px 35px;
+    right: 650px;
+    border-radius: 30px;
+    font-size: 18px;
+    border: solid #33CCFF;
+    background-color: black;
+    color: #33CCFF;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0px 0px 18px 3px #33CCFF;
+}
+
+    .btn1:hover {
+        background: #33CCFF;
+        color: #fff;
+        border: solid #33CCFF;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .btn1:focus {
+        background: #33CCFF;
+        color: #fff;
+        border: solid #33CCFF;
+        cursor: pointer;
+        top: 60px;
+        outline: 0;
+        box-shadow: none;
+    }
+
+.btn2 {
+    position: absolute;
+    width: 200px;
+    top: 45px;
+    float: right;
+    padding: 5px 35px;
+    right: 430px;
+    border-radius: 30px;
+    font-size: 18px;
+    border: solid #33CCFF;
+    background-color: black;
+    color: #33CCFF;
+    font-weight: bold;
+    box-shadow: 0px 0px 18px 3px #33CCFF;
+    text-align: center;
+}
+
+    .btn2:hover {
+        background: #33CCFF;
+        color: #fff;
+        border: solid #33CCFF;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .btn2:focus {
+        background: #33CCFF;
+        color: #fff;
+        border: solid #33CCFF;
+        cursor: pointer;
+        top: 60px;
+        outline: 0;
+        box-shadow: none;
+    }
+
+
+.btn3 {
+    position: absolute;
+    width: 200px;
+    top: 45px;
+    padding: 5px 35px;
+    right: 210px;
+    float: right;
+    border-radius: 30px;
+    font-size: 18px;
+    border: solid #33CCFF;
+    background-color: black;
+    color: #33CCFF;
+    box-shadow: 0px 0px 18px 3px #33CCFF;
+    font-weight: bold;
+    text-align: center;
+}
+
+    .btn3:hover {
+        background: #33CCFF;
+        color: #fff;
+        border: solid #33CCFF;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .btn3:focus {
+        background: #33CCFF;
+        color: #fff;
+        border: solid #33CCFF;
+        cursor: pointer;
+        top: 60px;
+        outline: 0;
+        box-shadow: none;
+    }
+
+#topPicks {
+    width: 1100px;
+    height: 590px;
+    border-radius: 50px;
+    background: black;
+    position: absolute;
+    top: 125px;
+    right: 100px;
+}
+
+.btn01 {
+    text-align: center;
+    top: 160px;
+    position: absolute;
+    left: 455px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 3px #33CCFF;
+}
+
+.btn02 {
+    text-align: center;
+    top: 160px;
+    position: absolute;
+    left: 755px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 3px #33CCFF;
+}
+
+.btn03 {
+    text-align: center;
+    top: 160px;
+    position: absolute;
+    left: 1055px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 3px #33CCFF;
+}
+
+.btn04 {
+    text-align: center;
+    top: 425px;
+    position: absolute;
+    left: 455px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 3px #33CCFF;
+}
+
+.btn05 {
+    text-align: center;
+    top: 425px;
+    position: absolute;
+    left: 755px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 3px #33CCFF;
+}
+
+.btn06 {
+    text-align: center;
+    top: 425px;
+    position: absolute;
+    left: 1055px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 3px #33CCFF;
+}
+
+
+.btn01:hover, .btn01:focus, .btn02:hover, .btn02:focus, .btn03:hover, .btn03:focus, .btn04:hover, .btn04:focus,
+.btn05:hover, .btn05:focus, .btn06:hover, .btn06:focus {
+    box-shadow: 0px 0px 25px 3px #33CCFF;
+    cursor: pointer;
+}
+
+#item1 {
+    color: white;
+    position: absolute;
+    top: 350px;
+    left: 483px;
+}
+
+#item2 {
+    color: white;
+    position: absolute;
+    top: 350px;
+    left: 783px;
+}
+
+#item3 {
+    color: white;
+    position: absolute;
+    top: 350px;
+    left: 1083px;
+}
+
+#item4 {
+    color: white;
+    position: absolute;
+    top: 615px;
+    left: 483px;
+}
+
+#item5 {
+    color: white;
+    position: absolute;
+    top: 615px;
+    left: 783px;
+}
+
+#item6 {
+    color: white;
+    position: absolute;
+    top: 615px;
+    left: 1083px;
+}
+
+
+.homescreen {
+    width: 1100px;
+    height: 530px;
+    border-radius: 50px;
+    border: solid #33CCFF; 
+    box-shadow: 0px 0px 30px 3px #33CCFF;
+    position: absolute;
+    top: 125px;
+    left: 350px;
+}
+
+#userImage {
+    top: 40px;
+    position: absolute;
+    left: 50px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+#userName {
+    border-bottom: 3px solid #33CCFF;
+    text-align: center;
+    font-size: 18px;
+    top: 100px;
+    width: 230px;
+    color: white;
+    position: absolute;
+    left: 300px;
+}
+
+#userEmail {
+    border-bottom: 3px solid #33CCFF;
+    text-align: center;
+    font-size: 18px;
+    top: 160px;
+    width: 230px;
+    color: white;
+    position: absolute;
+    left: 300px;
+}
+
+.homescreen p {
+    font-size: 20px;
+    color: #999;
+    top: 230px;
+    position: absolute;
+    left: 70px;
+}
+
+.homescreen .playlists {
+    color: white;
+    background: black;
+    font-size: 16px;
+    width: 900px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 2px solid #33CCFF;
+    top: 290px;
+    position: absolute;
+    left: 80px;
+}
+
+.playlists:focus {
+    outline: 0;
+    border-left:none;
+}
+
+
+.homescreen .playlists2 {
+    color: white;
+    background: black;
+    font-size: 16px;
+    width: 900px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 2px solid #33CCFF;
+    top: 330px;
+    position: relative;
+    left: 80px;
+}
+
+.playlists2:focus {
+    outline: 0;
+}
+
+
