@@ -7,9 +7,7 @@ select TOP(100)
 Playlist_ID,Playlist_Name,User_ID_FK
 from Playlist
 
-select TOP(100)
-playlistID,songsID
-from SongsPlaylistR
+Select TOP(100) playlistID,songsID from SongsPlaylistR
 
  * 
  * 
