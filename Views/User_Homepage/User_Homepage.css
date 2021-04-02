@@ -20,16 +20,17 @@ body {
     padding: 0;
     font-family: helvetica;
     background-color: black;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    /*overflow-x: hidden;
+    overflow-y: hidden;*/
 }
 
 .sidebar {
     height: 605px;
     width: 250px;
-    position: relative;
+    position: sticky;
     z-index: 1;
     top: 0;
+    border: solid #33CCFF;
     left: 15px;
     background-color: black;
     overflow-x: hidden;
@@ -427,47 +428,55 @@ input::-webkit-input-placeholder {
 .homescreen p {
     font-size: 20px;
     color: #999;
-    top: 230px;
+    top: 240px;
     position: absolute;
     left: 70px;
 }
 
-.homescreen .playlists {
-    color: white;
-    background: black;
-    font-size: 16px;
-    width: 900px;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    border-bottom: 2px solid #33CCFF;
-    top: 290px;
+audio {
+    width: 1050px;
+    top: 550px;
     position: absolute;
-    left: 80px;
+    left: 25px;
+    border-radius: 50px;
+    border: 4px solid #33ccff;
 }
 
-.playlists:focus {
+audio:focus {
     outline: 0;
-    border-left:none;
 }
 
+#f1 {
+    top: 300px;
+    position: absolute;
+    left: 70px;
+}
 
-.homescreen .playlists2 {
+#lbl1 {
+    color: white;
+    font-size: 18px;
+    padding-right: 5px;
+}
+
+#audio_list {
+    width: 750px;
     color: white;
     background: black;
-    font-size: 16px;
-    width: 900px;
+    border-bottom: 2px solid #33CCFF;
     border-left: none;
     border-right: none;
     border-top: none;
-    border-bottom: 2px solid #33CCFF;
-    top: 330px;
-    position: relative;
-    left: 80px;
 }
 
-.playlists2:focus {
+#audio_list:focus {
     outline: 0;
 }
+
+#opt {
+    font-size: 16px;
+    border: none;
+}
+
+
 
 

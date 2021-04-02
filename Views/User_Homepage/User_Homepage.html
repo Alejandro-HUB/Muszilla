@@ -26,11 +26,10 @@
 
         <div id="contents">
             <a href="#home"> Home</a>
-            <a href="#headphones"> My Playlist</a>
             <a href="#account"> Account</a>
             <a href="#settings"> Settings</a>
         </div>
-       
+
         <div>
             <p>Recently Played  <i class="arrow down"></i> </p>
 
@@ -50,45 +49,38 @@
     </div>
 
     <div class="homescreen">
-            <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
-            <img id="userImage" src="emptyImage.png" />
-            <div id="userName" contenteditable="true">User Name </div> 
-            <div id="userEmail" contenteditable="true">User Email</div>
-            <p>My Playlists</p>
-            
-        <select class="playlists">
-            <option value="default">Playlist 1 Name</option>
-            <option value="song1">Song 1 Name</option>
-            <option value="song2">Song 2 Name</option>
-            <option value="song3">Song 3 Name</option>
-            <option value="song4">Song 4 Name</option>
-         </select>
+        <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
+        <img id="userImage" src="emptyImage.png" />
+        <div id="userName" contenteditable="true">User Name </div>
+        <div id="userEmail" contenteditable="true">User Email</div>
 
-        <select class="playlists2">
-            <option value="default">Playlist 2 Name</option>
-            <option value="song1">Song 1 Name</option>
-            <option value="song2">Song 2 Name</option>
-            <option value="song3">Song 3 Name</option>
-            <option value="song4">Song 4 Name</option>
-         </select>
+        <p>My Playlists</p>
 
-        <!--
-            <details class="playlists">
-                <summary>Playlist 1 Name</summary>
-                    <ul>
-                        <li>Song 1 Name</li>
-                        <li>Song 2 Name</li>
-                        <li>Song 3 Name</li>
-                    </ul>
-            </details>
-            <details class="playlists2">
-                <summary>Playlist 2 Name</summary>
-                    <ul>
-                        <li>Song 1 Name</li>
-                        <li>Song 2 Name</li>
-                        <li>Song 3 Name</li>
-                    </ul>
-            </details> -->
+        <form id="f1">
+            <label for="audio_list" id="lbl1">
+                Playlist 1:
+            </label>
+            <select onchange="change_audio_file();" id="audio_list">
+                <!-- All this music is from bensound.com and the link is: https://www.bensound.com/ -->
+                <option id="opt" value="">Select A Song </option>
+                <option id="opt" value="anewbeginning.mp3">A New Beginning</option>
+                <option id="opt" value="creativeminds.mp3">Creative Minds</option>
+                <option id="opt" value="ukulele.mp3">Ukulele</option>
+                <option id="opt" value="goinghigher.mp3">Going Higher</option>
+                <option id="opt" value="cute.mp3">Cute</option>
+                <option id="opt" value="buddy.mp3">Buddy</option>
+                <option id="opt" value="littleidea.mp3">Little Idea</option>
+                <option id="opt" value="jazzyfrenchy.mp3">Jazzy Frenchy</option>
+            </select>
+        </form>
+
+        <div id="audio_container">
+            <audio controls id="audio_player" src="audio/demo.mp3">
+                <div>
+                    Sorry, your browser does not support this audio player.
+                </div>
+            </audio>
+        </div>
 
     </div>
 
@@ -104,24 +96,16 @@
     <div> <img class="btn05" src="headPhones.jpg" /><p id="item5">Song & Artist Name5 </p> </div>
     <div> <img class="btn06" src="headPhones.jpg" /><p id="item6">Song & Artist Name6 </p> </div> -->
 
-     <script type="text/javascript">
-        /* var x = document.getElementById('home');
+    <script type="text/javascript">
 
-        function showHomepage() {
-
+        function change_audio_file() {
+            var file_list = document.getElementById('audio_list');
+            var file_to_play = file_list.options[file_list.selectedIndex].value;
+            var player = document.getElementById('audio_player');
+            player.src = file_to_play;
+            player.play();
         }
 
-        function init() {
-            // Retrieving the text input's value which was stored into localStorage
-            var fname = localStorage.getItem("fn");
-            var em = localStorage.getItem("e");
-            var pass = localStorage.getItem("p");
-
-            // Writing the value in the document
-            document.write("First Name = " + fname);
-            document.write("Email = " + em);
-            document.write("Password = " + pass);
-        } * /
 
     </script>
 </body>
