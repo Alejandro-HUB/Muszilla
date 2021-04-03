@@ -48,12 +48,12 @@
 
             <div id="cb" style="display:none" class="cardBack">
 
-                <form id="registration" action="User_Homepage.html" method="post" >
+                <form id="registration" onsubmit="tosubmit()" action="User_Homepage.html" method="post" >
 
                     <p>SIGN-UP</p>
-                    <input type="text" name="" placeholder="Full Name" required>
-                    <input type="email" name="" placeholder="Email" required>
-                    <input type="password" name="" placeholder="Password" required>
+                    <input id="fn" type="text" name="" placeholder="Full Name" required>
+                    <input id="e" type="email" name="" placeholder="Email" required>
+                    <input id="p" type="password" name="" placeholder="Password" required>
                     <button type="submit" onclick="">Register</button>
                     <button type="button" class="btn1" onclick="showLogin()">I'm Already Registered</button>
 
@@ -94,6 +94,20 @@
                 y.style.display = "none";
             }
         }
+
+        
+        /* cannot implement this function until the login and the homepage is connected 
+         * function tosubmit() {
+            var fname = document.getElementById("fn").value;
+            localStorage.setItem("fn", fname);
+
+            var em = document.getElementById("e").value;
+            localStorage.setItem("e", em);
+
+            var pass = document.getElementById("p").value;
+            localStorage.setItem("p", pass);
+
+            return true; } */
 
     </script>
 
