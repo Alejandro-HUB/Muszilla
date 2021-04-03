@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\pictures\" />
+    <None Include="wwwroot\css\Login_And_Signup.css" />
+    <None Include="wwwroot\Pictures\logostyle2.jpg" />
+    <None Include="wwwroot\Pictures\officialMuszillaLogo.jpg" />
+    <None Include="wwwroot\Pictures\record.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pictures\" />
   </ItemGroup>
 
 </Project>
