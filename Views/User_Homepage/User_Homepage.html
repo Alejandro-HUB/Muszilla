@@ -25,9 +25,9 @@
         </form>
 
         <div id="contents">
-            <a href="#home"> Home</a>
-            <a href="#account"> Account</a>
-            <a href="#settings"> Settings</a>
+            <a href="" onclick="myFunction1()" id="userHome"> Home</a>
+            <a href="" onclick="myFunction1()" id="accountDetails"> Account</a>
+            <a href="" onclick="myFunction1()" id="userSettings"> Settings</a>
         </div>
 
         <div>
@@ -43,12 +43,12 @@
     </div>
 
     <div>
-        <button type="button" class="btn1" onclick=""> TOP PICKS </button>
-        <button type="button" class="btn2" onclick=""> FEATURED </button>
-        <button type="button" class="btn3" onclick=""> GENRES </button>
+        <button type="button" class="btn1" onclick="myFunction()" id="tp"> TOP PICKS </button>
+        <button type="button" class="btn2" onclick="myFunction()" id="feat"> FEATURED </button>
+        <button type="button" class="btn3" onclick="myFunction()" id="gen"> GENRES </button>
     </div>
 
-    <div class="homescreen">
+    <div class="homescreen" id="homefirst">
         <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
         <img id="userImage" src="emptyImage.png" />
         <div id="userName" contenteditable="true">User Name </div>
@@ -74,27 +74,26 @@
             </select>
         </form>
 
-        <div id="audio_container">
-            <audio controls id="audio_player" src="audio/demo.mp3">
-                <div>
-                    Sorry, your browser does not support this audio player.
-                </div>
-            </audio>
-        </div>
-
     </div>
 
-    <!-- <div id="topPicks"></div>
+    <div id="topPicks">
+        <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
+        <div> <img class="btn01" src="headPhones.jpg" /><p id="item1">Song & Artist Name1 </p> </div>
+        <div> <img class="btn02" src="headPhones.jpg" /><p id="item2">Song & Artist Name2 </p> </div>
+        <div> <img class="btn03" src="headPhones.jpg" /><p id="item3">Song & Artist Name3 </p> </div>
+        <div> <img class="btn04" src="headPhones.jpg" /><p id="item4">Song & Artist Name4 </p> </div>
+        <div> <img class="btn05" src="headPhones.jpg" /><p id="item5">Song & Artist Name5 </p> </div>
+        <div> <img class="btn06" src="headPhones.jpg" /><p id="item6">Song & Artist Name6 </p> </div>
+    </div>
 
-    <br />
 
-    <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
-    <!-- <div> <img class="btn01" src="headPhones.jpg" /><p id="item1">Song & Artist Name1 </p> </div>
-    <div> <img class="btn02" src="headPhones.jpg" /><p id="item2">Song & Artist Name2 </p> </div>
-    <div> <img class="btn03" src="headPhones.jpg" /><p id="item3">Song & Artist Name3 </p> </div>
-    <div> <img class="btn04" src="headPhones.jpg" /><p id="item4">Song & Artist Name4 </p> </div>
-    <div> <img class="btn05" src="headPhones.jpg" /><p id="item5">Song & Artist Name5 </p> </div>
-    <div> <img class="btn06" src="headPhones.jpg" /><p id="item6">Song & Artist Name6 </p> </div> -->
+    <div id="audio_container">
+        <audio controls id="audio_player" src="audio/demo.mp3">
+            <div>
+                Sorry, your browser does not support this audio player.
+            </div>
+        </audio>
+    </div>
 
     <script type="text/javascript">
 
@@ -104,6 +103,20 @@
             var player = document.getElementById('audio_player');
             player.src = file_to_play;
             player.play();
+        }
+
+        function myFunction1() {
+            var x = document.getElementByTagName("*")[0];
+
+            if (x.id === "userHome") {
+                document.getElementById("homefirst").style.display = "inherit";
+            }
+        }
+
+        function myFunction() {
+
+            document.getElementById("topPicks").style.display = "inherit";
+           
         }
 
 
