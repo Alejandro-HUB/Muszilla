@@ -61,7 +61,7 @@ namespace Muszilla.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data Source = &quot;W10-MAZC&quot;; database=&quot;UsersDB&quot;; integrated security = SSPI;.
+        ///   Looks up a localized string similar to Server=tcp:muzilla2.database.windows.net,1433;Initial Catalog=muzilla;Persist Security Info=False;User ID=muzilla;Password=AleMazNat1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;.
         /// </summary>
         internal static string ConnectionString {
             get {
