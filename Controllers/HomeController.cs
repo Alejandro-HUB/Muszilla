@@ -36,7 +36,7 @@ namespace Muszilla.Controllers
             if (dr.Read())
             {
                 con.Close();
-                return View("Create");
+                return View("User_Homepage");
             }
             else 
             {

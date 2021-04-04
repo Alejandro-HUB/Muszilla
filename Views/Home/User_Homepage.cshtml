@@ -1,18 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@model Muszilla.Models.ConsumerModel
+@{
+    ViewData["Title"] = "User Homepage";
+}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title>Home Page</title>
-
-    
-    <link rel="stylesheet" type="text/css" href="User_Homepage.css"/>
-
-</head>
+<link rel="stylesheet" type="text/css" href="/css/User_Homepage.css" />
 <body>
     <!-- This logo was created by hand by Natalia, so there is no link-->
     <div id="logo">
-        <img src="officialMuszillaLogo.jpg" width="250px" alt="Image Of Muszilla logo">
+        <img src="/Pictures/officialMuszillaLogo.jpg" width="250px" alt="Image Of Muszilla logo">
     </div>
 
     <div class="sidebar">
@@ -47,7 +42,7 @@
 
     <div class="homescreen" id="homefirst">
         <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
-        <img id="userImage" src="emptyImage.png" />
+        <img id="userImage" src="/Pictures/emptyImage.png" />
         <div id="userName" contenteditable="true">User Name </div>
         <div id="userEmail" contenteditable="true">User Email</div>
 
@@ -60,14 +55,14 @@
             <select onchange="change_audio_file();" id="audio_list">
                 <!-- All this music is from bensound.com and the link is: https://www.bensound.com/ -->
                 <option id="opt" value="">Select A Song </option>
-                <option id="opt" value="anewbeginning.mp3">A New Beginning</option>
-                <option id="opt" value="creativeminds.mp3">Creative Minds</option>
-                <option id="opt" value="ukulele.mp3">Ukulele</option>
-                <option id="opt" value="goinghigher.mp3">Going Higher</option>
-                <option id="opt" value="cute.mp3">Cute</option>
-                <option id="opt" value="buddy.mp3">Buddy</option>
-                <option id="opt" value="littleidea.mp3">Little Idea</option>
-                <option id="opt" value="jazzyfrenchy.mp3">Jazzy Frenchy</option>
+                <option id="opt" value="/Music/anewbeginning.mp3">A New Beginning</option>
+                <option id="opt" value="/Music/creativeminds.mp3">Creative Minds</option>
+                <option id="opt" value="/Music/ukulele.mp3">Ukulele</option>
+                <option id="opt" value="/Music/goinghigher.mp3">Going Higher</option>
+                <option id="opt" value="/Music/cute.mp3">Cute</option>
+                <option id="opt" value="/Music/buddy.mp3">Buddy</option>
+                <option id="opt" value="/Music/littleidea.mp3">Little Idea</option>
+                <option id="opt" value="/Music/jazzyfrenchy.mp3">Jazzy Frenchy</option>
             </select>
         </form>
 
@@ -113,10 +108,9 @@
         function myFunction() {
 
             document.getElementById("topPicks").style.display = "inherit";
-           
+
         }
 
 
     </script>
 </body>
-    </html>

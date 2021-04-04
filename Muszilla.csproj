@@ -16,11 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\User_Homepage\officialMuszillaLogo.jpg" />
-    <None Remove="Views\User_Homepage\User_Homepage.css" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\css\User_Homepage.css" />
     <None Include="wwwroot\Music\anewbeginning.mp3" />
     <None Include="wwwroot\Music\buddy.mp3" />
