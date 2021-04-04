@@ -1,27 +1,19 @@
 ﻿@media only screen and (max-width: 1024px) {
+}
 
-.sidebar {
-    padding-top: 15px;
-    padding-left: 30px;
-   }
-
-.sidebar a {
-    font-size: 18px;
+    #logo {
+        padding-left: 10px;
     }
-}
 
-#logo {
-    padding-left: 10px;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: helvetica;
-    background-color: black;
-    overflow-x: visible;
-    overflow-y: visible;
-}
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: helvetica;
+        background-color: black;
+        overflow-x: visible;
+        overflow-y: visible;
+        width: 100%;
+    }
 
 .sidebar {
     height: 575px;
@@ -34,251 +26,253 @@ body {
     background-color: black;
     overflow-x: hidden;
     box-shadow: 0px 0px 30px 4px #33CCFF;
-    border-radius: 18px;
+    border-radius: 40px;
     padding-top: 16px;
+    padding-left: 15px;
 }
 
-.sidebar p {
-    color: #999;
-    padding-top: 20px;
-    padding-left: 25px;
-    font-family: helvetica;
-    font-weight: normal;
-    font-size: 18px;
-}
+        .sidebar p {
+            color: #999;
+            padding-top: 20px;
+            padding-left: 25px;
+            font-family: helvetica;
+            font-weight: normal;
+            font-size: 18px;
+        }
 
-.sidebar li {
-    color: #fff;
-    font-family: Arial;
-    padding-top: 5px;
-    font-weight: normal;
-    font-size: 18px;
-    cursor: pointer;
-}
+        .sidebar li {
+            color: #fff;
+            font-family: Arial;
+            padding-top: 5px;
+            font-weight: normal;
+            font-size: 18px;
+            cursor: pointer;
+        }
 
-li:hover {
-    color: #33CCFF;
-}
-
-.sidebar a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 20px;
-    color: white;
-    display: block;
-}
-
-    .sidebar a:hover {
+    li:hover {
         color: #33CCFF;
-        border-right: 3px solid #fff;
     }
 
-.main {
-    margin-left: 160px; 
-    padding: 0px 10px;
-}
+    .sidebar a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: white;
+        display: block;
+    }
 
-.sidebar #searchBar {
-    padding-left: 20px;
-}
+        .sidebar a:hover {
+            color: #33CCFF;
+            border-right: 3px solid #fff;
+        }
 
-.sidebar #contents {
-    padding: 20px;
+    .main {
+        margin-left: 160px;
+        padding: 0px 10px;
+    }
 
-}
+    .sidebar #searchBar {
+        padding-left: 20px;
+    }
 
-input {
-    outline: none;
-}
+    .sidebar #contents {
+        padding: 20px;
+    }
 
-input[type=search] {
-    -webkit-appearance: textfield;
-    -webkit-box-sizing: content-box;
-    font-family: inherit;
-    font-size: 100%;
-}
+    input {
+        outline: none;
+    }
 
-input::-webkit-search-decoration, input::-webkit-search-cancel-button {
-    display: none;
-}
+        input[type=search] {
+            -webkit-appearance: textfield;
+            -webkit-box-sizing: content-box;
+            font-family: inherit;
+            font-size: 100%;
+        }
 
-input[type=search] {
-    background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
-    border: solid 2px #33a7ee;
-    padding: 9px 10px 9px 32px;
-    width: 55px;
-    -webkit-border-radius: 10em;
-    -moz-border-radius: 10em;
-    border-radius: 10em;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    transition: all .5s;
-}
+        input::-webkit-search-decoration, input::-webkit-search-cancel-button {
+            display: none;
+        }
 
-input[type=search]:focus {
-    width: 146px;
-    color: #33a7ee;
-    background-color: #fff;
-    border-color: #33a7ee;
-    -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
-    -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
-    box-shadow: 0 0 5px rgba(109,207,246,.5);
-}
+        input[type=search] {
+            background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+            border: solid 2px #33a7ee;
+            padding: 9px 10px 9px 32px;
+            width: 55px;
+            -webkit-border-radius: 10em;
+            -moz-border-radius: 10em;
+            border-radius: 10em;
+            -webkit-transition: all .5s;
+            -moz-transition: all .5s;
+            transition: all .5s;
+        }
 
-input:-moz-placeholder {
-    color: #999;
-}
+            input[type=search]:focus {
+                width: 146px;
+                color: #33a7ee;
+                background-color: #fff;
+                border-color: #33a7ee;
+                -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+                -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+                box-shadow: 0 0 5px rgba(109,207,246,.5);
+            }
 
-input::-webkit-input-placeholder {
-    color: #999;
-}
+        input:-moz-placeholder {
+            color: #999;
+        }
 
-.arrow {
-    border: solid #999;
-    border-width: 0 4px 4px 0;
-    display: inline-block;
-    padding: 3px;
-}
+        input::-webkit-input-placeholder {
+            color: #999;
+        }
 
-.down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-}
+    .arrow {
+        border: solid #999;
+        border-width: 0 4px 4px 0;
+        display: inline-block;
+        padding: 3px;
+    }
 
-.btn1 {
-    position: absolute;
-    width: 200px;
-    top: 45px;
-    padding: 5px 35px;
-    right: 650px;
-    border-radius: 30px;
-    font-size: 18px;
-    border: solid #33CCFF;
-    background-color: black;
-    color: #33CCFF;
-    font-weight: bold;
-    text-align: center;
-    box-shadow: 0px 0px 18px 3px #33CCFF;
-}
+    .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
 
-    .btn1:hover {
-        background: #33CCFF;
-        color: #fff;
+    .btn1 {
+        position: absolute;
+        width: 200px;
+        top: 30px;
+        padding: 5px 35px;
+        right: 550px;
+        border-radius: 30px;
+        font-size: 18px;
         border: solid #33CCFF;
-        cursor: pointer;
-        box-shadow: none;
+        background-color: black;
+        color: #33CCFF;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: 0px 0px 18px 3px #33CCFF;
     }
 
-    .btn1:focus {
-        background: #33CCFF;
-        color: #fff;
+        .btn1:hover {
+            background: #33CCFF;
+            color: #fff;
+            border: solid #33CCFF;
+            cursor: pointer;
+            box-shadow: none;
+        }
+
+        .btn1:focus {
+            background: #33CCFF;
+            color: #fff;
+            border: solid #33CCFF;
+            cursor: pointer;
+            top: 45px;
+            outline: 0;
+            box-shadow: none;
+        }
+
+    .btn2 {
+        position: absolute;
+        width: 200px;
+        top: 30px;
+        float: right;
+        padding: 5px 35px;
+        right: 330px;
+        border-radius: 30px;
+        font-size: 18px;
         border: solid #33CCFF;
-        cursor: pointer;
-        top: 60px;
-        outline: 0;
-        box-shadow: none;
+        background-color: black;
+        color: #33CCFF;
+        font-weight: bold;
+        box-shadow: 0px 0px 18px 3px #33CCFF;
+        text-align: center;
     }
 
-.btn2 {
-    position: absolute;
-    width: 200px;
-    top: 45px;
-    float: right;
-    padding: 5px 35px;
-    right: 430px;
-    border-radius: 30px;
-    font-size: 18px;
-    border: solid #33CCFF;
-    background-color: black;
-    color: #33CCFF;
-    font-weight: bold;
-    box-shadow: 0px 0px 18px 3px #33CCFF;
-    text-align: center;
-}
+        .btn2:hover {
+            background: #33CCFF;
+            color: #fff;
+            border: solid #33CCFF;
+            cursor: pointer;
+            box-shadow: none;
+        }
 
-    .btn2:hover {
-        background: #33CCFF;
-        color: #fff;
+        .btn2:focus {
+            background: #33CCFF;
+            color: #fff;
+            border: solid #33CCFF;
+            cursor: pointer;
+            top: 45px;
+            outline: 0;
+            box-shadow: none;
+        }
+
+
+    .btn3 {
+        position: absolute;
+        width: 200px;
+        top: 30px;
+        padding: 5px 35px;
+        right: 110px;
+        float: right;
+        border-radius: 30px;
+        font-size: 18px;
         border: solid #33CCFF;
-        cursor: pointer;
-        box-shadow: none;
+        background-color: black;
+        color: #33CCFF;
+        box-shadow: 0px 0px 18px 3px #33CCFF;
+        font-weight: bold;
+        text-align: center;
     }
 
-    .btn2:focus {
-        background: #33CCFF;
-        color: #fff;
+        .btn3:hover {
+            background: #33CCFF;
+            color: #fff;
+            border: solid #33CCFF;
+            cursor: pointer;
+            box-shadow: none;
+        }
+
+        .btn3:focus {
+            background: #33CCFF;
+            color: #fff;
+            border: solid #33CCFF;
+            cursor: pointer;
+            top: 45px;
+            outline: 0;
+            box-shadow: none;
+        }
+
+    #topPicks {
+        width: 1100px;
+        height: 520px;
+        border-radius: 50px;
+        background: black;
+        position: absolute;
+        top: 100px;
+        display: none;
         border: solid #33CCFF;
-        cursor: pointer;
-        top: 60px;
-        outline: 0;
-        box-shadow: none;
+        left: 350px;
+        color: white;
     }
 
-
-.btn3 {
-    position: absolute;
-    width: 200px;
-    top: 45px;
-    padding: 5px 35px;
-    right: 210px;
-    float: right;
-    border-radius: 30px;
-    font-size: 18px;
-    border: solid #33CCFF;
-    background-color: black;
-    color: #33CCFF;
-    box-shadow: 0px 0px 18px 3px #33CCFF;
-    font-weight: bold;
-    text-align: center;
-}
-
-    .btn3:hover {
-        background: #33CCFF;
-        color: #fff;
-        border: solid #33CCFF;
-        cursor: pointer;
-        box-shadow: none;
+    .btn01 {
+        text-align: center;
+        top: 40px;
+        position: absolute;
+        left: 100px;
+        width: 200px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0px 0px 15px 3px #33CCFF;
     }
 
-    .btn3:focus {
-        background: #33CCFF;
-        color: #fff;
-        border: solid #33CCFF;
-        cursor: pointer;
-        top: 60px;
-        outline: 0;
-        box-shadow: none;
-    }
-
-#topPicks {
-    width: 1100px;
-    height: 530px;
-    border-radius: 50px;
-    background: black;
-    position: fixed;
-    top: 113px;
-    display: none;
-    border: solid #33CCFF; 
-    left: 350px;
-}
-
-.btn01 {
-    text-align: center;
-    top: 160px;
-    position: fixed;
-    left: 455px;
-    width: 200px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0px 0px 15px 3px #33CCFF;
-}
-
+    
 .btn02 {
     text-align: center;
-    top: 160px;
-    position: fixed;
-    left: 755px;
+    top: 40px;
+    position: absolute;
+    left: 430px;
     width: 200px;
     height: 180px;
     object-fit: cover;
@@ -288,9 +282,9 @@ input::-webkit-input-placeholder {
 
 .btn03 {
     text-align: center;
-    top: 160px;
-    position: fixed;
-    left: 1055px;
+    top: 40px;
+    position: absolute;
+    left: 760px;
     width: 200px;
     height: 180px;
     object-fit: cover;
@@ -300,9 +294,9 @@ input::-webkit-input-placeholder {
 
 .btn04 {
     text-align: center;
-    top: 420px;
-    position: fixed;
-    left: 455px;
+    top: 280px;
+    position: absolute;
+    left: 100px;
     width: 200px;
     height: 180px;
     object-fit: cover;
@@ -312,9 +306,9 @@ input::-webkit-input-placeholder {
 
 .btn05 {
     text-align: center;
-    top: 420px;
-    position: fixed;
-    left: 755px;
+    top: 280px;
+    position: absolute;
+    left: 430px;
     width: 200px;
     height: 180px;
     object-fit: cover;
@@ -323,10 +317,9 @@ input::-webkit-input-placeholder {
 }
 
 .btn06 {
-    text-align: center;
-    top: 420px;
-    position: fixed;
-    left: 1055px;
+    top: 280px;
+    position: absolute;
+    left: 760px;
     width: 200px;
     height: 180px;
     object-fit: cover;
@@ -335,152 +328,158 @@ input::-webkit-input-placeholder {
 }
 
 
-.btn01:hover, .btn01:focus, .btn02:hover, .btn02:focus, .btn03:hover, .btn03:focus, .btn04:hover, .btn04:focus,
-.btn05:hover, .btn05:focus, .btn06:hover, .btn06:focus {
-    box-shadow: 0px 0px 25px 3px #33CCFF;
-    cursor: pointer;
-}
+        .btn01:hover, .btn01:focus, .btn02:hover, .btn02:focus, .btn03:hover, .btn03:focus, .btn04:hover, .btn04:focus,
+        .btn05:hover, .btn05:focus, .btn06:hover, .btn06:focus {
+            box-shadow: 0px 0px 25px 3px #33CCFF;
+            cursor: pointer;
+        }
 
 #item1 {
-    color: white;
-    position: fixed;
-    top: 342px;
-    left: 483px;
+    position: absolute;
+    top: 224px;
+    left: 123px;
 }
 
 #item2 {
     color: white;
-    position: fixed;
-    top: 342px;
-    left: 783px;
+    position: absolute;
+    top: 224px;
+    left: 450px;
 }
 
 #item3 {
     color: white;
-    position: fixed;
-    top: 342px;
-    left: 1083px;
+    position: absolute;
+    top: 224px;
+    left: 780px;
 }
 
-/*hello*/
+
 #item4 {
     color: white;
-    position: fixed;
-    top: 600px;
-    left: 483px;
+    position: absolute;
+    top: 460px;
+    left: 123px;
 }
 
 #item5 {
     color: white;
-    position: fixed;
-    top: 600px;
-    left: 783px;
+    position: absolute;
+    top: 460px;
+    left: 450px;
 }
 
 #item6 {
     color: white;
-    position: fixed;
-    top: 600px;
-    left: 1083px;
-}
-
-
-.homescreen {
-    width: 1100px;
-    height: 530px;
-    border-radius: 50px;
-    border: solid #33CCFF; 
-    box-shadow: 0px 0px 30px 3px #33CCFF;
-    position: fixed;
-    background: black;
-    top: 113px;
-    left: 350px;
-}
-
-#userImage {
-    top: 40px;
     position: absolute;
-    left: 50px;
-    width: 200px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 20px;
+    top: 460px;
+    left: 780px;
 }
 
-#userName {
+
+    .homescreen {
+        width: 1100px;
+        height: 520px;
+        border-radius: 50px;
+        border: solid #33CCFF;
+        box-shadow: 0px 0px 30px 3px #33CCFF;
+        position: absolute;
+        background: black;
+        top: 100px;
+        left: 350px;
+    }
+
+    #userImage {
+        top: 40px;
+        position: absolute;
+        left: 50px;
+        width: 200px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    #firstName {
+        border-bottom: 3px solid #33CCFF;
+        text-align: center;
+        font-size: 16px;
+        top: 100px;
+        width: 180px;
+        color: white;
+        position: absolute;
+        left: 300px;
+    }
+
+#lastName {
     border-bottom: 3px solid #33CCFF;
     text-align: center;
-    font-size: 18px;
-    top: 100px;
-    width: 230px;
-    color: white;
-    position: absolute;
-    left: 300px;
-}
-
-#userEmail {
-    border-bottom: 3px solid #33CCFF;
-    text-align: center;
-    font-size: 18px;
-    top: 160px;
-    width: 230px;
-    color: white;
-    position: absolute;
-    left: 300px;
-}
-
-.homescreen p {
-    font-size: 20px;
-    color: #999;
-    top: 240px;
-    position: absolute;
-    left: 70px;
-}
-
-audio {
-    width: 1050px;
-    top: 658px;
-    position: fixed;
-    left: 370px;
-    border-radius: 50px;
-    border: 4px solid #33ccff;
-}
-
-audio:focus {
-    outline: 0;
-}
-
-#f1 {
-    top: 300px;
-    position: absolute;
-    left: 70px;
-}
-
-#lbl1 {
-    color: white;
-    font-size: 18px;
-    padding-right: 5px;
-}
-
-#audio_list {
-    width: 750px;
-    color: white;
-    background: black;
-    border-bottom: 2px solid #33CCFF;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-}
-
-#audio_list:focus {
-    outline: 0;
-}
-
-#opt {
     font-size: 16px;
-    border: none;
+    top: 100px;
+    width: 180px;
+    color: white;
+    position: absolute;
+    left: 490px;
 }
 
+    #userEmail {
+        border-bottom: 3px solid #33CCFF;
+        text-align: center;
+        font-size: 16px;
+        top: 145px;
+        width: 373px;
+        color: white;
+        position: absolute;
+        
+        left: 300px;
+    }
 
+    .homescreen p {
+        font-size: 20px;
+        color: #999;
+        top: 240px;
+        position: absolute;
+        left: 70px;
+    }
 
+    audio {
+        width: 1050px;
+        top: 640px;
+        position: absolute;
+        left: 370px;
+        border-radius: 50px;
+        border: 4px solid #33ccff;
+    }
+
+        audio:focus {
+            outline: 0;
+        }
+
+    #f1 {
+        top: 300px;
+        position: absolute;
+        left: 70px;
+    }
+
+    #lbl1 {
+        color: white;
+        font-size: 18px;
+        padding-right: 5px;
+    }
+
+    #audio_list {
+        width: 750px;
+        color: white;
+        background: black;
+        border: 2px solid #33CCFF;
+        
+    }
+
+        #audio_list:focus {
+            outline: 0;
+        }
+
+    #opt {
+        font-size: 16px;
+        border: none;
+    }
 
