@@ -33,7 +33,10 @@
         <div id="cb" style="display:none" class="cardBack">
             <form id="registration" onsubmit="tosubmit()" action="User_Homepage.html" method="post">
                 <p>SIGN-UP</p>
-                <input id="fn" type="text" name="" placeholder="Full Name" required>
+                <!-- Turned the Full Name field into first and last name fields-->
+                <input id="fn" type="text" name="" placeholder="First Name" required>
+                <input id="ln" type="text" name="" placeholder="Last Name" required>
+
                 <input id="e" type="email" name="" placeholder="Email" required>
                 <input id="p" type="password" name="" placeholder="Password" required>
                 <button type="submit" onclick="">Register</button>

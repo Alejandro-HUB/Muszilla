@@ -176,7 +176,7 @@ body {
     transition: 0.25s;
     font-style: normal;
     cursor: pointer;
-    margin: 63px auto;
+    margin: 27px auto;
 }
 
     .btn:hover, .btn1:hover {
@@ -212,14 +212,14 @@ body {
     margin: 0px auto;
 }
 
-/* full name input */
+/* first last name input */
 .cardBack input[type = "text"] {
     border: 0;
     font-size: 16px;
     color: white;
     background: none;
     display: block;
-    margin: 10px auto;
+    margin: 6px auto;
     text-align: center;
     border: 2px solid white;
     padding: 14px 13px;
@@ -236,7 +236,7 @@ body {
     color: white;
     background: none;
     display: block;
-    margin: 10px auto;
+    margin: 6px auto;
     text-align: center;
     border: 2px solid white;
     padding: 14px 13px;
@@ -253,7 +253,7 @@ body {
     color: white;
     font-size: 16px;
     display: block;
-    margin: 0px auto;
+    margin: 6px auto;
     text-align: center;
     border: 2px solid white;
     padding: 14px 13px;
@@ -276,7 +276,7 @@ body {
     border: 0;
     background: none;
     display: block;
-    margin: 12px auto;
+    margin: 6px auto;
     font-size: 15px;
     text-align: center;
     font-weight: bold;
