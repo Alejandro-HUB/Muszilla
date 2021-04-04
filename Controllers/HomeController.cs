@@ -13,25 +13,36 @@ namespace Muszilla.Controllers
 {
     public class HomeController : Controller
     {
-        Login login = new Login();
+        SqlConnection con = new SqlConnection();
+        SqlCommand com = new SqlCommand();
+        SqlDataReader dr;
         public IActionResult Index()
         {
             return View();
         }
-
-        [HttpPost]
-        public IActionResult Index([Bind]ConsumerModel acc)
+        public void ConnectionString()
         {
-            int res = login.Verify(acc);
-            if (res == 1)
+            con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
+        }
+
+        public IActionResult Verify(ConsumerModel acc)
+        {
+            ConnectionString();
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "select * from Consumer where Email= '"+acc.Email+"'";
+            //command.CommandText = "select * from Consumer where Pass_word= '" + acc.Pass_word+ "'";
+            dr = com.ExecuteReader();
+            if (dr.Read())
             {
-                TempData["msg"] = "You are welcome to Admin Section";
+                con.Close();
+                return View("Create");
             }
-            else
+            else 
             {
-                TempData["msg"] = "Admin id or Password is wrong.!";
+                con.Close();
+                return View("Error");
             }
-            return View();
         }
     
     }
