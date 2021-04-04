@@ -16,11 +16,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\User_Homepage\officialMuszillaLogo.jpg" />
     <None Remove="Views\User_Homepage\User_Homepage.css" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\css\User_Homepage.css" />
+    <None Include="wwwroot\Music\anewbeginning.mp3" />
+    <None Include="wwwroot\Music\buddy.mp3" />
+    <None Include="wwwroot\Music\creativeminds.mp3" />
+    <None Include="wwwroot\Music\cute.mp3" />
+    <None Include="wwwroot\Music\goinghigher.mp3" />
+    <None Include="wwwroot\Music\jazzyfrenchy.mp3" />
+    <None Include="wwwroot\Music\littleidea.mp3" />
+    <None Include="wwwroot\Music\ukulele.mp3" />
+    <None Include="wwwroot\Pictures\emptyImage.png" />
+    <None Include="wwwroot\Pictures\headPhones.jpg" />
   </ItemGroup>
 
   <ItemGroup>
