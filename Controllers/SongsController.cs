@@ -10,49 +10,52 @@ using System.Data.SqlClient;
 
 namespace Muszilla.Controllers
 {
-    public class ConsumerController : Controller
+    public class SongsController : Controller
     {
         SqlCommand com = new SqlCommand();
         SqlDataReader dr;
         SqlConnection con = new SqlConnection();
-        List<ConsumerModel> consumers = new List<ConsumerModel>();
+        List<SongsModel> songs = new List<SongsModel>();
 
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<SongsController> _logger;
 
-        public ConsumerController(ILogger<HomeController> logger)
+        public SongsController(ILogger<SongsController> logger)
         {
             _logger = logger;
-            con.ConnectionString = Muszilla.Properties.Resources.ConnectionString; 
+            con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
         }
 
-        public IActionResult Index()
+        public IActionResult Songs()
         {
             FetchData();
-            return View(consumers);
+            return View(songs);
         }
 
         private void FetchData()
         {
-            if (consumers.Count > 0)
+            if (songs.Count > 0)
             {
-                consumers.Clear();
+                songs.Clear();
             }
             try
             {
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "Select TOP(100) User_ID,USERNAME,FirstName,LastName,Email,Pass_word,CreatedDate,Old_Pass_word from Consumer";
+                com.CommandText = "Select TOP(100)[Song_ID],[Song_Name],[Song_Artist],[Song_Length],[Song_Genre] from Songs";
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    consumers.Add(new ConsumerModel() { User_ID = dr["User_ID"].ToString()
-                    ,USERNAME = dr["USERNAME"].ToString()
-                    ,FirstName = dr["FirstName"].ToString()
-                    ,LastName = dr["LastName"].ToString()
-                    ,Email = dr["Email"].ToString()
-                    ,Pass_word = dr["Pass_word"].ToString()
-                    ,CreatedDate = dr["CreatedDate"].ToString()
-                    ,Old_Pass_word = dr["Old_Pass_word"].ToString()
+                    songs.Add(new SongsModel()
+                    {
+                        Song_ID = dr["Song_ID"].ToString()
+                    ,
+                        Song_Name = dr["Song_Name"].ToString()
+                    ,
+                        Song_Artist = dr["Song_Artist"].ToString()
+                    ,
+                        Song_Length = dr["Song_Length"].ToString()
+                    ,
+                        Song_Genre = dr["Song_Genre"].ToString()
                     });
                 }
                 con.Close();

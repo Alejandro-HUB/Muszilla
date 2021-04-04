@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Muszilla.Models.ConsumerModel
+@{
     ViewData["Title"] = "Login Page";
 }
 
@@ -20,10 +21,10 @@
 <div class="card">
     <div class="inner-box">
         <div id="cf" class="cardFront">
-            <form id="loginForm" action="User_Homepage.html" method="post">
+            <form class="form-horizontal" asp-action="Index">
                 <p>LOGIN</p>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="pass" placeholder="Password" required>
+                <input asp-for="Email" name ="email" class="form-control" type="email" placeholder="Email" required>
+                <input asp-for="Pass_word" name="pass" class="form-control" type ="password" placeholder="Password" required>
                 <button type="submit" value="Login" onclick="">Login</button>
                 <button type="button" class="btn" onclick="showRegistration()">I'm New Here</button>
                 <p id="forgotPassword">Forgot Password?<a id="link" href=""><em>Click here</em></a></p>
@@ -75,3 +76,12 @@
         localStorage.setItem("p", pass);
         return true; } */
 </script>
+
+@{ 
+    if (TempData["msg"] != null)
+    {
+        <script>
+            alert('@TempData["msg"]')
+        </script>
+    }
+}

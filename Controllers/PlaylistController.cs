@@ -25,7 +25,7 @@ namespace Muszilla.Controllers
             con.ConnectionString = Muszilla.Properties.Resources.ConnectionString; 
         }
 
-        public IActionResult Index()
+        public IActionResult Playlist()
         {
             FetchData();
             return View(playlists);
