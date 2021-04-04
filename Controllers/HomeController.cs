@@ -30,8 +30,7 @@ namespace Muszilla.Controllers
             ConnectionString();
             con.Open();
             com.Connection = con;
-            com.CommandText = "select * from Consumer where Email= '"+acc.Email+"'";
-            //command.CommandText = "select * from Consumer where Pass_word= '" + acc.Pass_word+ "'";
+            com.CommandText = "select * from Consumer where Email= '"+acc.Email+"' and Pass_word= '"+acc.Pass_word+"'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
