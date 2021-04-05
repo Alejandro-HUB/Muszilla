@@ -18,9 +18,9 @@
 .sidebar {
     height: 575px;
     width: 250px;
-    position: sticky;
+    position: absolute;
     z-index: 1;
-    top: 0;
+    top: 110px;
     border: solid #33CCFF;
     left: 15px;
     background-color: black;
@@ -53,18 +53,85 @@
         color: #33CCFF;
     }
 
-    .sidebar a {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 20px;
-        color: white;
-        display: block;
+.homebtn {
+    background-color: black;
+    border: none;
+    width: 220px;
+    padding: 5px 13px;
+    color: white;
+    text-align: left;
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
+    margin: 4px 10px;
+}
+
+.accountbtn {
+    background-color: black;
+    border: none;
+    width: 220px;
+    color: white;
+    padding: 5px 13px;
+    text-align: left;
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
+    margin: 4px 10px;
+}
+
+.settingbtn {
+    background-color: black;
+    border: none;
+    width: 220px;
+    color: white;
+    padding: 5px 13px;
+    text-align: left;
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
+    margin: 4px 10px;
+}
+
+.homebtn:hover, .accountbtn:hover, .settingbtn:hover {
+    cursor: pointer;
+    color: #33CCFF;
+    border-right: 3px solid #33CCFF;
+}
+
+    .homebtn:focus, .accountbtn:focus, .settingbtn:focus {
+        outline: 0;
     }
 
-        .sidebar a:hover {
-            color: #33CCFF;
-            border-right: 3px solid #fff;
-        }
+.logoutbtn {
+    width: 200px;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 30px;
+    font-size: 18px;
+    border: solid #33CCFF;
+    background-color: black;
+    color: #33CCFF;
+    font-weight: bold;
+    margin-left: 17px;
+    margin-right: 17px;
+    margin-top: 170px;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 18px 3px #33CCFF;
+}
+
+    .logoutbtn:hover {
+        background: #33CCFF;
+        color: #fff;
+        border: solid #33CCFF;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .logoutbtn:focus {
+        outline: 0;
+    }
+       
 
     .main {
         margin-left: 160px;
@@ -73,10 +140,7 @@
 
     .sidebar #searchBar {
         padding-left: 20px;
-    }
-
-    .sidebar #contents {
-        padding: 20px;
+        padding-bottom: 20px;
     }
 
     input {
@@ -142,7 +206,7 @@
         width: 200px;
         top: 30px;
         padding: 5px 35px;
-        right: 550px;
+        left: 720px;
         border-radius: 30px;
         font-size: 18px;
         border: solid #33CCFF;
@@ -177,7 +241,7 @@
         top: 30px;
         float: right;
         padding: 5px 35px;
-        right: 330px;
+        left: 940px;
         border-radius: 30px;
         font-size: 18px;
         border: solid #33CCFF;
@@ -212,7 +276,7 @@
         width: 200px;
         top: 30px;
         padding: 5px 35px;
-        right: 110px;
+        left: 1160px;
         float: right;
         border-radius: 30px;
         font-size: 18px;
@@ -482,4 +546,5 @@
         font-size: 16px;
         border: none;
     }
+
 

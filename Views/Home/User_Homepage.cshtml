@@ -16,10 +16,10 @@
             <input type="search" placeholder="Search">
         </form>
 
-        <div id="contents">
-            <a href="" onclick="myFunction1()" id="userHome"> Home</a>
-            <a href="" onclick="myFunction1()" id="accountDetails"> Account</a>
-            <a href="" onclick="myFunction1()" id="userSettings"> Settings</a>
+        <div>
+            <button type="button" class="homebtn" onclick="myFunction1()" id="userHome"> Home </button>
+            <button type="button" class="accountbtn" onclick="myFunction1()" id="accountDetails"> Account </button>
+            <button type="button" class="settingbtn" onclick="myFunction1()" id="userSettings"> Settings </button>
         </div>
 
         <div>
@@ -31,6 +31,10 @@
                 <li>Song 3 Name</li>
             </ul>
 
+        </div>
+
+        <div>
+            <button type="button" class="logoutbtn" onclick="" id="logout">LOG OUT</button>
         </div>
     </div>
 
@@ -98,19 +102,17 @@
             player.play();
         }
 
-        function myFunction1() {
-            var x = document.getElementByTagName("*")[0];
-
-            if (x.id === "userHome") {
-                document.getElementById("homefirst").style.display = "inherit";
-            }
-        }
-
         function myFunction() {
 
             document.getElementById("topPicks").style.display = "inherit";
-
         }
+
+        function myFunction1() {
+
+            document.getElementById("homefirst").style.display = "inherit";
+            
+        }
+
 
 
     </script>
