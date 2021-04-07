@@ -1,4 +1,4 @@
-﻿@model Muszilla.Models.ConsumerModel
+﻿@model Tuple<ConsumerModel, Register>
 @{
     ViewData["Title"] = "Login Page";
 }
@@ -23,22 +23,21 @@
         <div id="cf" class="cardFront">
             <form class="form-horizontal" asp-action="Verify">
                 <p>LOGIN</p>
-                <input asp-for="Email" name ="Email" class="form-control" type="email" placeholder="Email" required>
-                <input asp-for="Pass_word" name="Pass_word" class="form-control" type ="password" placeholder="Password" required>
+                <input asp-for="Item1.Email" name="Email" class="form-control" type="email" placeholder="Email" required>
+                <input asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" placeholder="Password" required>
                 <button type="submit" value="Login" onclick="">Login</button>
                 <button type="button" class="btn" onclick="showRegistration()">I'm New Here</button>
                 <p id="forgotPassword">Forgot Password?<a id="link" href=""><em>Click here</em></a></p>
             </form>
         </div>
         <div id="cb" style="display:none" class="cardBack">
-            <form id="registration" onsubmit="tosubmit()" action="User_Homepage.html" method="post">
+            <form class="form-horizontal" asp-action="Create">
                 <p>SIGN-UP</p>
                 <!-- Turned the Full Name field into first and last name fields-->
-                <input id="fn" type="text" name="" placeholder="First Name" required>
-                <input id="ln" type="text" name="" placeholder="Last Name" required>
-
-                <input id="e" type="email" name="" placeholder="Email" required>
-                <input id="p" type="password" name="" placeholder="Password" required>
+                <input asp-for="Item2.FirstName" name="FirstName" type="text"  class="form-control" placeholder="First Name" required>
+                <input asp-for="Item2.LastName" name="LastName" type="text"  class="form-control" placeholder="Last Name" required>
+                <input asp-for="Item2.Email" name="Email" type="email"  class="form-control" placeholder="Email" required>
+                <input asp-for="Item2.Pass_word" name="Pass_word" type="password"  class="form-control" placeholder="Password" required>
                 <button type="submit" onclick="">Register</button>
                 <button type="button" class="btn1" onclick="showLogin()">I'm Already Registered</button>
             </form>
@@ -80,7 +79,18 @@
         return true; } */
 </script>
 
-@{ 
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+    </script>
+
+}
+
+
+@{
     if (TempData["msg"] != null)
     {
         <script>

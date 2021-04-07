@@ -40,7 +40,8 @@ namespace Muszilla.Controllers
             else 
             {
                 con.Close();
-                return View("Error");
+                ViewBag.Message = "Email or Password Incorrect";
+                return View("Index");
             }
         }
     
