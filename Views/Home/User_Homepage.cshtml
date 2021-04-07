@@ -17,9 +17,9 @@
         </form>
 
         <div>
-            <button type="button" class="homebtn" onclick="myFunction1()" id="userHome"> Home </button>
-            <button type="button" class="accountbtn" onclick="myFunction1()" id="accountDetails"> Account </button>
-            <button type="button" class="settingbtn" onclick="myFunction1()" id="userSettings"> Settings </button>
+            <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
+            <button type="button" class="accountbtn" onclick="" id="accountDetails"> Account </button>
+            <button type="button" class="settingbtn" onclick="" id="userSettings"> Settings </button>
         </div>
 
         <div>
@@ -39,12 +39,12 @@
     </div>
 
     <div>
-        <button type="button" class="btn1" onclick="myFunction()" id="tp"> TOP PICKS </button>
-        <button type="button" class="btn2" onclick="myFunction()" id="feat"> FEATURED </button>
-        <button type="button" class="btn3" onclick="myFunction()" id="gen"> GENRES </button>
+        <button type="button" class="btn1" onclick="showTopPicks()" id="tp"> TOP PICKS </button>
+        <button type="button" class="btn2" onclick="showFeatured()" id="feat"> FEATURED </button>
+        <button type="button" class="btn3" onclick="" id="gen"> GENRES </button>
     </div>
 
-    <div class="homescreen" id="homefirst">
+    <div id="home_first">
         <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
         <img id="userImage" src="/Pictures/emptyImage.png" />
         <div id="firstName" contenteditable="true">First Name </div>
@@ -75,12 +75,22 @@
 
     <div id="topPicks">
         <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
-        <div><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Text below the image1</p></div>
-        <div><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">Text below the image2</p></div>
-        <div><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Text below the image3</p></div>
-        <div><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Text below the image4</p></div>
-        <div><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Text below the image5</p></div>
-        <div><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Text below the image6</p></div>
+        <a onclick="myAudioFunction('Acoustic Breeze')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Acoustic Breeze</p></a>
+        <a onclick="myAudioFunction('DubStep')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">DubStep</p></a>
+        <a onclick="myAudioFunction('Energy')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Energy</p></a>
+        <a onclick="myAudioFunction('Memories')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Memories</p></a>
+        <a onclick="myAudioFunction('Slow Motion')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Slow Motion</p></a>
+        <a onclick="myAudioFunction('Jazzy Frenchy')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Jazzy Frenchy</p></a>
+    </div>
+
+    <div id="featured">
+        <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
+        <a onclick="myAudioFunction1('Buddy')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Buddy</p></a>
+        <a onclick="myAudioFunction1('Cute')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">Cute</p></a>
+        <a onclick="myAudioFunction1('Memories')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Memories</p></a>
+        <a onclick="myAudioFunction1('Going Higher')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Going Higher</p></a>
+        <a onclick="myAudioFunction1('Little Idea')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Little Idea</p></a>
+        <a onclick="myAudioFunction1('Ukulele')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Ukulele</p></a>
     </div>
 
 
@@ -102,15 +112,121 @@
             player.play();
         }
 
-        function myFunction() {
+        function showTopPicks() {
 
-            document.getElementById("topPicks").style.display = "inherit";
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("featured").style.display = "none";
+            document.getElementById("topPicks").style.display = "initial";
         }
 
-        function myFunction1() {
+        function showFeatured() {
 
-            document.getElementById("homefirst").style.display = "inherit";
-            
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("topPicks").style.display = "none";
+            document.getElementById("featured").style.display = "initial";
+        }
+
+        function showHome() {
+
+            document.getElementById("topPicks").style.display = "none";
+            document.getElementById("featured").style.display = "none";
+            document.getElementById("home_first").style.display = "initial";
+
+        }
+
+        var aAudio;
+
+        function myAudioFunction1(song) {
+
+            if (song == 'Buddy') {
+                aAudio = '/Music/buddy.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
+            }
+
+            else if (song == 'Cute') {
+                aAudio = '/Music/cute.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
+            }
+
+            else if (song == 'Memories') {
+                aAudio = '/Music/memories.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
+            }
+
+            else if (song == 'Going Higher') {
+                aAudio = '/Music/goinghigher.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
+            }
+
+            else if (song == 'Little Idea') {
+                aAudio = '/Music/littleidea.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
+            }
+
+            else if (song == 'Ukulele') {
+                aAudio = '/Music/ukulele.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
+            }
+        }
+
+
+        var bAudio;
+
+        function myAudioFunction(song) {
+
+            if (song == 'Acoustic Breeze') {
+                bAudio = '/Music/acousticbreeze.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+            }
+
+            else if (song == 'DubStep') {
+                bAudio = '/Music/dubstep.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+            }
+
+            else if (song == 'Energy') {
+                bAudio = '/Music/energy.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+            }
+
+            else if (song == 'Memories') {
+                bAudio = '/Music/memories.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+            }
+
+            else if (song == 'Slow Motion') {
+                bAudio = '/Music/slowmotion.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+            }
+
+            else if (song == 'Jazzy Frenchy') {
+                bAudio = '/Music/jazzyfrenchy.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+            }
         }
 
 

@@ -306,7 +306,7 @@
             box-shadow: none;
         }
 
-    #topPicks {
+    #topPicks, #featured {
         width: 1100px;
         height: 520px;
         border-radius: 50px;
@@ -399,23 +399,30 @@
         }
 
 #item1 {
+    color: white;
     position: absolute;
     top: 224px;
-    left: 123px;
+    width: 200px;
+    text-align: center;
+    left: 100px;
 }
 
 #item2 {
     color: white;
     position: absolute;
     top: 224px;
-    left: 450px;
+    width: 200px;
+    text-align: center;
+    left: 430px;
 }
 
 #item3 {
     color: white;
     position: absolute;
     top: 224px;
-    left: 780px;
+    width: 200px;
+    text-align: center;
+    left: 760px;
 }
 
 
@@ -423,25 +430,31 @@
     color: white;
     position: absolute;
     top: 460px;
-    left: 123px;
+    width: 200px;
+    text-align: center;
+    left: 100px;
 }
 
 #item5 {
     color: white;
     position: absolute;
     top: 460px;
-    left: 450px;
+    left: 430px;
+    width: 200px;
+    text-align: center;
 }
 
 #item6 {
     color: white;
     position: absolute;
     top: 460px;
-    left: 780px;
+    width: 200px;
+    text-align: center;
+    left: 760px;
 }
 
 
-    .homescreen {
+    #home_first {
         width: 1100px;
         height: 520px;
         border-radius: 50px;
@@ -497,7 +510,7 @@
         left: 300px;
     }
 
-    .homescreen p {
+    #home_first p {
         font-size: 20px;
         color: #999;
         top: 240px;
