@@ -41,7 +41,7 @@
     <div>
         <button type="button" class="btn1" onclick="showTopPicks()" id="tp"> TOP PICKS </button>
         <button type="button" class="btn2" onclick="showFeatured()" id="feat"> FEATURED </button>
-        <button type="button" class="btn3" onclick="" id="gen"> GENRES </button>
+        <button type="button" class="btn3" onclick="showGenres()" id="gen"> GENRES </button>
     </div>
 
     <div id="home_first">
@@ -93,143 +93,181 @@
         <a onclick="myAudioFunction1('Ukulele')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Ukulele</p></a>
     </div>
 
+    <div class="genreInfo" id="genres">
+        <!-- Photo is from Pexels by cottonbro and the link is: https://www.pexels.com/photo/persons-hand-doing-peace-sign-4629625/ -->
+        <div><img src="/Pictures/rock.jpg" id="rock" /><p id="info1">ROCK</p></div>
 
-    <div id="audio_container">
-        <audio controls id="audio_player" src="audio/demo.mp3">
-            <div>
-                Sorry, your browser does not support this audio player.
-            </div>
-        </audio>
+        <!-- Photo is from Pexels by Hannah Gibs and the link is: https://www.pexels.com/photo/photo-of-man-holding-microphone-949274/ -->
+        <div><img src="/Pictures/pop.jpg" id="pop" /><p id="info2">POP</p></div>
+
+        <!-- Photo is from Pexels by Budgeron Bach and the link is: https://www.pexels.com/photo/wistful-black-man-listening-to-radio-from-vintage-tape-recorder-5158214/ -->
+        <div><img src="~/Pictures/hiphop.jpg" id="hiphop" /><p id="info3">HIPHOP</p></div>
+
+        <!-- Photo is from Pexels by cottonbro and the link is: https://www.pexels.com/photo/gold-saxophone-in-black-background-4709822/ -->
+        <div><img src="~/Pictures/jazz.jpg" id="jazz" /><p id="info4">JAZZ</p></div>
+
+        <!-- Photo is from Pexels by Thibault Trillet and the link is: https://www.pexels.com/photo/man-in-black-formal-suit-holding-electric-guitar-while-raising-his-right-hand-and-opening-his-mouth-in-tilt-shift-lens-photography-167471/ -->
+        <div><img src="~/Pictures/country.jpg" id="country" /><p id="info5">COUNTRY</p></div>
+
+        <!-- Photo is from Pexels by Kaique Rocha and teh link is: https://www.pexels.com/photo/man-playing-cielo-555345/ -->
+        <div><img src="~/Pictures/classical.jpg" id="classical" /><p id="info6">CLASSICAL</p></div>
+
+        <!-- Photo is from Pexels by NEOSiAM and the link is: https://www.pexels.com/photo/silver-disco-ball-593467/ -->
+        <div><img src="~/Pictures/disco.jpg" id="disco" /><p id="info7">DISCO</p></div>
+
+        <!-- Photo is from Pexels by ArtHouse Studio and the link is: https://www.pexels.com/photo/crop-person-standing-near-bonfire-with-mongolian-folk-instrument-in-valley-4348099/ -->
+        <div><img src="~/Pictures/folk.jpg" id="folk" /><p id="info8">FOLK</p></div>
+
     </div>
 
-    <script type="text/javascript">
 
-        function change_audio_file() {
-            var file_list = document.getElementById('audio_list');
-            var file_to_play = file_list.options[file_list.selectedIndex].value;
-            var player = document.getElementById('audio_player');
-            player.src = file_to_play;
-            player.play();
-        }
+        <div id="audio_container">
+            <audio controls id="audio_player" src="audio/demo.mp3">
+                <div>
+                    Sorry, your browser does not support this audio player.
+                </div>
+            </audio>
+        </div>
 
-        function showTopPicks() {
+        <script type="text/javascript">
 
-            document.getElementById("home_first").style.display = "none";
-            document.getElementById("featured").style.display = "none";
-            document.getElementById("topPicks").style.display = "initial";
-        }
-
-        function showFeatured() {
-
-            document.getElementById("home_first").style.display = "none";
-            document.getElementById("topPicks").style.display = "none";
-            document.getElementById("featured").style.display = "initial";
-        }
-
-        function showHome() {
-
-            document.getElementById("topPicks").style.display = "none";
-            document.getElementById("featured").style.display = "none";
-            document.getElementById("home_first").style.display = "initial";
-
-        }
-
-        var aAudio;
-
-        function myAudioFunction1(song) {
-
-            if (song == 'Buddy') {
-                aAudio = '/Music/buddy.mp3';
-                player = document.getElementById('audio_player');
-                player.src = aAudio;
+            function change_audio_file() {
+                var file_list = document.getElementById('audio_list');
+                var file_to_play = file_list.options[file_list.selectedIndex].value;
+                var player = document.getElementById('audio_player');
+                player.src = file_to_play;
                 player.play();
             }
 
-            else if (song == 'Cute') {
-                aAudio = '/Music/cute.mp3';
-                player = document.getElementById('audio_player');
-                player.src = aAudio;
-                player.play();
+            function showTopPicks() {
+
+                document.getElementById("home_first").style.display = "none";
+                document.getElementById("featured").style.display = "none";
+                document.getElementById("genres").style.display = "none";
+                document.getElementById("topPicks").style.display = "initial";
             }
 
-            else if (song == 'Memories') {
-                aAudio = '/Music/memories.mp3';
-                player = document.getElementById('audio_player');
-                player.src = aAudio;
-                player.play();
+            function showFeatured() {
+
+                document.getElementById("home_first").style.display = "none";
+                document.getElementById("topPicks").style.display = "none";
+                document.getElementById("genres").style.display = "none";
+                document.getElementById("featured").style.display = "initial";
             }
 
-            else if (song == 'Going Higher') {
-                aAudio = '/Music/goinghigher.mp3';
-                player = document.getElementById('audio_player');
-                player.src = aAudio;
-                player.play();
+            function showGenres() {
+
+                document.getElementById("home_first").style.display = "none";
+                document.getElementById("topPicks").style.display = "none";
+                document.getElementById("featured").style.display = "none";
+                document.getElementById("genres").style.display = "initial";
             }
 
-            else if (song == 'Little Idea') {
-                aAudio = '/Music/littleidea.mp3';
-                player = document.getElementById('audio_player');
-                player.src = aAudio;
-                player.play();
+            function showHome() {
+
+                document.getElementById("topPicks").style.display = "none";
+                document.getElementById("featured").style.display = "none";
+                document.getElementById("genres").style.display = "none";
+                document.getElementById("home_first").style.display = "initial";
+
             }
 
-            else if (song == 'Ukulele') {
-                aAudio = '/Music/ukulele.mp3';
-                player = document.getElementById('audio_player');
-                player.src = aAudio;
-                player.play();
+            var aAudio;
+
+            function myAudioFunction1(song) {
+
+                if (song == 'Buddy') {
+                    aAudio = '/Music/buddy.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = aAudio;
+                    player.play();
+                }
+
+                else if (song == 'Cute') {
+                    aAudio = '/Music/cute.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = aAudio;
+                    player.play();
+                }
+
+                else if (song == 'Memories') {
+                    aAudio = '/Music/memories.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = aAudio;
+                    player.play();
+                }
+
+                else if (song == 'Going Higher') {
+                    aAudio = '/Music/goinghigher.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = aAudio;
+                    player.play();
+                }
+
+                else if (song == 'Little Idea') {
+                    aAudio = '/Music/littleidea.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = aAudio;
+                    player.play();
+                }
+
+                else if (song == 'Ukulele') {
+                    aAudio = '/Music/ukulele.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = aAudio;
+                    player.play();
+                }
             }
-        }
 
 
-        var bAudio;
+            var bAudio;
 
-        function myAudioFunction(song) {
+            function myAudioFunction(song) {
 
-            if (song == 'Acoustic Breeze') {
-                bAudio = '/Music/acousticbreeze.mp3';
-                player = document.getElementById('audio_player');
-                player.src = bAudio;
-                player.play();
+                if (song == 'Acoustic Breeze') {
+                    bAudio = '/Music/acousticbreeze.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = bAudio;
+                    player.play();
+                }
+
+                else if (song == 'DubStep') {
+                    bAudio = '/Music/dubstep.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = bAudio;
+                    player.play();
+                }
+
+                else if (song == 'Energy') {
+                    bAudio = '/Music/energy.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = bAudio;
+                    player.play();
+                }
+
+                else if (song == 'Memories') {
+                    bAudio = '/Music/memories.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = bAudio;
+                    player.play();
+                }
+
+                else if (song == 'Slow Motion') {
+                    bAudio = '/Music/slowmotion.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = bAudio;
+                    player.play();
+                }
+
+                else if (song == 'Jazzy Frenchy') {
+                    bAudio = '/Music/jazzyfrenchy.mp3';
+                    player = document.getElementById('audio_player');
+                    player.src = bAudio;
+                    player.play();
+                }
             }
 
-            else if (song == 'DubStep') {
-                bAudio = '/Music/dubstep.mp3';
-                player = document.getElementById('audio_player');
-                player.src = bAudio;
-                player.play();
-            }
-
-            else if (song == 'Energy') {
-                bAudio = '/Music/energy.mp3';
-                player = document.getElementById('audio_player');
-                player.src = bAudio;
-                player.play();
-            }
-
-            else if (song == 'Memories') {
-                bAudio = '/Music/memories.mp3';
-                player = document.getElementById('audio_player');
-                player.src = bAudio;
-                player.play();
-            }
-
-            else if (song == 'Slow Motion') {
-                bAudio = '/Music/slowmotion.mp3';
-                player = document.getElementById('audio_player');
-                player.src = bAudio;
-                player.play();
-            }
-
-            else if (song == 'Jazzy Frenchy') {
-                bAudio = '/Music/jazzyfrenchy.mp3';
-                player = document.getElementById('audio_player');
-                player.src = bAudio;
-                player.play();
-            }
-        }
 
 
-
-    </script>
-</body>
+        </script>
+    </body>

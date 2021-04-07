@@ -306,18 +306,19 @@
             box-shadow: none;
         }
 
-    #topPicks, #featured {
-        width: 1100px;
-        height: 520px;
-        border-radius: 50px;
-        background: black;
-        position: absolute;
-        top: 100px;
-        display: none;
-        border: solid #33CCFF;
-        left: 350px;
-        color: white;
-    }
+#topPicks, #featured, #genres {
+    width: 1100px;
+    height: 520px;
+    border-radius: 50px;
+    background: black;
+    position: absolute;
+    top: 100px;
+    display: none;
+    border: solid #33CCFF;
+    box-shadow: 0px 0px 30px 3px #33CCFF;
+    left: 350px;
+    color: white;
+}
 
     .btn01 {
         text-align: center;
@@ -560,4 +561,222 @@
         border: none;
     }
 
+
+#rock {
+    text-align: center;
+    top: 40px;
+    position: absolute;
+    left: 80px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    border: 5px solid #33CCFF;
+    box-shadow: 0px 0px 20px 5px #33CCFF;
+}
+
+#info1 {
+    color: white;
+    font-size: 40px;
+    width: 205px;
+    z-index: 2;
+    text-align: center;
+    top: 75px;
+    position: absolute;
+    left: 80px;
+    font-weight: bold;
+}
+
+#pop {
+    text-align: center;
+    top: 40px;
+    position: absolute;
+    left: 320px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    border: 5px solid #33CCFF;
+    box-shadow: 0px 0px 20px 5px #33CCFF;
+}
+
+#info2 {
+    color: white;
+    font-size: 40px;
+    width: 205px;
+    z-index: 2;
+    text-align: center;
+    top: 75px;
+    position: absolute;
+    left: 320px;
+    font-weight: bold;
+}
+
+#hiphop {
+    text-align: center;
+    top: 40px;
+    position: absolute;
+    left: 560px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    border: 5px solid #33CCFF;
+    box-shadow: 0px 0px 20px 5px #33CCFF;
+}
+
+#info3 {
+    color: white;
+    font-size: 40px;
+    width: 205px;
+    z-index: 2;
+    text-align: center;
+    top: 75px;
+    position: absolute;
+    left: 560px;
+    font-weight: bold;
+}
+
+
+#jazz {
+    text-align: center;
+    top: 40px;
+    position: absolute;
+    left: 800px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    border: 5px solid #33CCFF;
+    box-shadow: 0px 0px 20px 5px #33CCFF;
+}
+
+#info4 {
+    color: white;
+    font-size: 40px;
+    width: 205px;
+    z-index: 2;
+    text-align: center;
+    top: 75px;
+    position: absolute;
+    left: 800px;
+    font-weight: bold;
+}
+
+
+#country {
+    text-align: center;
+    top: 280px;
+    position: absolute;
+    left: 80px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    border: 5px solid #33CCFF;
+    box-shadow: 0px 0px 20px 5px #33CCFF;
+}
+
+#info5 {
+    color: white;
+    font-size: 40px;
+    width: 205px;
+    z-index: 2;
+    text-align: center;
+    top: 320px;
+    position: absolute;
+    left: 82px;
+    font-weight: bold;
+}
+
+#classical {
+    text-align: center;
+    top: 280px;
+    position: absolute;
+    left: 320px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    border: 5px solid #33CCFF;
+    box-shadow: 0px 0px 20px 5px #33CCFF;
+}
+
+#info6 {
+    color: white;
+    font-size: 35px;
+    width: 205px;
+    z-index: 2;
+    text-align: center;
+    top: 324px;
+    position: absolute;
+    left: 323px;
+    font-weight: bold;
+}
+
+#disco {
+    text-align: center;
+    top: 280px;
+    position: absolute;
+    left: 560px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    border: 5px solid #33CCFF;
+    box-shadow: 0px 0px 20px 5px #33CCFF;
+}
+
+#info7 {
+    color: white;
+    font-size: 40px;
+    width: 205px;
+    z-index: 2;
+    text-align: center;
+    top: 320px;
+    position: absolute;
+    left: 560px;
+    font-weight: bold;
+}
+
+#folk {
+    text-align: center;
+    top: 280px;
+    position: absolute;
+    left: 800px;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    border: 5px solid #33CCFF;
+    box-shadow: 0px 0px 20px 5px #33CCFF;
+}
+
+#info8 {
+    color: white;
+    font-size: 40px;
+    width: 205px;
+    z-index: 2;
+    text-align: center;
+    top: 320px;
+    position: absolute;
+    left: 800px;
+    font-weight: bold;
+}
 

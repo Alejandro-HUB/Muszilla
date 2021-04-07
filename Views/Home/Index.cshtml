@@ -23,7 +23,7 @@
         <div id="cf" class="cardFront">
             <form class="form-horizontal" asp-action="Verify">
                 <p>LOGIN</p>
-                <input asp-for="Email" name ="Email" class="form-control" type="email" placeholder="Email" required>
+                <input asp-for="Email" name ="Email" class="form-control" type="email" autocomplete="off" placeholder="Email" required>
                 <input asp-for="Pass_word" name="Pass_word" class="form-control" type ="password" placeholder="Password" required>
                 <button type="submit" value="Login" onclick="">Login</button>
                 <button type="button" class="btn" onclick="showRegistration()">I'm New Here</button>
