@@ -19,6 +19,7 @@ namespace Muszilla.Controllers
         }
 
         // GET: RegisterController/Create
+        //Code for register page
         [HttpPost]
         public ActionResult Create(Register add)
         {
