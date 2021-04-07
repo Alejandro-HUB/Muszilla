@@ -20,6 +20,7 @@ namespace Muszilla.Models
         public string Pass_word{ get; set; }
         public string CreatedDate { get; set; }
         public string Old_Pass_word { get; set; }
+        //public string Picture { get; set; }
        
     }
     public class Register

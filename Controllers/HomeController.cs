@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using Muszilla.Models;
 using System.Data.SqlClient;
 using Sitecore.FakeDb;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Session;
 
 namespace Muszilla.Controllers
 {
@@ -27,22 +29,42 @@ namespace Muszilla.Controllers
 
         public IActionResult Verify(ConsumerModel acc)
         {
+            string fn = "";
+            string ln = "";
             ConnectionString();
             con.Open();
             com.Connection = con;
-            com.CommandText = "select * from Consumer where Email= '"+acc.Email+"' and Pass_word= '"+acc.Pass_word+"'";
+            com.CommandText = "select * from Consumer where Email= '" + acc.Email + "' and Pass_word= '" + acc.Pass_word + "'";
+            com.CommandText = "select FirstName, LastName from Consumer where Email = '" + acc.Email + "'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
+                fn = dr["FirstName"].ToString();
+                ln = dr["LastName"].ToString();
                 con.Close();
-                return View("User_Homepage");
+                HttpContext.Session.SetString("Email", acc.Email);
+                HttpContext.Session.SetString("FirstName", fn);
+                HttpContext.Session.SetString("LastName", ln);
+                return RedirectToAction("Homepage");
             }
-            else 
+            else
             {
                 con.Close();
                 ViewBag.Message = "Email or Password Incorrect";
                 return View("Index");
             }
+        }
+
+        public IActionResult Homepage()
+        {
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("Email");
+                ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
+                ViewBag.LastName = HttpContext.Session.GetString("LastName");
+                return View("User_Homepage");
+            }
+            return View();
         }
 
         [HttpPost]
@@ -65,7 +87,7 @@ namespace Muszilla.Controllers
 
         public IActionResult Logout()
         {
-            ViewBag.Message = "Logg out succesfull";
+            ViewBag.Message = "Log out successful!";
             return View("Index");
         }
 
