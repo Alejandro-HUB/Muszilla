@@ -13,15 +13,16 @@ namespace Muszilla.Controllers
     public class RegisterController : Controller
     {
         // GET: RegisterController
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
 
         // GET: RegisterController/Create
         //Code for register page
+        /*
         [HttpPost]
-        public ActionResult Create(Register add)
+        public IActionResult Create(Register add)
         {
             string connection = Muszilla.Properties.Resources.ConnectionString;
             using (SqlConnection con = new SqlConnection(connection))
@@ -37,5 +38,6 @@ namespace Muszilla.Controllers
                 return View("Index");
             }
         }
+        */
     }
 }
