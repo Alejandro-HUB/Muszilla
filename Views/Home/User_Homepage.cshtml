@@ -3,8 +3,16 @@
     ViewData["Title"] = "User Homepage";
 }
 
+<script type="text/javascript">
+    var storedHash = window.location.hash;
+    function changeHashOnLoad() { window.location.hash = "1"; }
+    window.onhashchange = function () {
+        window.location.hash = storedHash;
+    }
+</script>
+
 <link rel="stylesheet" type="text/css" href="/css/User_Homepage.css" />
-<body>
+<body onload="changeHashOnLoad(); ">
     <!-- This logo was created by hand by Natalia, so there is no link-->
     <div id="logo">
         <img src="/Pictures/officialMuszillaLogo.jpg" width="250px" alt="Image Of Muszilla logo">
@@ -121,153 +129,153 @@
     </div>
 
 
-        <div id="audio_container">
-            <audio controls id="audio_player" src="audio/demo.mp3">
-                <div>
-                    Sorry, your browser does not support this audio player.
-                </div>
-            </audio>
-        </div>
+    <div id="audio_container">
+        <audio controls id="audio_player" src="audio/demo.mp3">
+            <div>
+                Sorry, your browser does not support this audio player.
+            </div>
+        </audio>
+    </div>
 
-        <script type="text/javascript">
+    <script type="text/javascript">
 
-            function change_audio_file() {
-                var file_list = document.getElementById('audio_list');
-                var file_to_play = file_list.options[file_list.selectedIndex].value;
-                var player = document.getElementById('audio_player');
-                player.src = file_to_play;
+        function change_audio_file() {
+            var file_list = document.getElementById('audio_list');
+            var file_to_play = file_list.options[file_list.selectedIndex].value;
+            var player = document.getElementById('audio_player');
+            player.src = file_to_play;
+            player.play();
+        }
+
+        function showTopPicks() {
+
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("featured").style.display = "none";
+            document.getElementById("genres").style.display = "none";
+            document.getElementById("topPicks").style.display = "initial";
+        }
+
+        function showFeatured() {
+
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("topPicks").style.display = "none";
+            document.getElementById("genres").style.display = "none";
+            document.getElementById("featured").style.display = "initial";
+        }
+
+        function showGenres() {
+
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("topPicks").style.display = "none";
+            document.getElementById("featured").style.display = "none";
+            document.getElementById("genres").style.display = "initial";
+        }
+
+        function showHome() {
+
+            document.getElementById("topPicks").style.display = "none";
+            document.getElementById("featured").style.display = "none";
+            document.getElementById("genres").style.display = "none";
+            document.getElementById("home_first").style.display = "initial";
+
+        }
+
+        var aAudio;
+
+        function myAudioFunction1(song) {
+
+            if (song == 'Buddy') {
+                aAudio = '/Music/buddy.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
                 player.play();
             }
 
-            function showTopPicks() {
-
-                document.getElementById("home_first").style.display = "none";
-                document.getElementById("featured").style.display = "none";
-                document.getElementById("genres").style.display = "none";
-                document.getElementById("topPicks").style.display = "initial";
+            else if (song == 'Cute') {
+                aAudio = '/Music/cute.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
             }
 
-            function showFeatured() {
-
-                document.getElementById("home_first").style.display = "none";
-                document.getElementById("topPicks").style.display = "none";
-                document.getElementById("genres").style.display = "none";
-                document.getElementById("featured").style.display = "initial";
+            else if (song == 'Memories') {
+                aAudio = '/Music/memories.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
             }
 
-            function showGenres() {
-
-                document.getElementById("home_first").style.display = "none";
-                document.getElementById("topPicks").style.display = "none";
-                document.getElementById("featured").style.display = "none";
-                document.getElementById("genres").style.display = "initial";
+            else if (song == 'Going Higher') {
+                aAudio = '/Music/goinghigher.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
             }
 
-            function showHome() {
-
-                document.getElementById("topPicks").style.display = "none";
-                document.getElementById("featured").style.display = "none";
-                document.getElementById("genres").style.display = "none";
-                document.getElementById("home_first").style.display = "initial";
-
+            else if (song == 'Little Idea') {
+                aAudio = '/Music/littleidea.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
             }
 
-            var aAudio;
+            else if (song == 'Ukulele') {
+                aAudio = '/Music/ukulele.mp3';
+                player = document.getElementById('audio_player');
+                player.src = aAudio;
+                player.play();
+            }
+        }
 
-            function myAudioFunction1(song) {
 
-                if (song == 'Buddy') {
-                    aAudio = '/Music/buddy.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = aAudio;
-                    player.play();
-                }
+        var bAudio;
 
-                else if (song == 'Cute') {
-                    aAudio = '/Music/cute.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = aAudio;
-                    player.play();
-                }
+        function myAudioFunction(song) {
 
-                else if (song == 'Memories') {
-                    aAudio = '/Music/memories.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = aAudio;
-                    player.play();
-                }
-
-                else if (song == 'Going Higher') {
-                    aAudio = '/Music/goinghigher.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = aAudio;
-                    player.play();
-                }
-
-                else if (song == 'Little Idea') {
-                    aAudio = '/Music/littleidea.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = aAudio;
-                    player.play();
-                }
-
-                else if (song == 'Ukulele') {
-                    aAudio = '/Music/ukulele.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = aAudio;
-                    player.play();
-                }
+            if (song == 'Acoustic Breeze') {
+                bAudio = '/Music/acousticbreeze.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
             }
 
-
-            var bAudio;
-
-            function myAudioFunction(song) {
-
-                if (song == 'Acoustic Breeze') {
-                    bAudio = '/Music/acousticbreeze.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = bAudio;
-                    player.play();
-                }
-
-                else if (song == 'DubStep') {
-                    bAudio = '/Music/dubstep.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = bAudio;
-                    player.play();
-                }
-
-                else if (song == 'Energy') {
-                    bAudio = '/Music/energy.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = bAudio;
-                    player.play();
-                }
-
-                else if (song == 'Memories') {
-                    bAudio = '/Music/memories.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = bAudio;
-                    player.play();
-                }
-
-                else if (song == 'Slow Motion') {
-                    bAudio = '/Music/slowmotion.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = bAudio;
-                    player.play();
-                }
-
-                else if (song == 'Jazzy Frenchy') {
-                    bAudio = '/Music/jazzyfrenchy.mp3';
-                    player = document.getElementById('audio_player');
-                    player.src = bAudio;
-                    player.play();
-                }
+            else if (song == 'DubStep') {
+                bAudio = '/Music/dubstep.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
             }
 
+            else if (song == 'Energy') {
+                bAudio = '/Music/energy.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+            }
+
+            else if (song == 'Memories') {
+                bAudio = '/Music/memories.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+            }
+
+            else if (song == 'Slow Motion') {
+                bAudio = '/Music/slowmotion.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+            }
+
+            else if (song == 'Jazzy Frenchy') {
+                bAudio = '/Music/jazzyfrenchy.mp3';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+            }
+        }
 
 
-        </script>
-    </body>
+
+    </script>
+</body>
