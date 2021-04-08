@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Muszilla.Models;
 
 namespace Muszilla
 {
@@ -25,6 +26,7 @@ namespace Muszilla
         {
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
+            services.Configure<AzureStorageConfig>(Configuration.GetSection("AzureStorageConfig"));
             services.AddSession(options=> 
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(3600);

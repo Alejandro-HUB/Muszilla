@@ -10,6 +10,9 @@ using System.Data.SqlClient;
 using Sitecore.FakeDb;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Session;
+using Microsoft.Extensions.Options;
+using Muszilla.Helpers;
+using System.IO;
 
 namespace Muszilla.Controllers
 {
@@ -62,7 +65,7 @@ namespace Muszilla.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("Email");
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
-                return View("User_Homepage");
+                return View("Create");
             }
             return View();
         }
@@ -89,6 +92,6 @@ namespace Muszilla.Controllers
             ViewBag.Message = "Log out successful!";
             return View("Index");
         }
-
     }
 }
+       
