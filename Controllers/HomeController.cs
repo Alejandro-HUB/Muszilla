@@ -65,7 +65,7 @@ namespace Muszilla.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("Email");
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
-                return View("Create");
+                return View("User_Homepage");
             }
             return View();
         }
