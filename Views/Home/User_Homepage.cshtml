@@ -45,11 +45,11 @@
     </div>
 
     <div id="home_first">
-        <form asp-action="" enctype="multipart/form-data">
+        <form asp-action="/api/images/upload" enctype="multipart/form-data">
             <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
             <img id="userImage" src="/Pictures/emptyImage.png" />
             <!--This is the button to upload images-->
-            <!--<input asp-for="Picture" name="Picture" class="form-control" accept="image/*">-->
+            <input asp-for="Picture" name="Picture" class="form-control" accept="image/*">
             <div id="firstName" contenteditable="true">@ViewBag.FirstName </div>
             <div id="lastName" contenteditable="true">@ViewBag.LastName</div>
             <div id="userEmail" contenteditable="true">@ViewBag.Email </div>
