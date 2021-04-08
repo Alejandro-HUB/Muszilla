@@ -3,14 +3,6 @@
     ViewData["Title"] = "User Homepage";
 }
 
-<script type="text/javascript">
-    var storedHash = window.location.hash;
-    function changeHashOnLoad() { window.location.hash = "1"; }
-    window.onhashchange = function () {
-        window.location.hash = storedHash;
-    }
-</script>
-
 <link rel="stylesheet" type="text/css" href="/css/User_Homepage.css" />
 <body onload="changeHashOnLoad(); ">
     <!-- This logo was created by hand by Natalia, so there is no link-->
@@ -53,14 +45,17 @@
     </div>
 
     <div id="home_first">
-        <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
-        <img id="userImage" src="/Pictures/emptyImage.png" />
-        <input asp-for="Picture" name="Picture" class="form-control">
-        <div id="firstName" contenteditable="true">@ViewBag.FirstName </div>
-        <div id="lastName" contenteditable="true">@ViewBag.LastName</div>
-        <div id="userEmail" contenteditable="true">@ViewBag.Email </div>
+        <form asp-action="" enctype="multipart/form-data">
+            <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
+            <img id="userImage" src="/Pictures/emptyImage.png" />
+            <!--This is the button to upload images-->
+            <!--<input asp-for="Picture" name="Picture" class="form-control" accept="image/*">-->
+            <div id="firstName" contenteditable="true">@ViewBag.FirstName </div>
+            <div id="lastName" contenteditable="true">@ViewBag.LastName</div>
+            <div id="userEmail" contenteditable="true">@ViewBag.Email </div>
 
-        <p>My Playlists</p>
+            <p>My Playlists</p>
+        </form>
 
         <form id="f1">
             <label for="audio_list" id="lbl1">
@@ -279,4 +274,7 @@
 
 
     </script>
+
 </body>
+
+
