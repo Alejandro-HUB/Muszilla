@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,7 +23,9 @@ namespace Muszilla.Models
         public string Pass_word{ get; set; }
         public string CreatedDate { get; set; }
         public string Old_Pass_word { get; set; }
-        //public string Picture { get; set; }
+        [NotMapped]
+        [DisplayName("UploadFile")]
+        public IFormFile Picture { get; set; }
        
     }
     public class Register
