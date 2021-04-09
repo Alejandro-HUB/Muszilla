@@ -10,6 +10,7 @@
         <img src="/Pictures/officialMuszillaLogo.jpg" width="250px" alt="Image Of Muszilla logo">
     </div>
 
+    <!-- random comment for testing-->
     <div class="sidebar">
 
         <form id="searchBar">
@@ -18,7 +19,7 @@
 
         <div>
             <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
-            <button type="button" class="accountbtn" onclick="" id="accountDetails"> Account </button>
+            <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Account </button>
             <button type="button" class="settingbtn" onclick="" id="userSettings"> Settings </button>
         </div>
 
@@ -47,9 +48,9 @@
     <div id="home_first">
         <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
         <img id="userImage" src="/Pictures/emptyImage.png" />
-        <div id="firstName" contenteditable="true">First Name </div>
-        <div id="lastName" contenteditable="true">Last Name </div>
-        <div id="userEmail" contenteditable="true">User Email</div>
+        <div id="firstName" >First Name </div>
+        <div id="lastName" >Last Name </div>
+        <div id="userEmail" >User Email</div>
 
         <p>My Playlists</p>
 
@@ -70,6 +71,39 @@
                 <option id="opt" value="/Music/jazzyfrenchy.mp3">Jazzy Frenchy</option>
             </select>
         </form>
+
+    </div>
+
+    <div id="account_screen">
+
+        <input id="imageUpload" type="file" onchange="readURL(this);" accept="image/*" />
+        <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
+
+        <p id="f">
+            First Name:
+            <div id="fn" contenteditable="true">First Name </div>
+        </p>
+
+        <p id="l">
+            Last Name:
+            <div id="ln" contenteditable="true">Last Name </div>
+        </p>
+
+        <p id="e">
+            Your Email:
+            <div id="UEmail" contenteditable="true">User Email</div>
+        </p>
+
+        <p id="p">
+            Password:
+            <input type="password" value="ThisIsUserPasswordFromDB" id="UPassword"><br><br>
+            <input contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
+        </p>
+
+        <div>
+            <button type="button" class="savebtn" onclick="" id="saveInfo">Save Changes</button>
+        </div>
+
 
     </div>
 
@@ -144,6 +178,7 @@
             document.getElementById("home_first").style.display = "none";
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
+            document.getElementById("account_screen").style.display = "none";
             document.getElementById("topPicks").style.display = "initial";
         }
 
@@ -152,6 +187,7 @@
             document.getElementById("home_first").style.display = "none";
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("genres").style.display = "none";
+            document.getElementById("account_screen").style.display = "none";
             document.getElementById("featured").style.display = "initial";
         }
 
@@ -160,6 +196,7 @@
             document.getElementById("home_first").style.display = "none";
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("featured").style.display = "none";
+            document.getElementById("account_screen").style.display = "none";
             document.getElementById("genres").style.display = "initial";
         }
 
@@ -168,7 +205,18 @@
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
+            document.getElementById("account_screen").style.display = "none";
             document.getElementById("home_first").style.display = "initial";
+
+        }
+
+        function showAccount() {
+
+            document.getElementById("topPicks").style.display = "none";
+            document.getElementById("featured").style.display = "none";
+            document.getElementById("genres").style.display = "none";
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("account_screen").style.display = "initial";
 
         }
 
@@ -264,6 +312,28 @@
                 player = document.getElementById('audio_player');
                 player.src = bAudio;
                 player.play();
+            }
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#placeholderImage')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function showPassword() {
+            var x = document.getElementById("UPassword");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
             }
         }
 

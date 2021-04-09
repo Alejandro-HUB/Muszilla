@@ -467,14 +467,16 @@ input::-webkit-input-placeholder {
     left: 350px;
 }
 
-#userImage {
+#userImage, #placeholderImage {
     top: 40px;
     position: absolute;
     left: 50px;
     width: 200px;
-    height: 180px;
+    height: 200px;
+    border: 4px solid #33CCFF;
     object-fit: cover;
-    border-radius: 20px;
+    border-radius: 250px;
+    object-fit: cover;
 }
 
 #firstName {
@@ -488,6 +490,30 @@ input::-webkit-input-placeholder {
     left: 300px;
 }
 
+#f {
+    color: white;
+    font-size: 16px;
+    top: 60px;
+    position: absolute;
+    left: 320px;
+}
+
+#fn {
+    border-bottom: 3px solid #33CCFF;
+    text-align: center;
+    font-size: 16px;
+    top: 70px;
+    width: 373px;
+    color: white;
+    position: absolute;
+    left: 420px; 
+
+}
+
+    #fn:focus {
+        outline: 0;
+    }
+
 #lastName {
     border-bottom: 3px solid #33CCFF;
     text-align: center;
@@ -499,6 +525,29 @@ input::-webkit-input-placeholder {
     left: 490px;
 }
 
+#l {
+    color: white;
+    font-size: 16px;
+    top: 100px;
+    position: absolute;
+    left: 320px;
+}
+
+#ln {
+    border-bottom: 3px solid #33CCFF;
+    text-align: center;
+    font-size: 16px;
+    top: 110px;
+    width: 373px;
+    color: white;
+    position: absolute;
+    left: 420px;
+}
+
+    #ln:focus {
+        outline: 0;
+    }
+
 #userEmail {
     border-bottom: 3px solid #33CCFF;
     text-align: center;
@@ -507,8 +556,53 @@ input::-webkit-input-placeholder {
     width: 373px;
     color: white;
     position: absolute;
-        
-    left: 300px;
+    left: 320px;
+}
+
+#e {
+    color: white;
+    font-size: 16px;
+    top: 140px;
+    position: absolute;
+    left: 320px;
+}
+
+#UEmail {
+    border-bottom: 3px solid #33CCFF;
+    text-align: center;
+    font-size: 16px;
+    top: 150px;
+    width: 373px;
+    color: white;
+    position: absolute;
+    left: 420px;
+}
+
+    #UEmail:focus {
+        outline: 0;
+    }
+
+#p {
+    color: white;
+    font-size: 16px;
+    top: 180px;
+    position: absolute;
+    left: 320px;
+}
+
+#UPassword {
+    border-bottom: 3px solid #33CCFF;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    text-align: center;
+    background-color: black;
+    font-size: 16px;
+    top: -5px;
+    width: 373px;
+    color: white;
+    position: absolute;
+    left: 100px;
 }
 
 #home_first p {
@@ -778,5 +872,56 @@ audio:focus {
     position: absolute;
     left: 800px;
     font-weight: bold;
+}
+
+#imageUpload {
+    position: absolute;
+    top: 260px;
+    left: 110px;
+}
+
+#account_screen {
+    width: 1100px;
+    height: 520px;
+    border-radius: 50px;
+    border: solid #33CCFF;
+    box-shadow: 0px 0px 30px 3px #33CCFF;
+    position: absolute;
+    display: none;
+    background: black;
+    top: 100px;
+    left: 350px;
+}
+
+.savebtn {
+    width: 200px;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 30px;
+    font-size: 18px;
+    border: solid #33CCFF;
+    background-color: black;
+    color: #33CCFF;
+    font-weight: bold;
+    margin-left: 17px;
+    margin-right: 17px;
+    margin-top: 440px;
+    margin-bottom: 10px;
+    position: absolute;
+    left: 830px;
+    box-shadow: 0px 0px 18px 3px #33CCFF;
+}
+
+.savebtn:hover {
+    background: #33CCFF;
+    color: #fff;
+    border: solid #33CCFF;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.savebtn:focus {
+    outline: 0;
 }
 
