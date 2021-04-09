@@ -63,5 +63,11 @@ namespace Muszilla.Controllers
             }
         }
 
+        public IActionResult Logout()
+        {
+            ViewBag.Message = "Logg out succesfull";
+            return View("Index");
+        }
+
     }
 }
