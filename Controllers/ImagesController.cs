@@ -7,12 +7,17 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Muszilla.Controllers
 {
     [Route("api/[controller]")]
     public class ImagesController : Controller
     {
+        public string url = "";
+        SqlConnection con = new SqlConnection();
+        SqlCommand com = new SqlCommand();
+        SqlDataReader dr;
         // make sure that appsettings.json is filled with the necessary details of the azure storage
         private readonly AzureStorageConfig storageConfig = null;
 
@@ -26,6 +31,7 @@ namespace Muszilla.Controllers
         public async Task<IActionResult> Upload(ICollection<IFormFile> files)
         {
             bool isUploaded = false;
+            string email = "";
 
             try
             {
@@ -47,6 +53,8 @@ namespace Muszilla.Controllers
                             using (Stream stream = formFile.OpenReadStream())
                             {
                                 isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
+                                url = "https://muzilla.blob.core.windows.net/muzilla/form/" +
+               "'" + formFile.FileName + "'";
                             }
                         }
                     }
@@ -56,12 +64,33 @@ namespace Muszilla.Controllers
                     }
                 }
      
-                if (isUploaded)
+                //if (isUploaded)
                 {
-                        return new AcceptedResult();
+                    ConsumerModel add = new ConsumerModel();
+                    string connection = Muszilla.Properties.Resources.ConnectionString;
+                    if (HttpContext.Session.GetString("Email") != null)
+                    {
+                        using (SqlConnection con = new SqlConnection(connection))
+                        {
+                            email = HttpContext.Session.GetString("Email");
+                            string query = "update Consumer set Picture ='" + url + "'  where Email ='" + email + "'";
+                            using (SqlCommand com = new SqlCommand(query, con))
+                            {
+                                con.Open();
+                                com.ExecuteNonQuery();
+                                ViewBag.Message = "New Picture inserted succesfully!";
+                            }
+                            con.Close();
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Error";
+                    }
+                    return new AcceptedResult();
                 }
-                else
-                    return BadRequest("Look like the image couldnt upload to the storage");
+                //else
+                    //return BadRequest("Looks like the image couldnt upload to the storage");
             }
             catch (Exception ex)
             {
@@ -71,6 +100,6 @@ namespace Muszilla.Controllers
         }
 
         // GET /api/images/thumbnails
-        
+
     }
 }

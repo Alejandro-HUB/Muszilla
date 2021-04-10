@@ -48,7 +48,7 @@
     <div id="home_first">
 
         <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
-        <img id="userImage" src="/Pictures/emptyImage.png" />
+        <img id="userImage" src="@ViewBag.Picture" />
         <div id="firstName" contenteditable="true">@ViewBag.FirstName </div>
         <div id="lastName" contenteditable="true">@ViewBag.LastName </div>
         <div id="userEmail" contenteditable="true">@ViewBag.Email</div>
@@ -126,7 +126,7 @@
             };
         </script>
         <!--This is the button to upload images-->
-        <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
+        <!--<img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />-->
 
         <p id="f">
             First Name:
@@ -404,5 +404,15 @@
     </script>
 
 </body>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+    </script>
+
+}
 
 
