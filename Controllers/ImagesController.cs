@@ -55,12 +55,9 @@ namespace Muszilla.Controllers
                         return new UnsupportedMediaTypeResult();
                     }
                 }
-
+     
                 if (isUploaded)
                 {
-                    if (storageConfig.ThumbnailContainer != string.Empty)
-                        return new AcceptedAtActionResult("GetThumbNails", "Images", null, null);
-                    else
                         return new AcceptedResult();
                 }
                 else
@@ -70,6 +67,7 @@ namespace Muszilla.Controllers
             {
                 return BadRequest(ex.Message);
             }
+              
         }
 
         // GET /api/images/thumbnails
