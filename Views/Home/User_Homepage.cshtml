@@ -78,33 +78,80 @@
 
     <div id="account_screen">
 
-        
-            <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
-
-            <p id="f">
-                First Name:
-                <div id="fn" contenteditable="true">@ViewBag.FirstName </div>
-            </p>
-
-            <p id="l">
-                Last Name:
-                <div id="ln" contenteditable="true">@ViewBag.LastName </div>
-            </p>
-
-            <p id="e">
-                Your Email:
-                <div id="UEmail" contenteditable="true">@ViewBag.Email</div>
-            </p>
-
-            <p id="p">
-                Password:
-                <input type="password" value="@ViewBag.Pass_word" id="UPassword"><br><br>
-                <input contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
-            </p>
-
-            <div>
-                <button type="button" class="savebtn" onclick="" id="saveInfo">Save Changes</button>
+        <!--This is the button to upload images-->
+        <!-- Client side libs required  -->
+        <main>
+            <div class="box content">
+                <div>
+                    <form action="/api/images/upload"
+                          class="dropzone needsclick dz-clickable"
+                          id="image-upload"
+                          method="post"
+                          enctype="multipart/form">
+                        <div class="dz-message needsclick">
+                            <span class="note needsclick">
+                                <input asp-for="Item1.Picture" name="Picture" class="form-control" accept="image/*">
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.25.2/js/blueimp-gallery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script>
+            // Grab links for images from backend api
+            function fetchImageLinks() {
+                // Fetch images
+                $.get(function (fetchedImageLinks) {
+                    console.log(fetchedImageLinks)
+                });
+            }
+            // Start first interval
+            fetchImageLinks()
+            /* Dropzone */
+            // "imageUpload" is the camelized version of the HTML element's ID
+            Dropzone.options.imageUpload = {
+                paramName: "files", // The name that will be used to transfer the file
+                dictDefaultMessage: "Drop files here or Click to Upload",
+
+                init: function () {
+                    myDropzone = this;
+                    myDropzone.on("success", function (file, response) {
+                        console.log("Success");
+                    });
+                }
+            };
+        </script>
+        <!--This is the button to upload images-->
+        <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
+
+        <p id="f">
+            First Name:
+            <div id="fn" contenteditable="true">@ViewBag.FirstName </div>
+        </p>
+
+        <p id="l">
+            Last Name:
+            <div id="ln" contenteditable="true">@ViewBag.LastName </div>
+        </p>
+
+        <p id="e">
+            Your Email:
+            <div id="UEmail" contenteditable="true">@ViewBag.Email</div>
+        </p>
+
+        <p id="p">
+            Password:
+            <input type="password" value="@ViewBag.Pass_word" id="UPassword"><br><br>
+            <input contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
+        </p>
+
+        <div>
+            <button type="button" class="savebtn" onclick="" id="saveInfo">Save Changes</button>
+        </div>
 
 
     </div>
