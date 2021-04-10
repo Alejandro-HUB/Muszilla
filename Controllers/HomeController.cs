@@ -46,6 +46,7 @@ namespace Muszilla.Controllers
                 ln = dr["LastName"].ToString();
                 con.Close();
                 HttpContext.Session.SetString("Email", acc.Email);
+                HttpContext.Session.SetString("Pass_word", acc.Pass_word);
                 HttpContext.Session.SetString("FirstName", fn);
                 HttpContext.Session.SetString("LastName", ln);
                 return RedirectToAction("Homepage");
@@ -63,6 +64,7 @@ namespace Muszilla.Controllers
             if (HttpContext.Session.GetString("Email") != null)
             {
                 ViewBag.Email = HttpContext.Session.GetString("Email");
+                ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 return View("User_Homepage");
