@@ -42,7 +42,7 @@ namespace Muszilla.Controllers
                 if (storageConfig.AccountKey == string.Empty || storageConfig.AccountName == string.Empty)
                     return BadRequest("sorry, can't retrieve your azure storage details from appsettings.js, make sure that you add azure storage details there");
 
-                if (storageConfig.ImageContainer == string.Empty)
+                if (storageConfig.Container == string.Empty)
                     return BadRequest("Please provide a name for your image container in the azure blob storage");
 
                 foreach (var formFile in files)
@@ -71,22 +71,33 @@ namespace Muszilla.Controllers
                     string connection = Muszilla.Properties.Resources.ConnectionString;
                     if (HttpContext.Session.GetString("Email") != null)
                     {
+              
+   
                         using (SqlConnection con = new SqlConnection(connection))
                         {
-                            email = HttpContext.Session.GetString("Email");
-                            string query = "update Consumer set Picture = '"+url+"'  where Email ='" + email + "'";
-                            using (SqlCommand com = new SqlCommand(query, con))
+                        
+                        email = HttpContext.Session.GetString("Email");
+                       
+                        string query = "update Consumer set Picture = '"+url+"'  where Email ='" + email + "'";
+
+                        using (SqlCommand com = new SqlCommand(query, con))
                             {
+
                                 con.Open();
                                 com.ExecuteNonQuery();
-                                con.Close();
-                            }  
+                         
+                                 con.Close();
+                            
+                             }
+                           
                         }
+                       
                     }
                     else
                     {
                         ViewBag.Message = "Error";
-                    }
+            
+                }
                     return new AcceptedResult();
               }
               else
