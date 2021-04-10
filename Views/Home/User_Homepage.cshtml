@@ -14,7 +14,7 @@
     <div class="sidebar">
 
         <form id="searchBar">
-            <input type="search" placeholder="Search">
+            <input type="search" id="searchsong" onkeypress="handle(event)" placeholder="Search">
         </form>
 
         <div>
@@ -126,7 +126,7 @@
             };
         </script>
         <!--This is the button to upload images-->
-        <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
+        <img id="placeholderImage" src="" alt="Your Profile Picture" />
 
         <p id="f">
             First Name:
@@ -388,6 +388,15 @@
             } else {
                 x.type = "password";
             }
+        }
+
+        function handle(e) {
+            address = document.getElementById("searchsong").value;
+            if (e.keyCode === 13) {
+                //write your specific code from here
+                alert("You are searching: " + address);
+            }
+            return false;
         }
 
 
