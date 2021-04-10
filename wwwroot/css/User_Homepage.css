@@ -498,6 +498,14 @@ input::-webkit-input-placeholder {
     left: 320px;
 }
 
+#edit_one {
+    position: absolute;
+    color: lightgrey;
+    left: 800px;
+    font-size: 10px;
+    top: 70px;
+}
+
 #fn {
     border-bottom: 3px solid #33CCFF;
     text-align: center;
@@ -531,6 +539,14 @@ input::-webkit-input-placeholder {
     top: 100px;
     position: absolute;
     left: 320px;
+}
+
+#edit_two {
+    position: absolute;
+    color: lightgrey;
+    left: 800px;
+    font-size: 10px;
+    top: 110px;
 }
 
 #ln {
@@ -567,6 +583,14 @@ input::-webkit-input-placeholder {
     left: 320px;
 }
 
+#edit_three {
+    position: absolute;
+    color: lightgrey;
+    left: 800px;
+    font-size: 10px;
+    top: 150px;
+}
+
 #UEmail {
     border-bottom: 3px solid #33CCFF;
     text-align: center;
@@ -588,6 +612,14 @@ input::-webkit-input-placeholder {
     top: 180px;
     position: absolute;
     left: 320px;
+}
+
+#edit_four {
+    position: absolute;
+    color: lightgrey;
+    left: 800px;
+    font-size: 10px;
+    top: 190px;
 }
 
 #UPassword {
