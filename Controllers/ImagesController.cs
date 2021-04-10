@@ -33,6 +33,7 @@ namespace Muszilla.Controllers
             bool isUploaded = false;
             string email = "";
 
+
             try
             {
                 if (files.Count == 0)
@@ -48,13 +49,13 @@ namespace Muszilla.Controllers
                 {
                     if (StorageHelper.IsImage(formFile))
                     {
+                        url = "https://muzilla.blob.core.windows.net/muzilla/"+formFile.FileName;
                         if (formFile.Length > 0)
                         {
                             using (Stream stream = formFile.OpenReadStream())
                             {
                                 isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
-                                url = "https://muzilla.blob.core.windows.net/muzilla/form/" +
-               "'" + formFile.FileName + "'";
+                                
                             }
                         }
                     }
@@ -70,27 +71,37 @@ namespace Muszilla.Controllers
                     string connection = Muszilla.Properties.Resources.ConnectionString;
                     if (HttpContext.Session.GetString("Email") != null)
                     {
+              
+   
                         using (SqlConnection con = new SqlConnection(connection))
                         {
-                            email = HttpContext.Session.GetString("Email");
-                            string query = "update Consumer set Picture ='" + url + "'  where Email ='" + email + "'";
-                            using (SqlCommand com = new SqlCommand(query, con))
+                        
+                        email = HttpContext.Session.GetString("Email");
+                       
+                        string query = "update Consumer set Picture = '"+url+"'  where Email ='" + email + "'";
+
+                        using (SqlCommand com = new SqlCommand(query, con))
                             {
+
                                 con.Open();
                                 com.ExecuteNonQuery();
-                                ViewBag.Message = "New Picture inserted succesfully!";
-                            }
-                            con.Close();
+                         
+                                 con.Close();
+                            
                         }
+                           
+                        }
+                       
                     }
                     else
                     {
                         ViewBag.Message = "Error";
-                    }
-                    return new AcceptedResult();
+            
                 }
-                else
-                    return BadRequest("Looks like the image couldnt upload to the storage");
+                    return new AcceptedResult();
+              }
+              else
+                   return BadRequest("Looks like the image couldnt upload to the storage");
             }
             catch (Exception ex)
             {
