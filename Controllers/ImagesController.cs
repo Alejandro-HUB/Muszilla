@@ -64,7 +64,7 @@ namespace Muszilla.Controllers
                     }
                 }
      
-                //if (isUploaded)
+                if (isUploaded)
                 {
                     ConsumerModel add = new ConsumerModel();
                     string connection = Muszilla.Properties.Resources.ConnectionString;
@@ -89,8 +89,8 @@ namespace Muszilla.Controllers
                     }
                     return new AcceptedResult();
                 }
-                //else
-                    //return BadRequest("Looks like the image couldnt upload to the storage");
+                else
+                    return BadRequest("Looks like the image couldnt upload to the storage");
             }
             catch (Exception ex)
             {
