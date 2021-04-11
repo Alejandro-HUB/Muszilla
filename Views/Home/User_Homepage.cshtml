@@ -1,4 +1,4 @@
-﻿@model Tuple<ConsumerModel, AzureStorageConfig, EditModel>
+﻿@model Tuple<ConsumerModel, AzureStorageConfig>
 @{
     ViewData["Title"] = "User Homepage";
 }
@@ -153,7 +153,7 @@
             First Name:
             <!-- Natalia commented out the line below. And the prohram works as expected with this change.-->
             <!-- <input asp-for="Item3.FirstName" name="FirstName" class="form-control"> -->
-            <div id="fn" contenteditable="true" asp-for="Item3.FirstName" name="FirstName" class="form-control">@ViewBag.FirstName </div>
+            <div id="fn" contenteditable="true" asp-for="Item3.FirstName" name="FirstName" class="form-control">@ViewBag.FirstName</div>
         </p>
         <p id="edit_one">(Double click to edit)</p>
 
@@ -171,7 +171,7 @@
 
         <p id="p">
             Password:
-            <input type="password" value="@ViewBag.Pass_word" id="UPassword"><br><br>
+            <input asp-for="Item1.Pass_word" name ="Pass_word" Type="password" value="@ViewBag.Pass_word" id="UPassword"><br><br>
             <input contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
         </p>
         <p id="edit_four">(Double click to edit)</p>

@@ -98,14 +98,15 @@ namespace Muszilla.Controllers
             return View("Index");
         }
 
-        public IActionResult Update(EditModel edit)
+        public IActionResult Update(ConsumerModel edit)
         {
             string email = "";
+            string pass = "aaa";
             email = HttpContext.Session.GetString("Email");
             ConnectionString();
             con.Open();
             com.Connection = con;
-            com.CommandText = "update Consumer set FirstName = '" + edit.FirstName + "'  where Email ='" + email + "'";
+            com.CommandText = "update Consumer set Pass_word = '" + edit.Pass_word + "'  where Email ='" + email + "'";
             com.ExecuteNonQuery();
             con.Close();
             return RedirectToAction("Homepage");
