@@ -20,13 +20,13 @@
         </form>
 
         <div>
-            <button type="button" class="homebtn" onclick="showHome()" id="userHome" > Home </button>
-            <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails" > Account </button>
+            <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
+            <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Settings </button>
         </div>
 
         <div>
             <p style="color:#33CCFF; font-size: 14px;">Now Playing:</p>
-            <div id="song-name" style="color:white; font-size: 14px; padding-left: 23px;" >Playing songs show here </div>
+            <div id="song-name" style="color:white; font-size: 14px; padding-left: 23px;">Playing songs show here </div>
         </div>
 
         <div>
@@ -46,40 +46,63 @@
     </div>
 
     <div>
-        <button type="button" class="btn1" onclick="showTopPicks()" id="tp" > TOP PICKS </button>
-        <button type="button" class="btn2" onclick="showFeatured()" id="feat"  > FEATURED </button>
-        <button type="button" class="btn3" onclick="showGenres()" id="gen"  > GENRES </button>
+        <button type="button" class="btn1" onclick="showTopPicks()" id="tp"> TOP PICKS </button>
+        <button type="button" class="btn2" onclick="showFeatured()" id="feat"> FEATURED </button>
+        <button type="button" class="btn3" onclick="showGenres()" id="gen"> GENRES </button>
     </div>
 
     <div id="home_first">
 
-        <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
         <img id="userImage" src="@ViewBag.Picture" />
-        <div id="firstName" >@ViewBag.FirstName </div>
-        <div id="lastName" >@ViewBag.LastName </div>
-        <div id="userEmail" >@ViewBag.Email</div>
+        <div id="accountInfo">Account Details</div>
+        <div id="firstName">@ViewBag.FirstName </div>
+        <div id="lastName">@ViewBag.LastName </div>
+        <div id="userEmail">@ViewBag.Email</div>
 
-        <p>My Playlists</p>
-
+        <p style="top:252px;">My Playlists</p>
+        <button type="button" id="newplaylistbtn"> Add New Playlist</button>
 
         <form id="f1">
-            
-            <!-- <label for="audio_list" id="lbl1">
-                Playlist 1:
-            </label>
-            <select onchange="change_audio_file();" id="audio_list">
-                <!-- All this music is from bensound.com and the link is: https://www.bensound.com/ -->
-                <!-- <option id="opt" value="">Select A Song </option>
-                <option id="opt" value="/Music/anewbeginning.mp3">A New Beginning</option>
-                <option id="opt" value="/Music/creativeminds.mp3">Creative Minds</option>
-                <option id="opt" value="/Music/ukulele.mp3">Ukulele</option>
-                <option id="opt" value="/Music/goinghigher.mp3">Going Higher</option>
-                <option id="opt" value="/Music/cute.mp3">Cute</option>
-                <option id="opt" value="/Music/buddy.mp3">Buddy</option>
-                <option id="opt" value="/Music/littleidea.mp3">Little Idea</option>
-                <option id="opt" value="/Music/jazzyfrenchy.mp3">Jazzy Frenchy</option>
-            </select> -->
+            <div class="container2">
+                <ul class="items">
+                    <li onclick="showSongs()">Playlist 1 (Default)</li>
+                    <li onclick="showSongs2()">Playlist 2</li>
+                </ul>
+            </div>
         </form>
+
+    </div>
+
+
+    <div id="songsinplaylist">
+        <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
+
+        <div class="container3">
+            <ul class="items">
+                <li onclick="myAudioFunction1('Going Higher')">Going Higher</li>
+                <li onclick="myAudioFunction1('Ukulele')">Ukulele</li>
+                <li onclick="myAudioFunction1('Memories')">Memories</li>
+                <li onclick="myAudioFunction1('Jazzy Frenchy')">Jazzy Frenchy</li>
+                <li onclick="myAudioFunction1('Energy')">Energy</li>
+                <li onclick="myAudioFunction1('Acoustic Breeze')">Acoustic Breeze</li>
+                <li onclick="myAudioFunction1('Little Idea')">Little Idea</li>
+                <li onclick="myAudioFunction1('Slow Motion')">Slow Motion</li>
+                <li onclick="myAudioFunction1('Buddy')">Buddy</li>
+                <li onclick="myAudioFunction1('Cute')">Cute</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="songsinplaylist2">
+        <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
+        <button id="uploadsongs" onclick="">Upload</button>
+
+        <div class="container3">
+            <ul class="items">
+            </ul>
+        </div>
 
     </div>
 
@@ -129,8 +152,6 @@
                 createImageThumbnails: false,
                 dictRemoveFileConfirmation: false,
 
-
-
                 init: function () {
                     myDropzone = this;
                     myDropzone.on("success", function (file, response) {
@@ -171,29 +192,29 @@
             <p id="p">
                 Password:
                 <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
-                <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password 
+                <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
             </p>
             <p id="edit_four">(Click to edit)</p>
-            
+
             <button type="submit" value="Save" onclick="" id="saveInfo" class="savebtn">Save Changes</button>
         </form>
     </div>
 
     <div id="list_search_songs">
 
-        <p id="results">Your Search Results: </p> 
+        <p id="results">Your Search Results: </p>
 
         <div class="container1">
             <ul class="items">
-                <li onclick="myAudioFunction1('Going Higher')" style="border-style:inset;" >Going Higher</li>
+                <li onclick="myAudioFunction1('Going Higher')" style="border-style:inset;">Going Higher</li>
                 <li onclick="myAudioFunction1('Ukulele')" style="border-style:inset;">Ukulele</li>
                 <li onclick="myAudioFunction1('Memories')" style="border-style:inset;">Memories</li>
                 <li onclick="myAudioFunction1('Jazzy Frenchy')" style="border-style:inset;">Jazzy Frenchy</li>
                 <li onclick="myAudioFunction1('Energy')" style="border-style:inset;">Energy</li>
             </ul>
         </div>
-        
-        
+
+
     </div>
 
     <div id="topPicks">
@@ -254,20 +275,13 @@
 
     <script type="text/javascript">
 
-        function change_audio_file() {
-            var file_list = document.getElementById('audio_list');
-            var file_to_play = file_list.options[file_list.selectedIndex].value;
-            var player = document.getElementById('audio_player');
-            player.src = file_to_play;
-            player.play();
-        }
-
         function showTopPicks() {
 
             document.getElementById("home_first").style.display = "none";
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("topPicks").style.display = "initial";
         }
@@ -278,6 +292,7 @@
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("featured").style.display = "initial";
         }
@@ -288,6 +303,7 @@
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("featured").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("genres").style.display = "initial";
         }
@@ -299,6 +315,7 @@
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("home_first").style.display = "initial";
 
         }
@@ -310,23 +327,46 @@
             document.getElementById("genres").style.display = "none";
             document.getElementById("home_first").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("account_screen").style.display = "initial";
         }
 
         function showSearchedSong() {
 
-            
+
             document.getElementById("list_search_songs").style.display = "initial";
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("home_first").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
+        }
+
+        function showSongs() {
+
+            document.getElementById("songsinplaylist").style.display = "initial";
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("songsinplaylist2").style.display = "none";
+        }
+
+        function showSongs2() {
+
+            document.getElementById("songsinplaylist").style.display = "none";
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("songsinplaylist2").style.display = "initial";
+        }
+
+        function gobacktoplaylists() {
+
+            document.getElementById("home_first").style.display = "initial";
+            document.getElementById("songsinplaylist").style.display = "none";
+            document.getElementById("songsinplaylist2").style.display = "none";
         }
 
         var aAudio;
         var bAudio;
-        
+
         function myAudioFunction1(song) {
 
             if (song == 'Buddy') {
@@ -414,7 +454,7 @@
                 player = document.getElementById('audio_player');
                 player.src = bAudio;
                 player.play();
-                document.getElementById('song-name').innerHTML = 'Jazzy Frenchy - By BenSound'; 
+                document.getElementById('song-name').innerHTML = 'Jazzy Frenchy - By BenSound';
             }
         }
 
