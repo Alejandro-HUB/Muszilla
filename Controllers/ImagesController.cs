@@ -97,7 +97,7 @@ namespace Muszilla.Controllers
                         email = HttpContext.Session.GetString("Email");
                        
                         string query = "update Consumer set Picture = '"+url+"'  where Email ='" + email + "'";
-
+                        
                         using (SqlCommand com = new SqlCommand(query, con))
                             {
 
