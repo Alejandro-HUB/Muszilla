@@ -38,13 +38,14 @@ namespace Muszilla.Controllers
             ConnectionString();
             con.Open();
             com.Connection = con;
-            com.CommandText = "select * from Consumer where Email= '" + acc.Email + "' and Pass_word= '" + acc.Pass_word + "'";
-            com.CommandText = "select FirstName, LastName, Picture from Consumer where Email = '" + acc.Email + "'";
+            //com.CommandText = "select * from Consumer where Email= '" + acc.Email + "' and Pass_word= '" + acc.Pass_word + "'";
+            com.CommandText = "select FirstName, LastName, Picture from Consumer where Email = '" + acc.Email + "'and Pass_word= '" + acc.Pass_word + "'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
                 fn = dr["FirstName"].ToString();
                 ln = dr["LastName"].ToString();
+                url = dr["Picture"].ToString();
                 con.Close();
                 HttpContext.Session.SetString("Email", acc.Email);
                 HttpContext.Session.SetString("Pass_word", acc.Pass_word);
@@ -69,7 +70,7 @@ namespace Muszilla.Controllers
                 ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
-                ViewBag.Picture = HttpContext.Session.GetString("");
+                ViewBag.Picture = HttpContext.Session.GetString("Picture");
                 return View("User_Homepage");
             }
             return View();
