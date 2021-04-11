@@ -53,7 +53,7 @@
     <div id="home_first">
 
         <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
-        <img id="userImage" src="/Pictures/emptyImage.png" />
+        <img id="userImage" src="@ViewBag.Picture" />
         <div id="firstName" contenteditable="true">@ViewBag.FirstName </div>
         <div id="lastName" contenteditable="true">@ViewBag.LastName </div>
         <div id="userEmail" contenteditable="true">@ViewBag.Email</div>
@@ -133,12 +133,13 @@
             Dropzone.options.uploa
         </script>
         <!--This is the button to upload images-->
-        <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
+        <!-- <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" /> -->
 
         <p id="f">
             First Name:
-            <input asp-for="Item3.FirstName" name="FirstName" class="form-control">
-            <div id="fn" contenteditable="true">@ViewBag.FirstName </div>
+            <!-- Natalia commented out the line below. And the prohram works as expected with this change.-->
+            <!-- <input asp-for="Item3.FirstName" name="FirstName" class="form-control"> -->
+            <div id="fn" contenteditable="true" asp-for="Item3.FirstName" name="FirstName" class="form-control">@ViewBag.FirstName </div>
         </p>
         <p id="edit_one">(Double click to edit)</p>
 
