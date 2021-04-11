@@ -1,4 +1,4 @@
-﻿@model Tuple<ConsumerModel, AzureStorageConfig>
+﻿@model Tuple<ConsumerModel, AzureStorageConfig, EditModel>
 @{
     ViewData["Title"] = "User Homepage";
 }
@@ -130,6 +130,7 @@
 
         <p id="f">
             First Name:
+            <input asp-for="Item3.FirstName" name="FirstName" class="form-control">
             <div id="fn" contenteditable="true">@ViewBag.FirstName </div>
         </p>
         <p id="edit_one">(Double click to edit)</p>
@@ -154,7 +155,7 @@
         <p id="edit_four">(Double click to edit)</p>
 
         <div>
-            <button type="button" class="savebtn" onclick="" id="saveInfo">Save Changes</button>
+            <button type="button" class="savebtn" onclick="location.href='@Url.Action("Update", "Home")'" id="saveInfo">Save Changes</button>
         </div>
 
 
