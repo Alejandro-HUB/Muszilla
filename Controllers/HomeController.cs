@@ -38,8 +38,7 @@ namespace Muszilla.Controllers
             ConnectionString();
             con.Open();
             com.Connection = con;
-            //com.CommandText = "select * from Consumer where Email= '" + acc.Email + "' and Pass_word= '" + acc.Pass_word + "'";
-            com.CommandText = "select FirstName, LastName, Picture from Consumer where Email = '" + acc.Email + "'and Pass_word= '" + acc.Pass_word + "'";
+            com.CommandText = "select Email, Pass_word, FirstName, LastName, Picture from Consumer where Email = '" + acc.Email + "' and Pass_word = '"+acc.Pass_word+"'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
@@ -97,6 +96,19 @@ namespace Muszilla.Controllers
         {
             ViewBag.Message = "Log out successful!";
             return View("Index");
+        }
+
+        public IActionResult Update(EditModel edit)
+        {
+            string email = "";
+            email = HttpContext.Session.GetString("Email");
+            ConnectionString();
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "update Consumer set FirstName = '" + edit.FirstName + "'  where Email ='" + email + "'";
+            com.ExecuteNonQuery();
+            con.Close();
+            return View("User_Homepage");
         }
     }
 }

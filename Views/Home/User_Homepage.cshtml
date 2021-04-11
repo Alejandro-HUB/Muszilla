@@ -1,4 +1,4 @@
-﻿@model Tuple<ConsumerModel, AzureStorageConfig>
+﻿@model Tuple<ConsumerModel, AzureStorageConfig, EditModel>
 @{
     ViewData["Title"] = "User Homepage";
 }
@@ -121,6 +121,7 @@
             Dropzone.options.imageUpload = {
                 paramName: "files", // The name that will be used to transfer the file
                 dictDefaultMessage: "Drop files here or Click to Upload",
+                createImageThumbnails:false,
 
                 init: function () {
                     myDropzone = this;
@@ -129,12 +130,14 @@
                     });
                 }
             };
+            Dropzone.options.uploa
         </script>
         <!--This is the button to upload images-->
         <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
 
         <p id="f">
             First Name:
+            <input asp-for="Item3.FirstName" name="FirstName" class="form-control">
             <div id="fn" contenteditable="true">@ViewBag.FirstName </div>
         </p>
         <p id="edit_one">(Double click to edit)</p>
@@ -159,7 +162,7 @@
         <p id="edit_four">(Double click to edit)</p>
 
         <div>
-            <button type="button" class="savebtn" onclick="" id="saveInfo">Save Changes</button>
+            <button type="button" class="savebtn" onclick="location.href='@Url.Action("Update", "Home")'" id="saveInfo">Save Changes</button>
         </div>
     </div>
 
