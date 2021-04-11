@@ -4,6 +4,7 @@
 }
 
 <link rel="stylesheet" type="text/css" href="/css/User_Homepage.css" />
+
 <body onload="changeHashOnLoad(); ">
     <!-- This logo was created by hand by Natalia, so there is no link-->
     <div id="logo">
@@ -53,7 +54,7 @@
     <div id="home_first">
 
         <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
-        <img id="userImage" src="/Pictures/emptyImage.png" />
+        <img id="userImage" src="@ViewBag.Picture" />
         <div id="firstName" contenteditable="true">@ViewBag.FirstName </div>
         <div id="lastName" contenteditable="true">@ViewBag.LastName </div>
         <div id="userEmail" contenteditable="true">@ViewBag.Email</div>
@@ -91,7 +92,7 @@
             <div class="box content" id="imageUpload">
                 <div>
                     <form action="/api/images/upload"
-                          class="dropzone needsclick dz-clickable"
+                          class="dropzone"
                           id="image-upload"
                           method="post"
                           enctype="multipart/form">
@@ -100,8 +101,10 @@
                                 <input asp-for="Item1.Picture" name="Picture" class="form-control" accept="image/*">
                             </span>
                         </div>
+                       
                     </form>
                 </div>
+                
             </div>
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -119,21 +122,32 @@
             /* Dropzone */
             // "imageUpload" is the camelized version of the HTML element's ID
             Dropzone.options.imageUpload = {
+                addRemoveLinks: true,
                 paramName: "files", // The name that will be used to transfer the file
                 dictDefaultMessage: "Drop files here or Click to Upload",
-                createImageThumbnails:false,
+                createImageThumbnails: false,
+                dictRemoveFileConfirmation: false,
+
+
 
                 init: function () {
                     myDropzone = this;
                     myDropzone.on("success", function (file, response) {
+                        file.previewElement.remove();
                         console.log("Success");
+                        
                     });
+
+                },
+                removedfile: function (file) {
+                    file.previewElement.remove();
                 }
+
             };
             Dropzone.options.uploa
         </script>
         <!--This is the button to upload images-->
-        <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
+       
 
         <p id="f">
             First Name:
