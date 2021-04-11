@@ -98,9 +98,10 @@ namespace Muszilla.Controllers
             return View("Index");
         }
 
-        public IActionResult Update(EditModel edit)
+        public IActionResult Update(ConsumerModel edit)
         {
             string email = "";
+            string pass = "aaa";
             email = HttpContext.Session.GetString("Email");
             ConnectionString();
             con.Open();
@@ -108,7 +109,8 @@ namespace Muszilla.Controllers
             com.CommandText = "update Consumer set FirstName = '" + edit.FirstName + "'  where Email ='" + email + "'";
             com.ExecuteNonQuery();
             con.Close();
-            return View("User_Homepage");
+            HttpContext.Session.SetString("FirstName", edit.FirstName);
+            return RedirectToAction("Homepage");
         }
     }
 }

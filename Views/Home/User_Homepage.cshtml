@@ -1,4 +1,4 @@
-﻿@model Tuple<ConsumerModel, AzureStorageConfig, EditModel>
+﻿@model Tuple<ConsumerModel, AzureStorageConfig>
 @{
     ViewData["Title"] = "User Homepage";
 }
@@ -148,12 +148,13 @@
             Dropzone.options.uploa
         </script>
         <!--This is the button to upload images-->
+        <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
 
         <p id="f">
             First Name:
             <!-- Natalia commented out the line below. And the prohram works as expected with this change.-->
             <!-- <input asp-for="Item3.FirstName" name="FirstName" class="form-control"> -->
-            <input id="fn" contenteditable="true" asp-for="Item3.FirstName" name="FirstName" class="form-control" autocomplete="off">@ViewBag.FirstName </>
+            <div id="fn" contenteditable="true" asp-for="Item3.FirstName" name="FirstName" class="form-control">@ViewBag.FirstName </div>
         </p>
         <p id="edit_one">(Double click to edit)</p>
 

@@ -89,27 +89,18 @@ namespace Muszilla.Controllers
                     string connection = Muszilla.Properties.Resources.ConnectionString;
                     if (HttpContext.Session.GetString("Email") != null)
                     {
-              
-   
                         using (SqlConnection con = new SqlConnection(connection))
                         {
-                        
-                        email = HttpContext.Session.GetString("Email");
-                       
-                        string query = "update Consumer set Picture = '"+url+"'  where Email ='" + email + "'";
-                        
-                        using (SqlCommand com = new SqlCommand(query, con))
+                            email = HttpContext.Session.GetString("Email");
+                            string query = "update Consumer set Picture = '"+url+"'  where Email ='" + email + "'";
+                            using (SqlCommand com = new SqlCommand(query, con))
                             {
-
                                 con.Open();
                                 com.ExecuteNonQuery();
-                         
-                                 con.Close();
-                            
-                             }
-                           
+                                HttpContext.Session.SetString("Picture",url);
+                                con.Close();
+                            }
                         }
-                       
                     }
                     else
                     {
@@ -117,7 +108,6 @@ namespace Muszilla.Controllers
             
                     }
                     return new AcceptedResult();
-
               }
                 else if (isUploaded&&isAudio)
                 {
