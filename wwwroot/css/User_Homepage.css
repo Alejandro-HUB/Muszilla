@@ -79,15 +79,16 @@ li:hover {
     margin: 4px 10px;
 }
 
-.homebtn:hover, .accountbtn:hover {
-    cursor: pointer;
-    color: #33CCFF;
-    border-right: 3px solid #33CCFF;
-}
-
-.homebtn:focus, .accountbtn:focus {
-    outline: 0;
-}
+    .homebtn:hover, .accountbtn:hover, .homebtn:focus, .accountbtn:focus {
+        cursor: pointer;
+        color: #33CCFF;
+        outline: 0;
+        border-style: inset;
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+        border-right: 3px solid #33CCFF;
+    }
 
 .logoutbtn {
     width: 200px;
@@ -531,13 +532,12 @@ input::-webkit-input-placeholder {
             box-shadow: 0px 0px 5px 3px white;
         }
 
-
-    ul.items {
-        list-style-type: none;
-        margin: 0;
-        padding-top: 5px;
-        padding-left: 5px;
-    }
+            ul.items {
+            list-style-type: none;
+            margin: 0;
+            padding-top: 5px;
+            padding-left: 5px;
+        }
 
 ::-webkit-scrollbar {
     width: 7px;
@@ -601,7 +601,7 @@ input::-webkit-input-placeholder {
     border-bottom: 3px solid #33CCFF;
     text-align: center;
     font-size: 16px;
-    top: 70px;
+    top: 60px;
     width: 373px;
     color: white;
     position: absolute;

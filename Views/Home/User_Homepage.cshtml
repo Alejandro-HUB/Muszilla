@@ -20,8 +20,8 @@
         </form>
 
         <div>
-            <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
-            <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Account </button>
+            <button type="button" class="homebtn" onclick="showHome()" id="userHome" > Home </button>
+            <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails" > Account </button>
         </div>
 
         <div>
@@ -46,29 +46,30 @@
     </div>
 
     <div>
-        <button type="button" class="btn1" onclick="showTopPicks()" id="tp"> TOP PICKS </button>
-        <button type="button" class="btn2" onclick="showFeatured()" id="feat"> FEATURED </button>
-        <button type="button" class="btn3" onclick="showGenres()" id="gen"> GENRES </button>
+        <button type="button" class="btn1" onclick="showTopPicks()" id="tp" > TOP PICKS </button>
+        <button type="button" class="btn2" onclick="showFeatured()" id="feat"  > FEATURED </button>
+        <button type="button" class="btn3" onclick="showGenres()" id="gen"  > GENRES </button>
     </div>
 
     <div id="home_first">
 
         <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
         <img id="userImage" src="@ViewBag.Picture" />
-        <div id="firstName" contenteditable="true">@ViewBag.FirstName </div>
-        <div id="lastName" contenteditable="true">@ViewBag.LastName </div>
-        <div id="userEmail" contenteditable="true">@ViewBag.Email</div>
+        <div id="firstName" >@ViewBag.FirstName </div>
+        <div id="lastName" >@ViewBag.LastName </div>
+        <div id="userEmail" >@ViewBag.Email</div>
 
         <p>My Playlists</p>
 
 
         <form id="f1">
-            <label for="audio_list" id="lbl1">
+            
+            <!-- <label for="audio_list" id="lbl1">
                 Playlist 1:
             </label>
             <select onchange="change_audio_file();" id="audio_list">
                 <!-- All this music is from bensound.com and the link is: https://www.bensound.com/ -->
-                <option id="opt" value="">Select A Song </option>
+                <!-- <option id="opt" value="">Select A Song </option>
                 <option id="opt" value="/Music/anewbeginning.mp3">A New Beginning</option>
                 <option id="opt" value="/Music/creativeminds.mp3">Creative Minds</option>
                 <option id="opt" value="/Music/ukulele.mp3">Ukulele</option>
@@ -77,7 +78,7 @@
                 <option id="opt" value="/Music/buddy.mp3">Buddy</option>
                 <option id="opt" value="/Music/littleidea.mp3">Little Idea</option>
                 <option id="opt" value="/Music/jazzyfrenchy.mp3">Jazzy Frenchy</option>
-            </select>
+            </select> -->
         </form>
 
     </div>
@@ -147,13 +148,12 @@
             Dropzone.options.uploa
         </script>
         <!--This is the button to upload images-->
-        <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
 
         <p id="f">
             First Name:
             <!-- Natalia commented out the line below. And the prohram works as expected with this change.-->
             <!-- <input asp-for="Item3.FirstName" name="FirstName" class="form-control"> -->
-            <div id="fn" contenteditable="true" asp-for="Item3.FirstName" name="FirstName" class="form-control">@ViewBag.FirstName </div>
+            <input id="fn" contenteditable="true" asp-for="Item3.FirstName" name="FirstName" class="form-control" autocomplete="off">@ViewBag.FirstName </>
         </p>
         <p id="edit_one">(Double click to edit)</p>
 
@@ -187,11 +187,11 @@
 
         <div class="container1">
             <ul class="items">
-                <li onclick="myAudioFunction1('Going Higher')" >Going Higher</li>
-                <li onclick="myAudioFunction1('Ukulele')">Ukulele</li>
-                <li onclick="myAudioFunction1('Memories')">Memories</li>
-                <li onclick="myAudioFunction1('Jazzy Frenchy')">Jazzy Frenchy</li>
-                <li onclick="myAudioFunction1('Energy')">Energy</li>
+                <li onclick="myAudioFunction1('Going Higher')" style="border-style:inset;" >Going Higher</li>
+                <li onclick="myAudioFunction1('Ukulele')" style="border-style:inset;">Ukulele</li>
+                <li onclick="myAudioFunction1('Memories')" style="border-style:inset;">Memories</li>
+                <li onclick="myAudioFunction1('Jazzy Frenchy')" style="border-style:inset;">Jazzy Frenchy</li>
+                <li onclick="myAudioFunction1('Energy')" style="border-style:inset;">Energy</li>
             </ul>
         </div>
         
