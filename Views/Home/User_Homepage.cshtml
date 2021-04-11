@@ -4,173 +4,161 @@
 }
 
 <link rel="stylesheet" type="text/css" href="/css/User_Homepage.css" />
-
 <body onload="changeHashOnLoad(); ">
     <!-- This logo was created by hand by Natalia, so there is no link-->
-    <div id="logo">
-        <img src="/Pictures/officialMuszillaLogo.jpg" width="250px" alt="Image Of Muszilla logo">
-    </div>
-
+    @if (@ViewBag.Pass_word != "")
+    {
+        <div id="logo">
+            <img src="/Pictures/officialMuszillaLogo.jpg" width="250px" alt="Image Of Muszilla logo">
+        </div>
+    }
     <!-- random comment for testing-->
-    <div class="sidebar">
+    @if (@ViewBag.Pass_word != "")
+    {
+        <div class="sidebar">
 
-        <form id="searchBar">
-            <input type="search" id="searchsong" placeholder="Search" autocomplete="off">
-            <button type="button" onclick="" id="lookupsong" class="searchbtn"> Search </button>
-        </form>
+            <form id="searchBar">
+                <input type="search" id="searchsong" placeholder="Search" autocomplete="off">
+                <button type="button" onclick="" id="lookupsong" class="searchbtn"> Search </button>
+            </form>
 
-        <div>
-            <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
-            <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Settings </button>
+            <div>
+                <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
+                <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Account </button>
+            </div>
+
+            <div>
+                <p style="color:#33CCFF; font-size: 14px;">Now Playing:</p>
+                <div id="song-name" style="color:white; font-size: 14px; padding-left: 23px;">Playing songs show here </div>
+            </div>
+
+            <div>
+                <p>Recently Played  <i class="arrow down"></i> </p>
+
+                <ul>
+                    <li>Song 1 Name</li>
+                    <li>Song 2 Name</li>
+                    <li>Song 3 Name</li>
+                </ul>
+
+            </div>
+
+            <div>
+                <button type="button" class="logoutbtn" onclick="location.href='@Url.Action("Logout", "Home")'" id="logout">LOG OUT</button>
+            </div>
         </div>
-
+    }
+    @if (@ViewBag.Pass_word != "")
+    {
         <div>
-            <p style="color:#33CCFF; font-size: 14px;">Now Playing:</p>
-            <div id="song-name" style="color:white; font-size: 14px; padding-left: 23px;">Playing songs show here </div>
+            <button type="button" class="btn1" onclick="showTopPicks()" id="tp"> TOP PICKS </button>
+            <button type="button" class="btn2" onclick="showFeatured()" id="feat"> FEATURED </button>
+            <button type="button" class="btn3" onclick="showGenres()" id="gen"> GENRES </button>
         </div>
+    }
 
-        <div>
-            <p>Recently Played  <i class="arrow down"></i> </p>
-
-            <ul>
-                <li>Song 1 Name</li>
-                <li>Song 2 Name</li>
-                <li>Song 3 Name</li>
-            </ul>
-
-        </div>
-
-        <div>
-            <button type="button" class="logoutbtn" onclick="location.href='@Url.Action("Logout", "Home")'" id="logout">LOG OUT</button>
-        </div>
-    </div>
-
-    <div>
-        <button type="button" class="btn1" onclick="showTopPicks()" id="tp"> TOP PICKS </button>
-        <button type="button" class="btn2" onclick="showFeatured()" id="feat"> FEATURED </button>
-        <button type="button" class="btn3" onclick="showGenres()" id="gen"> GENRES </button>
-    </div>
 
     <div id="home_first">
+        @if (@ViewBag.Pass_word != "")
+        {
+            <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
+            <img id="userImage" src="@ViewBag.Picture" />
+            <div id="firstName">@ViewBag.FirstName </div>
+            <div id="lastName">@ViewBag.LastName </div>
+            <div id="userEmail">@ViewBag.Email</div>
 
-        <img id="userImage" src="@ViewBag.Picture" />
-        <div id="accountInfo">Account Details</div>
-        <div id="firstName">@ViewBag.FirstName </div>
-        <div id="lastName">@ViewBag.LastName </div>
-        <div id="userEmail">@ViewBag.Email</div>
-
-        <p style="top:252px;">My Playlists</p>
-        <button type="button" id="newplaylistbtn"> Add New Playlist</button>
+            <p>My Playlists</p>
+        }
 
         <form id="f1">
-            <div class="container2">
-                <ul class="items">
-                    <li onclick="showSongs()">Playlist 1 (Default)</li>
-                    <li onclick="showSongs2()">Playlist 2</li>
-                </ul>
-            </div>
+
+            <!-- <label for="audio_list" id="lbl1">
+                Playlist 1:
+            </label>
+            <select onchange="change_audio_file();" id="audio_list">
+                <!-- All this music is from bensound.com and the link is: https://www.bensound.com/ -->
+            <!-- <option id="opt" value="">Select A Song </option>
+                <option id="opt" value="/Music/anewbeginning.mp3">A New Beginning</option>
+                <option id="opt" value="/Music/creativeminds.mp3">Creative Minds</option>
+                <option id="opt" value="/Music/ukulele.mp3">Ukulele</option>
+                <option id="opt" value="/Music/goinghigher.mp3">Going Higher</option>
+                <option id="opt" value="/Music/cute.mp3">Cute</option>
+                <option id="opt" value="/Music/buddy.mp3">Buddy</option>
+                <option id="opt" value="/Music/littleidea.mp3">Little Idea</option>
+                <option id="opt" value="/Music/jazzyfrenchy.mp3">Jazzy Frenchy</option>
+            </select> -->
         </form>
-
-    </div>
-
-
-    <div id="songsinplaylist">
-        <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
-
-        <div class="container3">
-            <ul class="items">
-                <li onclick="myAudioFunction1('Going Higher')">Going Higher</li>
-                <li onclick="myAudioFunction1('Ukulele')">Ukulele</li>
-                <li onclick="myAudioFunction1('Memories')">Memories</li>
-                <li onclick="myAudioFunction1('Jazzy Frenchy')">Jazzy Frenchy</li>
-                <li onclick="myAudioFunction1('Energy')">Energy</li>
-                <li onclick="myAudioFunction1('Acoustic Breeze')">Acoustic Breeze</li>
-                <li onclick="myAudioFunction1('Little Idea')">Little Idea</li>
-                <li onclick="myAudioFunction1('Slow Motion')">Slow Motion</li>
-                <li onclick="myAudioFunction1('Buddy')">Buddy</li>
-                <li onclick="myAudioFunction1('Cute')">Cute</li>
-
-            </ul>
-        </div>
-
-    </div>
-
-    <div id="songsinplaylist2">
-        <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
-        <button id="uploadsongs" onclick="">Upload</button>
-
-        <div class="container3">
-            <ul class="items">
-            </ul>
-        </div>
-
     </div>
 
     <div id="account_screen">
+        @if (@ViewBag.Pass_word != "")
+        {
+            <img id="placeholderImage" src="@ViewBag.Picture" />
+            <!--This is the button to upload images-->
+            <!-- Client side libs required  -->
+            <main>
+                <div class="box content" id="imageUpload">
+                    <div>
+                        <form action="/api/images/upload"
+                              class="dropzone"
+                              id="image-upload"
+                              method="post"
+                              enctype="multipart/form">
+                            <div class="dz-message needsclick">
+                                <span class="note needsclick">
+                                    <input asp-for="Item1.Picture" name="Picture" class="form-control" accept="image/*">
+                                </span>
+                            </div>
 
+                        </form>
+                    </div>
 
-        <img id="placeholderImage" src="@ViewBag.Picture" />
-        <!--This is the button to upload images-->
-        <!-- Client side libs required  -->
-        <main>
-            <div class="box content" id="imageUpload">
-                <div>
-                    <form action="/api/images/upload"
-                          class="dropzone"
-                          id="image-upload"
-                          method="post"
-                          enctype="multipart/form">
-                        <div class="dz-message needsclick">
-                            <span class="note needsclick">
-                                <input asp-for="Item1.Picture" name="Picture" class="form-control" accept="image/*">
-                            </span>
-                        </div>
-
-                    </form>
                 </div>
-
-            </div>
-        </main>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
-        <script>
-            // Grab links for images from backend api
-            function fetchImageLinks() {
-                // Fetch images
-                $.get(function (fetchedImageLinks) {
-                    console.log(fetchedImageLinks)
-                });
-            }
-            // Start first interval
-            fetchImageLinks()
-            /* Dropzone */
-            // "imageUpload" is the camelized version of the HTML element's ID
-            Dropzone.options.imageUpload = {
-                addRemoveLinks: true,
-                paramName: "files", // The name that will be used to transfer the file
-                dictDefaultMessage: "Drop files here or Click to Upload",
-                createImageThumbnails: false,
-                dictRemoveFileConfirmation: false,
-
-                init: function () {
-                    myDropzone = this;
-                    myDropzone.on("success", function (file, response) {
-                        file.previewElement.remove();
-                        console.log("Success");
-
+            </main>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+            <script>
+                // Grab links for images from backend api
+                function fetchImageLinks() {
+                    // Fetch images
+                    $.get(function (fetchedImageLinks) {
+                        console.log(fetchedImageLinks)
                     });
-
-                },
-                removedfile: function (file) {
-                    file.previewElement.remove();
                 }
+                // Start first interval
+                fetchImageLinks()
+                /* Dropzone */
+                // "imageUpload" is the camelized version of the HTML element's ID
+                Dropzone.options.imageUpload = {
+                    addRemoveLinks: true,
+                    paramName: "files", // The name that will be used to transfer the file
+                    dictDefaultMessage: "Drop files here or Click to Upload",
+                    createImageThumbnails: false,
+                    dictRemoveFileConfirmation: false,
 
-            };
-            Dropzone.options.uploa
-        </script>
-        <!--This is the button to upload images-->
-        <form class="form-horizontal" asp-action="Update">
 
+
+                    init: function () {
+                        myDropzone = this;
+                        myDropzone.on("success", function (file, response) {
+                            file.previewElement.remove();
+                            console.log("Success");
+
+                        });
+
+                    },
+                    removedfile: function (file) {
+                        file.previewElement.remove();
+                    }
+
+                };
+                Dropzone.options.uploa
+            </script>
+            <!--This is the button to upload images-->
+        }
+    <form class="form-horizontal" asp-action="Update">
+        @if (@ViewBag.Pass_word != "")
+        {
             <p id="f">
                 First Name:
                 <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
@@ -197,25 +185,27 @@
             <p id="edit_four">(Click to edit)</p>
 
             <button type="submit" value="Save" onclick="" id="saveInfo" class="savebtn">Save Changes</button>
+        }
         </form>
     </div>
 
     <div id="list_search_songs">
+        @if (@ViewBag.Pass_word != "")
+        {
+            <p id="results">Your Search Results: </p>
 
-        <p id="results">Your Search Results: </p>
+            <div class="container1">
+                <ul class="items">
+                    <li onclick="myAudioFunction1('Going Higher')" style="border-style:inset;">Going Higher</li>
+                    <li onclick="myAudioFunction1('Ukulele')" style="border-style:inset;">Ukulele</li>
+                    <li onclick="myAudioFunction1('Memories')" style="border-style:inset;">Memories</li>
+                    <li onclick="myAudioFunction1('Jazzy Frenchy')" style="border-style:inset;">Jazzy Frenchy</li>
+                    <li onclick="myAudioFunction1('Energy')" style="border-style:inset;">Energy</li>
+                </ul>
+            </div>
 
-        <div class="container1">
-            <ul class="items">
-                <li onclick="myAudioFunction1('Going Higher')" style="border-style:inset;">Going Higher</li>
-                <li onclick="myAudioFunction1('Ukulele')" style="border-style:inset;">Ukulele</li>
-                <li onclick="myAudioFunction1('Memories')" style="border-style:inset;">Memories</li>
-                <li onclick="myAudioFunction1('Jazzy Frenchy')" style="border-style:inset;">Jazzy Frenchy</li>
-                <li onclick="myAudioFunction1('Energy')" style="border-style:inset;">Energy</li>
-            </ul>
+        }
         </div>
-
-
-    </div>
 
     <div id="topPicks">
         <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
@@ -266,14 +256,25 @@
 
 
     <div id="audio_container">
-        <audio controls id="audio_player" src="audio/demo.mp3">
-            <div>
-                Sorry, your browser does not support this audio player.
-            </div>
-        </audio>
-    </div>
+        @if (@ViewBag.Pass_word != "")
+        {
+            <audio controls id="audio_player" src="audio/demo.mp3">
+                <div>
+                    Sorry, your browser does not support this audio player.
+                </div>
+            </audio>
+        }
+        </div>
 
     <script type="text/javascript">
+
+        function change_audio_file() {
+            var file_list = document.getElementById('audio_list');
+            var file_to_play = file_list.options[file_list.selectedIndex].value;
+            var player = document.getElementById('audio_player');
+            player.src = file_to_play;
+            player.play();
+        }
 
         function showTopPicks() {
 
@@ -281,7 +282,6 @@
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
-            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("topPicks").style.display = "initial";
         }
@@ -292,7 +292,6 @@
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
-            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("featured").style.display = "initial";
         }
@@ -303,7 +302,6 @@
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("featured").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
-            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("genres").style.display = "initial";
         }
@@ -315,7 +313,6 @@
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
-            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("home_first").style.display = "initial";
 
         }
@@ -327,7 +324,6 @@
             document.getElementById("genres").style.display = "none";
             document.getElementById("home_first").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
-            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("account_screen").style.display = "initial";
         }
 
@@ -339,29 +335,7 @@
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("home_first").style.display = "none";
-            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
-        }
-
-        function showSongs() {
-
-            document.getElementById("songsinplaylist").style.display = "initial";
-            document.getElementById("home_first").style.display = "none";
-            document.getElementById("songsinplaylist2").style.display = "none";
-        }
-
-        function showSongs2() {
-
-            document.getElementById("songsinplaylist").style.display = "none";
-            document.getElementById("home_first").style.display = "none";
-            document.getElementById("songsinplaylist2").style.display = "initial";
-        }
-
-        function gobacktoplaylists() {
-
-            document.getElementById("home_first").style.display = "initial";
-            document.getElementById("songsinplaylist").style.display = "none";
-            document.getElementById("songsinplaylist2").style.display = "none";
         }
 
         var aAudio;
@@ -497,14 +471,15 @@
 
 </body>
 
-@if (ViewBag.Message != null)
-{
-    <script type="text/javascript">
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
         window.onload = function () {
             alert("@ViewBag.Message");
         };
-    </script>
+        </script>
 
-}
+    }
+
 
 
