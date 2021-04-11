@@ -86,7 +86,7 @@
     <div id="account_screen">
 
 
-        <img id="placeholderImage" src="@ViewBag.Picture" alt="Your Profile Picture" />
+        <img id="placeholderImage" src="@ViewBag.Picture" />
         <!--This is the button to upload images-->
         <!-- Client side libs required  -->
         <main>
@@ -149,15 +149,33 @@
         </script>
         <!--This is the button to upload images-->
         <form class="form-horizontal" asp-action="Update">
-            <p>LOGIN</p>
-            <input asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" placeholder="@ViewBag.FirstName">
-            <input asp-for="Item1.LastName" name="LastName" class="form-control" type="text" placeholder="@ViewBag.LastName">
-            <input asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" placeholder="@ViewBag.Email">
+
+            <p id="f">
+                First Name:
+                <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" placeholder="@ViewBag.FirstName">
+            </p>
+            <p id="edit_one">(Double click to edit)</p>
+
+            <p id="l">
+                Last Name:
+                <input asp-for="Item1.LastName" name="LastName" class="form-control" type="text" placeholder="@ViewBag.LastName">
+            </p>
+            <p id="edit_two">(Double click to edit)</p>
+
+            <p id="e">
+                Your Email:
+                <input asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" placeholder="@ViewBag.Email">
+            </p>
+            <p id="edit_three">(Double click to edit)</p>
+
             <p id="p">
+                Password:
                 <input asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" autocomplete="off" placeholder="@ViewBag.Pass_word">
                 <input contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
             </p>
-            <button type="submit" value="Save" onclick="">Save</button>
+            <p id="edit_four">(Double click to edit)</p>
+
+            <button type="submit" value="Save" onclick="" id="saveInfo" class="savebtn">Save Changes</button>
         </form>
     </div>
 
