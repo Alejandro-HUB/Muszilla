@@ -50,17 +50,20 @@ namespace Muszilla.Controllers
 
                 foreach (var formFile in files)
                 {
-                    if (StorageHelper.IsImage(formFile))
+                    if (ViewBag.Email != "")
                     {
-                        url = "https://muzilla.blob.core.windows.net/muzilla/"+formFile.FileName;
-                     
-                        if (formFile.Length > 0)
+                        if (StorageHelper.IsImage(formFile))
                         {
-                            using (Stream stream = formFile.OpenReadStream())
+                            url = "https://muzilla.blob.core.windows.net/muzilla/" + formFile.FileName;
+
+                            if (formFile.Length > 0)
                             {
-                                isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
-                                isImage = true;
-                                
+                                using (Stream stream = formFile.OpenReadStream())
+                                {
+                                    isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
+                                    isImage = true;
+
+                                }
                             }
                         }
                     }

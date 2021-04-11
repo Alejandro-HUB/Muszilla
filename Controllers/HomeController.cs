@@ -29,23 +29,25 @@ namespace Muszilla.Controllers
         {
             con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
         }
-
         public IActionResult Verify(ConsumerModel acc)
         {
             string fn = "";
             string ln = "";
             string url = "";
+            string id = "";
             ConnectionString();
             con.Open();
             com.Connection = con;
-            com.CommandText = "select Email, Pass_word, FirstName, LastName, Picture from Consumer where Email = '" + acc.Email + "' and Pass_word = '"+acc.Pass_word+"'";
+            com.CommandText = "select User_ID, Email, Pass_word, FirstName, LastName, Picture from Consumer where Email = '" + acc.Email + "' and Pass_word = '"+acc.Pass_word+"'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
                 fn = dr["FirstName"].ToString();
                 ln = dr["LastName"].ToString();
                 url = dr["Picture"].ToString();
+                id = dr["User_ID"].ToString();
                 con.Close();
+                HttpContext.Session.SetString("User_ID", id);
                 HttpContext.Session.SetString("Email", acc.Email);
                 HttpContext.Session.SetString("Pass_word", acc.Pass_word);
                 HttpContext.Session.SetString("FirstName", fn);
@@ -94,39 +96,45 @@ namespace Muszilla.Controllers
         }
         public IActionResult Logout()
         {
+            string empty = "";
+            HttpContext.Session.SetString("User_ID", empty);
+            HttpContext.Session.SetString("Email", empty);
+            HttpContext.Session.SetString("Pass_word", empty);
+            HttpContext.Session.SetString("FirstName", empty);
+            HttpContext.Session.SetString("LastName", empty);
+            HttpContext.Session.SetString("Picture", empty);
             ViewBag.Message = "Log out successful!";
             return View("Index");
         }
 
         public IActionResult Update(ConsumerModel edit)
         {
-            string email = "";
-            string pass = "aaa";
-            email = HttpContext.Session.GetString("Email");
+            string id = "";
+            id = HttpContext.Session.GetString("User_ID");
             ConnectionString();
             con.Open();
             com.Connection = con;
             if (edit.FirstName != null)
             {
-                com.CommandText = "update Consumer set FirstName = '" + edit.FirstName + "'  where Email ='" + email + "'";
+                com.CommandText = "update Consumer set FirstName = '" + edit.FirstName + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
                 HttpContext.Session.SetString("FirstName", edit.FirstName);
             }
             if (edit.LastName != null)
             {
-                com.CommandText = "update Consumer set LastName = '" + edit.LastName + "'  where Email ='" + email + "'";
+                com.CommandText = "update Consumer set LastName = '" + edit.LastName + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
                 HttpContext.Session.SetString("LastName", edit.LastName);
             }
             if (edit.Email != null)
             {
-                com.CommandText = "update Consumer set Email = '" + edit.Email + "'  where Email ='" + email + "'";
+                com.CommandText = "update Consumer set Email = '" + edit.Email + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
                 HttpContext.Session.SetString("Email", edit.Email);
             }
             if (edit.Pass_word != null)
             {
-                com.CommandText = "update Consumer set Pass_word = '" + edit.Pass_word + "'  where Email ='" + email + "'";
+                com.CommandText = "update Consumer set Pass_word = '" + edit.Pass_word + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
                 HttpContext.Session.SetString("Pass_word", edit.Pass_word);
             }
