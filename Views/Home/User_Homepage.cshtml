@@ -152,29 +152,29 @@
 
             <p id="f">
                 First Name:
-                <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" placeholder="@ViewBag.FirstName">
+                <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
             </p>
-            <p id="edit_one">(Double click to edit)</p>
+            <p id="edit_one">(Click to edit)</p>
 
             <p id="l">
                 Last Name:
-                <input asp-for="Item1.LastName" name="LastName" class="form-control" type="text" placeholder="@ViewBag.LastName">
+                <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName">
             </p>
-            <p id="edit_two">(Double click to edit)</p>
+            <p id="edit_two">(Click to edit)</p>
 
             <p id="e">
                 Your Email:
-                <input asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" placeholder="@ViewBag.Email">
+                <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email">
             </p>
-            <p id="edit_three">(Double click to edit)</p>
+            <p id="edit_three">(Click to edit)</p>
 
             <p id="p">
                 Password:
-                <input asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" autocomplete="off" placeholder="@ViewBag.Pass_word">
-                <input contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
+                <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
+                <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password 
             </p>
-            <p id="edit_four">(Double click to edit)</p>
-
+            <p id="edit_four">(Click to edit)</p>
+            
             <button type="submit" value="Save" onclick="" id="saveInfo" class="savebtn">Save Changes</button>
         </form>
     </div>
