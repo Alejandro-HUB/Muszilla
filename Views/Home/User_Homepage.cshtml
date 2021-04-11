@@ -153,10 +153,8 @@
             <input asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" placeholder="@ViewBag.FirstName">
             <input asp-for="Item1.LastName" name="LastName" class="form-control" type="text" placeholder="@ViewBag.LastName">
             <input asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" placeholder="@ViewBag.Email">
-            <p id="p">
-                <input asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" autocomplete="off" placeholder="@ViewBag.Pass_word">
-                <input contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
-            </p>
+            <input asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" autocomplete="off" placeholder="@ViewBag.Pass_word">
+            <input contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
             <button type="submit" value="Save" onclick="">Save</button>
         </form>
     </div>

@@ -116,19 +116,19 @@ namespace Muszilla.Controllers
             {
                 com.CommandText = "update Consumer set LastName = '" + edit.LastName + "'  where Email ='" + email + "'";
                 com.ExecuteNonQuery();
-                HttpContext.Session.SetString("LastName", edit.FirstName);
+                HttpContext.Session.SetString("LastName", edit.LastName);
             }
             if (edit.Email != null)
             {
                 com.CommandText = "update Consumer set Email = '" + edit.Email + "'  where Email ='" + email + "'";
                 com.ExecuteNonQuery();
-                HttpContext.Session.SetString("Email", edit.FirstName);
+                HttpContext.Session.SetString("Email", edit.Email);
             }
             if (edit.Pass_word != null)
             {
                 com.CommandText = "update Consumer set Pass_word = '" + edit.Pass_word + "'  where Email ='" + email + "'";
                 com.ExecuteNonQuery();
-                HttpContext.Session.SetString("Pass_word", edit.FirstName);
+                HttpContext.Session.SetString("Pass_word", edit.Pass_word);
             }
             else
             {
