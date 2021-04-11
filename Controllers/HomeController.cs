@@ -106,10 +106,36 @@ namespace Muszilla.Controllers
             ConnectionString();
             con.Open();
             com.Connection = con;
-            com.CommandText = "update Consumer set FirstName = '" + edit.FirstName + "'  where Email ='" + email + "'";
-            com.ExecuteNonQuery();
+            if (edit.FirstName != null)
+            {
+                com.CommandText = "update Consumer set FirstName = '" + edit.FirstName + "'  where Email ='" + email + "'";
+                com.ExecuteNonQuery();
+                HttpContext.Session.SetString("FirstName", edit.FirstName);
+            }
+            if (edit.LastName != null)
+            {
+                com.CommandText = "update Consumer set LastName = '" + edit.LastName + "'  where Email ='" + email + "'";
+                com.ExecuteNonQuery();
+                HttpContext.Session.SetString("LastName", edit.LastName);
+            }
+            if (edit.Email != null)
+            {
+                com.CommandText = "update Consumer set Email = '" + edit.Email + "'  where Email ='" + email + "'";
+                com.ExecuteNonQuery();
+                HttpContext.Session.SetString("Email", edit.Email);
+            }
+            if (edit.Pass_word != null)
+            {
+                com.CommandText = "update Consumer set Pass_word = '" + edit.Pass_word + "'  where Email ='" + email + "'";
+                com.ExecuteNonQuery();
+                HttpContext.Session.SetString("Pass_word", edit.Pass_word);
+            }
+            else
+            {
+                con.Close();
+                return RedirectToAction("Homepage");
+            }
             con.Close();
-            HttpContext.Session.SetString("FirstName", edit.FirstName);
             return RedirectToAction("Homepage");
         }
     }
