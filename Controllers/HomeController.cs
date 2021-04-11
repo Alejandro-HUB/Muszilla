@@ -109,6 +109,7 @@ namespace Muszilla.Controllers
             com.CommandText = "update Consumer set FirstName = '" + edit.FirstName + "'  where Email ='" + email + "'";
             com.ExecuteNonQuery();
             con.Close();
+            HttpContext.Session.SetString("FirstName", edit.FirstName);
             return RedirectToAction("Homepage");
         }
     }
