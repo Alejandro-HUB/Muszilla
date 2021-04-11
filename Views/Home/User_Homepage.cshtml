@@ -14,13 +14,18 @@
     <div class="sidebar">
 
         <form id="searchBar">
-            <input type="search" id="searchsong" onkeypress="handle(event)" placeholder="Search">
+            <input type="search" id="searchsong" placeholder="Search" autocomplete="off">
+            <button type="button" onclick="" id="lookupsong" class="searchbtn"> Search </button>
         </form>
 
         <div>
             <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
             <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Account </button>
-            <button type="button" class="settingbtn" onclick="" id="userSettings"> Settings </button>
+        </div>
+
+        <div>
+            <p style="color:#33CCFF; font-size: 14px;">Now Playing:</p>
+            <div id="song-name" style="color:white; font-size: 14px; padding-left: 23px;" >Playing songs show here </div>
         </div>
 
         <div>
@@ -48,7 +53,7 @@
     <div id="home_first">
 
         <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
-        <img id="userImage" src="@ViewBag.Picture" />
+        <img id="userImage" src="/Pictures/emptyImage.png" />
         <div id="firstName" contenteditable="true">@ViewBag.FirstName </div>
         <div id="lastName" contenteditable="true">@ViewBag.LastName </div>
         <div id="userEmail" contenteditable="true">@ViewBag.Email</div>
@@ -128,7 +133,7 @@
             Dropzone.options.uploa
         </script>
         <!--This is the button to upload images-->
-        <!--<img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />-->
+        <img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />
 
         <p id="f">
             First Name:
@@ -158,18 +163,33 @@
         <div>
             <button type="button" class="savebtn" onclick="" id="saveInfo">Save Changes</button>
         </div>
+    </div>
 
+    <div id="list_search_songs">
 
+        <p id="results">Your Search Results: </p> 
+
+        <div class="container1">
+            <ul class="items">
+                <li onclick="myAudioFunction1('Going Higher')" >Going Higher</li>
+                <li onclick="myAudioFunction1('Ukulele')">Ukulele</li>
+                <li onclick="myAudioFunction1('Memories')">Memories</li>
+                <li onclick="myAudioFunction1('Jazzy Frenchy')">Jazzy Frenchy</li>
+                <li onclick="myAudioFunction1('Energy')">Energy</li>
+            </ul>
+        </div>
+        
+        
     </div>
 
     <div id="topPicks">
         <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
-        <a onclick="myAudioFunction('Acoustic Breeze')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Acoustic Breeze</p></a>
-        <a onclick="myAudioFunction('DubStep')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">DubStep</p></a>
-        <a onclick="myAudioFunction('Energy')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Energy</p></a>
-        <a onclick="myAudioFunction('Memories')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Memories</p></a>
-        <a onclick="myAudioFunction('Slow Motion')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Slow Motion</p></a>
-        <a onclick="myAudioFunction('Jazzy Frenchy')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Jazzy Frenchy</p></a>
+        <a onclick="myAudioFunction1('Acoustic Breeze')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Acoustic Breeze</p></a>
+        <a onclick="myAudioFunction1('DubStep')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">DubStep</p></a>
+        <a onclick="myAudioFunction1('Energy')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Energy</p></a>
+        <a onclick="myAudioFunction1('Memories')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Memories</p></a>
+        <a onclick="myAudioFunction1('Slow Motion')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Slow Motion</p></a>
+        <a onclick="myAudioFunction1('Jazzy Frenchy')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Jazzy Frenchy</p></a>
     </div>
 
     <div id="featured">
@@ -234,6 +254,7 @@
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
+            document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("topPicks").style.display = "initial";
         }
 
@@ -243,6 +264,7 @@
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
+            document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("featured").style.display = "initial";
         }
 
@@ -252,6 +274,7 @@
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("featured").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
+            document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("genres").style.display = "initial";
         }
 
@@ -261,6 +284,7 @@
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
+            document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("home_first").style.display = "initial";
 
         }
@@ -271,12 +295,24 @@
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("home_first").style.display = "none";
+            document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("account_screen").style.display = "initial";
+        }
 
+        function showSearchedSong() {
+
+            
+            document.getElementById("list_search_songs").style.display = "initial";
+            document.getElementById("topPicks").style.display = "none";
+            document.getElementById("featured").style.display = "none";
+            document.getElementById("genres").style.display = "none";
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("account_screen").style.display = "none";
         }
 
         var aAudio;
-
+        var bAudio;
+        
         function myAudioFunction1(song) {
 
             if (song == 'Buddy') {
@@ -284,6 +320,7 @@
                 player = document.getElementById('audio_player');
                 player.src = aAudio;
                 player.play();
+                document.getElementById('song-name').innerHTML = 'Buddy - By BenSound';
             }
 
             else if (song == 'Cute') {
@@ -291,13 +328,7 @@
                 player = document.getElementById('audio_player');
                 player.src = aAudio;
                 player.play();
-            }
-
-            else if (song == 'Memories') {
-                aAudio = '/Music/memories.mp3';
-                player = document.getElementById('audio_player');
-                player.src = aAudio;
-                player.play();
+                document.getElementById('song-name').innerHTML = 'Cute - By BenSound';
             }
 
             else if (song == 'Going Higher') {
@@ -305,6 +336,7 @@
                 player = document.getElementById('audio_player');
                 player.src = aAudio;
                 player.play();
+                document.getElementById('song-name').innerHTML = 'Going Higher - By BenSound';
             }
 
             else if (song == 'Little Idea') {
@@ -312,6 +344,7 @@
                 player = document.getElementById('audio_player');
                 player.src = aAudio;
                 player.play();
+                document.getElementById('song-name').innerHTML = 'Little Idea - By BenSound';
             }
 
             else if (song == 'Ukulele') {
@@ -319,19 +352,15 @@
                 player = document.getElementById('audio_player');
                 player.src = aAudio;
                 player.play();
+                document.getElementById('song-name').innerHTML = 'Ukulele - By BenSound';
             }
-        }
 
-
-        var bAudio;
-
-        function myAudioFunction(song) {
-
-            if (song == 'Acoustic Breeze') {
+            else if (song == 'Acoustic Breeze') {
                 bAudio = '/Music/acousticbreeze.mp3';
                 player = document.getElementById('audio_player');
                 player.src = bAudio;
                 player.play();
+                document.getElementById('song-name').innerHTML = 'Acoustic Breeze - By BenSound';
             }
 
             else if (song == 'DubStep') {
@@ -339,6 +368,7 @@
                 player = document.getElementById('audio_player');
                 player.src = bAudio;
                 player.play();
+                document.getElementById('song-name').innerHTML = 'DubStep - By BenSound';
             }
 
             else if (song == 'Energy') {
@@ -346,6 +376,7 @@
                 player = document.getElementById('audio_player');
                 player.src = bAudio;
                 player.play();
+                document.getElementById('song-name').innerHTML = 'Energy - By BenSound';
             }
 
             else if (song == 'Memories') {
@@ -353,6 +384,7 @@
                 player = document.getElementById('audio_player');
                 player.src = bAudio;
                 player.play();
+                document.getElementById('song-name').innerHTML = 'Memories - By BenSound';
             }
 
             else if (song == 'Slow Motion') {
@@ -360,6 +392,7 @@
                 player = document.getElementById('audio_player');
                 player.src = bAudio;
                 player.play();
+                document.getElementById('song-name').innerHTML = 'Slow Motion - By BenSound';
             }
 
             else if (song == 'Jazzy Frenchy') {
@@ -367,6 +400,7 @@
                 player = document.getElementById('audio_player');
                 player.src = bAudio;
                 player.play();
+                document.getElementById('song-name').innerHTML = 'Jazzy Frenchy - By BenSound'; 
             }
         }
 
@@ -392,15 +426,17 @@
             }
         }
 
-        function handle(e) {
-            address = document.getElementById("searchsong").value;
-            if (e.keyCode === 13) {
-                //write your specific code from here
-                alert("You are searching: " + address);
-            }
-            return false;
-        }
+        var searchbutton = document.getElementById("lookupsong");
+        var searchsomething = document.getElementById("searchsong");
 
+        searchbutton.addEventListener("click", function () {
+            if (searchsomething.value == "") {
+                alert("Please enter a song to search.");
+            }
+            else {
+                showSearchedSong();
+            }
+        });
 
 
     </script>
