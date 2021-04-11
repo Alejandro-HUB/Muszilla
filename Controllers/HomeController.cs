@@ -38,8 +38,8 @@ namespace Muszilla.Controllers
             ConnectionString();
             con.Open();
             com.Connection = con;
-            com.CommandText = "select * from Consumer where Email= '" + acc.Email + "' and Pass_word= '" + acc.Pass_word + "'";
-            com.CommandText = "select FirstName, LastName, Picture from Consumer where Email = '" + acc.Email + "'";
+            //com.CommandText = "select * from Consumer where Email= '" + acc.Email + "' and Pass_word= '" + acc.Pass_word + "'";
+            com.CommandText = "select FirstName, LastName, Picture from Consumer where Email = '" + acc.Email + "'and Pass_word= '" + acc.Pass_word + "'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {

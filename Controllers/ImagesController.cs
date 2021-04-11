@@ -31,6 +31,9 @@ namespace Muszilla.Controllers
         public async Task<IActionResult> Upload(ICollection<IFormFile> files)
         {
             bool isUploaded = false;
+            bool isImage = false;
+            bool isAudio = false;
+            string Song_Name = "";
             string email = "";
 
 
@@ -50,12 +53,27 @@ namespace Muszilla.Controllers
                     if (StorageHelper.IsImage(formFile))
                     {
                         url = "https://muzilla.blob.core.windows.net/muzilla/"+formFile.FileName;
+                     
                         if (formFile.Length > 0)
                         {
                             using (Stream stream = formFile.OpenReadStream())
                             {
                                 isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
+                                isImage = true;
                                 
+                            }
+                        }
+                    }
+                    else if (StorageHelper.IsAudio(formFile))
+                    {
+                        url = "https://muzilla.blob.core.windows.net/muzilla/" + formFile.FileName;
+                        Song_Name = formFile.FileName;
+                        if (formFile.Length > 0)
+                        {
+                            using (Stream stream = formFile.OpenReadStream())
+                            {
+                                isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
+                                isAudio = true;
                             }
                         }
                     }
@@ -65,9 +83,9 @@ namespace Muszilla.Controllers
                     }
                 }
      
-                if (isUploaded)
+                if (isUploaded&&isImage)
                 {
-                    ConsumerModel add = new ConsumerModel();
+                   
                     string connection = Muszilla.Properties.Resources.ConnectionString;
                     if (HttpContext.Session.GetString("Email") != null)
                     {
@@ -97,10 +115,47 @@ namespace Muszilla.Controllers
                     {
                         ViewBag.Message = "Error";
             
-                }
+                    }
                     return new AcceptedResult();
+
               }
-              else
+                else if (isUploaded&&isAudio)
+                {
+                 
+                    string connection = Muszilla.Properties.Resources.ConnectionString;
+                    if (HttpContext.Session.GetString("Email") != null)
+                    {
+
+
+                        using (SqlConnection con = new SqlConnection(connection))
+                        {
+
+                            email = HttpContext.Session.GetString("Email");
+
+                            string query = "insert into Songs(Song_Name,Song_Audio) values('"+Song_Name+"','"+url+"')";
+
+                            using (SqlCommand com = new SqlCommand(query, con))
+                            {
+
+                                con.Open();
+                                com.ExecuteNonQuery();
+
+                                con.Close();
+
+                            }
+
+                        }
+
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Error";
+
+                    }
+                    return new AcceptedResult();
+
+                }
+                else
                    return BadRequest("Looks like the image couldnt upload to the storage");
             }
             catch (Exception ex)
