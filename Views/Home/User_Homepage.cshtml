@@ -116,6 +116,7 @@
             Dropzone.options.imageUpload = {
                 paramName: "files", // The name that will be used to transfer the file
                 dictDefaultMessage: "Drop files here or Click to Upload",
+                createImageThumbnails:false,
 
                 init: function () {
                     myDropzone = this;
@@ -124,6 +125,7 @@
                     });
                 }
             };
+            Dropzone.options.uploa
         </script>
         <!--This is the button to upload images-->
         <!--<img id="placeholderImage" src="/Pictures/emptyImage.png" alt="Your Profile Picture" />-->
