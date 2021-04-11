@@ -14,6 +14,17 @@ namespace Muszilla.Helpers
     public static class StorageHelper
     {
 
+        public static bool IsAudio(IFormFile file)
+        {
+            if (file.ContentType.Contains("audio"))
+            {
+                return true;
+            }
+
+            string[] formats = new string[] { ".mp3", ".wma", ".wav", ".wmv" };
+
+            return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
+        }
         public static bool IsImage(IFormFile file)
         {
             if (file.ContentType.Contains("image"))
@@ -25,7 +36,6 @@ namespace Muszilla.Helpers
 
             return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
         }
-
         public static async Task<bool> UploadFileToStorage(Stream fileStream, string fileName,
                                                             AzureStorageConfig _storageConfig)
         {
@@ -33,7 +43,7 @@ namespace Muszilla.Helpers
             Uri blobUri = new Uri("https://" +
                                   _storageConfig.AccountName +
                                   ".blob.core.windows.net/" +
-                                  _storageConfig.ImageContainer +
+                                  _storageConfig.Container +
                                   "/" + fileName);
 
             // Create StorageSharedKeyCredentials object by reading
@@ -49,5 +59,6 @@ namespace Muszilla.Helpers
 
             return await Task.FromResult(true);
         }
+
     }
 }
