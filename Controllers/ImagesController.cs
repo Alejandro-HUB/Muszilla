@@ -67,24 +67,24 @@ namespace Muszilla.Controllers
                                 }
                             }
                         }
-                    }
-                    else if (StorageHelper.IsAudio(formFile))
-                    {
-                        url = "https://muzilla.blob.core.windows.net/muzilla/" + formFile.FileName;
-                        Song_Name = formFile.FileName;
-                        if (formFile.Length > 0)
+                        else if (StorageHelper.IsAudio(formFile))
                         {
-                            using (Stream stream = formFile.OpenReadStream())
+                            url = "https://muzilla.blob.core.windows.net/muzilla/" + formFile.FileName;
+                            Song_Name = formFile.FileName;
+                            if (formFile.Length > 0)
                             {
-                                isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
-                                isAudio = true;
+                                using (Stream stream = formFile.OpenReadStream())
+                                {
+                                    isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
+                                    isAudio = true;
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        return new UnsupportedMediaTypeResult();
-                    }
+                        else
+                        {
+                            return new UnsupportedMediaTypeResult();
+                        }
+                    }                    
                 }
      
                 if (isUploaded&&isImage)
