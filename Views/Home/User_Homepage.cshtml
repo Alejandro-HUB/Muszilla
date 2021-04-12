@@ -183,7 +183,7 @@
 
             <div class="container3">
                 <ul class="items">
-                    <li onclick="myAudioFunction1('@ViewBag.Song_Name')">@ViewBag.Song_Name</li>
+                    <li onclick="myAudioFunction1('@ViewBag.SongName')" > @ViewBag.SongName</li>
                 </ul>
             </div>
         }
@@ -543,7 +543,8 @@
                 document.getElementById('song-name').innerHTML = 'Jazzy Frenchy - By BenSound';
             }
 
-            else if (song == '@ViewBag.Song_Name') {
+            
+            else if (song == '@ViewBag.SongName') {
                 bAudio = '@ViewBag.Song_Audio';
                 player = document.getElementById('audio_player');
                 player.src = bAudio;
