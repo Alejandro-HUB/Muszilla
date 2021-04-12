@@ -134,12 +134,13 @@ input {
     outline: none;
 }
 
-input[type=search] {
-    -webkit-appearance: textfield;
-    -webkit-box-sizing: content-box;
-    font-family: inherit;
-    font-size: 100%;
-}
+    input[type=search] {
+        -webkit-appearance: textfield;
+        -webkit-box-sizing: content-box;
+        font-family: inherit;
+        font-size: 100%;
+        color: #33CCFF;
+    }
 
 input::-webkit-search-decoration, input::-webkit-search-cancel-button {
     display: none;
@@ -149,7 +150,9 @@ input[type=search] {
     background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
     border: solid 2px #33a7ee;
     padding: 9px 10px 9px 32px;
+    background-color: black;
     width: 155px;
+    color: #33CCFF;
     -webkit-border-radius: 10em;
     -moz-border-radius: 10em;
     border-radius: 10em;
@@ -159,31 +162,28 @@ input[type=search] {
 }
 
     input[type=search]:focus {
-        color: #33CCFF;
+        color: #fff;
     }
 
     input:-moz-placeholder {
-        color: #999;
+        color: #fff;
     }
 
 input::-webkit-input-placeholder {
-    color: #999;
+    color: #fff;
 }
 
 .searchbtn {
     text-align: center;
     background-color: black;
-    border-bottom: 2px solid #33CCFF;
-    border-top: 2px solid #33CCFF;
-    border-left: none;
-    border-right: none;
+    border: 2px solid #33CCFF;
     border-radius: 30px;
     width: 200px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    color: white;
+    background-color: #33CCFF;
+    color: black;
+    font-weight: bold;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
     margin-top: 7px;
 }
 
@@ -502,8 +502,8 @@ input::-webkit-input-placeholder {
 
 #uploadsongs {
     position: absolute;
-    left: 790px;
-    top: -70px;
+    left: 710px;
+    top: -328px;
     width: 160px;
     text-align: center;
     padding-top: 5px;

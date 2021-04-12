@@ -34,10 +34,10 @@
             <form class="form-horizontal" asp-action="Create">
                 <p>SIGN-UP</p>
                 <!-- Turned the Full Name field into first and last name fields-->
-                <input asp-for="Item2.FirstName" name="FirstName" type="text"  class="form-control" placeholder="First Name" required>
-                <input asp-for="Item2.LastName" name="LastName" type="text"  class="form-control" placeholder="Last Name" required>
-                <input asp-for="Item2.Email" name="Email" type="email"  class="form-control" placeholder="Email" required>
-                <input asp-for="Item2.Pass_word" name="Pass_word" type="password"  class="form-control" placeholder="Password" required>
+                <input asp-for="Item2.FirstName" name="FirstName" type="text"  autocomplete="off" class="form-control" placeholder="First Name" required>
+                <input asp-for="Item2.LastName" name="LastName" type="text" autocomplete="off" class="form-control" placeholder="Last Name" required>
+                <input asp-for="Item2.Email" name="Email" type="email"  autocomplete="off" class="form-control" placeholder="Email" required>
+                <input asp-for="Item2.Pass_word" name="Pass_word" type="password" autocomplete="off" class="form-control" placeholder="Password" required>
                 <button type="submit" onclick="">Register</button>
                 <button type="button" class="btn1" onclick="showLogin()">I'm Already Registered</button>
             </form>
