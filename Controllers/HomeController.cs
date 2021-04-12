@@ -14,7 +14,7 @@ using Microsoft.Extensions.Options;
 using Muszilla.Helpers;
 using System.IO;
 
-namespace Muszilla.Controllers                                                            //Take out index commented out to see if uploading songs works
+namespace Muszilla.Controllers                                                            //*****Please look at comments below*****
 {
     public class HomeController : Controller
     {
@@ -72,11 +72,23 @@ namespace Muszilla.Controllers                                                  
                 else
                 {
                     con.Close();
-                    ViewBag.Message = "Query did not work";
-                    return RedirectToAction("Homepage");
-                    //return View("Index");                                                 //Take out comment to see if uploading songs into the database works
+                    ViewBag.Message = "Query did not work";                                 //***** To see if uploading songs into the database works *****
+                    return RedirectToAction("Homepage");                                    //Comment out
+                    //return View("Index");                                                 //Take out comment 
+
+                                                                                            /*
+                                                                                             * Should look like this to test: 
+                                                                                             * //return RedirectToAction("Homepage");  <----- commented out
+                                                                                             * return View("Index");    <---- not commented out
+                                                                                             * 
+                                                                                             * This tests if the song got properly inserted inside the database
+                                                                                             * 
+                                                                                             * Do this after uploading a song, and you can only upload a song when it looks like this:
+                                                                                             * return RedirectToAction("Homepage");  <----- not commented out
+                                                                                             * //return View("Index");    <---- commented out
+                                                                                            */
                 }
-                
+
                 con.Close();
                 HttpContext.Session.SetString("Song_Name", song_name);
                 HttpContext.Session.SetString("Song_Audio", audio);
