@@ -35,6 +35,7 @@ namespace Muszilla.Controllers
             bool isAudio = false;
             string Song_Name = "";
             string email = "";
+            string id = "";
 
 
             try
@@ -95,7 +96,8 @@ namespace Muszilla.Controllers
                         using (SqlConnection con = new SqlConnection(connection))
                         {
                             email = HttpContext.Session.GetString("Email");
-                            string query = "update Consumer set Picture = '"+url+"'  where Email ='" + email + "'";
+                            id = HttpContext.Session.GetString("User_ID");
+                            string query = "update Consumer set Picture = '" + url + "'  where Email ='" + email + "'";
                             using (SqlCommand com = new SqlCommand(query, con))
                             {
                                 con.Open();
@@ -108,48 +110,39 @@ namespace Muszilla.Controllers
                     else
                     {
                         ViewBag.Message = "Error";
-            
                     }
                     return new AcceptedResult();
               }
+                
                 else if (isUploaded&&isAudio)
                 {
-                 
                     string connection = Muszilla.Properties.Resources.ConnectionString;
                     if (HttpContext.Session.GetString("Email") != null)
                     {
-
-
                         using (SqlConnection con = new SqlConnection(connection))
                         {
-
                             email = HttpContext.Session.GetString("Email");
-
-                            string query = "insert into Songs(Song_Name,Song_Audio) values('"+Song_Name+"','"+url+"')";
-
+                            id = HttpContext.Session.GetString("User_ID");
+                            string query = "insert into Songs(Song_Name, Song_Audio, Song_Owner) values('" + Song_Name + "', '" + url + "', '" + id + "')";
                             using (SqlCommand com = new SqlCommand(query, con))
                             {
-
                                 con.Open();
                                 com.ExecuteNonQuery();
-
+                                HttpContext.Session.SetString("Song_Name", Song_Name);
+                                HttpContext.Session.SetString("Song_Audio", url);
                                 con.Close();
-
                             }
-
                         }
-
                     }
                     else
                     {
                         ViewBag.Message = "Error";
-
                     }
                     return new AcceptedResult();
-
                 }
+                
                 else
-                   return BadRequest("Looks like the image couldnt upload to the storage");
+                    return BadRequest("Looks like the image couldnt upload to the storage");
             }
             catch (Exception ex)
             {

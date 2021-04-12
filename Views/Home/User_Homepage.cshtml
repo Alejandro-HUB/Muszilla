@@ -1,9 +1,11 @@
-﻿@model Tuple<ConsumerModel, AzureStorageConfig>
+﻿@model Tuple<ConsumerModel, AzureStorageConfig, SongsModel>
 @{
     ViewData["Title"] = "User Homepage";
 }
-
-<link rel="stylesheet" type="text/css" href="/css/User_Homepage.css" />
+@if (ViewBag.Pass_word != "")
+{
+    <link rel="stylesheet" type="text/css" href="/css/User_Homepage.css" />
+}
 <body onload="changeHashOnLoad(); ">
     <!-- This logo was created by hand by Natalia, so there is no link-->
     @if (@ViewBag.Pass_word != "")
@@ -73,47 +75,115 @@
         }
 
         <form id="f1">
-
-            <div class="container2">
-                <ul class="items">
-                    <li onclick="showSongs()">Playlist 1 (Default)</li>
-                    <li onclick="showSongs2()">Playlist 2</li>
-                </ul>
-            </div>
+            @if (@ViewBag.Pass_word != "")
+            {
+                <div class="container2">
+                    <ul class="items">
+                        <li onclick="showSongs()">Playlist 1 (Default)</li>
+                        <li onclick="showSongs2()">Playlist 2</li>
+                    </ul>
+                </div>
+            }
         </form>
     </div>
 
 
     <div id="songsinplaylist">
-        <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
+        @if (@ViewBag.Pass_word != "")
+        {
+            <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
 
-        <div class="container3">
-            <ul class="items">
-                <li onclick="myAudioFunction1('Going Higher')">Going Higher</li>
-                <li onclick="myAudioFunction1('Ukulele')">Ukulele</li>
-                <li onclick="myAudioFunction1('Memories')">Memories</li>
-                <li onclick="myAudioFunction1('Jazzy Frenchy')">Jazzy Frenchy</li>
-                <li onclick="myAudioFunction1('Energy')">Energy</li>
-                <li onclick="myAudioFunction1('Acoustic Breeze')">Acoustic Breeze</li>
-                <li onclick="myAudioFunction1('Little Idea')">Little Idea</li>
-                <li onclick="myAudioFunction1('Slow Motion')">Slow Motion</li>
-                <li onclick="myAudioFunction1('Buddy')">Buddy</li>
-                <li onclick="myAudioFunction1('Cute')">Cute</li>
+            <div class="container3">
+                <ul class="items">
+                    <li onclick="myAudioFunction1('Going Higher')">Going Higher</li>
+                    <li onclick="myAudioFunction1('Ukulele')">Ukulele</li>
+                    <li onclick="myAudioFunction1('Memories')">Memories</li>
+                    <li onclick="myAudioFunction1('Jazzy Frenchy')">Jazzy Frenchy</li>
+                    <li onclick="myAudioFunction1('Energy')">Energy</li>
+                    <li onclick="myAudioFunction1('Acoustic Breeze')">Acoustic Breeze</li>
+                    <li onclick="myAudioFunction1('Little Idea')">Little Idea</li>
+                    <li onclick="myAudioFunction1('Slow Motion')">Slow Motion</li>
+                    <li onclick="myAudioFunction1('Buddy')">Buddy</li>
+                    <li onclick="myAudioFunction1('Cute')">Cute</li>
 
-            </ul>
-        </div>
-
+                </ul>
+            </div>
+        }
     </div>
 
     <div id="songsinplaylist2">
-        <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
-        <button id="uploadsongs" onclick="">Upload</button>
+        @if (@ViewBag.Pass_word != "")
+        {
+            <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
+            
+            <!--This is the button to upload images-->
+            <!-- Client side libs required  -->
+            <main>
+                <div class="box content" id="imageUpload">
+                    <div>
+                        <form action="/api/images/upload"
+                              class="dropzone"
+                              id="image-upload"
+                              method="post"
+                              enctype="multipart/form">
+                            <div class="dz-message needsclick">
+                                <span class="note needsclick">
+                                    <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs"class="form-control" placeholder="Upload" accept="audio/*">
+                                </span>
+                            </div>
 
-        <div class="container3">
-            <ul class="items">
-            </ul>
-        </div>
+                        </form>
+                    </div>
 
+                </div>
+            </main>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+            <script>
+                // Grab links for images from backend api
+                function fetchImageLinks() {
+                    // Fetch images
+                    $.get(function (fetchedImageLinks) {
+                        console.log(fetchedImageLinks)
+                    });
+                }
+                // Start first interval
+                fetchImageLinks()
+                /* Dropzone */
+                // "imageUpload" is the camelized version of the HTML element's ID
+                Dropzone.options.imageUpload = {
+                    addRemoveLinks: true,
+                    paramName: "files", // The name that will be used to transfer the file
+                    dictDefaultMessage: "Drop files here or Click to Upload",
+                    createImageThumbnails: false,
+                    dictRemoveFileConfirmation: false,
+
+
+
+                    init: function () {
+                        myDropzone = this;
+                        myDropzone.on("success", function (file, response) {
+                            file.previewElement.remove();
+                            console.log("Success");
+
+                        });
+
+                    },
+                    removedfile: function (file) {
+                        file.previewElement.remove();
+                    }
+
+                };
+                Dropzone.options.uploa
+            </script>
+            <!--This is the button to upload images-->
+
+            <div class="container3">
+                <ul class="items">
+                    <li onclick="myAudioFunction1('@ViewBag.Song_Name')">@ViewBag.Song_Name</li>
+                </ul>
+            </div>
+        }
     </div>
 
     <div id="account_screen">
@@ -234,50 +304,58 @@
     </div>
 
     <div id="topPicks">
-        <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
-        <a onclick="myAudioFunction1('Acoustic Breeze')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Acoustic Breeze</p></a>
-        <a onclick="myAudioFunction1('DubStep')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">DubStep</p></a>
-        <a onclick="myAudioFunction1('Energy')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Energy</p></a>
-        <a onclick="myAudioFunction1('Memories')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Memories</p></a>
-        <a onclick="myAudioFunction1('Slow Motion')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Slow Motion</p></a>
-        <a onclick="myAudioFunction1('Jazzy Frenchy')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Jazzy Frenchy</p></a>
+        @if (@ViewBag.Pass_word != "")
+        {
+            <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
+            <a onclick="myAudioFunction1('Acoustic Breeze')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Acoustic Breeze</p></a>
+            <a onclick="myAudioFunction1('DubStep')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">DubStep</p></a>
+            <a onclick="myAudioFunction1('Energy')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Energy</p></a>
+            <a onclick="myAudioFunction1('Memories')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Memories</p></a>
+            <a onclick="myAudioFunction1('Slow Motion')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Slow Motion</p></a>
+            <a onclick="myAudioFunction1('Jazzy Frenchy')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Jazzy Frenchy</p></a>
+        }
     </div>
 
     <div id="featured">
-        <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
-        <a onclick="myAudioFunction1('Buddy')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Buddy</p></a>
-        <a onclick="myAudioFunction1('Cute')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">Cute</p></a>
-        <a onclick="myAudioFunction1('Memories')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Memories</p></a>
-        <a onclick="myAudioFunction1('Going Higher')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Going Higher</p></a>
-        <a onclick="myAudioFunction1('Little Idea')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Little Idea</p></a>
-        <a onclick="myAudioFunction1('Ukulele')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Ukulele</p></a>
+        @if (@ViewBag.Pass_word != "")
+        {
+            <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
+            <a onclick="myAudioFunction1('Buddy')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Buddy</p></a>
+            <a onclick="myAudioFunction1('Cute')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">Cute</p></a>
+            <a onclick="myAudioFunction1('Memories')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Memories</p></a>
+            <a onclick="myAudioFunction1('Going Higher')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Going Higher</p></a>
+            <a onclick="myAudioFunction1('Little Idea')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Little Idea</p></a>
+            <a onclick="myAudioFunction1('Ukulele')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Ukulele</p></a>
+        }
     </div>
 
     <div class="genreInfo" id="genres">
-        <!-- Photo is from Pexels by cottonbro and the link is: https://www.pexels.com/photo/persons-hand-doing-peace-sign-4629625/ -->
-        <div><img src="/Pictures/rock.jpg" id="rock" /><p id="info1">ROCK</p></div>
+        @if (@ViewBag.Pass_word != "")
+        {
+            <!-- Photo is from Pexels by cottonbro and the link is: https://www.pexels.com/photo/persons-hand-doing-peace-sign-4629625/ -->
+            <div><img src="/Pictures/rock.jpg" id="rock" /><p id="info1">ROCK</p></div>
 
-        <!-- Photo is from Pexels by Hannah Gibs and the link is: https://www.pexels.com/photo/photo-of-man-holding-microphone-949274/ -->
-        <div><img src="/Pictures/pop.jpg" id="pop" /><p id="info2">POP</p></div>
+            <!-- Photo is from Pexels by Hannah Gibs and the link is: https://www.pexels.com/photo/photo-of-man-holding-microphone-949274/ -->
+            <div><img src="/Pictures/pop.jpg" id="pop" /><p id="info2">POP</p></div>
 
-        <!-- Photo is from Pexels by Budgeron Bach and the link is: https://www.pexels.com/photo/wistful-black-man-listening-to-radio-from-vintage-tape-recorder-5158214/ -->
-        <div><img src="~/Pictures/hiphop.jpg" id="hiphop" /><p id="info3">HIPHOP</p></div>
+            <!-- Photo is from Pexels by Budgeron Bach and the link is: https://www.pexels.com/photo/wistful-black-man-listening-to-radio-from-vintage-tape-recorder-5158214/ -->
+            <div><img src="~/Pictures/hiphop.jpg" id="hiphop" /><p id="info3">HIPHOP</p></div>
 
-        <!-- Photo is from Pexels by cottonbro and the link is: https://www.pexels.com/photo/gold-saxophone-in-black-background-4709822/ -->
-        <div><img src="~/Pictures/jazz.jpg" id="jazz" /><p id="info4">JAZZ</p></div>
+            <!-- Photo is from Pexels by cottonbro and the link is: https://www.pexels.com/photo/gold-saxophone-in-black-background-4709822/ -->
+            <div><img src="~/Pictures/jazz.jpg" id="jazz" /><p id="info4">JAZZ</p></div>
 
-        <!-- Photo is from Pexels by Thibault Trillet and the link is: https://www.pexels.com/photo/man-in-black-formal-suit-holding-electric-guitar-while-raising-his-right-hand-and-opening-his-mouth-in-tilt-shift-lens-photography-167471/ -->
-        <div><img src="~/Pictures/country.jpg" id="country" /><p id="info5">COUNTRY</p></div>
+            <!-- Photo is from Pexels by Thibault Trillet and the link is: https://www.pexels.com/photo/man-in-black-formal-suit-holding-electric-guitar-while-raising-his-right-hand-and-opening-his-mouth-in-tilt-shift-lens-photography-167471/ -->
+            <div><img src="~/Pictures/country.jpg" id="country" /><p id="info5">COUNTRY</p></div>
 
-        <!-- Photo is from Pexels by Kaique Rocha and teh link is: https://www.pexels.com/photo/man-playing-cielo-555345/ -->
-        <div><img src="~/Pictures/classical.jpg" id="classical" /><p id="info6">CLASSICAL</p></div>
+            <!-- Photo is from Pexels by Kaique Rocha and teh link is: https://www.pexels.com/photo/man-playing-cielo-555345/ -->
+            <div><img src="~/Pictures/classical.jpg" id="classical" /><p id="info6">CLASSICAL</p></div>
 
-        <!-- Photo is from Pexels by NEOSiAM and the link is: https://www.pexels.com/photo/silver-disco-ball-593467/ -->
-        <div><img src="~/Pictures/disco.jpg" id="disco" /><p id="info7">DISCO</p></div>
+            <!-- Photo is from Pexels by NEOSiAM and the link is: https://www.pexels.com/photo/silver-disco-ball-593467/ -->
+            <div><img src="~/Pictures/disco.jpg" id="disco" /><p id="info7">DISCO</p></div>
 
-        <!-- Photo is from Pexels by ArtHouse Studio and the link is: https://www.pexels.com/photo/crop-person-standing-near-bonfire-with-mongolian-folk-instrument-in-valley-4348099/ -->
-        <div><img src="~/Pictures/folk.jpg" id="folk" /><p id="info8">FOLK</p></div>
-
+            <!-- Photo is from Pexels by ArtHouse Studio and the link is: https://www.pexels.com/photo/crop-person-standing-near-bonfire-with-mongolian-folk-instrument-in-valley-4348099/ -->
+            <div><img src="~/Pictures/folk.jpg" id="folk" /><p id="info8">FOLK</p></div>
+        }
     </div>
 
 
@@ -293,7 +371,6 @@
     </div>
 
     <script type="text/javascript">
-
         function change_audio_file() {
             var file_list = document.getElementById('audio_list');
             var file_to_play = file_list.options[file_list.selectedIndex].value;
@@ -462,6 +539,14 @@
                 player.play();
                 document.getElementById('song-name').innerHTML = 'Jazzy Frenchy - By BenSound';
             }
+
+            else if (song == '@ViewBag.Song_Name') {
+                bAudio = '@ViewBag.Song_Audio';
+                player = document.getElementById('audio_player');
+                player.src = bAudio;
+                player.play();
+                document.getElementById('song-name').innerHTML = '@ViewBag.SongName';
+            }
         }
 
         function readURL(input) {
@@ -524,15 +609,18 @@
 
 </body>
 
-    @if (ViewBag.Message != null)
-    {
-        <script type="text/javascript">
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
         window.onload = function () {
             alert("@ViewBag.Message");
         };
-        </script>
-
-    }
+    </script>
+}
+@if (@ViewBag.Pass_word == "")
+{
+    <script>alert("Please log in again");</script>
+}
 
 
 

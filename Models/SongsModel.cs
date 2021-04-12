@@ -12,6 +12,8 @@ namespace Muszilla.Models
         public string Song_Artist { get; set; }
         public string Song_Length { get; set; }
         public string Song_Genre { get; set; }
+        public string Song_Audio { get; set; }
+        public string Song_Owner { get; set; }
 
     }
 }

@@ -21,6 +21,8 @@ namespace Muszilla.Controllers
         SqlConnection con = new SqlConnection();
         SqlCommand com = new SqlCommand();
         SqlDataReader dr;
+        SqlCommand command = new SqlCommand();
+        SqlDataReader read;
         public IActionResult Index()
         {
             return View();
@@ -29,12 +31,14 @@ namespace Muszilla.Controllers
         {
             con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
         }
-        public IActionResult Verify(ConsumerModel acc)
+        public IActionResult Verify(ConsumerModel acc, SongsModel song) //
         {
             string fn = "";
             string ln = "";
             string url = "";
             string id = "";
+            string song_name = "";
+            string audio = "";
             ConnectionString();
             con.Open();
             com.Connection = con;
@@ -53,6 +57,29 @@ namespace Muszilla.Controllers
                 HttpContext.Session.SetString("FirstName", fn);
                 HttpContext.Session.SetString("LastName", ln);
                 HttpContext.Session.SetString("Picture", url);
+                
+                ConnectionString();
+                con.Open();
+                command.Connection = con;
+                command.CommandText = "select Song_Name, Song_Audio, Song_Owner  from Songs where Song_Owner = '" + id + "'";
+                read = command.ExecuteReader();
+                if (read.Read())
+                {
+                    song_name = read["Song_Name"].ToString();
+                    audio = read["Song_Audio"].ToString();
+                    ViewBag.Message = "Hi!";
+                }
+                else
+                {
+                    con.Close();
+                    ViewBag.Message = "Query did not work";
+                    return RedirectToAction("Homepage");
+                    //return View("Index");
+                }
+                
+                con.Close();
+                HttpContext.Session.SetString("Song_Name", song_name);
+                HttpContext.Session.SetString("Song_Audio", audio);
                 return RedirectToAction("Homepage");
             }
             else
@@ -72,6 +99,8 @@ namespace Muszilla.Controllers
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.SongName = HttpContext.Session.GetString("Song_Name");
+                ViewBag.Song_Audio = HttpContext.Session.GetString("Song_Audio");
                 return View("User_Homepage");
             }
             return View();
@@ -103,6 +132,8 @@ namespace Muszilla.Controllers
             HttpContext.Session.SetString("FirstName", empty);
             HttpContext.Session.SetString("LastName", empty);
             HttpContext.Session.SetString("Picture", empty);
+            HttpContext.Session.SetString("Song_Name", empty);
+            HttpContext.Session.SetString("Song_Audio", empty);
             ViewBag.Message = "Log out successful!";
             return View("Index");
         }
