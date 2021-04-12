@@ -113,7 +113,7 @@ namespace Muszilla.Controllers
                     }
                     return new AcceptedResult();
               }
-                
+                //                                                                          ** Start logic for Uploading Songs **
                 else if (isUploaded&&isAudio)
                 {
                     string connection = Muszilla.Properties.Resources.ConnectionString;
@@ -140,7 +140,8 @@ namespace Muszilla.Controllers
                     }
                     return new AcceptedResult();
                 }
-                
+                //                                                                          ** End logic for Uploading Songs **
+
                 else
                     return BadRequest("Looks like the image couldnt upload to the storage");
             }

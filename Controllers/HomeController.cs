@@ -64,6 +64,7 @@ namespace Muszilla.Controllers                                                  
                 HttpContext.Session.SetString("LastName", ln);
                 HttpContext.Session.SetString("Picture", url);
                 
+                //                                                                          ** Start logic for Uploading Songs **
                 ConnectionString();
                 connect.Open();
                 command.Connection = connect;
@@ -98,6 +99,9 @@ namespace Muszilla.Controllers                                                  
                 connect.Close();
                 HttpContext.Session.SetString("Song_Name", song_name);
                 HttpContext.Session.SetString("Song_Audio", audio);
+                //                                                                          ** End logic for Uploading Songs **
+
+
                 return RedirectToAction("Homepage");
             }
             else
