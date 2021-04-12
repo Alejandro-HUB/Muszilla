@@ -24,7 +24,7 @@
 
             <div>
                 <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
-                <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Account </button>
+                <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Settings </button>
             </div>
 
             <div>
@@ -63,31 +63,57 @@
         {
             <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
             <img id="userImage" src="@ViewBag.Picture" />
+            <div id="accountInfo">Account Details</div>
             <div id="firstName">@ViewBag.FirstName </div>
             <div id="lastName">@ViewBag.LastName </div>
             <div id="userEmail">@ViewBag.Email</div>
 
-            <p>My Playlists</p>
+            <p style="top:252px;">My Playlists</p>
+            <button type="button" id="newplaylistbtn"> Add New Playlist</button>
         }
 
         <form id="f1">
 
-            <!-- <label for="audio_list" id="lbl1">
-                Playlist 1:
-            </label>
-            <select onchange="change_audio_file();" id="audio_list">
-                <!-- All this music is from bensound.com and the link is: https://www.bensound.com/ -->
-            <!-- <option id="opt" value="">Select A Song </option>
-                <option id="opt" value="/Music/anewbeginning.mp3">A New Beginning</option>
-                <option id="opt" value="/Music/creativeminds.mp3">Creative Minds</option>
-                <option id="opt" value="/Music/ukulele.mp3">Ukulele</option>
-                <option id="opt" value="/Music/goinghigher.mp3">Going Higher</option>
-                <option id="opt" value="/Music/cute.mp3">Cute</option>
-                <option id="opt" value="/Music/buddy.mp3">Buddy</option>
-                <option id="opt" value="/Music/littleidea.mp3">Little Idea</option>
-                <option id="opt" value="/Music/jazzyfrenchy.mp3">Jazzy Frenchy</option>
-            </select> -->
+            <div class="container2">
+                <ul class="items">
+                    <li onclick="showSongs()">Playlist 1 (Default)</li>
+                    <li onclick="showSongs2()">Playlist 2</li>
+                </ul>
+            </div>
         </form>
+    </div>
+
+
+    <div id="songsinplaylist">
+        <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
+
+        <div class="container3">
+            <ul class="items">
+                <li onclick="myAudioFunction1('Going Higher')">Going Higher</li>
+                <li onclick="myAudioFunction1('Ukulele')">Ukulele</li>
+                <li onclick="myAudioFunction1('Memories')">Memories</li>
+                <li onclick="myAudioFunction1('Jazzy Frenchy')">Jazzy Frenchy</li>
+                <li onclick="myAudioFunction1('Energy')">Energy</li>
+                <li onclick="myAudioFunction1('Acoustic Breeze')">Acoustic Breeze</li>
+                <li onclick="myAudioFunction1('Little Idea')">Little Idea</li>
+                <li onclick="myAudioFunction1('Slow Motion')">Slow Motion</li>
+                <li onclick="myAudioFunction1('Buddy')">Buddy</li>
+                <li onclick="myAudioFunction1('Cute')">Cute</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="songsinplaylist2">
+        <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
+        <button id="uploadsongs" onclick="">Upload</button>
+
+        <div class="container3">
+            <ul class="items">
+            </ul>
+        </div>
+
     </div>
 
     <div id="account_screen">
@@ -156,36 +182,36 @@
             </script>
             <!--This is the button to upload images-->
         }
-    <form class="form-horizontal" asp-action="Update">
-        @if (@ViewBag.Pass_word != "")
-        {
-            <p id="f">
-                First Name:
-                <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
-            </p>
-            <p id="edit_one">(Click to edit)</p>
+        <form class="form-horizontal" asp-action="Update">
+            @if (@ViewBag.Pass_word != "")
+            {
+                <p id="f">
+                    First Name:
+                    <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
+                </p>
+                <p id="edit_one">(Click to edit)</p>
 
-            <p id="l">
-                Last Name:
-                <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName">
-            </p>
-            <p id="edit_two">(Click to edit)</p>
+                <p id="l">
+                    Last Name:
+                    <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName">
+                </p>
+                <p id="edit_two">(Click to edit)</p>
 
-            <p id="e">
-                Your Email:
-                <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email">
-            </p>
-            <p id="edit_three">(Click to edit)</p>
+                <p id="e">
+                    Your Email:
+                    <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email">
+                </p>
+                <p id="edit_three">(Click to edit)</p>
 
-            <p id="p">
-                Password:
-                <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
-                <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
-            </p>
-            <p id="edit_four">(Click to edit)</p>
+                <p id="p">
+                    Password:
+                    <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
+                    <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
+                </p>
+                <p id="edit_four">(Click to edit)</p>
 
-            <button type="submit" value="Save" onclick="" id="saveInfo" class="savebtn">Save Changes</button>
-        }
+                <button type="submit" value="Save" onclick="" id="saveInfo" class="savebtn">Save Changes</button>
+            }
         </form>
     </div>
 
@@ -205,7 +231,7 @@
             </div>
 
         }
-        </div>
+    </div>
 
     <div id="topPicks">
         <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
@@ -264,7 +290,7 @@
                 </div>
             </audio>
         }
-        </div>
+    </div>
 
     <script type="text/javascript">
 
@@ -282,6 +308,7 @@
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("topPicks").style.display = "initial";
         }
@@ -290,6 +317,7 @@
 
             document.getElementById("home_first").style.display = "none";
             document.getElementById("topPicks").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
@@ -300,6 +328,7 @@
 
             document.getElementById("home_first").style.display = "none";
             document.getElementById("topPicks").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("featured").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
@@ -311,6 +340,7 @@
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
             document.getElementById("home_first").style.display = "initial";
@@ -321,6 +351,7 @@
 
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("featured").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("genres").style.display = "none";
             document.getElementById("home_first").style.display = "none";
             document.getElementById("list_search_songs").style.display = "none";
@@ -334,6 +365,7 @@
             document.getElementById("topPicks").style.display = "none";
             document.getElementById("featured").style.display = "none";
             document.getElementById("genres").style.display = "none";
+            document.getElementById("songsinplaylist").style.display = "none";
             document.getElementById("home_first").style.display = "none";
             document.getElementById("account_screen").style.display = "none";
         }
@@ -465,6 +497,27 @@
                 showSearchedSong();
             }
         });
+
+        function showSongs() {
+
+            document.getElementById("songsinplaylist").style.display = "initial";
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("songsinplaylist2").style.display = "none";
+        }
+
+        function showSongs2() {
+
+            document.getElementById("songsinplaylist").style.display = "none";
+            document.getElementById("home_first").style.display = "none";
+            document.getElementById("songsinplaylist2").style.display = "initial";
+        }
+
+        function gobacktoplaylists() {
+
+            document.getElementById("home_first").style.display = "initial";
+            document.getElementById("songsinplaylist").style.display = "none";
+            document.getElementById("songsinplaylist2").style.display = "none";
+        }
 
 
     </script>
