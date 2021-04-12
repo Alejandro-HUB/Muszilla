@@ -18,11 +18,16 @@ namespace Muszilla.Controllers                                                  
 {
     public class HomeController : Controller
     {
+        //Connection for login
         SqlConnection con = new SqlConnection();
         SqlCommand com = new SqlCommand();
         SqlDataReader dr;
+
+        //Connection for upload music
+        SqlConnection connect = new SqlConnection();
         SqlCommand command = new SqlCommand();
         SqlDataReader read;
+        
         public IActionResult Index()
         {
             return View();
@@ -30,6 +35,7 @@ namespace Muszilla.Controllers                                                  
         public void ConnectionString()
         {
             con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
+            connect.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
         }
         public IActionResult Verify(ConsumerModel acc, SongsModel song) //
         {
@@ -59,8 +65,8 @@ namespace Muszilla.Controllers                                                  
                 HttpContext.Session.SetString("Picture", url);
                 
                 ConnectionString();
-                con.Open();
-                command.Connection = con;
+                connect.Open();
+                command.Connection = connect;
                 command.CommandText = "select Song_Name, Song_Audio, Song_Owner  from Songs where Song_Owner = '" + id + "'";
                 read = command.ExecuteReader();
                 if (read.Read())
@@ -71,7 +77,7 @@ namespace Muszilla.Controllers                                                  
                 }
                 else
                 {
-                    con.Close();
+                    connect.Close();
                     ViewBag.Message = "Query did not work";                                 //***** To see if uploading songs into the database works *****
                     return RedirectToAction("Homepage");                                    //Comment out
                     //return View("Index");                                                 //Take out comment 
@@ -89,7 +95,7 @@ namespace Muszilla.Controllers                                                  
                                                                                             */
                 }
 
-                con.Close();
+                connect.Close();
                 HttpContext.Session.SetString("Song_Name", song_name);
                 HttpContext.Session.SetString("Song_Audio", audio);
                 return RedirectToAction("Homepage");
