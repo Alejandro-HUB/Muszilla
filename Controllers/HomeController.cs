@@ -14,7 +14,7 @@ using Microsoft.Extensions.Options;
 using Muszilla.Helpers;
 using System.IO;
 
-namespace Muszilla.Controllers
+namespace Muszilla.Controllers                                                            //Take out index commented out to see if uploading songs works
 {
     public class HomeController : Controller
     {
@@ -74,7 +74,7 @@ namespace Muszilla.Controllers
                     con.Close();
                     ViewBag.Message = "Query did not work";
                     return RedirectToAction("Homepage");
-                    //return View("Index");
+                    //return View("Index");                                                 //Take out comment to see if uploading songs into the database works
                 }
                 
                 con.Close();
