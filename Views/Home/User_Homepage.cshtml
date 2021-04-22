@@ -112,82 +112,86 @@
     </div>
 
     <div id="songsinplaylist2">
+
         @if (@ViewBag.Pass_word != "")
         {
             <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
-            
+            <form class="form-horizontal" asp-action="Homepage">
+                <button type="submit" id="updateview" onclick=""> Update</button>
+            </form>
 
-            <!--This is the button to upload Songs-->
-            <!-- Client side libs required  -->
-            <main>
-                <div class="box content" id="imageUpload">
-                    <div>
-                        <form action="/api/images/upload"
-                              class="dropzone"
-                              id="image-upload"
-                              method="post"
-                              enctype="multipart/form">
-                            <div class="dz-message needsclick">
-                                <span class="note needsclick">
-                                    <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs"class="form-control" placeholder="Upload" accept="audio/*">
-                                </span>
-                            </div>
 
-                        </form>
+                <!--This is the button to upload Songs-->
+                <!-- Client side libs required  -->
+                <main>
+                    <div class="box content" id="imageUpload">
+                        <div>
+                            <form action="/api/images/upload"
+                                  class="dropzone"
+                                  id="image-upload"
+                                  method="post"
+                                  enctype="multipart/form">
+                                <div class="dz-message needsclick">
+                                    <span class="note needsclick">
+                                        <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" placeholder="Upload" accept="audio/*">
+                                    </span>
+                                </div>
+
+                            </form>
+                        </div>
+
                     </div>
-
-                </div>
-            </main>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
-            <script>
-                // Grab links for images from backend api
-                function fetchImageLinks() {
-                    // Fetch images
-                    $.get(function (fetchedImageLinks) {
-                        console.log(fetchedImageLinks)
-                    });
-                }
-                // Start first interval
-                fetchImageLinks()
-                /* Dropzone */
-                // "imageUpload" is the camelized version of the HTML element's ID
-                Dropzone.options.imageUpload = {
-                    addRemoveLinks: true,
-                    paramName: "files", // The name that will be used to transfer the file
-                    dictDefaultMessage: "Drop files here or Click to Upload",
-                    createImageThumbnails: false,
-                    dictRemoveFileConfirmation: false,
-
-
-
-                    init: function () {
-                        myDropzone = this;
-                        myDropzone.on("success", function (file, response) {
-                            file.previewElement.remove();
-                            console.log("Success");
-
+                </main>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+                <script>
+                    // Grab links for images from backend api
+                    function fetchImageLinks() {
+                        // Fetch images
+                        $.get(function (fetchedImageLinks) {
+                            console.log(fetchedImageLinks)
                         });
-
-                    },
-                    removedfile: function (file) {
-                        file.previewElement.remove();
                     }
+                    // Start first interval
+                    fetchImageLinks()
+                    /* Dropzone */
+                    // "imageUpload" is the camelized version of the HTML element's ID
+                    Dropzone.options.imageUpload = {
+                        addRemoveLinks: true,
+                        paramName: "files", // The name that will be used to transfer the file
+                        dictDefaultMessage: "Drop files here or Click to Upload",
+                        createImageThumbnails: false,
+                        dictRemoveFileConfirmation: false,
 
-                };
-                Dropzone.options.uploa
-            </script>
-            <!--This is the button to upload Songs-->
+
+
+                        init: function () {
+                            myDropzone = this;
+                            myDropzone.on("success", function (file, response) {
+                                file.previewElement.remove();
+                                console.log("Success");
+
+                            });
+
+                        },
+                        removedfile: function (file) {
+                            file.previewElement.remove();
+                        }
+
+                    };
+                    Dropzone.options.uploa
+                </script>
+                <!--This is the button to upload Songs-->
 
 
 
-            <div class="container3">
-                <ul class="items">
-                    <li onclick="myAudioFunction1('@ViewBag.SongName')" > @ViewBag.SongName</li>
-                </ul>
-            </div>
-        }
-    </div>
+                <div class="container3">
+                    <ul class="items">
+                        <li onclick="myAudioFunction1('@ViewBag.SongName')"> @ViewBag.SongName</li>
+                    </ul>
+                </div>
+                }
+        </div>
 
     <div id="account_screen">
         @if (@ViewBag.Pass_word != "")

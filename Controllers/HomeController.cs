@@ -69,6 +69,8 @@ namespace Muszilla.Controllers                                                  
                 connect.Open();
                 command.Connection = connect;
                 command.CommandText = "select Song_Name, Song_Audio, Song_Owner  from Songs where Song_Owner = '" + id + "'";
+                SqlDataAdapter sda = new SqlDataAdapter(command);
+
                 read = command.ExecuteReader();
                 if (read.Read())
                 {
@@ -79,21 +81,8 @@ namespace Muszilla.Controllers                                                  
                 else
                 {
                     connect.Close();
-                    ViewBag.Message = "Query did not work";                                 //***** To see if uploading songs into the database works *****
-                    return RedirectToAction("Homepage");                                    //Comment out
-                    //return View("Index");                                                 //Take out comment 
-
-                                                                                            /*
-                                                                                             * Should look like this to test: 
-                                                                                             * //return RedirectToAction("Homepage");  <----- commented out
-                                                                                             * return View("Index");    <---- not commented out
-                                                                                             * 
-                                                                                             * This tests if the song got properly inserted inside the database
-                                                                                             * 
-                                                                                             * Do this after uploading a song, and you can only upload a song when it looks like this:
-                                                                                             * return RedirectToAction("Homepage");  <----- not commented out
-                                                                                             * //return View("Index");    <---- commented out
-                                                                                            */
+                    ViewBag.Message = "Query did not work";                                 
+                    return RedirectToAction("Homepage");                                    
                 }
 
                 connect.Close();
