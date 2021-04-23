@@ -37,7 +37,7 @@ namespace Muszilla.Controllers                                                  
             con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
             connect.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
         }
-        public IActionResult Verify(ConsumerModel acc, SongsModel song) //
+        public IActionResult Verify(ConsumerModel acc) //
         {
             string fn = "";
             string ln = "";
@@ -186,6 +186,35 @@ namespace Muszilla.Controllers                                                  
                 return RedirectToAction("Homepage");
             }
             con.Close();
+            return RedirectToAction("Homepage");
+        }
+
+        public IActionResult Search(SongsModel song)
+        {
+            string song_name = "";
+            string audio = "";
+            string id = HttpContext.Session.GetString("User_ID");
+            ConnectionString();
+            connect.Open();
+            command.Connection = connect;
+            command.CommandText = "select Song_Name, Song_Audio, Song_Owner from Songs where Song_Owner = '" + id + "' and Song_Name = '"+song.Song_Name+"'";
+            read = command.ExecuteReader();
+            if (read.Read())
+            {
+                song_name = read["Song_Name"].ToString();
+                audio = read["Song_Audio"].ToString();
+                ViewBag.Message = "Hi!";
+            }
+            else
+            {
+                connect.Close();
+                ViewBag.Message = "Query did not work";
+                return RedirectToAction("Homepage");
+            }
+
+            connect.Close();
+            HttpContext.Session.SetString("Song_Name", song_name);
+            HttpContext.Session.SetString("Song_Audio", audio);
             return RedirectToAction("Homepage");
         }
     }
