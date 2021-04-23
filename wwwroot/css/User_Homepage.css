@@ -591,8 +591,8 @@ input::-webkit-input-placeholder {
 
 #updateview {
     position: absolute;
-    left: 70px;
-    top: -70px;
+    left: 840px;
+    top: 280px;
     width: 160px;
     text-align: center;
     padding-top: 5px;
