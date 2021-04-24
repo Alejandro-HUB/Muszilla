@@ -203,7 +203,7 @@
             <!--This is the button to upload Songs   -->
 
 
-
+            <!-- this is the container that will hold all the uploaded songs by the user-->
             <div class="container3">
                 <ul class="items">
                     <li onclick="myAudioFunction1('@ViewBag.SongName')"> @ViewBag.SongName</li> 
@@ -213,6 +213,7 @@
         }
     </div>
 
+    <!-- this is the code for the account screen so the user can access their account information and make changes to it-->
     <div id="account_screen">
         @if (@ViewBag.Pass_word != "")
         {
@@ -279,29 +280,35 @@
             </script>
             <!--This is the button to upload images-->
         }
+
+        <!-- the functions below are to fetch the user's account information from the database and fill that into their respective areas -->
         <form class="form-horizontal" asp-action="Update">
             @if (@ViewBag.Pass_word != "")
             {
                 <p id="f">
                     First Name:
+                    <!-- this gets the user's first name-->
                     <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
                 </p>
                 <p id="edit_one">(Click to edit)</p>
 
                 <p id="l">
                     Last Name:
+                    <!-- this gets the user's last name-->
                     <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName">
                 </p>
                 <p id="edit_two">(Click to edit)</p>
 
                 <p id="e">
                     Your Email:
+                    <!-- this gets the user's email-->
                     <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email">
                 </p>
                 <p id="edit_three">(Click to edit)</p>
 
                 <p id="p">
                     Password:
+                    <!-- this gets the user's password-->
                     <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
                     <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
                 </p>
@@ -312,6 +319,8 @@
         </form>
     </div>
 
+
+    <!-- this list of songs will appear when the user will try to search something in the search bar-->
     <div id="list_search_songs">
         @if (@ViewBag.Pass_word != "")
         {
@@ -330,6 +339,7 @@
         }
     </div>
 
+    <!-- this is the top picks button with top picked songs -->
     <div id="topPicks">
         @if (@ViewBag.Pass_word != "")
         {
@@ -343,6 +353,7 @@
         }
     </div>
 
+    <!-- this is the featured button that shows the featured songs-->
     <div id="featured">
         @if (@ViewBag.Pass_word != "")
         {
@@ -356,6 +367,7 @@
         }
     </div>
 
+    <!--- this is the genres button that shows the songs genres we have -->
     <div class="genreInfo" id="genres">
         @if (@ViewBag.Pass_word != "")
         {
@@ -385,7 +397,7 @@
         }
     </div>
 
-
+    <!-- below is the audio player -->
     <div id="audio_container">
         @if (@ViewBag.Pass_word != "")
         {
@@ -398,14 +410,8 @@
     </div>
 
     <script type="text/javascript">
-        function change_audio_file() {
-            var file_list = document.getElementById('audio_list');
-            var file_to_play = file_list.options[file_list.selectedIndex].value;
-            var player = document.getElementById('audio_player');
-            player.src = file_to_play;
-            player.play();
-        }
-
+        
+        //this function will show the top picked songs
         function showTopPicks() {
 
             document.getElementById("home_first").style.display = "none";
@@ -417,6 +423,7 @@
             document.getElementById("topPicks").style.display = "initial";
         }
 
+        //this function will show the featured songs
         function showFeatured() {
 
             document.getElementById("home_first").style.display = "none";
@@ -428,6 +435,7 @@
             document.getElementById("featured").style.display = "initial";
         }
 
+        //this function shows the genres of music we offer
         function showGenres() {
 
             document.getElementById("home_first").style.display = "none";
@@ -439,6 +447,7 @@
             document.getElementById("genres").style.display = "initial";
         }
 
+        //this function shows the user homepage 
         function showHome() {
 
             document.getElementById("topPicks").style.display = "none";
@@ -451,6 +460,7 @@
 
         }
 
+        //this function shows the user's accoutn page
         function showAccount() {
 
             document.getElementById("topPicks").style.display = "none";
@@ -462,6 +472,7 @@
             document.getElementById("account_screen").style.display = "initial";
         }
 
+        //this function displays these default songs when a user searches something
         function showSearchedSong() {
 
 
@@ -477,6 +488,7 @@
         var aAudio;
         var bAudio;
 
+        //in this function a song name is passed, which is played in the audio player and also showed in the now playing area
         function myAudioFunction1(song) {
 
             if (song == 'Buddy') {
@@ -567,7 +579,7 @@
                 document.getElementById('song-name').innerHTML = 'Jazzy Frenchy - By BenSound';
             }
 
-
+                // if the song is not one of the default songs within the project, then the song name is sent here
             else if (song == '@ViewBag.SongName') {
                 bAudio = '@ViewBag.Song_Audio';
                 player = document.getElementById('audio_player');
@@ -577,6 +589,7 @@
             }
         }
 
+        //this function is for the user's image URL
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -590,6 +603,7 @@
             }
         }
 
+        //this function shows the user's password when they click on the show password button
         function showPassword() {
             var x = document.getElementById("UPassword");
             if (x.type === "password") {
@@ -602,6 +616,7 @@
         var searchbutton = document.getElementById("lookupsong");
         var searchsomething = document.getElementById("searchsong");
 
+        //this message is displayed in case the user clicks search button without typing in anything to search
         searchbutton.addEventListener("click", function () {
             if (searchsomething.value == "") {
                 alert("Please enter a song to search.");
@@ -611,6 +626,7 @@
             }
         });
 
+        //this will show the default list of songs in the default playlist
         function showSongs() {
 
             document.getElementById("songsinplaylist").style.display = "initial";
@@ -618,6 +634,7 @@
             document.getElementById("songsinplaylist2").style.display = "none";
         }
 
+        //this will show the second playlist adn the list of songs in it
         function showSongs2() {
 
             document.getElementById("songsinplaylist").style.display = "none";
@@ -625,6 +642,7 @@
             document.getElementById("songsinplaylist2").style.display = "initial";
         }
 
+        //this is the back button which will take you back to the user homepage
         function gobacktoplaylists() {
 
             document.getElementById("home_first").style.display = "initial";
@@ -632,6 +650,7 @@
             document.getElementById("songsinplaylist2").style.display = "none";
         }
 
+        //this function will add the list item as playlist and will use the user input as the playlist's name 
         function AddLi(str) {
             var li = document.createElement('li');
             li.appendChild(document.createTextNode(str));
@@ -639,6 +658,7 @@
             document.getElementById("out").appendChild(li);
         }
 
+        //this function will add a list item as a song that a user will try to upload ***This is hard coded,we could not implement it in time ***
         function anotherSong() {
             var li = document.createElement('li');
             li.appendChild(document.createTextNode('Another Song'));
