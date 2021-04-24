@@ -19,22 +19,27 @@
     {
         <div class="sidebar">
 
+            <!-- This is the sidebar which you see on the user homepage -->
             <form id="searchBar">
+                <!-- the sidebar has a search songs input option and a search button-->
                 <input type="search" id="searchsong" placeholder="Search A Song" autocomplete="off">
                 <button type="button" onclick="" id="lookupsong" class="searchbtn"> Search </button>
             </form>
 
             <div>
+                <!-- The sidebar has a Home and settings button that will take the user to Home page or the settings page-->
                 <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
                 <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Settings </button>
             </div>
 
             <div>
+                <!-- This is where the name of the song is displayed when a song is playing-->
                 <p style="color:#33CCFF; font-size: 14px;">Now Playing:</p>
                 <div id="song-name" style="color:white; font-size: 14px; padding-left: 23px;">Playing songs show here </div>
             </div>
 
-            <div>
+            <!-- We wanted to implement this but ran out of time, this would have been the area where you would see the recently played songs lists
+                <div>
                 <p>Recently Played  <i class="arrow down"></i> </p>
 
                 <ul>
@@ -44,7 +49,8 @@
                 </ul>
 
             </div>
-
+            -->
+            <!-- this is the logout button within the sidebar -->
             <div>
                 <button type="button" class="logoutbtn" onclick="location.href='@Url.Action("Logout", "Home")'" id="logout">LOG OUT</button>
             </div>
@@ -52,6 +58,7 @@
     }
     @if (@ViewBag.Pass_word != "")
     {
+        <!-- these are the 3 buttons in the top right corner of the user homepage where they can listen to top picked, and featured music and check out our genres-->
         <div>
             <button type="button" class="btn1" onclick="showTopPicks()" id="tp"> TOP PICKS </button>
             <button type="button" class="btn2" onclick="showFeatured()" id="feat"> FEATURED </button>
@@ -60,6 +67,7 @@
     }
 
 
+    <!-- this is the actual home page container, that contains user information, their photo, and their list of playlists-->
     <div id="home_first">
         @if (@ViewBag.Pass_word != "")
         {
@@ -71,16 +79,23 @@
             <div id="userEmail">@ViewBag.Email</div>
 
             <p style="top:252px;">My Playlists</p>
-            <button type="button" id="newplaylistbtn"> Add New Playlist</button>
+            <!-- this button allows the user to add a new playlist-->
+            <form>
+                <input type="text" name="userinput" id="playlistNameInput" placeholder="New Playlist Name here" autocomplete="off">
+                <input type="button" id="newplaylistbtn" value="Add Playlist" onclick="AddLi(userinput.value)">
+            </form>
+
         }
 
+        <!-- here we display the user's playlists -->
         <form id="f1">
             @if (@ViewBag.Pass_word != "")
             {
                 <div class="container2">
                     <ul class="items">
                         <li onclick="showSongs()">Playlist 1 (Default)</li>
-                        <li onclick="showSongs2()">Playlist 2</li>
+                        <li onclick="showSongs2()">Playlist 2 </li>
+                        <span id="out" onclick="showSongs2()" />
                     </ul>
                 </div>
             }
@@ -88,6 +103,7 @@
     </div>
 
 
+    <!-- this is the default playlist for each user thta contains a default list of songs for testing -->
     <div id="songsinplaylist">
         @if (@ViewBag.Pass_word != "")
         {
@@ -111,87 +127,91 @@
         }
     </div>
 
+    <!-- this is an empty playlist where the user can upload their songs and play them too -->
     <div id="songsinplaylist2">
 
         @if (@ViewBag.Pass_word != "")
         {
+            <!-- this is the back button that takes the user back to their homscreen-->
             <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
             <form class="form-horizontal" asp-action="Homepage">
+                <!-- this button updates the songs and the playlists -->
                 <button type="submit" id="updateview" onclick=""> Update</button>
             </form>
 
 
-                <!--This is the button to upload Songs-->
-                <!-- Client side libs required  -->
-                <main>
-                    <div class="box content" id="imageUpload">
-                        <div>
-                            <form action="/api/images/upload"
-                                  class="dropzone"
-                                  id="image-upload"
-                                  method="post"
-                                  enctype="multipart/form">
-                                <div class="dz-message needsclick">
-                                    <span class="note needsclick">
-                                        <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" placeholder="Upload" accept="audio/*">
-                                    </span>
-                                </div>
+            <!--This is the button to upload Songs-->
+            <!-- Client side libs required  -->
+            <main>
+                <div class="box content" id="imageUpload">
+                    <div>
+                        <form action="/api/images/upload"
+                              class="dropzone"
+                              id="image-upload"
+                              method="post"
+                              enctype="multipart/form">
+                            <div class="dz-message needsclick">
+                                <span class="note needsclick">
+                                    <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" onclick="anotherSong()" placeholder="Upload" accept="audio/*" contenteditable="false">
+                                </span>
+                            </div>
 
-                            </form>
-                        </div>
-
+                        </form>
                     </div>
-                </main>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
-                <script>
-                    // Grab links for images from backend api
-                    function fetchImageLinks() {
-                        // Fetch images
-                        $.get(function (fetchedImageLinks) {
-                            console.log(fetchedImageLinks)
-                        });
-                    }
-                    // Start first interval
-                    fetchImageLinks()
-                    /* Dropzone */
-                    // "imageUpload" is the camelized version of the HTML element's ID
-                    Dropzone.options.imageUpload = {
-                        addRemoveLinks: true,
-                        paramName: "files", // The name that will be used to transfer the file
-                        dictDefaultMessage: "Drop files here or Click to Upload",
-                        createImageThumbnails: false,
-                        dictRemoveFileConfirmation: false,
 
-
-
-                        init: function () {
-                            myDropzone = this;
-                            myDropzone.on("success", function (file, response) {
-                                file.previewElement.remove();
-                                console.log("Success");
-
-                            });
-
-                        },
-                        removedfile: function (file) {
-                            file.previewElement.remove();
-                        }
-
-                    };
-                    Dropzone.options.uploa
-                </script>
-                <!--This is the button to upload Songs-->
-
-
-
-                <div class="container3">
-                    <ul class="items">
-                        <li onclick="myAudioFunction1('@ViewBag.SongName')"> @ViewBag.SongName</li>
-                    </ul>
                 </div>
+            </main>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+            <script>
+                // Grab links for images from backend api
+                function fetchImageLinks() {
+                    // Fetch images
+                    $.get(function (fetchedImageLinks) {
+                        console.log(fetchedImageLinks)
+                    });
                 }
-        </div>
+                // Start first interval
+                fetchImageLinks()
+                /* Dropzone */
+                // "imageUpload" is the camelized version of the HTML element's ID
+                Dropzone.options.imageUpload = {
+                    addRemoveLinks: true,
+                    paramName: "files", // The name that will be used to transfer the file
+                    dictDefaultMessage: "Drop files here or Click to Upload",
+                    createImageThumbnails: false,
+                    dictRemoveFileConfirmation: false,
+
+
+
+                    init: function () {
+                        myDropzone = this;
+                        myDropzone.on("success", function (file, response) {
+                            file.previewElement.remove();
+                            console.log("Success");
+
+                        });
+
+                    },
+                    removedfile: function (file) {
+                        file.previewElement.remove();
+                    }
+
+                };
+                Dropzone.options.uploa
+            </script>
+            <!--This is the button to upload Songs-->
+
+
+
+            <div class="container3">
+                <ul class="items">
+                    <li onclick="myAudioFunction1('@ViewBag.SongName')"> @ViewBag.SongName</li> 
+                    <span id="moreSongs" onclick="myAudioFunction1('@ViewBag.SongName')"/>
+                </ul>
+            </div>
+        }
+    </div>
 
     <div id="account_screen">
         @if (@ViewBag.Pass_word != "")
@@ -547,7 +567,7 @@
                 document.getElementById('song-name').innerHTML = 'Jazzy Frenchy - By BenSound';
             }
 
-            
+
             else if (song == '@ViewBag.SongName') {
                 bAudio = '@ViewBag.Song_Audio';
                 player = document.getElementById('audio_player');
@@ -612,6 +632,18 @@
             document.getElementById("songsinplaylist2").style.display = "none";
         }
 
+        function AddLi(str) {
+            var li = document.createElement('li');
+            li.appendChild(document.createTextNode(str));
+            li.innerHTML += ' <button id="deletePlaylist" onclick="this.parentNode.remove()">Delete Playlist</button>';
+            document.getElementById("out").appendChild(li);
+        }
+
+        function anotherSong() {
+            var li = document.createElement('li');
+            li.appendChild(document.createTextNode('Another Song'));
+            document.getElementById("moreSongs").appendChild(li);
+        }
 
     </script>
 

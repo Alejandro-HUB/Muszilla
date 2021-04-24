@@ -103,7 +103,7 @@ li:hover {
     font-weight: bold;
     margin-left: 17px;
     margin-right: 17px;
-    margin-top: 135px;
+    margin-top: 260px;
     margin-bottom: 10px;
     box-shadow: 0px 0px 18px 3px #33CCFF;
 }
@@ -541,7 +541,7 @@ input::-webkit-input-placeholder {
     width: 897px;
     position: absolute;
     top: 120px;
-    height: 350px;
+    height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -592,7 +592,7 @@ input::-webkit-input-placeholder {
 #updateview {
     position: absolute;
     left: 840px;
-    top: 280px;
+    top: 320px;
     width: 160px;
     text-align: center;
     padding-top: 5px;
@@ -609,6 +609,7 @@ input::-webkit-input-placeholder {
     margin-bottom: 10px;
     box-shadow: 0px 0px 8px 2px #33CCFF;
 }
+
 
 .container1 {
     border-radius: 10px;
@@ -671,14 +672,14 @@ input::-webkit-input-placeholder {
     box-shadow: 0px 0px 8px 2px #33CCFF;
 }
 
-    #newplaylistbtn:hover, #backtoplaylists:hover {
+    #newplaylistbtn:hover, #backtoplaylists:hover, #updateview:hover {
         background: #33CCFF;
         color: #fff;
         cursor: pointer;
         box-shadow: none;
     }
 
-    #newplaylistbtn:focus, #updateview:focus {
+    #newplaylistbtn:focus, #updateview:focus, #updateview:focus {
         outline: 0;
     }
 
@@ -697,7 +698,7 @@ input::-webkit-input-placeholder {
     outline: 0;
 }
 
-#uploadsongs:focus {
+#uploadsongs:focus, #deletePlaylist:focus {
     outline: 0;
 }
 
@@ -727,7 +728,6 @@ input::-webkit-input-placeholder {
 }
 
 .container2 li:hover, .container2 li:focus {
-    font-size: 15px;
     color: #33CCFF;
     cursor: pointer;
     border: 3px solid white;
@@ -786,13 +786,47 @@ input::-webkit-input-placeholder {
     left: 320px;
 }
 
-#f {
+#playlistNameInput {
+    border-bottom: 3px solid #33CCFF;
+    text-align: center;
+    font-size: 14px;
+    left: 620px;
+    top: 270px;
+    width: 170px;
+    background-color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
     color: white;
-    font-size: 16px;
-    top: 60px;
     position: absolute;
-    left: 320px;
 }
+
+#deletePlaylist {
+    width: 140px;
+    text-align: center;
+    border: 2px solid white;
+    background-color: black;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    margin-left: 650px;
+   
+}
+
+    #deletePlaylist:hover {
+        color: #33ccff;
+        border-color: #33ccff;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    #f {
+        color: white;
+        font-size: 16px;
+        top: 60px;
+        position: absolute;
+        left: 320px;
+    }
 
 #edit_one {
     position: absolute;
