@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Muszilla.Models
 {
-    public class ConsumerModel
+    public class ConsumerModel //Model for the user tables
     {
         public string User_ID { get; set; }
         public string USERNAME { get; set; }

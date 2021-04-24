@@ -10,7 +10,9 @@ using System.Data.SqlClient;
 
 namespace Muszilla.Controllers
 {
-    public class SongsController : Controller
+    public class SongsController : Controller //Not being used, this conroller had dealt with showing all the songs
+                                              // inside the songs table. Currently only one shows inside a playlist.
+                                              // **         This means that this was not implemented yet          **
     {
         SqlCommand com = new SqlCommand();
         SqlDataReader dr;

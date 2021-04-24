@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace Muszilla.Controllers
 {
-    public class PlaylistController : Controller
+    public class PlaylistController : Controller //Not fully implemented
     {
         SqlCommand com = new SqlCommand();
         SqlDataReader dr;

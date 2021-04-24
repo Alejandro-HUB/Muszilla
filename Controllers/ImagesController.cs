@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 namespace Muszilla.Controllers
 {
     [Route("api/[controller]")]
-    public class ImagesController : Controller
+    public class ImagesController : Controller //This is the controller than handles the file upload 
     {
         public string url = "";
         SqlConnection con = new SqlConnection();
@@ -41,7 +41,7 @@ namespace Muszilla.Controllers
             try
             {
                 if (files.Count == 0)
-                    return BadRequest("No files received from the upload");
+                    return BadRequest("No files received from the upload"); 
 
                 if (storageConfig.AccountKey == string.Empty || storageConfig.AccountName == string.Empty)
                     return BadRequest("sorry, can't retrieve your azure storage details from appsettings.js, make sure that you add azure storage details there");
@@ -53,7 +53,7 @@ namespace Muszilla.Controllers
                 {
                     if (ViewBag.Email != "")
                     {
-                        if (StorageHelper.IsImage(formFile))
+                        if (StorageHelper.IsImage(formFile)) //Checks if the file is an image
                         {
                             url = "https://muzilla.blob.core.windows.net/muzilla/" + formFile.FileName;
 
@@ -67,7 +67,7 @@ namespace Muszilla.Controllers
                                 }
                             }
                         }
-                        else if (StorageHelper.IsAudio(formFile))
+                        else if (StorageHelper.IsAudio(formFile)) //Checks if the file is an audio file
                         {
                             url = "https://muzilla.blob.core.windows.net/muzilla/" + formFile.FileName;
                             Song_Name = formFile.FileName;
@@ -87,7 +87,7 @@ namespace Muszilla.Controllers
                     }                    
                 }
      
-                if (isUploaded&&isImage)
+                if (isUploaded&&isImage) //Upload procedure for an image
                 {
                    
                     string connection = Muszilla.Properties.Resources.ConnectionString;
@@ -114,7 +114,7 @@ namespace Muszilla.Controllers
                     return new AcceptedResult();
               }
                 //                                                                          ** Start logic for Uploading Songs **
-                else if (isUploaded&&isAudio)
+                else if (isUploaded&&isAudio) //Upload procedure for a song
                 {
                     string connection = Muszilla.Properties.Resources.ConnectionString;
                     if (HttpContext.Session.GetString("Email") != null)

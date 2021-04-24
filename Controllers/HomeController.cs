@@ -14,7 +14,7 @@ using Microsoft.Extensions.Options;
 using Muszilla.Helpers;
 using System.IO;
 
-namespace Muszilla.Controllers                                                            //*****Please look at comments below*****
+namespace Muszilla.Controllers                                                            //**This controller handles the CRUD functionalities**
 {
     public class HomeController : Controller
     {
@@ -37,7 +37,7 @@ namespace Muszilla.Controllers                                                  
             con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
             connect.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
         }
-        public IActionResult Verify(ConsumerModel acc, SongsModel song) //
+        public IActionResult Verify(ConsumerModel acc, SongsModel song) //Checks if the user's email and password matches one inside the database
         {
             string fn = "";
             string ln = "";
@@ -64,7 +64,7 @@ namespace Muszilla.Controllers                                                  
                 HttpContext.Session.SetString("LastName", ln);
                 HttpContext.Session.SetString("Picture", url);
                 
-                //                                                                          ** Start logic for Uploading Songs **
+                //                                                                          ** Start logic for Showing Songs **
                 ConnectionString();
                 connect.Open();
                 command.Connection = connect;
@@ -86,7 +86,7 @@ namespace Muszilla.Controllers                                                  
                 connect.Close();
                 HttpContext.Session.SetString("Song_Name", song_name);
                 HttpContext.Session.SetString("Song_Audio", audio);
-                //                                                                          ** End logic for Uploading Songs **
+                //                                                                          ** End logic for Showing Songs **
 
 
                 return RedirectToAction("Homepage");
@@ -99,7 +99,7 @@ namespace Muszilla.Controllers                                                  
             }
         }
 
-        public IActionResult Homepage()
+        public IActionResult Homepage() // Gets all the strings to show the user's information in their session
         {
             if (HttpContext.Session.GetString("Email") != null)
             {
@@ -116,7 +116,7 @@ namespace Muszilla.Controllers                                                  
         }
 
         [HttpPost]
-        public IActionResult Create(Register add)
+        public IActionResult Create(Register add) // Adding a new user inside the database
         {
             string connection = Muszilla.Properties.Resources.ConnectionString;
             using (SqlConnection con = new SqlConnection(connection))
@@ -132,7 +132,7 @@ namespace Muszilla.Controllers                                                  
                 return View("Index");
             }
         }
-        public IActionResult Logout()
+        public IActionResult Logout() //Returns to the login page and clears the session
         {
             string empty = "";
             HttpContext.Session.SetString("User_ID", empty);
@@ -147,7 +147,7 @@ namespace Muszilla.Controllers                                                  
             return View("Index");
         }
 
-        public IActionResult Update(ConsumerModel edit)
+        public IActionResult Update(ConsumerModel edit) //Updates fields inside the database
         {
             string id = "";
             id = HttpContext.Session.GetString("User_ID");
