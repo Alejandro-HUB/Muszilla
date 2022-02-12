@@ -55,7 +55,7 @@ namespace Muszilla.Controllers
                     {
                         if (StorageHelper.IsImage(formFile)) //Checks if the file is an image
                         {
-                            url = "https://muzilla.blob.core.windows.net/muzilla/" + formFile.FileName;
+                            url = "https://muszilla.blob.core.windows.net/muszilla/" + formFile.FileName;
 
                             if (formFile.Length > 0)
                             {
@@ -69,7 +69,7 @@ namespace Muszilla.Controllers
                         }
                         else if (StorageHelper.IsAudio(formFile)) //Checks if the file is an audio file
                         {
-                            url = "https://muzilla.blob.core.windows.net/muzilla/" + formFile.FileName;
+                            url = "https://muszilla.blob.core.windows.net/muszilla/" + formFile.FileName;
                             Song_Name = formFile.FileName;
                             if (formFile.Length > 0)
                             {
