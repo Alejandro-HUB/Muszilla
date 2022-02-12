@@ -14,7 +14,7 @@ using Microsoft.Extensions.Options;
 using Muszilla.Helpers;
 using System.IO;
 
-namespace Muszilla.Controllers                                                            //**This controller handles the CRUD functionalities**
+namespace Muszilla.Controllers                                                            //**This controller handles the CRUD functionalities** By Alejandro Lopez
 {
     public class HomeController : Controller
     {
