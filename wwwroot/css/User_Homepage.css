@@ -546,6 +546,42 @@ input::-webkit-input-placeholder {
     overflow-x: hidden;
 }
 
+td {
+    border: solid black 1px;
+}
+
+tr, td {
+    display: inline-block;
+}
+
+.resize 
+{
+    height: none;
+    width: none;
+}
+
+.container3 td {
+    margin-left: 10px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    float: initial;
+    width: 850px;
+    border: 3px solid #33CCFF;
+    box-shadow: 0px 0px 5px 3px #33CCFF;
+}
+
+.container3 td:hover, .container3 td:focus {
+    font-size: 15px;
+    color: #33CCFF;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0px 0px 5px 3px white;
+}
+
 .container3 li {
     margin-left: 10px;
     margin-bottom: 12px;
@@ -560,13 +596,13 @@ input::-webkit-input-placeholder {
     box-shadow: 0px 0px 5px 3px #33CCFF;
 }
 
-.container3 li:hover, .container3 li:focus {
-    font-size: 15px;
-    color: #33CCFF;
-    cursor: pointer;
-    border: 3px solid white;
-    box-shadow: 0px 0px 5px 3px white;
-}
+    .container3 li:hover, .container3 li:focus {
+        font-size: 15px;
+        color: #33CCFF;
+        cursor: pointer;
+        border: 3px solid white;
+        box-shadow: 0px 0px 5px 3px white;
+    }
 
 #backtoplaylists {
     position: absolute;

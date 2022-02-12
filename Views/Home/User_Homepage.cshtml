@@ -1,4 +1,5 @@
-﻿@model Tuple<ConsumerModel, AzureStorageConfig, SongsModel>
+﻿@using Muszilla.Models
+@model Tuple<ConsumerModel, AzureStorageConfig, SongsModel>
 @{
     ViewData["Title"] = "User Homepage";
 }
@@ -204,12 +205,42 @@
 
             <!-- this is the container that will hold all the uploaded songs by the user-->
             <div class="container3">
-                <ul class="items">
-                    <li onclick="myAudioFunction1('@ViewBag.SongName')">@ViewBag.SongName</li>
-                    <span id="name" style="visibility: hidden;">@ViewBag.SongName</span>
-                    <span id="audio" style="visibility: hidden;">@ViewBag.Song_Audio</span>
-                    <!--<span id="moreSongs" onclick="myAudioFunction1('@ViewBag.SongName')"/>  -->
-                </ul>
+                <table>
+                    <tr Style="color: white;">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Item3.Song_Name)
+                        </th>
+                    </tr>
+                    <script>
+                        var count = 0;
+                    </script>
+                    <tr Style="color: white;" class="items">
+                        @foreach (var item in Model.Item3.songs)
+                        {
+                            <!--
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Song_ID)
+                            </td>
+                             -->
+                            <td onclick="myAudioFunction1('@item.Song_Name', '@item.Song_ID', '@item.Song_Audio')">
+                                @Html.DisplayFor(modelItem => item.Song_Name)
+                                <span id="@item.Song_ID@item.Song_Name" style="visibility: hidden;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
+                                <span id="@item.Song_ID@item.Song_Audio" style="visibility: hidden;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
+                            </td>
+                            
+                            <!--
+                            <td style="visibility: hidden;">
+                                @Html.DisplayFor(modelItem => item.Song_Audio)
+                            </td>
+                            -->
+                            <!--
+                            <td style="visibility: hidden;">
+                                @Html.DisplayFor(modelItem => item.Song_Owner)
+                            </td>
+                            -->
+                        }
+                    </tr>
+                </table>
             </div>
         }
     </div>

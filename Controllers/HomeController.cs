@@ -27,7 +27,10 @@ namespace Muszilla.Controllers                                                  
         SqlConnection connect = new SqlConnection();
         SqlCommand command = new SqlCommand();
         SqlDataReader read;
-        
+        SongsModel songs = new SongsModel();
+        ConsumerModel consumer = new ConsumerModel();
+        AzureStorageConfig storage = new AzureStorageConfig();
+
         public IActionResult Index()
         {
             return View();
@@ -45,6 +48,7 @@ namespace Muszilla.Controllers                                                  
             string id = "";
             string song_name = "";
             string audio = "";
+            FetchData();
             ConnectionString();
             con.Open();
             com.Connection = con;
@@ -64,33 +68,8 @@ namespace Muszilla.Controllers                                                  
                 HttpContext.Session.SetString("LastName", ln);
                 HttpContext.Session.SetString("Picture", url);
                 
-                //                                                                          ** Start logic for Showing Songs **
-                ConnectionString();
-                connect.Open();
-                command.Connection = connect;
-                command.CommandText = "select Song_Name, Song_Audio, Song_Owner  from Songs where Song_Owner = '" + id + "'";
-                read = command.ExecuteReader();
-                if (read.Read())
-                {
-                    song_name = read["Song_Name"].ToString();
-                    audio = read["Song_Audio"].ToString();
-                    ViewBag.Message = "Hi!";
-                }
-                else
-                {
-                    connect.Close();
-                    ViewBag.Message = "Query did not work";                                 
-                    return RedirectToAction("Homepage");                                                                                   
-                }
-
-                connect.Close();
-                HttpContext.Session.SetString("Song_Name", song_name);
-                HttpContext.Session.SetString("Song_Audio", audio);
-
-                //                                                                          ** End logic for Showing Songs **
-
-
-                return RedirectToAction("Homepage");
+                
+                return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songs));
             }
             else
             {
@@ -109,11 +88,10 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
-                ViewBag.SongName = HttpContext.Session.GetString("Song_Name");
-                ViewBag.Song_Audio = HttpContext.Session.GetString("Song_Audio");
-                return View("User_Homepage");
+                FetchData();
+                return View("User_Homepage",Tuple.Create(consumer, storage, songs));
             }
-            return View();
+            return View(Tuple.Create(consumer, storage, songs));
         }
 
         [HttpPost]
@@ -142,8 +120,6 @@ namespace Muszilla.Controllers                                                  
             HttpContext.Session.SetString("FirstName", empty);
             HttpContext.Session.SetString("LastName", empty);
             HttpContext.Session.SetString("Picture", empty);
-            HttpContext.Session.SetString("Song_Name", empty);
-            HttpContext.Session.SetString("Song_Audio", empty);
             ViewBag.Message = "Log out successful!";
             return View("Index");
         }
@@ -151,6 +127,7 @@ namespace Muszilla.Controllers                                                  
         public IActionResult Update(ConsumerModel edit) //Updates fields inside the database
         {
             string id = "";
+            FetchData();
             id = HttpContext.Session.GetString("User_ID");
             ConnectionString();
             con.Open();
@@ -182,10 +159,50 @@ namespace Muszilla.Controllers                                                  
             else
             {
                 con.Close();
-                return RedirectToAction("Homepage");
+                return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songs));
             }
             con.Close();
-            return RedirectToAction("Homepage");
+            return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songs));
+        }
+
+        private void FetchData()
+        {
+            List<SongsModel> songList = new List<SongsModel>();
+            ConnectionString();
+            String id;
+            id = HttpContext.Session.GetString("User_ID");
+
+            if (songList.Count > 0)
+            {
+                songList.Clear();
+            }
+            try
+            {
+                con.Open();
+                com.Connection = con;
+                //com.CommandText = "select * from Songs where Song_Owner = 1";
+                com.CommandText = "select * from Songs where Song_Owner ='" + id + "'";
+                dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    songList.Add(new SongsModel()
+                    {
+                        Song_ID = dr["Song_ID"].ToString()
+                    ,
+                        Song_Name = dr["Song_Name"].ToString()                
+                    ,
+                        Song_Audio = dr["Song_Audio"].ToString()
+                    //,
+                        //Song_Owner = dr["Song_Owner"].ToString()
+                    });
+                }
+                con.Close();
+                songs.songs = songList;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

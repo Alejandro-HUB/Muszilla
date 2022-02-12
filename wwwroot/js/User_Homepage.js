@@ -78,9 +78,9 @@ var aAudio;
 var bAudio;
 
 //in this function a song name is passed, which is played in the audio player and also showed in the now playing area
-function myAudioFunction1(song) {
-    var check = document.getElementById('name').innerHTML;
-    var audio = document.getElementById('audio').innerHTML;
+function myAudioFunction1(song, id, audio) {
+    var check = document.getElementById(id + song).innerHTML;
+    var audio = document.getElementById(id + audio).innerHTML;
 
     if (song == 'Buddy') {
         aAudio = '/Music/buddy.mp3';

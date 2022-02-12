@@ -52,12 +52,6 @@ namespace Muszilla.Controllers
                         Song_ID = dr["Song_ID"].ToString()
                     ,
                         Song_Name = dr["Song_Name"].ToString()
-                    ,
-                        Song_Artist = dr["Song_Artist"].ToString()
-                    ,
-                        Song_Length = dr["Song_Length"].ToString()
-                    ,
-                        Song_Genre = dr["Song_Genre"].ToString()
                     });
                 }
                 con.Close();
