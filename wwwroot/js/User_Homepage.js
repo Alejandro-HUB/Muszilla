@@ -82,6 +82,18 @@ function myAudioFunction1(song, id, audio) {
     var check = document.getElementById(id + song).innerHTML;
     var audio = document.getElementById(id + audio).innerHTML;
 
+    // if the song is not one of the default songs within the project, then the song name is sent here
+    if (song == check) {
+        bAudio = audio;
+        player = document.getElementById('audio_player');
+        player.src = bAudio;
+        player.play();
+        document.getElementById('song-name').innerHTML = check;
+    }
+}
+
+function localAudio(song)
+{
     if (song == 'Buddy') {
         aAudio = '/Music/buddy.mp3';
         player = document.getElementById('audio_player');
@@ -168,15 +180,6 @@ function myAudioFunction1(song, id, audio) {
         player.src = bAudio;
         player.play();
         document.getElementById('song-name').innerHTML = 'Jazzy Frenchy - By BenSound';
-    }
-
-    // if the song is not one of the default songs within the project, then the song name is sent here
-    else if (song == check) {
-        bAudio = audio;
-        player = document.getElementById('audio_player');
-        player.src = bAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = check;
     }
 }
 

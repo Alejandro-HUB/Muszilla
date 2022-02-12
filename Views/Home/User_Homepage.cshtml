@@ -113,16 +113,16 @@
 
             <div class="container3">
                 <ul class="items">
-                    <li onclick="myAudioFunction1('Going Higher')">Going Higher</li>
-                    <li onclick="myAudioFunction1('Ukulele')">Ukulele</li>
-                    <li onclick="myAudioFunction1('Memories')">Memories</li>
-                    <li onclick="myAudioFunction1('Jazzy Frenchy')">Jazzy Frenchy</li>
-                    <li onclick="myAudioFunction1('Energy')">Energy</li>
-                    <li onclick="myAudioFunction1('Acoustic Breeze')">Acoustic Breeze</li>
-                    <li onclick="myAudioFunction1('Little Idea')">Little Idea</li>
-                    <li onclick="myAudioFunction1('Slow Motion')">Slow Motion</li>
-                    <li onclick="myAudioFunction1('Buddy')">Buddy</li>
-                    <li onclick="myAudioFunction1('Cute')">Cute</li>
+                    <li onclick="localAudio('Going Higher')">Going Higher</li>
+                    <li onclick="localAudio('Ukulele')">Ukulele</li>
+                    <li onclick="localAudio('Memories')">Memories</li>
+                    <li onclick="localAudio('Jazzy Frenchy')">Jazzy Frenchy</li>
+                    <li onclick="localAudio('Energy')">Energy</li>
+                    <li onclick="localAudio('Acoustic Breeze')">Acoustic Breeze</li>
+                    <li onclick="localAudio('Little Idea')">Little Idea</li>
+                    <li onclick="localAudio('Slow Motion')">Slow Motion</li>
+                    <li onclick="localAudio('Buddy')">Buddy</li>
+                    <li onclick="localAudio('Cute')">Cute</li>
                 </ul>
             </div>
         }
@@ -360,11 +360,11 @@
 
             <div class="container1">
                 <ul class="items">
-                    <li onclick="myAudioFunction1('Going Higher')" style="border-style:inset;">Going Higher</li>
-                    <li onclick="myAudioFunction1('Ukulele')" style="border-style:inset;">Ukulele</li>
-                    <li onclick="myAudioFunction1('Memories')" style="border-style:inset;">Memories</li>
-                    <li onclick="myAudioFunction1('Jazzy Frenchy')" style="border-style:inset;">Jazzy Frenchy</li>
-                    <li onclick="myAudioFunction1('Energy')" style="border-style:inset;">Energy</li>
+                    <li onclick="localAudio('Going Higher')" style="border-style:inset;">Going Higher</li>
+                    <li onclick="localAudio('Ukulele')" style="border-style:inset;">Ukulele</li>
+                    <li onclick="localAudio('Memories')" style="border-style:inset;">Memories</li>
+                    <li onclick="localAudio('Jazzy Frenchy')" style="border-style:inset;">Jazzy Frenchy</li>
+                    <li onclick="localAudio('Energy')" style="border-style:inset;">Energy</li>
                 </ul>
             </div>
 
@@ -376,12 +376,12 @@
         @if (@ViewBag.Pass_word != "")
         {
             <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
-            <a onclick="myAudioFunction1('Acoustic Breeze')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Acoustic Breeze</p></a>
-            <a onclick="myAudioFunction1('DubStep')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">DubStep</p></a>
-            <a onclick="myAudioFunction1('Energy')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Energy</p></a>
-            <a onclick="myAudioFunction1('Memories')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Memories</p></a>
-            <a onclick="myAudioFunction1('Slow Motion')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Slow Motion</p></a>
-            <a onclick="myAudioFunction1('Jazzy Frenchy')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Jazzy Frenchy</p></a>
+            <a onclick="localAudio('Acoustic Breeze')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Acoustic Breeze</p></a>
+            <a onclick="localAudio('DubStep')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">DubStep</p></a>
+            <a onclick="localAudio('Energy')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Energy</p></a>
+            <a onclick="localAudio('Memories')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Memories</p></a>
+            <a onclick="localAudio('Slow Motion')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Slow Motion</p></a>
+            <a onclick="localAudio('Jazzy Frenchy')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Jazzy Frenchy</p></a>
         }
     </div>
 
@@ -390,12 +390,12 @@
         @if (@ViewBag.Pass_word != "")
         {
             <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
-            <a onclick="myAudioFunction1('Buddy')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Buddy</p></a>
-            <a onclick="myAudioFunction1('Cute')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">Cute</p></a>
-            <a onclick="myAudioFunction1('Memories')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Memories</p></a>
-            <a onclick="myAudioFunction1('Going Higher')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Going Higher</p></a>
-            <a onclick="myAudioFunction1('Little Idea')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Little Idea</p></a>
-            <a onclick="myAudioFunction1('Ukulele')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Ukulele</p></a>
+            <a onclick="localAudio('Buddy')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Buddy</p></a>
+            <a onclick="localAudio('Cute')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">Cute</p></a>
+            <a onclick="localAudio('Memories')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Memories</p></a>
+            <a onclick="localAudio('Going Higher')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Going Higher</p></a>
+            <a onclick="localAudio('Little Idea')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Little Idea</p></a>
+            <a onclick="localAudio('Ukulele')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Ukulele</p></a>
         }
     </div>
 
