@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConnectionString" xml:space="preserve">
-    <value>Server=ALE-PC\SQLEXPRESS;Database=master;Trusted_Connection=True;MultipleActiveResultSets=True</value>
+    <value>Server=ALE-PC\SQLEXPRESS;Database=MuszillaDB;Trusted_Connection=True;MultipleActiveResultSets=True</value>
     <comment>SQL Server Connection</comment>
   </data>
 </root>

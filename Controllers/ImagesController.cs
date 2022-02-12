@@ -131,6 +131,7 @@ namespace Muszilla.Controllers
                                 HttpContext.Session.SetString("Song_Name", Song_Name);
                                 HttpContext.Session.SetString("Song_Audio", url);
                                 con.Close();
+                                ViewBag.Message = "New User inserted succesfully!";
                             }
                         }
                     }
