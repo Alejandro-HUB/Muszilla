@@ -79,6 +79,8 @@ var bAudio;
 
 //in this function a song name is passed, which is played in the audio player and also showed in the now playing area
 function myAudioFunction1(song) {
+    var check = document.getElementById('name').innerHTML;
+    var audio = document.getElementById('audio').innerHTML;
 
     if (song == 'Buddy') {
         aAudio = '/Music/buddy.mp3';
@@ -169,12 +171,12 @@ function myAudioFunction1(song) {
     }
 
     // if the song is not one of the default songs within the project, then the song name is sent here
-    else if (song == '@ViewBag.SongName') {
-        bAudio = '@ViewBag.Song_Audio';
+    else if (song == check) {
+        bAudio = audio;
         player = document.getElementById('audio_player');
         player.src = bAudio;
         player.play();
-        document.getElementById('song-name').innerHTML = '@ViewBag.SongName';
+        document.getElementById('song-name').innerHTML = check;
     }
 }
 

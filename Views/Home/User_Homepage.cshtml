@@ -122,7 +122,6 @@
                     <li onclick="myAudioFunction1('Slow Motion')">Slow Motion</li>
                     <li onclick="myAudioFunction1('Buddy')">Buddy</li>
                     <li onclick="myAudioFunction1('Cute')">Cute</li>
-
                 </ul>
             </div>
         }
@@ -153,7 +152,7 @@
                               enctype="multipart/form">
                             <div class="dz-message needsclick">
                                 <span class="note needsclick">
-                                    <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" onclick="anotherSong()" placeholder="Upload" accept="audio/*" contenteditable="false">
+                                    <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" placeholder="Upload" accept="audio/*">
                                 </span>
                             </div>
 
@@ -199,7 +198,6 @@
                     }
 
                 };
-                Dropzone.options.uploa
             </script>
             <!--This is the button to upload Songs   -->
 
@@ -207,8 +205,10 @@
             <!-- this is the container that will hold all the uploaded songs by the user-->
             <div class="container3">
                 <ul class="items">
-                    <li onclick="myAudioFunction1('@ViewBag.SongName')"> @ViewBag.SongName</li> 
-                    <span id="moreSongs" onclick="myAudioFunction1('@ViewBag.SongName')"/>
+                    <li onclick="myAudioFunction1('@ViewBag.SongName')">@ViewBag.SongName</li>
+                    <span id="name" style="visibility: hidden;">@ViewBag.SongName</span>
+                    <span id="audio" style="visibility: hidden;">@ViewBag.Song_Audio</span>
+                    <!--<span id="moreSongs" onclick="myAudioFunction1('@ViewBag.SongName')"/>  -->
                 </ul>
             </div>
         }
