@@ -61,7 +61,7 @@ namespace Muszilla.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server=ALE-PC\SQLEXPRESS;Database=MuszillaDB;Trusted_Connection=True;MultipleActiveResultSets=True.
+        ///   Looks up a localized string similar to Server=tcp:muszilladbserver.database.windows.net,1433;Initial Catalog=MuszillaDB;Persist Security Info=False;User ID=muszilla;Password=479638alM@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;.
         /// </summary>
         internal static string ConnectionString {
             get {
