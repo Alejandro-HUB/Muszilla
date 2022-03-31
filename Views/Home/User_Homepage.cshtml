@@ -224,8 +224,8 @@
                              -->
                             <td onclick="myAudioFunction1('@item.Song_Name', '@item.Song_ID', '@item.Song_Audio')">
                                 @Html.DisplayFor(modelItem => item.Song_Name)
-                                <span id="@item.Song_ID@item.Song_Name" style="visibility: hidden;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
-                                <span id="@item.Song_ID@item.Song_Audio" style="visibility: hidden;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
+                                <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
+                                <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
                             </td>
                             
                             <!--
@@ -432,7 +432,7 @@
     <div id="audio_container">
         @if (@ViewBag.Pass_word != "")
         {
-            <audio controls id="audio_player" src="audio/demo.mp3">
+            <audio controls id="audio_player" src="audio/demo.mp3" onended="">
                 <div>
                     Sorry, your browser does not support this audio player.
                 </div>
