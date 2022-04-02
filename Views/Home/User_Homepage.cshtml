@@ -146,7 +146,7 @@
             <main>
                 <div class="box content" id="imageUpload">
                     <div>
-                        <form action="/api/images/upload"
+                        <form action="/api/songs/upload"
                               class="dropzone"
                               id="image-upload"
                               method="post"
@@ -156,18 +156,16 @@
                                     <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" placeholder="Upload" accept="audio/*">
                                 </span>
                             </div>
-
                         </form>
                     </div>
-
                 </div>
             </main>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
             <script>
-                // Grab links for images from backend api
+                // Grab links for the songs from backend api
                 function fetchImageLinks() {
-                    // Fetch images
+                    // Fetch songs
                     $.get(function (fetchedImageLinks) {
                         console.log(fetchedImageLinks)
                     });
@@ -175,7 +173,7 @@
                 // Start first interval
                 fetchImageLinks()
                 /* Dropzone */
-                // "imageUpload" is the camelized version of the HTML element's ID
+                // "songUpload" is the camelized version of the HTML element's ID
                 Dropzone.options.imageUpload = {
                     addRemoveLinks: true,
                     paramName: "files", // The name that will be used to transfer the file
@@ -184,20 +182,16 @@
                     dictRemoveFileConfirmation: false,
 
 
-
                     init: function () {
                         myDropzone = this;
                         myDropzone.on("success", function (file, response) {
                             file.previewElement.remove();
                             console.log("Success");
-
                         });
-
                     },
                     removedfile: function (file) {
                         file.previewElement.remove();
                     }
-
                 };
             </script>
             <!--This is the button to upload Songs   -->
@@ -265,10 +259,8 @@
                                     <input asp-for="Item1.Picture" name="Picture" class="form-control" accept="image/*">
                                 </span>
                             </div>
-
                         </form>
                     </div>
-
                 </div>
             </main>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -293,20 +285,16 @@
                     dictRemoveFileConfirmation: false,
 
 
-
                     init: function () {
                         myDropzone = this;
                         myDropzone.on("success", function (file, response) {
                             file.previewElement.remove();
                             console.log("Success");
-
                         });
-
                     },
                     removedfile: function (file) {
                         file.previewElement.remove();
                     }
-
                 };
             </script>
             <!--This is the button to upload images-->

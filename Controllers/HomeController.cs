@@ -46,8 +46,6 @@ namespace Muszilla.Controllers                                                  
             string ln = "";
             string url = "";
             string id = "";
-            string song_name = "";
-            string audio = "";
             FetchData();
             ConnectionString();
             con.Open();

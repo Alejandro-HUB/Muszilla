@@ -1,76 +1,119 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Muszilla.Helpers;
 using Muszilla.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using System.Data.SqlClient;
 
 namespace Muszilla.Controllers
 {
-    public class SongsController : Controller //Not being used, this conroller had dealt with showing all the songs
-                                              // inside the songs table. Currently only one shows inside a playlist.
-                                              // **         This means that this was not implemented yet          **
+    [Route("api/songs")]
+    public class SongsController : Controller //This is the controller than handles the file upload 
     {
+        public string url = "";
+        SqlConnection con = new SqlConnection();
         SqlCommand com = new SqlCommand();
         SqlDataReader dr;
-        SqlConnection con = new SqlConnection();
-        List<SongsModel> songs = new List<SongsModel>();
+        // make sure that appsettings.json is filled with the necessary details of the azure storage
+        private readonly AzureStorageConfig storageConfig = null;
 
-        private readonly ILogger<SongsController> _logger;
-
-        public SongsController(ILogger<SongsController> logger)
+        public SongsController(IOptions<AzureStorageConfig> config)
         {
-            _logger = logger;
-            con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
+            storageConfig = config.Value;
         }
 
-        public IActionResult Songs()
+        // POST /api/songs/upload
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Upload(ICollection<IFormFile> files)
         {
-            FetchData();
-            return View(songs);
-        }
+            bool isUploaded = false;
+            bool isAudio = false;
+            string Song_Name = "";
+            string email = "";
+            string id = "";
 
-        private void FetchData()
-        {
-            if (songs.Count > 0)
-            {
-                songs.Clear();
-            }
+
             try
             {
-                con.Open();
-                com.Connection = con;
-                com.CommandText = "Select TOP(100)[Song_ID],[Song_Name],[Song_Artist],[Song_Length],[Song_Genre] from Songs";
-                dr = com.ExecuteReader();
-                while (dr.Read())
+                if (files.Count == 0)
+                    return BadRequest("No files received from the upload");
+
+                if (storageConfig.AccountKey == string.Empty || storageConfig.AccountName == string.Empty)
+                    return BadRequest("sorry, can't retrieve your azure storage details from appsettings.js, make sure that you add azure storage details there");
+
+                if (storageConfig.Container == string.Empty)
+                    return BadRequest("Please provide a name for your image container in the azure blob storage");
+
+                foreach (var formFile in files)
                 {
-                    songs.Add(new SongsModel()
+                    if (ViewBag.Email != "")
                     {
-                        Song_ID = dr["Song_ID"].ToString()
-                    ,
-                        Song_Name = dr["Song_Name"].ToString()
-                    });
+                        if (StorageHelper.IsImage(formFile)) //Checks if the file is an image 
+                        {
+                            ViewBag.Message = "You can only upload a song!";
+                            return new UnsupportedMediaTypeResult();
+                        }
+                        else if (StorageHelper.IsAudio(formFile)) //Checks if the file is an audio file
+                        {
+                            url = "https://devstorageale.blob.core.windows.net/muszilla/" + formFile.FileName;
+                            Song_Name = formFile.FileName;
+                            if (formFile.Length > 0)
+                            {
+                                using (Stream stream = formFile.OpenReadStream())
+                                {
+                                    isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
+                                    isAudio = true;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            return new UnsupportedMediaTypeResult();
+                        }
+                    }
                 }
-                con.Close();
+
+                //                                                                          ** Start logic for Uploading Songs **
+                if (isUploaded && isAudio) //Upload procedure for a song
+                {
+                    string connection = Muszilla.Properties.Resources.ConnectionString;
+                    if (HttpContext.Session.GetString("Email") != null)
+                    {
+                        using (SqlConnection con = new SqlConnection(connection))
+                        {
+                            email = HttpContext.Session.GetString("Email");
+                            id = HttpContext.Session.GetString("User_ID");
+                            string query = "insert into Songs(Song_Name, Song_Audio, Song_Owner) values('" + Song_Name + "', '" + url + "', '" + id + "')";
+                            using (SqlCommand com = new SqlCommand(query, con))
+                            {
+                                con.Open();
+                                com.ExecuteNonQuery();
+                                HttpContext.Session.SetString("Song_Name", Song_Name);
+                                HttpContext.Session.SetString("Song_Audio", url);
+                                con.Close();
+                                ViewBag.Message = "New User inserted succesfully!";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Error";
+                    }
+                    return new AcceptedResult();
+                }
+                //                                                                          ** End logic for Uploading Songs **
+
+                else
+                    return BadRequest("Looks like the song could not be uploaded to the storage");
             }
             catch (Exception ex)
             {
-                throw ex;
+                return BadRequest(ex.Message);
             }
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

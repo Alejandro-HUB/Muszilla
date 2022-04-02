@@ -32,7 +32,6 @@ namespace Muszilla.Controllers
         {
             bool isUploaded = false;
             bool isImage = false;
-            bool isAudio = false;
             string Song_Name = "";
             string email = "";
             string id = "";
@@ -69,16 +68,8 @@ namespace Muszilla.Controllers
                         }
                         else if (StorageHelper.IsAudio(formFile)) //Checks if the file is an audio file
                         {
-                            url = "https://devstorageale.blob.core.windows.net/muszilla/" + formFile.FileName;
-                            Song_Name = formFile.FileName;
-                            if (formFile.Length > 0)
-                            {
-                                using (Stream stream = formFile.OpenReadStream())
-                                {
-                                    isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
-                                    isAudio = true;
-                                }
-                            }
+                            ViewBag.Message = "You can only upload an image!";
+                            return new UnsupportedMediaTypeResult();
                         }
                         else
                         {
@@ -112,37 +103,7 @@ namespace Muszilla.Controllers
                         ViewBag.Message = "Error";
                     }
                     return new AcceptedResult();
-              }
-                //                                                                          ** Start logic for Uploading Songs **
-                else if (isUploaded&&isAudio) //Upload procedure for a song
-                {
-                    string connection = Muszilla.Properties.Resources.ConnectionString;
-                    if (HttpContext.Session.GetString("Email") != null)
-                    {
-                        using (SqlConnection con = new SqlConnection(connection))
-                        {
-                            email = HttpContext.Session.GetString("Email");
-                            id = HttpContext.Session.GetString("User_ID");
-                            string query = "insert into Songs(Song_Name, Song_Audio, Song_Owner) values('" + Song_Name + "', '" + url + "', '" + id + "')";
-                            using (SqlCommand com = new SqlCommand(query, con))
-                            {
-                                con.Open();
-                                com.ExecuteNonQuery();
-                                HttpContext.Session.SetString("Song_Name", Song_Name);
-                                HttpContext.Session.SetString("Song_Audio", url);
-                                con.Close();
-                                ViewBag.Message = "New User inserted succesfully!";
-                            }
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.Message = "Error";
-                    }
-                    return new AcceptedResult();
-                }
-                //                                                                          ** End logic for Uploading Songs **
-
+                }  
                 else
                     return BadRequest("Looks like the image couldnt upload to the storage");
             }

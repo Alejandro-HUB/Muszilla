@@ -17,11 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\css\User_Homepage.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\css\User_Homepage.css" />
     <None Include="wwwroot\Music\anewbeginning.mp3" />
     <None Include="wwwroot\Music\buddy.mp3" />
     <None Include="wwwroot\Music\creativeminds.mp3" />

@@ -1286,6 +1286,12 @@ audio {
     left: 110px;
 }
 
+#songUpload {
+    position: absolute;
+    top: 260px;
+    left: 110px;
+}
+
 #account_screen {
     width: 1100px;
     height: 520px;
