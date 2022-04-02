@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 
 namespace Muszilla.Controllers
 {
+    [Route("api/Playlist")]
     public class PlaylistController : Controller //Not fully implemented
     {
         SqlCommand com = new SqlCommand();
@@ -17,21 +18,14 @@ namespace Muszilla.Controllers
         SqlConnection con = new SqlConnection();
         List<PlaylistModel> playlists = new List<PlaylistModel>();
 
-        private readonly ILogger<PlaylistController> _logger;
-
-        public PlaylistController(ILogger<PlaylistController> logger)
-        {
-            _logger = logger;
-            con.ConnectionString = Muszilla.Properties.Resources.ConnectionString; 
-        }
-
         public IActionResult Playlist()
         {
-            FetchData();
+            AddPlaylist();
             return View(playlists);
         }
 
-        private void FetchData()
+        [HttpPost("AddPlaylist")]
+        private void AddPlaylist()
         {
             if (playlists.Count > 0)
             {

@@ -1,5 +1,5 @@
 ﻿@using Muszilla.Models
-@model Tuple<ConsumerModel, AzureStorageConfig, SongsModel>
+@model Tuple<ConsumerModel, AzureStorageConfig, SongsModel, PlaylistModel>
 @{
     ViewData["Title"] = "User Homepage";
 }
@@ -22,21 +22,21 @@
         <div class="sidebar">
 
             <!-- This is the sidebar which you see on the user homepage -->
-            <form id="searchBar">
+        <form id="searchBar">
                 <!-- the sidebar has a search songs input option and a search button-->
-                <input type="search" id="searchsong" placeholder="Search A Song" autocomplete="off">
+            <input type="search" id="searchsong" placeholder="Search A Song" autocomplete="off">
                 <button type="button" onclick="" id="lookupsong" class="searchbtn"> Search </button>
             </form>
 
             <div>
                 <!-- The sidebar has a Home and settings button that will take the user to Home page or the settings page-->
-                <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
+            <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
                 <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Settings </button>
             </div>
 
             <div>
                 <!-- This is where the name of the song is displayed when a song is playing-->
-                <p style="color:#33CCFF; font-size: 14px;">Now Playing:</p>
+            <p style="color:#33CCFF; font-size: 14px;">Now Playing:</p>
                 <div id="song-name" style="color:white; font-size: 14px; padding-left: 23px;">Playing songs show here </div>
             </div>
 
@@ -53,7 +53,7 @@
             </div>
             -->
             <!-- this is the logout button within the sidebar -->
-            <div>
+        <div>
                 <button type="button" class="logoutbtn" onclick="location.href='@Url.Action("Logout", "Home")'" id="logout">LOG OUT</button>
             </div>
         </div>
@@ -74,7 +74,7 @@
         @if (@ViewBag.Pass_word != "")
         {
             <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
-            <img id="userImage" src="@ViewBag.Picture" onerror="if (this.src != '/Pictures/emptyImage.png') this.src = '/Pictures/emptyImage.png';"/>
+            <img id="userImage" src="@ViewBag.Picture" onerror="if (this.src != '/Pictures/emptyImage.png') this.src = '/Pictures/emptyImage.png';" />
             <div id="accountInfo">Account Details</div>
             <div id="firstName">@ViewBag.FirstName </div>
             <div id="lastName">@ViewBag.LastName </div>
@@ -82,9 +82,9 @@
 
             <p style="top:252px;">My Playlists</p>
             <!-- this button allows the user to add a new playlist-->
-            <form>
-                <input type="text" name="userinput" id="playlistNameInput" placeholder="New Playlist Name here" autocomplete="off">
-                <input type="button" id="newplaylistbtn" value="Add Playlist" onclick="AddLi(userinput.value)">
+            <form class="form-horizontal" asp-action="CreatePlaylist">
+                <input id="playlistNameInput" asp-for="Item4.Playlist_Name" name="Playlist_Name" class="form-control" type="text" autocomplete="off" placeholder="New Playlist Name here">
+                <button type="submit" id="newplaylistbtn" onclick="">Add Playlist</button>    
             </form>
 
         }
@@ -137,7 +137,7 @@
             <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
             <form class="form-horizontal" asp-action="Homepage">
                 <!-- this button updates the songs and the playlists -->
-                <button type="submit" id="updateview" onclick=""> Update</button>
+            <button type="submit" id="updateview" onclick=""> Update</button>
             </form>
 
 
@@ -147,10 +147,10 @@
                 <div class="box content" id="imageUpload">
                     <div>
                         <form action="/api/songs/upload"
-                              class="dropzone"
-                              id="image-upload"
-                              method="post"
-                              enctype="multipart/form">
+                          class="dropzone"
+                          id="image-upload"
+                          method="post"
+                          enctype="multipart/form">
                             <div class="dz-message needsclick">
                                 <span class="note needsclick">
                                     <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" placeholder="Upload" accept="audio/*">
@@ -195,8 +195,6 @@
                 };
             </script>
             <!--This is the button to upload Songs   -->
-
-
             <!-- this is the container that will hold all the uploaded songs by the user-->
             <div class="container3">
                 <table>
@@ -205,33 +203,14 @@
                             @Html.DisplayNameFor(model => model.Item3.Song_Name)
                         </th>
                     </tr>
-                    <script>
-                        var count = 0;
-                    </script>
                     <tr Style="color: white;" class="items">
-                        @foreach (var item in Model.Item3.songs)
+                        @foreach (var item in Model.Item3.songsList)
                         {
-                            <!--
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Song_ID)
-                            </td>
-                             -->
                             <td onclick="myAudioFunction1('@item.Song_Name', '@item.Song_ID', '@item.Song_Audio')">
                                 @Html.DisplayFor(modelItem => item.Song_Name)
                                 <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
                                 <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
                             </td>
-                            
-                            <!--
-                            <td style="visibility: hidden;">
-                                @Html.DisplayFor(modelItem => item.Song_Audio)
-                            </td>
-                            -->
-                            <!--
-                            <td style="visibility: hidden;">
-                                @Html.DisplayFor(modelItem => item.Song_Owner)
-                            </td>
-                            -->
                         }
                     </tr>
                 </table>
@@ -243,17 +222,17 @@
     <div id="account_screen">
         @if (@ViewBag.Pass_word != "")
         {
-            <img id="userImage" src="@ViewBag.Picture" onerror="if (this.src != '/Pictures/emptyImage.png') this.src = '/Pictures/emptyImage.png';"/>
+            <img id="userImage" src="@ViewBag.Picture" onerror="if (this.src != '/Pictures/emptyImage.png') this.src = '/Pictures/emptyImage.png';" />
             <!--This is the button to upload images-->
             <!-- Client side libs required  -->
             <main>
                 <div class="box content" id="imageUpload">
                     <div>
                         <form action="/api/images/upload"
-                              class="dropzone"
-                              id="image-upload"
-                              method="post"
-                              enctype="multipart/form">
+                          class="dropzone"
+                          id="image-upload"
+                          method="post"
+                          enctype="multipart/form">
                             <div class="dz-message needsclick">
                                 <span class="note needsclick">
                                     <input asp-for="Item1.Picture" name="Picture" class="form-control" accept="image/*">
@@ -307,28 +286,28 @@
                 <p id="f">
                     First Name:
                     <!-- this gets the user's first name-->
-                    <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
+                <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
                 </p>
                 <p id="edit_one">(Click to edit)</p>
 
                 <p id="l">
                     Last Name:
                     <!-- this gets the user's last name-->
-                    <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName">
+                <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName">
                 </p>
                 <p id="edit_two">(Click to edit)</p>
 
                 <p id="e">
                     Your Email:
                     <!-- this gets the user's email-->
-                    <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email">
+                <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email">
                 </p>
                 <p id="edit_three">(Click to edit)</p>
 
                 <p id="p">
                     Password:
                     <!-- this gets the user's password-->
-                    <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
+                <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
                     <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
                 </p>
                 <p id="edit_four">(Click to edit)</p>
@@ -420,7 +399,7 @@
     <div id="audio_container">
         @if (@ViewBag.Pass_word != "")
         {
-            <audio controls id="audio_player" src="audio/demo.mp3" onended="">
+            <audio controls id="audio_player" src="audio/demo.mp3">
                 <div>
                     Sorry, your browser does not support this audio player.
                 </div>

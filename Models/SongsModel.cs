@@ -16,7 +16,7 @@ namespace Muszilla.Models
         public string Song_Audio { get; set; }
         [DisplayName("Owner")]
         public string Song_Owner { get; set; }
-        public List<SongsModel> songs { get; set; }
+        public List<SongsModel> songsList { get; set; }
 
     }
 }
