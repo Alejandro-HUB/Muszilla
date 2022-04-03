@@ -56,9 +56,37 @@ namespace Muszilla.Controllers
                         {
                             //Check if the image's name has invalid characters
                             bool InvalidFileName = CleanString.IsValidFilename(formFile.FileName);
-                            if (InvalidFileName)
+
+                            //Check if the song's name contains unicode characters that have an AnsiCode > 127
+                            bool unicodeCharacters = CleanString.ContainsUnicodeCharacter(formFile.FileName);
+
+                            if (InvalidFileName || !unicodeCharacters)
                             {
                                 ImageName = CleanString.UseStringBuilderWithHashSet(formFile.FileName);
+                                ImageName = CleanString.EscapeForeignCharacters(ImageName);
+
+                                //If clean up got rid of file name because it only included invalid characters, replace empty string
+                                if (ImageName == string.Empty || ImageName == "" || string.IsNullOrEmpty(ImageName))
+                                {
+                                    ViewBag.Message = "Invalid Image Name!";
+                                    return new UnsupportedMediaTypeResult();
+                                }
+                                else if (ImageName == ".jpg")
+                                {
+                                    ImageName = "EmptyFileName.jpg";
+                                }
+                                else if (ImageName == ".png")
+                                {
+                                    ImageName = "EmptyFileName.png";
+                                }
+                                else if (ImageName == ".gif")
+                                {
+                                    ImageName = "EmptyFileName.gif";
+                                }
+                                else if (ImageName == ".jpeg")
+                                {
+                                    ImageName = "EmptyFileName.jpeg";
+                                }
                             }
                             else
                             {

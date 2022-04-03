@@ -54,6 +54,25 @@ namespace Muszilla.Helpers
             return sb.ToString();
         }
 
+        public static string EscapeForeignCharacters(string s)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (char c in s)
+            {
+                int i = (int)c;
+                if (i < 32 || i > 126)
+                {
+                    sb.AppendFormat("", i);
+                }
+                else
+                {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString();
+        }
+
         // by SteveDog
         public static string UseStringBuilderWithHashSet2(string dirtyString)
         {
@@ -83,6 +102,13 @@ namespace Muszilla.Helpers
         public static string UseWhere(string dirtyString)
         {
             return new String(dirtyString.Where(Char.IsLetterOrDigit).ToArray());
+        }
+
+        public static bool ContainsUnicodeCharacter(string input)
+        {
+            const int MaxAnsiCode = 127;
+
+            return input.Any(c => c > MaxAnsiCode);
         }
 
         public static bool IsValidFilename(string fileName)

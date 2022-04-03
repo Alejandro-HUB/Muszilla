@@ -63,9 +63,38 @@ namespace Muszilla.Controllers
                         {
                             //Check if the song's name has invalid characters
                             bool InvalidFileName = CleanString.IsValidFilename(formFile.FileName);
-                            if (InvalidFileName)
+
+                            //Check if the song's name contains unicode characters that have an AnsiCode > 127
+                            bool unicodeCharacters = CleanString.ContainsUnicodeCharacter(formFile.FileName);
+
+                            if (InvalidFileName || !unicodeCharacters)
                             {
                                 Song_Name = CleanString.UseStringBuilderWithHashSet(formFile.FileName);
+                                Song_Name = CleanString.EscapeForeignCharacters(Song_Name);
+                              
+                                //If clean up got rid of file name because it only included invalid characters, replace empty string
+                                if (Song_Name == string.Empty || Song_Name == "" || string.IsNullOrEmpty(Song_Name))
+                                {
+                                    ViewBag.Message = "Invalid Image Name!";
+                                    return new UnsupportedMediaTypeResult();
+                                }
+                                else if (Song_Name == ".mp3")
+                                {
+                                    Song_Name = "EmptyFileName.mp3";
+                                }
+                                else if (Song_Name == ".wma")
+                                {
+                                    Song_Name = "EmptyFileName.wma";
+                                }
+                                else if (Song_Name == ".wav")
+                                {
+                                    Song_Name = "EmptyFileName.wav";
+                                }
+                                else if (Song_Name == ".wmv")
+                                {
+                                    Song_Name = "EmptyFileName.wmv";
+                                }
+
                             }
                             else
                             {
