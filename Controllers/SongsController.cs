@@ -60,13 +60,13 @@ namespace Muszilla.Controllers
                         }
                         else if (StorageHelper.IsAudio(formFile)) //Checks if the file is an audio file
                         {
-                            url = "https://devstorageale.blob.core.windows.net/muszilla/" + formFile.FileName;
-                            Song_Name = formFile.FileName;
+                            Song_Name = CleanString.UseRegex(formFile.FileName);
+                            url = "https://devstorageale.blob.core.windows.net/muszilla/" + Song_Name;
                             if (formFile.Length > 0)
                             {
                                 using (Stream stream = formFile.OpenReadStream())
                                 {
-                                    isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
+                                    isUploaded = await StorageHelper.UploadFileToStorage(stream, Song_Name, storageConfig);
                                     isAudio = true;
                                 }
                             }
