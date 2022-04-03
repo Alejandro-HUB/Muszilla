@@ -113,7 +113,7 @@
                                 result = item.Playlist_ID + "." + result;
 
                                 //For each Playlist generate a button
-                                <td onclick="showSongs('@result', '@item.Playlist_ID')">
+                                <td onclick="showSongs('@result', '@item.Playlist_ID'); history.go(0); reloadPage();">
                                     @Html.DisplayFor(modelItem => item.Playlist_Name)
                                     <span id="@item.Playlist_ID@item.Playlist_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Playlist_Name)</span>
                                 </td>

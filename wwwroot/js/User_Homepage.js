@@ -199,6 +199,11 @@ function readURL(input) {
     }
 }
 
+function reloadPage()
+{
+    window.location.reload();
+}
+
 //this function shows the user's password when they click on the show password button
 function showPassword() {
     var x = document.getElementById("UPassword");
