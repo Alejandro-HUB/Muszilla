@@ -32,7 +32,7 @@ namespace Muszilla.Controllers
         {
             bool isUploaded = false;
             bool isImage = false;
-            string Song_Name = "";
+            string ImageName = "";
             string email = "";
             string id = "";
 
@@ -54,13 +54,23 @@ namespace Muszilla.Controllers
                     {
                         if (StorageHelper.IsImage(formFile)) //Checks if the file is an image 
                         {
-                            url = "https://devstorageale.blob.core.windows.net/muszilla/" + formFile.FileName;
+                            //Check if the image's name has invalid characters
+                            bool InvalidFileName = CleanString.IsValidFilename(formFile.FileName);
+                            if (InvalidFileName)
+                            {
+                                ImageName = CleanString.UseStringBuilderWithHashSet(formFile.FileName);
+                            }
+                            else
+                            {
+                                ImageName = formFile.FileName;
+                            }
+                            url = "https://devstorageale.blob.core.windows.net/muszilla/" + ImageName;
 
                             if (formFile.Length > 0)
                             {
                                 using (Stream stream = formFile.OpenReadStream())
                                 {
-                                    isUploaded = await StorageHelper.UploadFileToStorage(stream, formFile.FileName, storageConfig);
+                                    isUploaded = await StorageHelper.UploadFileToStorage(stream, ImageName, storageConfig);
                                     isImage = true;
 
                                 }

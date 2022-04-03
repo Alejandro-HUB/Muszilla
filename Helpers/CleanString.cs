@@ -44,7 +44,7 @@ namespace Muszilla.Helpers
         // by Paolo Tedesco, but using a HashSet
         public static String UseStringBuilderWithHashSet(string strIn)
         {
-            var hashSet = new HashSet<char>(" ?&^$#@!()+-,:;<>’\'-_*");
+            var hashSet = new HashSet<char>("?&^$#@!()+-,:;<>’\'-_*");
             // specify capacity of StringBuilder to avoid resizing
             StringBuilder sb = new StringBuilder(strIn.Length);
             foreach (char x in strIn.Where(c => !hashSet.Contains(c)))
@@ -83,6 +83,11 @@ namespace Muszilla.Helpers
         public static string UseWhere(string dirtyString)
         {
             return new String(dirtyString.Where(Char.IsLetterOrDigit).ToArray());
+        }
+
+        public static bool IsValidFilename(string fileName)
+        {
+            return Path.GetInvalidFileNameChars().All(invalidChar => fileName.Contains(invalidChar) != true);
         }
     }
 }

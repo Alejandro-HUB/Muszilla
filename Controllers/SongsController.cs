@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Muszilla.Controllers
 {
@@ -60,7 +61,17 @@ namespace Muszilla.Controllers
                         }
                         else if (StorageHelper.IsAudio(formFile)) //Checks if the file is an audio file
                         {
-                            Song_Name = CleanString.UseRegex(formFile.FileName);
+                            //Check if the song's name has invalid characters
+                            bool InvalidFileName = CleanString.IsValidFilename(formFile.FileName);
+                            if (InvalidFileName)
+                            {
+                                Song_Name = CleanString.UseStringBuilderWithHashSet(formFile.FileName);
+                            }
+                            else
+                            {
+                                Song_Name = formFile.FileName;
+                            }
+                            
                             url = "https://devstorageale.blob.core.windows.net/muszilla/" + Song_Name;
                             if (formFile.Length > 0)
                             {
