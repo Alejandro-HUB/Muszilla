@@ -233,7 +233,7 @@ function showSongsDefault(currentDIV) {
 function showSongs(playlistNumber, currentPlaylistID) {
 
     var ArrayOfLists = playlistNumber.split('.');
-    alert("First index: " + ArrayOfLists[0] + " Second index: " + ArrayOfLists[1]);
+    //alert("First index: " + ArrayOfLists[0] + " Second index: " + ArrayOfLists[1]);
 
     for (let i = 0; i < ArrayOfLists.length; i++)
     {
@@ -257,7 +257,7 @@ function showSongs(playlistNumber, currentPlaylistID) {
                     }
                 },
                 error: function (jqXHR, textStatus) {
-                    alert(textStatus);
+                    //alert(textStatus);
                 }
 
             });
