@@ -42,7 +42,7 @@ CREATE TABLE [dbo].[Songs](
 	[Song_Name] [varchar](max) NULL,
 	[Song_Audio] [varchar](max) NULL,
 	[Song_Owner] [int] NULL,
-	[Song_Playlist_ID] [int]
+	[Song_Playlist_ID] [int] NULL,
  CONSTRAINT [PK_Songs] PRIMARY KEY CLUSTERED 
 (
 	[Song_ID] ASC
