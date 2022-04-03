@@ -37,7 +37,7 @@ function showGenres() {
 }
 
 //this function shows the user homepage 
-function showHome() {
+function showHome(currentDIV) {
 
     document.getElementById("topPicks").style.display = "none";
     document.getElementById("featured").style.display = "none";
@@ -46,6 +46,9 @@ function showHome() {
     document.getElementById("account_screen").style.display = "none";
     document.getElementById("list_search_songs").style.display = "none";
     document.getElementById("home_first").style.display = "initial";
+    if (currentDIV != null && currentDIV != "") {
+        document.getElementById(currentDIV).style.display = "none";
+    }
 
 }
 
@@ -231,9 +234,9 @@ function showSongsDefault(currentDIV) {
 
 //this will show the second playlist adn the list of songs in it
 function showSongs(playlistNumber, currentPlaylistID) {
-
     var ArrayOfLists = playlistNumber.split('.');
     //alert("First index: " + ArrayOfLists[0] + " Second index: " + ArrayOfLists[1]);
+    //alert("CurrentID: " + currentPlaylistID);
 
     for (let i = 0; i < ArrayOfLists.length; i++)
     {

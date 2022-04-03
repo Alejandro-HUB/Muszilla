@@ -31,7 +31,7 @@
 
             <div>
                 <!-- The sidebar has a Home and settings button that will take the user to Home page or the settings page-->
-            <button type="button" class="homebtn" onclick="showHome()" id="userHome"> Home </button>
+            <button type="button" class="homebtn" onclick="showHome('@ViewBag.CurrentDIV')" id="userHome"> Home </button>
                 <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Settings </button>
             </div>
 
@@ -164,7 +164,7 @@
     <!-- this is an empty playlist where the user can upload their songs and play them too -->
     @foreach (var Playlist in Model.Item4.Playlists)
     {
-
+        //@Model.Item4.Clicked_Playlist add to check if the playlist button was clicked
         @if (Playlist.Playlist_ID == @ViewBag.CurrentPlaylistID)
         {
           
