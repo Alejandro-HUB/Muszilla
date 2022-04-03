@@ -92,8 +92,7 @@ function myAudioFunction1(song, id, audio) {
     }
 }
 
-function localAudio(song)
-{
+function localAudio(song) {
     if (song == 'Buddy') {
         aAudio = '/Music/buddy.mp3';
         player = document.getElementById('audio_player');
@@ -221,27 +220,62 @@ searchbutton.addEventListener("click", function () {
 });
 
 //this will show the default list of songs in the default playlist
-function showSongs() {
+function showSongsDefault(currentDIV) {
 
     document.getElementById("songsinplaylist").style.display = "initial";
     document.getElementById("home_first").style.display = "none";
-    document.getElementById("songsinplaylist2").style.display = "none";
+    if (currentDIV != null && currentDIV != "") {
+        document.getElementById(currentDIV).style.display = "none";
+    }
 }
 
 //this will show the second playlist adn the list of songs in it
-function showSongs2() {
+function showSongs(playlistNumber, currentPlaylistID) {
 
-    document.getElementById("songsinplaylist").style.display = "none";
-    document.getElementById("home_first").style.display = "none";
-    document.getElementById("songsinplaylist2").style.display = "initial";
+    var ArrayOfLists = playlistNumber.split('.');
+    alert("First index: " + ArrayOfLists[0] + " Second index: " + ArrayOfLists[1]);
+
+    for (let i = 0; i < ArrayOfLists.length; i++)
+    {
+        var Id = "songsinplaylist" + i;
+        if (ArrayOfLists[0] == currentPlaylistID)
+        {
+            $.ajax({
+                type: "POST",
+                url: '/Home/GetID',
+                dataType: "html",
+                data: {
+                    dataID: currentPlaylistID,
+                    DIV: Id,
+                },
+                success: function (data) {
+                    if (data == "Success") {
+                        alert('Your data updated');
+                    } else {
+                        document.getElementById("songsinplaylist").style.display = "none";
+                        document.getElementById("home_first").style.display = "none";
+                    }
+                },
+                error: function (jqXHR, textStatus) {
+                    alert(textStatus);
+                }
+
+            });
+
+        }
+    }
 }
 
+
+
 //this is the back button which will take you back to the user homepage
-function gobacktoplaylists() {
+function gobacktoplaylists(currentDIV) {
 
     document.getElementById("home_first").style.display = "initial";
     document.getElementById("songsinplaylist").style.display = "none";
-    document.getElementById("songsinplaylist2").style.display = "none";
+    if (currentDIV != null && currentDIV != "") {
+        document.getElementById(currentDIV).style.display = "none";
+    }
 }
 
 //this function will add the list item as playlist and will use the user input as the playlist's name 

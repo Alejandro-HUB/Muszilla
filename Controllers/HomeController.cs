@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Session;
 using Microsoft.Extensions.Options;
 using Muszilla.Helpers;
 using System.IO;
+using javax.jws;
 
 namespace Muszilla.Controllers                                                            //**This controller handles the CRUD functionalities** By Alejandro Lopez
 {
@@ -88,11 +89,26 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
                 FetchPlaylistData();
                 FetchSongData();
                 return View("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
             }
             return View(Tuple.Create(consumer, storage, songsModel));
+        }
+
+        [HttpPost]
+        public IActionResult GetID(string dataID, string DIV)
+        {
+            FetchPlaylistData();
+            FetchSongData();
+            HttpContext.Session.SetString("CurrentPlaylistID", dataID);
+            ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+            HttpContext.Session.SetString("CurrentDIV", DIV);
+            ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
+            playlistModel.Clicked_Playlist = true;
+            return View("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
 
         [HttpPost]
@@ -121,6 +137,8 @@ namespace Muszilla.Controllers                                                  
             HttpContext.Session.SetString("FirstName", empty);
             HttpContext.Session.SetString("LastName", empty);
             HttpContext.Session.SetString("Picture", empty);
+            HttpContext.Session.SetString("CurrentPlaylistID", empty);
+            HttpContext.Session.SetString("CurrentDIV", empty);
             ViewBag.Message = "Log out successful!";
             return View("Index");
         }
@@ -169,22 +187,26 @@ namespace Muszilla.Controllers                                                  
 
         public IActionResult CreatePlaylist(PlaylistModel createPlaylist)
         {
-            String id;
-            id = HttpContext.Session.GetString("User_ID");
-            string connection = Muszilla.Properties.Resources.ConnectionString;
-
-            using (SqlConnection con = new SqlConnection(connection))
+            if (createPlaylist.Playlist_Name != null)
             {
-                string query = "insert into Playlist(Playlist_Name, User_ID_FK)  values('" + createPlaylist.Playlist_Name + "', '" + id + "')";
-                using (SqlCommand com = new SqlCommand(query, con))
+                String id;
+                id = HttpContext.Session.GetString("User_ID");
+                string connection = Muszilla.Properties.Resources.ConnectionString;
+
+                using (SqlConnection con = new SqlConnection(connection))
                 {
-                    con.Open();
-                    com.ExecuteNonQuery();
-                    ViewBag.Message = "New Playlist inserted succesfully!";
+                    string query = "insert into Playlist(Playlist_Name, User_ID_FK)  values('" + createPlaylist.Playlist_Name + "', '" + id + "')";
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        con.Open();
+                        com.ExecuteNonQuery();
+                        ViewBag.Message = "New Playlist inserted succesfully!";
+                    }
+                    con.Close();
+                    return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
                 }
-                con.Close();
-                return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
             }
+            return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
 
 
@@ -228,7 +250,10 @@ namespace Muszilla.Controllers                                                  
             List<SongsModel> songListFromDB = new List<SongsModel>();
             ConnectionString();
             String id;
+            String currentPlaylist;
             id = HttpContext.Session.GetString("User_ID");
+            currentPlaylist = HttpContext.Session.GetString("CurrentPlaylistID");
+
 
             if (songListFromDB.Count > 0)
             {
@@ -238,7 +263,7 @@ namespace Muszilla.Controllers                                                  
             {
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "select * from Songs where Song_Owner ='" + id + "'";
+                com.CommandText = "select * from Songs where Song_Owner ='" + id + "' and Song_Playlist_ID ='" + currentPlaylist + "'";
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {

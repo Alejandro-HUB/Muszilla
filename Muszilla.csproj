@@ -32,6 +32,7 @@
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.8.1" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.55.0.2566" />
+    <PackageReference Include="IKVM" Version="8.1.5717" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
@@ -46,6 +47,7 @@
     <PackageReference Include="SQLitePCLRaw.core" Version="2.0.4" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="Vse.Web.Serialization.ControlledSerializationJsonConverter" Version="1.0.4" />
   </ItemGroup>
 
   <ItemGroup>

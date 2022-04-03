@@ -35,6 +35,7 @@ namespace Muszilla.Controllers
             string Song_Name = "";
             string email = "";
             string id = "";
+            string currentPlaylist = "";
 
 
             try
@@ -87,7 +88,9 @@ namespace Muszilla.Controllers
                         {
                             email = HttpContext.Session.GetString("Email");
                             id = HttpContext.Session.GetString("User_ID");
-                            string query = "insert into Songs(Song_Name, Song_Audio, Song_Owner) values('" + Song_Name + "', '" + url + "', '" + id + "')";
+                            currentPlaylist = HttpContext.Session.GetString("CurrentPlaylistID");
+
+                            string query = "insert into Songs(Song_Name, Song_Audio, Song_Owner) values('" + Song_Name + "', '" + url + "', '" + id + "', '" + currentPlaylist + "')";
                             using (SqlCommand com = new SqlCommand(query, con))
                             {
                                 con.Open();
