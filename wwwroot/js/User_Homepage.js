@@ -199,8 +199,7 @@ function readURL(input) {
     }
 }
 
-function reloadPage()
-{
+function reloadPage() {
     window.location.reload();
 }
 
@@ -243,11 +242,9 @@ function showSongs(playlistNumber, currentPlaylistID) {
     //alert("First index: " + ArrayOfLists[0] + " Second index: " + ArrayOfLists[1]);
     //alert("CurrentID: " + currentPlaylistID);
 
-    for (let i = 0; i < ArrayOfLists.length; i++)
-    {
-        var Id = "songsinplaylist" + i;
-        if (ArrayOfLists[0] == currentPlaylistID)
-        {
+    for (let i = 0; i < ArrayOfLists.length; i++) {
+        var Id = "songsinplaylist" + currentPlaylistID;
+        if (ArrayOfLists[0] == currentPlaylistID) {
             $.ajax({
                 type: "POST",
                 url: '/Home/GetID',
@@ -260,8 +257,6 @@ function showSongs(playlistNumber, currentPlaylistID) {
                     if (data == "Success") {
                         alert('Your data updated');
                     } else {
-                        document.getElementById("songsinplaylist").style.display = "none";
-                        document.getElementById("home_first").style.display = "none";
                     }
                 },
                 error: function (jqXHR, textStatus) {
@@ -269,9 +264,31 @@ function showSongs(playlistNumber, currentPlaylistID) {
                 }
 
             });
-
+            break;
         }
     }
+
+    history.go(0);
+
+    setTimeout(function () {
+        history.go(0);
+    }, 2000);
+
+    setTimeout(function () {
+        history.go(0);
+    }, 3000);
+
+    setTimeout(function () {
+        history.go(0);
+    }, 4000);
+
+    setTimeout(function () {
+        document.getElementById("songsinplaylist").style.display = "none";
+        document.getElementById("home_first").style.display = "none";
+        document.getElementById(Id).style.display = "initial";
+        document.getElementById(Id).style.display = "contents";
+        history.go(0);
+    }, 5000);
 }
 
 

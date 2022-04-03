@@ -13,6 +13,8 @@ namespace Muszilla.Models
         public string Playlist_Name { get; set; }
         public string User_ID_FK { get; set; }
         public List<PlaylistModel> Playlists { get; set; }
+        public string currentDIV { get; set; }
+        public string currentID { get; set; }
         public bool Clicked_Playlist { get; set; }
     }
 }

@@ -103,10 +103,13 @@ namespace Muszilla.Controllers                                                  
         {
             FetchPlaylistData();
             FetchSongData();
-            HttpContext.Session.SetString("CurrentPlaylistID", dataID);
-            ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-            HttpContext.Session.SetString("CurrentDIV", DIV);
-            ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
+            if (!string.IsNullOrEmpty(dataID) && !string.IsNullOrEmpty(DIV))
+            {
+                HttpContext.Session.SetString("CurrentPlaylistID", dataID);
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                HttpContext.Session.SetString("CurrentDIV", DIV);
+                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
+            }
             playlistModel.Clicked_Playlist = true;
             return View("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
@@ -181,6 +184,8 @@ namespace Muszilla.Controllers                                                  
                 con.Close();
                 return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
             }
+            ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+            ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             con.Close();
             return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
@@ -206,12 +211,16 @@ namespace Muszilla.Controllers                                                  
                     return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
                 }
             }
+            ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+            ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
 
 
         private void FetchPlaylistData()
         {
+            ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+            ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             List<PlaylistModel> PlaylistsFromDB = new List<PlaylistModel>();
             ConnectionString();
             String id;
@@ -247,6 +256,8 @@ namespace Muszilla.Controllers                                                  
 
         private void FetchSongData()
         {
+            ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+            ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             List<SongsModel> songListFromDB = new List<SongsModel>();
             ConnectionString();
             String id;

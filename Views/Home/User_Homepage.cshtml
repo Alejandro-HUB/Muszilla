@@ -31,7 +31,7 @@
 
             <div>
                 <!-- The sidebar has a Home and settings button that will take the user to Home page or the settings page-->
-            <button type="button" class="homebtn" onclick="showHome('@ViewBag.CurrentDIV')" id="userHome"> Home </button>
+                <button type="button" class="homebtn" onclick="showHome('@ViewBag.CurrentDIV')" id="userHome"> Home </button>
                 <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Settings </button>
             </div>
 
@@ -113,7 +113,7 @@
                                 result = item.Playlist_ID + "." + result;
 
                                 //For each Playlist generate a button
-                                <td onclick="showSongs('@result', '@item.Playlist_ID'); history.go(0); reloadPage();">
+                                <td onclick="showSongs('@result', '@item.Playlist_ID'); history.go(0);">
                                     @Html.DisplayFor(modelItem => item.Playlist_Name)
                                     <span id="@item.Playlist_ID@item.Playlist_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Playlist_Name)</span>
                                 </td>
@@ -149,25 +149,19 @@
             </div>
         }
     </div>
-    @{
-        var test = @ViewBag.CurrentDIV;
-    }
     @if (@Model.Item4.Clicked_Playlist)
     {
-        <script>
-            document.getElementById("songsinplaylist").style.display = "none";
-            document.getElementById("home_first").style.display = "none";
-            document.getElementById(test).style.display = "initial";
-            document.getElementById(test).style.display = "contents";
-        </script>
+        
     }
+        <script>
+        </script>
     <!-- this is an empty playlist where the user can upload their songs and play them too -->
     @foreach (var Playlist in Model.Item4.Playlists)
     {
         //@Model.Item4.Clicked_Playlist add to check if the playlist button was clicked
-        @if (Playlist.Playlist_ID == @ViewBag.CurrentPlaylistID)
+        if (Playlist.Playlist_ID == @ViewBag.CurrentPlaylistID)
         {
-          
+
 
             <div id='@ViewBag.CurrentDIV' class="Playlists">
                 <script>
@@ -183,7 +177,7 @@
                     <button id="backtoplaylists" onclick="gobacktoplaylists('@ViewBag.CurrentDIV')"> Go Back</button>
                     <form class="form-horizontal" asp-action="Homepage">
                         <!-- this button updates the songs and the playlists -->
-            <button type="submit" id="updateview" onclick=""> Update</button>
+                        <button type="submit" id="updateview" onclick=""> Update</button>
                     </form>
 
 
@@ -192,11 +186,7 @@
                     <main>
                         <div class="box content" id="imageUpload">
                             <div>
-                                <form action="/api/songs/upload"
-                          class="dropzone"
-                          id="image-upload"
-                          method="post"
-                          enctype="multipart/form">
+                                <form action="/api/songs/upload" class="dropzone" id="image-upload" method="post" enctype="multipart/form">
                                     <div class="dz-message needsclick">
                                         <span class="note needsclick">
                                             <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" placeholder="Upload" accept="audio/*">
@@ -262,10 +252,6 @@
                         </table>
                     </div>
                     <script>
-                        document.getElementById("songsinplaylist").style.display = "none";
-                        document.getElementById("home_first").style.display = "none";
-                        document.getElementById(test).style.display = "initial";
-                        document.getElementById(test).style.display = "contents";
                     </script>
                 }
             </div>
