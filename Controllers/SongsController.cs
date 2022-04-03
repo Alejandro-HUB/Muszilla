@@ -90,7 +90,7 @@ namespace Muszilla.Controllers
                             id = HttpContext.Session.GetString("User_ID");
                             currentPlaylist = HttpContext.Session.GetString("CurrentPlaylistID");
 
-                            string query = "insert into Songs(Song_Name, Song_Audio, Song_Owner) values('" + Song_Name + "', '" + url + "', '" + id + "', '" + currentPlaylist + "')";
+                            string query = "insert into Songs(Song_Name, Song_Audio, Song_Owner, Song_Playlist_ID) values('" + Song_Name + "', '" + url + "', '" + id + "', '" + currentPlaylist + "')";
                             using (SqlCommand com = new SqlCommand(query, con))
                             {
                                 con.Open();
