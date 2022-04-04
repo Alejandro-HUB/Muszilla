@@ -65,9 +65,10 @@ function showAccount() {
 }
 
 //this function displays these default songs when a user searches something
-function showSearchedSong() {
+function showSearchedSong(currentDIV) {
 
-
+    document.getElementById("searchsong").innerHTML = "Click to see search results";
+    document.getElementById("searchsong").innerText = "Click to see search results";
     document.getElementById("list_search_songs").style.display = "initial";
     document.getElementById("topPicks").style.display = "none";
     document.getElementById("featured").style.display = "none";
@@ -75,6 +76,10 @@ function showSearchedSong() {
     document.getElementById("songsinplaylist").style.display = "none";
     document.getElementById("home_first").style.display = "none";
     document.getElementById("account_screen").style.display = "none";
+    if (currentDIV != null && currentDIV != "") {
+        document.getElementById(currentDIV).style.display = "none";
+    }
+    
 }
 
 var aAudio;
@@ -298,6 +303,7 @@ function gobacktoplaylists(currentDIV) {
 
     document.getElementById("home_first").style.display = "initial";
     document.getElementById("songsinplaylist").style.display = "none";
+    document.getElementById("list_search_songs").style.display = "none";
     if (currentDIV != null && currentDIV != "") {
         document.getElementById(currentDIV).style.display = "none";
     }

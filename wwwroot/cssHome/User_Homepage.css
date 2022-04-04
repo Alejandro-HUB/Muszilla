@@ -669,6 +669,28 @@ tr, td {
     overflow-x: hidden;
 }
 
+.container1 td {
+    margin-left: 10px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    float: initial;
+    width: 850px;
+    border: 3px solid #33CCFF;
+    box-shadow: 0px 0px 5px 3px #33CCFF;
+}
+
+    .container1 td:hover, .container1 td:focus {
+        font-size: 15px;
+        color: #33CCFF;
+        cursor: pointer;
+        border: 3px solid white;
+        box-shadow: 0px 0px 5px 3px white;
+    }
+
     .container1 li {
         margin-left: 10px;
         margin-bottom: 12px;
@@ -1321,6 +1343,12 @@ audio {
 }
 
 #songUpload {
+    position: absolute;
+    top: 260px;
+    left: 110px;
+}
+
+.SearchAllBtn {
     position: absolute;
     top: 260px;
     left: 110px;

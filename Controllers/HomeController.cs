@@ -254,6 +254,120 @@ namespace Muszilla.Controllers                                                  
             }
         }
 
+        public IActionResult searchForAllSongs()
+        {
+            List<SongsModel> songListFromDB = new List<SongsModel>();
+            ConnectionString();
+
+            //Repopulate data so it is not null
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("Email");
+                ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
+                ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
+                ViewBag.LastName = HttpContext.Session.GetString("LastName");
+                ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
+                FetchPlaylistData();
+                FetchSongData();
+            }
+
+
+            if (songListFromDB.Count > 0)
+            {
+                songListFromDB.Clear();
+            }
+            try
+            {
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "select TOP(100) * from dbo.Songs";
+
+                dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    songListFromDB.Add(new SongsModel()
+                    {
+                        Song_ID = dr["Song_ID"].ToString(),
+                        Song_Name = dr["Song_Name"].ToString(),
+                        Song_Audio = dr["Song_Audio"].ToString()
+                    });
+                }
+                con.Close();
+
+                songsModel.searchedSongsList = songListFromDB;
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
+                return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IActionResult searchForSongs(SongsModel songModelSearch)
+        {
+            List<SongsModel> songListFromDB = new List<SongsModel>();
+            ConnectionString();
+
+            //Repopulate data so it is not null
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("Email");
+                ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
+                ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
+                ViewBag.LastName = HttpContext.Session.GetString("LastName");
+                ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
+                FetchPlaylistData();
+                FetchSongData();
+            }
+
+
+            if (songListFromDB.Count > 0)
+            {
+                songListFromDB.Clear();
+            }
+            try
+            {
+                con.Open();
+                com.Connection = con;
+
+                if (!string.IsNullOrEmpty(songModelSearch.Song_Name))
+                {
+                    com.CommandText = "select TOP(100) * from dbo.Songs where Song_Name like '%" + songModelSearch.Song_Name + "%'";
+
+                    dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        songListFromDB.Add(new SongsModel()
+                        {
+                            Song_ID = dr["Song_ID"].ToString(),
+                            Song_Name = dr["Song_Name"].ToString(),
+                            Song_Audio = dr["Song_Audio"].ToString()
+                        });
+                    }
+                    con.Close();
+                }
+                else
+                {
+                    con.Close();
+                }
+
+                songsModel.searchedSongsList = songListFromDB;
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
+                return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         private void FetchSongData()
         {
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");

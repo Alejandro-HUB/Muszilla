@@ -1,5 +1,6 @@
 ﻿@using Muszilla.Models
 @model Tuple<ConsumerModel, AzureStorageConfig, SongsModel, PlaylistModel>
+
 @{
     ViewData["Title"] = "User Homepage";
 }
@@ -24,15 +25,15 @@
         <div class="sidebar">
 
             <!-- This is the sidebar which you see on the user homepage -->
-        <form id="searchBar">
+        <form class="form-horizontal" asp-action="searchForSongs" id="searchBar">
                 <!-- the sidebar has a search songs input option and a search button-->
-            <input type="search" id="searchsong" placeholder="Search A Song" autocomplete="off">
-                <button type="button" onclick="" id="lookupsong" class="searchbtn"> Search </button>
+            <input id="searchsong" onclick="showSearchedSong('@ViewBag.CurrentDIV')" asp-for="Item3.Song_Name" name="Song_Name" class="form-control" type="search" autocomplete="off" placeholder="Search A Song">
+                <button type="submit" onclick="" id="lookupsong" class="searchbtn"> Search </button>
             </form>
 
             <div>
                 <!-- The sidebar has a Home and settings button that will take the user to Home page or the settings page-->
-                <button type="button" class="homebtn" onclick="showHome('@ViewBag.CurrentDIV')" id="userHome"> Home </button>
+            <button type="button" class="homebtn" onclick="showHome('@ViewBag.CurrentDIV')" id="userHome"> Home </button>
                 <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Settings </button>
             </div>
 
@@ -152,10 +153,10 @@
     </div>
     @if (@Model.Item4.Clicked_Playlist)
     {
-        
+
     }
-        <script>
-        </script>
+    <script>
+    </script>
     <!-- this is an empty playlist where the user can upload their songs and play them too -->
     @foreach (var Playlist in Model.Item4.Playlists)
     {
@@ -178,7 +179,7 @@
                     <button id="backtoplaylists" onclick="gobacktoplaylists('@ViewBag.CurrentDIV')"> Go Back</button>
                     <form class="form-horizontal" asp-action="Homepage">
                         <!-- this button updates the songs and the playlists -->
-                        <button type="submit" id="updateview" onclick=""> Update</button>
+            <button type="submit" id="updateview" onclick=""> Update</button>
                     </form>
 
 
@@ -363,20 +364,39 @@
 
     <!-- this list of songs will appear when the user will try to search something in the search bar-->
     <div id="list_search_songs">
-        @if (@ViewBag.Pass_word != "")
+        <p id="results">Your Search Results: </p>
+        <button id="backtoplaylists" onclick="gobacktoplaylists('@ViewBag.CurrentDIV')"> Go Back</button>
+        <main>
+            <div class="box content" id="imageUpload">
+                <div>
+                    <form asp-action="searchForAllSongs" class="" id="image-upload">
+                       <button type="submit" name="Song_Name" id="uploadsongs" class="form-control">Search for all songs</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        @if (@ViewBag.Pass_word != "" && Model.Item3.searchedSongsList != null)
         {
-            <p id="results">Your Search Results: </p>
 
             <div class="container1">
-                <ul class="items">
-                    <li onclick="localAudio('Going Higher')" style="border-style:inset;">Going Higher</li>
-                    <li onclick="localAudio('Ukulele')" style="border-style:inset;">Ukulele</li>
-                    <li onclick="localAudio('Memories')" style="border-style:inset;">Memories</li>
-                    <li onclick="localAudio('Jazzy Frenchy')" style="border-style:inset;">Jazzy Frenchy</li>
-                    <li onclick="localAudio('Energy')" style="border-style:inset;">Energy</li>
-                </ul>
+                <table>
+                    <tr Style="color: white;">
+                        <th>
+                            <!-- Html.DisplayNameFor(model => model.Item3.Song_Name) -->
+                    </th>
+                    </tr>
+                    <tr Style="color: white;" class="items">
+                        @foreach (var item in Model.Item3.searchedSongsList)
+                        {
+                            <td onclick="myAudioFunction1('@item.Song_Name', '@item.Song_ID', '@item.Song_Audio')">
+                                @Html.DisplayFor(modelItem => item.Song_Name)
+                                <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
+                                <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
+                            </td>
+                        }
+                    </tr>
+                </table>
             </div>
-
         }
     </div>
 
