@@ -7,7 +7,7 @@ function showTopPicks() {
     document.getElementById("featured").style.display = "none";
     document.getElementById("genres").style.display = "none";
     document.getElementById("account_screen").style.display = "none";
-    document.getElementById("songsinplaylist").style.display = "none";
+    document.getElementById("songsdefault").style.display = "none";
     document.getElementById("list_search_songs").style.display = "none";
     document.getElementById("topPicks").style.display = "initial";
 }
@@ -17,7 +17,7 @@ function showFeatured() {
 
     document.getElementById("home_first").style.display = "none";
     document.getElementById("topPicks").style.display = "none";
-    document.getElementById("songsinplaylist").style.display = "none";
+    document.getElementById("songsdefault").style.display = "none";
     document.getElementById("genres").style.display = "none";
     document.getElementById("account_screen").style.display = "none";
     document.getElementById("list_search_songs").style.display = "none";
@@ -29,7 +29,7 @@ function showGenres() {
 
     document.getElementById("home_first").style.display = "none";
     document.getElementById("topPicks").style.display = "none";
-    document.getElementById("songsinplaylist").style.display = "none";
+    document.getElementById("songsdefault").style.display = "none";
     document.getElementById("featured").style.display = "none";
     document.getElementById("account_screen").style.display = "none";
     document.getElementById("list_search_songs").style.display = "none";
@@ -42,12 +42,18 @@ function showHome(currentDIV) {
     document.getElementById("topPicks").style.display = "none";
     document.getElementById("featured").style.display = "none";
     document.getElementById("genres").style.display = "none";
-    document.getElementById("songsinplaylist").style.display = "none";
+    document.getElementById("songsdefault").style.display = "none";
     document.getElementById("account_screen").style.display = "none";
     document.getElementById("list_search_songs").style.display = "none";
     document.getElementById("home_first").style.display = "initial";
-    if (currentDIV != null && currentDIV != "") {
-        document.getElementById(currentDIV).style.display = "none";
+    for (let i = 0; i < ArrayOfLists.length; i++) {
+        if (ArrayOfLists[i] === null || ArrayOfLists[i] === "") {
+            continue;
+        }
+        else {
+            var Id = "songsinplaylist" + ArrayOfLists[i];
+            document.getElementById(Id).style.display = "none";
+        }
     }
 
 }
@@ -57,7 +63,7 @@ function showAccount() {
 
     document.getElementById("topPicks").style.display = "none";
     document.getElementById("featured").style.display = "none";
-    document.getElementById("songsinplaylist").style.display = "none";
+    document.getElementById("songsdefault").style.display = "none";
     document.getElementById("genres").style.display = "none";
     document.getElementById("home_first").style.display = "none";
     document.getElementById("list_search_songs").style.display = "none";
@@ -66,15 +72,22 @@ function showAccount() {
 
 //this function displays these default songs when a user searches something
 function showSearchedSong(currentDIV) {
+    var ArrayOfLists = currentDIV.split('.');
     document.getElementById("list_search_songs").style.display = "initial";
     document.getElementById("topPicks").style.display = "none";
     document.getElementById("featured").style.display = "none";
     document.getElementById("genres").style.display = "none";
-    document.getElementById("songsinplaylist").style.display = "none";
+    document.getElementById("songsdefault").style.display = "none";
     document.getElementById("home_first").style.display = "none";
     document.getElementById("account_screen").style.display = "none";
-    if (currentDIV != null && currentDIV != "") {
-        document.getElementById(currentDIV).style.display = "none";
+    for (let i = 0; i < ArrayOfLists.length; i++) {
+        if (ArrayOfLists[i] === null || ArrayOfLists[i] === "") {
+            continue;
+        }
+        else {
+            var Id = "songsinplaylist" + ArrayOfLists[i];
+            document.getElementById(Id).style.display = "none";
+        }
     }
 }
 
@@ -229,11 +242,20 @@ searchbutton.addEventListener("click", function () {
 
 //this will show the default list of songs in the default playlist
 function showSongsDefault(currentDIV) {
-
-    document.getElementById("songsinplaylist").style.display = "initial";
+    var ArrayOfLists = currentDIV.split('.');
+    document.getElementById("songsdefault").style.display = "initial";
     document.getElementById("home_first").style.display = "none";
-    if (currentDIV != null && currentDIV != "") {
-        document.getElementById(currentDIV).style.display = "none";
+    for (let i = 0; i < ArrayOfLists.length; i++)
+    {
+        if (ArrayOfLists[i] === null || ArrayOfLists[i] === "")
+        {
+            continue;
+        }
+        else
+        {
+            var Id = "songsinplaylist" + ArrayOfLists[i];
+            document.getElementById(Id).style.display = "none";
+        }
     }
 }
 
@@ -245,7 +267,7 @@ function showSongs(playlistNumber, currentPlaylistID) {
 
     for (let i = 0; i < ArrayOfLists.length; i++) {
         var Id = "songsinplaylist" + currentPlaylistID;
-        if (ArrayOfLists[0] == currentPlaylistID) {
+        if (ArrayOfLists[i] == currentPlaylistID) {
             $.ajax({
                 type: "POST",
                 url: '/Home/GetID',
@@ -253,6 +275,7 @@ function showSongs(playlistNumber, currentPlaylistID) {
                 data: {
                     dataID: currentPlaylistID,
                     DIV: Id,
+                    AllPlaylists: playlistNumber,
                 },
                 success: function (data) {
                     if (data == "Success") {
@@ -269,6 +292,7 @@ function showSongs(playlistNumber, currentPlaylistID) {
         }
     }
 
+
     history.go(0);
 
     setTimeout(function () {
@@ -284,10 +308,21 @@ function showSongs(playlistNumber, currentPlaylistID) {
     }, 4000);
 
     setTimeout(function () {
-        document.getElementById("songsinplaylist").style.display = "none";
+        document.getElementById("songsdefault").style.display = "none";
         document.getElementById("home_first").style.display = "none";
         document.getElementById(Id).style.display = "initial";
         document.getElementById(Id).style.display = "contents";
+
+        for (let k = 0; k < ArrayOfLists.length; k++) {
+            if (ArrayOfLists[k] == currentPlaylistID || ArrayOfLists[k] === "" || ArrayOfLists[k] === null)
+            {
+                continue;
+            }
+            else {
+                var Id = "songsinplaylist" + ArrayOfLists[k];
+                document.getElementById(Id).style.display = "none";
+            }
+        }
         history.go(0);
     }, 5000);
 }
@@ -296,12 +331,18 @@ function showSongs(playlistNumber, currentPlaylistID) {
 
 //this is the back button which will take you back to the user homepage
 function gobacktoplaylists(currentDIV) {
-
+    var ArrayOfLists = currentDIV.split('.');
     document.getElementById("home_first").style.display = "initial";
-    document.getElementById("songsinplaylist").style.display = "none";
+    document.getElementById("songsdefault").style.display = "none";
     document.getElementById("list_search_songs").style.display = "none";
-    if (currentDIV != null && currentDIV != "") {
-        document.getElementById(currentDIV).style.display = "none";
+    for (let i = 0; i < ArrayOfLists.length; i++) {
+        if (ArrayOfLists[i] === null || ArrayOfLists[i] === "") {
+            continue;
+        }
+        else {
+            var Id = "songsinplaylist" + ArrayOfLists[i];
+            document.getElementById(Id).style.display = "none";
+        }
     }
 }
 

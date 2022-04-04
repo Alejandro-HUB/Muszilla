@@ -89,6 +89,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
                 ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
                 FetchPlaylistData();
@@ -99,12 +100,14 @@ namespace Muszilla.Controllers                                                  
         }
 
         [HttpPost]
-        public IActionResult GetID(string dataID, string DIV)
+        public IActionResult GetID(string dataID, string DIV, string AllPlaylists)
         {
             FetchPlaylistData();
             FetchSongData();
             if (!string.IsNullOrEmpty(dataID) && !string.IsNullOrEmpty(DIV))
             {
+                HttpContext.Session.SetString("AllPlaylists", AllPlaylists);
+                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 HttpContext.Session.SetString("CurrentPlaylistID", dataID);
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
                 HttpContext.Session.SetString("CurrentDIV", DIV);
@@ -140,6 +143,7 @@ namespace Muszilla.Controllers                                                  
             HttpContext.Session.SetString("FirstName", empty);
             HttpContext.Session.SetString("LastName", empty);
             HttpContext.Session.SetString("Picture", empty);
+            HttpContext.Session.SetString("AllPlaylists", empty);
             HttpContext.Session.SetString("CurrentPlaylistID", empty);
             HttpContext.Session.SetString("CurrentDIV", empty);
             ViewBag.Message = "Log out successful!";
@@ -184,6 +188,7 @@ namespace Muszilla.Controllers                                                  
                 con.Close();
                 return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
             }
+            ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
             ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             con.Close();
@@ -211,6 +216,7 @@ namespace Muszilla.Controllers                                                  
                     return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
                 }
             }
+            ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
             ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
@@ -219,6 +225,7 @@ namespace Muszilla.Controllers                                                  
 
         private void FetchPlaylistData()
         {
+            ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
             ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             List<PlaylistModel> PlaylistsFromDB = new List<PlaylistModel>();
@@ -267,6 +274,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
                 ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
                 FetchPlaylistData();
@@ -297,6 +305,7 @@ namespace Muszilla.Controllers                                                  
                 con.Close();
 
                 songsModel.searchedSongsList = songListFromDB;
+                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
                 ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
                 return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
@@ -320,6 +329,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
                 ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
                 FetchPlaylistData();
@@ -358,6 +368,7 @@ namespace Muszilla.Controllers                                                  
                 }
 
                 songsModel.searchedSongsList = songListFromDB;
+                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
                 ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
                 return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
@@ -370,6 +381,7 @@ namespace Muszilla.Controllers                                                  
 
         private void FetchSongData()
         {
+            ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
             ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             List<SongsModel> songListFromDB = new List<SongsModel>();

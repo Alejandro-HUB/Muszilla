@@ -521,7 +521,7 @@ input {
     box-shadow: 0px 0px 8px 2px #33CCFF;
 }
 
-#songsinplaylist, #songsinplaylist2 {
+#songsdefault, #songsinplaylist2 {
     width: 1100px;
     height: 520px;
     border-radius: 50px;

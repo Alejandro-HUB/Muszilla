@@ -27,13 +27,13 @@
             <!-- This is the sidebar which you see on the user homepage -->
         <form class="form-horizontal" asp-action="searchForSongs" id="searchBar">
                 <!-- the sidebar has a search songs input option and a search button-->
-            <input id="searchsong" onclick="showSearchedSong('@ViewBag.CurrentDIV')" asp-for="Item3.Song_Name" name="Song_Name" class="form-control" type="search" autocomplete="off" placeholder="Search A Song">
-                <button type="submit" onclick="showSearchedSong('@ViewBag.CurrentDIV')" id="lookupsong" class="searchbtn"> Search </button>
+            <input id="searchsong" onclick="showSearchedSong('@ViewBag.AllPlaylists')" asp-for="Item3.Song_Name" name="Song_Name" class="form-control" type="search" autocomplete="off" placeholder="Search A Song">
+                <button type="submit" onclick="showSearchedSong('@ViewBag.AllPlaylists')" id="lookupsong" class="searchbtn"> Search </button>
             </form>
 
             <div>
                 <!-- The sidebar has a Home and settings button that will take the user to Home page or the settings page-->
-            <button type="button" class="homebtn" onclick="showHome('@ViewBag.CurrentDIV')" id="userHome"> Home </button>
+            <button type="button" class="homebtn" onclick="showHome('@ViewBag.AllPlaylists')" id="userHome"> Home </button>
                 <button type="button" class="accountbtn" onclick="showAccount()" id="accountDetails"> Settings </button>
             </div>
 
@@ -108,7 +108,7 @@
                             </th>
                         </tr>
                         <tr Style="color: white;" class="items">
-                            <td onclick="showSongsDefault('@ViewBag.CurrentDIV')">Playlist 1 (Default)</td>
+                            <td onclick="showSongsDefault('@ViewBag.AllPlaylists')">Playlist 1 (Default)</td>
                             @foreach (var item in Model.Item4.Playlists)
                             {
                                 //Populate list with PlaylistIDs
@@ -130,10 +130,10 @@
 
 
     <!-- this is the default playlist for each user thta contains a default list of songs for testing -->
-    <div id="songsinplaylist">
+    <div id="songsdefault">
         @if (@ViewBag.Pass_word != "")
         {
-            <button id="backtoplaylists" onclick="gobacktoplaylists('@ViewBag.CurrentDIV')"> Go Back</button>
+            <button id="backtoplaylists" onclick="gobacktoplaylists('@ViewBag.AllPlaylists')"> Go Back</button>
 
             <div class="container3">
                 <ul class="items">
@@ -172,7 +172,7 @@
                 @if (@ViewBag.Pass_word != "")
                 {
                     <!-- this is the back button that takes the user back to their homscreen-->
-                    <button id="backtoplaylists" onclick="gobacktoplaylists('@ViewBag.CurrentDIV')"> Go Back</button>
+                    <button id="backtoplaylists" onclick="gobacktoplaylists('@ViewBag.AllPlaylists')"> Go Back</button>
                     <form class="form-horizontal" asp-action="Homepage">
                         <!-- this button updates the songs and the playlists -->
             <button type="submit" id="updateview" onclick=""> Update</button>
@@ -361,12 +361,12 @@
     <!-- this list of songs will appear when the user will try to search something in the search bar-->
     <div id="list_search_songs">
         <p id="results">Your Search Results: </p>
-        <button id="backtoplaylists" onclick="gobacktoplaylists('@ViewBag.CurrentDIV')"> Go Back</button>
+        <button id="backtoplaylists" onclick="gobacktoplaylists('@ViewBag.AllPlaylists')"> Go Back</button>
         <main>
             <div class="box content" id="imageUpload">
                 <div>
                     <form asp-action="searchForAllSongs" class="" id="image-upload">
-                       <button type="submit" name="Song_Name" id="uploadsongs" onclick="showSearchedSong('@ViewBag.CurrentDIV')" class="form-control">Search for all songs</button>
+                       <button type="submit" name="Song_Name" id="uploadsongs" onclick="showSearchedSong('@ViewBag.AllPlaylists')" class="form-control">Search for all songs</button>
                     </form>
                 </div>
             </div>
