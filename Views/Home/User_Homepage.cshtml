@@ -28,7 +28,7 @@
         <form class="form-horizontal" asp-action="searchForSongs" id="searchBar">
                 <!-- the sidebar has a search songs input option and a search button-->
             <input id="searchsong" onclick="showSearchedSong('@ViewBag.CurrentDIV')" asp-for="Item3.Song_Name" name="Song_Name" class="form-control" type="search" autocomplete="off" placeholder="Search A Song">
-                <button type="submit" onclick="" id="lookupsong" class="searchbtn"> Search </button>
+                <button type="submit" onclick="showSearchedSong('@ViewBag.CurrentDIV')" id="lookupsong" class="searchbtn"> Search </button>
             </form>
 
             <div>
@@ -167,10 +167,6 @@
 
             <div id='@ViewBag.CurrentDIV' class="Playlists">
                 <script>
-                    document.getElementById("songsinplaylist").style.display = "none";
-                    document.getElementById("home_first").style.display = "none";
-                    document.getElementById(test).style.display = "initial";
-                    document.getElementById(test).style.display = "contents";
                 </script>
 
                 @if (@ViewBag.Pass_word != "")
@@ -370,7 +366,7 @@
             <div class="box content" id="imageUpload">
                 <div>
                     <form asp-action="searchForAllSongs" class="" id="image-upload">
-                       <button type="submit" name="Song_Name" id="uploadsongs" class="form-control">Search for all songs</button>
+                       <button type="submit" name="Song_Name" id="uploadsongs" onclick="showSearchedSong('@ViewBag.CurrentDIV')" class="form-control">Search for all songs</button>
                     </form>
                 </div>
             </div>
