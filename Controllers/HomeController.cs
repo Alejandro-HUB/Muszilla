@@ -14,6 +14,8 @@ using Microsoft.Extensions.Options;
 using Muszilla.Helpers;
 using System.IO;
 using javax.jws;
+using com.sun.tools.@internal.ws.processor.model;
+using System.Text.Json;
 
 namespace Muszilla.Controllers                                                            //**This controller handles the CRUD functionalities** By Alejandro Lopez
 {
@@ -100,8 +102,9 @@ namespace Muszilla.Controllers                                                  
         }
 
         [HttpPost]
-        public IActionResult GetID(string dataID)
+        public string GetID(string dataID)
         {
+            string jsonString = "";
             FetchPlaylistData();
             GetListofPlaylistIDs();
             String id;
@@ -116,9 +119,12 @@ namespace Muszilla.Controllers                                                  
                 con.Close();
                 HttpContext.Session.SetString("CurrentPlaylistID", dataID);
                 FetchSongData();
-                return RedirectToAction("Update", Tuple.Create(consumer, storage, songsModel, playlistModel));
+                jsonString = JsonSerializer.Serialize(songsModel.songsList);
+                return jsonString;
             }
-            return RedirectToAction("Update", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            FetchSongData();
+            jsonString = JsonSerializer.Serialize(songsModel.songsList);
+            return jsonString;
         }
 
         public void GetListofPlaylistIDs()

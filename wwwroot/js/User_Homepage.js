@@ -247,6 +247,10 @@ function showSongs(playlistNumber, currentPlaylistID, Playlist_Name) {
                     dataID: currentPlaylistID,
                 },
                 success: function (data) {
+                    var arr_from_json = JSON.parse(data);
+                    for (var i in arr_from_json) {
+                        alert(arr_from_json[i].Song_Name);
+                    }
                 },
                 error: function (jqXHR, textStatus) {
                     //alert(textStatus);
