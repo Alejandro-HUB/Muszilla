@@ -239,7 +239,6 @@ function showSongs(playlistNumber, currentPlaylistID) {
     for (let i = 0; i < ArrayOfLists.length; i++) {
         if (ArrayOfLists[i] == currentPlaylistID) {
             var Id = "songsinplaylist" + currentPlaylistID;
-            alert(Id);
             $.ajax({
                 type: "POST",
                 url: '/Home/GetID',
