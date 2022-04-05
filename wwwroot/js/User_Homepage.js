@@ -233,7 +233,7 @@ function showSongsDefault() {
 }
 
 //this will show the second playlist adn the list of songs in it
-function showSongs(playlistNumber, currentPlaylistID) {
+function showSongs(playlistNumber, currentPlaylistID, Playlist_Name) {
     var ArrayOfLists = playlistNumber.split('.');
 
     for (let i = 0; i < ArrayOfLists.length; i++) {
@@ -261,6 +261,7 @@ function showSongs(playlistNumber, currentPlaylistID) {
     document.getElementById("songsdefault").style.display = "none";
     document.getElementById("home_first").style.display = "none";
     document.getElementById("PlaylistsFromDB").style.display = "initial";
+    document.getElementById("PlaylistName").innerHTML = Playlist_Name;
 }
 
 

@@ -293,6 +293,19 @@ namespace Muszilla.Controllers                                                  
             }
         }
 
+
+        public IActionResult sortSongsByName(string buttonName)
+        {
+
+            return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+        }
+
+        public IActionResult sortSongsByDate(string buttonName)
+        {
+
+            return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+        }
+
         public IActionResult searchForAllSongs()
         {
             List<SongsModel> songListFromDB = new List<SongsModel>();
@@ -320,7 +333,7 @@ namespace Muszilla.Controllers                                                  
             {
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "select TOP(100) * from dbo.Songs";
+                com.CommandText = "select TOP(100) * from dbo.Songs order by Song_Name";
 
                 dr = com.ExecuteReader();
                 while (dr.Read())
@@ -374,7 +387,7 @@ namespace Muszilla.Controllers                                                  
 
                 if (!string.IsNullOrEmpty(songModelSearch.Song_Name))
                 {
-                    com.CommandText = "select TOP(100) * from dbo.Songs where Song_Name like '%" + songModelSearch.Song_Name + "%'";
+                    com.CommandText = "select TOP(100) * from dbo.Songs where Song_Name like '%" + songModelSearch.Song_Name + "%' order by Song_Name";
 
                     dr = com.ExecuteReader();
                     while (dr.Read())

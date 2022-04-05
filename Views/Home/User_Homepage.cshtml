@@ -116,7 +116,7 @@
                                 result = item.Playlist_ID + "." + result;
 
                                 //For each Playlist generate a button
-                                <td onclick="showSongs('@result', '@item.Playlist_ID');">
+                                <td onclick="showSongs('@result', '@item.Playlist_ID', '@item.Playlist_Name');">
                                     @Html.DisplayFor(modelItem => item.Playlist_Name)
                                     <span id="@item.Playlist_ID@item.Playlist_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Playlist_Name)</span>
                                 </td>
@@ -134,6 +134,7 @@
     <div id="songsdefault">
         @if (@ViewBag.Pass_word != "")
         {
+            <p id="PlaylistNameDefault">Playlist 1 (Default)</p>
             <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
 
             <div class="container3">
@@ -152,92 +153,94 @@
             </div>
         }
     </div>
-    
+
     <!-- this is an empty playlist where the user can upload their songs and play them too -->
 
-        <div id='PlaylistsFromDB' class="Playlists">
-            @if (@ViewBag.Pass_word != "")
-            {
-                <!-- this is the back button that takes the user back to their homscreen-->
-                <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
-                <form class="form-horizontal" asp-action="Homepage">
-                    <!-- this button updates the songs and the playlists -->
-                    <button type="submit" id="updateview" onclick=""> Update</button>
-                </form>
+    <div id='PlaylistsFromDB' class="Playlists">
+        @if (@ViewBag.Pass_word != "")
+        {
+            <!-- this is the back button that takes the user back to their homscreen-->
+            <p id="PlaylistName"></p>
+
+            <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
+            <form class="form-horizontal" asp-action="Homepage">
+                <!-- this button updates the songs and the playlists -->
+            <button type="submit" id="updateview" onclick=""> Update</button>
+            </form>
 
 
-                <!--This is the button to upload Songs-->
-                <!-- Client side libs required  -->
-                <main>
-                    <div class="box content" id="imageUpload">
-                        <div>
-                            <form action="/api/songs/upload" class="dropzone" id="image-upload" method="post" enctype="multipart/form">
-                                <div class="dz-message needsclick">
-                                    <span class="note needsclick">
-                                        <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" placeholder="Upload" accept="audio/*">
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
+            <!--This is the button to upload Songs-->
+            <!-- Client side libs required  -->
+            <main>
+                <div class="box content" id="imageUpload">
+                    <div>
+                        <form action="/api/songs/upload" class="dropzone" id="image-upload" method="post" enctype="multipart/form">
+                            <div class="dz-message needsclick">
+                                <span class="note needsclick">
+                                    <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" placeholder="Upload" accept="audio/*">
+                                </span>
+                            </div>
+                        </form>
                     </div>
-                </main>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
-                <script>
-                    // Grab links for the songs from backend api
-                    function fetchImageLinks() {
-                        // Fetch songs
-                        $.get(function (fetchedImageLinks) {
-                            console.log(fetchedImageLinks)
-                        });
-                    }
-                    // Start first interval
-                    fetchImageLinks()
-                    /* Dropzone */
-                    // "songUpload" is the camelized version of the HTML element's ID
-                    Dropzone.options.imageUpload = {
-                        addRemoveLinks: true,
-                        paramName: "files", // The name that will be used to transfer the file
-                        dictDefaultMessage: "Drop files here or Click to Upload",
-                        createImageThumbnails: false,
-                        dictRemoveFileConfirmation: false,
-
-
-                        init: function () {
-                            myDropzone = this;
-                            myDropzone.on("success", function (file, response) {
-                                file.previewElement.remove();
-                                console.log("Success");
-                            });
-                        },
-                        removedfile: function (file) {
-                            file.previewElement.remove();
-                        }
-                    };
-                </script>
-                <!--This is the button to upload Songs   -->
-                <!-- this is the container that will hold all the uploaded songs by the user-->
-                <div class="container3">
-                    <table>
-                        <tr Style="color: white;">
-                            <th>
-                                @Html.DisplayNameFor(model => model.Item3.Song_Name)
-                            </th>
-                        </tr>
-                        <tr Style="color: white;" class="items">
-                            @foreach (var item in Model.Item3.songsList)
-                            {
-                                <td onclick="myAudioFunction1('@item.Song_Name', '@item.Song_ID', '@item.Song_Audio')">
-                                    @Html.DisplayFor(modelItem => item.Song_Name)
-                                    <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
-                                    <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
-                                </td>
-                            }
-                        </tr>
-                    </table>
                 </div>
-            }
-        </div>
+            </main>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+            <script>
+                // Grab links for the songs from backend api
+                function fetchImageLinks() {
+                    // Fetch songs
+                    $.get(function (fetchedImageLinks) {
+                        console.log(fetchedImageLinks)
+                    });
+                }
+                // Start first interval
+                fetchImageLinks()
+                /* Dropzone */
+                // "songUpload" is the camelized version of the HTML element's ID
+                Dropzone.options.imageUpload = {
+                    addRemoveLinks: true,
+                    paramName: "files", // The name that will be used to transfer the file
+                    dictDefaultMessage: "Drop files here or Click to Upload",
+                    createImageThumbnails: false,
+                    dictRemoveFileConfirmation: false,
+
+
+                    init: function () {
+                        myDropzone = this;
+                        myDropzone.on("success", function (file, response) {
+                            file.previewElement.remove();
+                            console.log("Success");
+                        });
+                    },
+                    removedfile: function (file) {
+                        file.previewElement.remove();
+                    }
+                };
+            </script>
+            <!--This is the button to upload Songs   -->
+            <!-- this is the container that will hold all the uploaded songs by the user-->
+            <div class="container3">
+                <table>
+                    <tr Style="color: white;">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Item3.Song_Name)
+                        </th>
+                    </tr>
+                    <tr Style="color: white;" class="items">
+                        @foreach (var item in Model.Item3.songsList)
+                        {
+                            <td onclick="myAudioFunction1('@item.Song_Name', '@item.Song_ID', '@item.Song_Audio')">
+                                @Html.DisplayFor(modelItem => item.Song_Name)
+                                <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
+                                <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
+                            </td>
+                        }
+                    </tr>
+                </table>
+            </div>
+        }
+    </div>
 
 
     <!-- this is the code for the account screen so the user can access their account information and make changes to it-->
@@ -342,6 +345,9 @@
 
     <!-- this list of songs will appear when the user will try to search something in the search bar-->
     <div id="list_search_songs">
+        <p id="Sort">Sort by:</p>
+        <button type="submit" asp-action="sortSongsByName" id="" class="SortName"> Name </button>
+        <button type="submit" asp-action="sortSongsByDate" id="" class="SortByDate"> Date </button>
         <p id="results">Your Search Results: </p>
         <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
         <main>
