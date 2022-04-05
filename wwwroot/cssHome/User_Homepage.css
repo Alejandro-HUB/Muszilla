@@ -544,7 +544,7 @@ input {
     background: black;
     top: 100px;
     left: 350px;
-    display: initial;
+    display: none;
 }
 
 .container3 {

@@ -37,7 +37,7 @@ function showGenres() {
 }
 
 //this function shows the user homepage 
-function showHome(currentDIV) {
+function showHome() {
 
     document.getElementById("topPicks").style.display = "none";
     document.getElementById("featured").style.display = "none";
@@ -46,15 +46,7 @@ function showHome(currentDIV) {
     document.getElementById("account_screen").style.display = "none";
     document.getElementById("list_search_songs").style.display = "none";
     document.getElementById("home_first").style.display = "initial";
-    for (let i = 0; i < ArrayOfLists.length; i++) {
-        if (ArrayOfLists[i] === null || ArrayOfLists[i] === "") {
-            continue;
-        }
-        else {
-            var Id = "songsinplaylist" + ArrayOfLists[i];
-            document.getElementById(Id).style.display = "none";
-        }
-    }
+    document.getElementById("PlaylistsFromDB").style.display = "none";
 
 }
 
@@ -71,8 +63,8 @@ function showAccount() {
 }
 
 //this function displays these default songs when a user searches something
-function showSearchedSong(currentDIV) {
-    var ArrayOfLists = currentDIV.split('.');
+function showSearchedSong() {
+    
     document.getElementById("list_search_songs").style.display = "initial";
     document.getElementById("topPicks").style.display = "none";
     document.getElementById("featured").style.display = "none";
@@ -80,15 +72,7 @@ function showSearchedSong(currentDIV) {
     document.getElementById("songsdefault").style.display = "none";
     document.getElementById("home_first").style.display = "none";
     document.getElementById("account_screen").style.display = "none";
-    for (let i = 0; i < ArrayOfLists.length; i++) {
-        if (ArrayOfLists[i] === null || ArrayOfLists[i] === "") {
-            continue;
-        }
-        else {
-            var Id = "songsinplaylist" + ArrayOfLists[i];
-            document.getElementById(Id).style.display = "none";
-        }
-    }
+    document.getElementById("PlaylistsFromDB").style.display = "none";
 }
 
 var aAudio;
@@ -241,47 +225,29 @@ searchbutton.addEventListener("click", function () {
 });
 
 //this will show the default list of songs in the default playlist
-function showSongsDefault(currentDIV) {
-    var ArrayOfLists = currentDIV.split('.');
+function showSongsDefault() {
+    
     document.getElementById("songsdefault").style.display = "initial";
     document.getElementById("home_first").style.display = "none";
-    for (let i = 0; i < ArrayOfLists.length; i++)
-    {
-        if (ArrayOfLists[i] === null || ArrayOfLists[i] === "")
-        {
-            continue;
-        }
-        else
-        {
-            var Id = "songsinplaylist" + ArrayOfLists[i];
-            document.getElementById(Id).style.display = "none";
-        }
-    }
+    document.getElementById("PlaylistsFromDB").style.display = "none";
 }
 
 //this will show the second playlist adn the list of songs in it
 function showSongs(playlistNumber, currentPlaylistID) {
     var ArrayOfLists = playlistNumber.split('.');
-    //alert("First index: " + ArrayOfLists[0] + " Second index: " + ArrayOfLists[1]);
-    //alert("CurrentID: " + currentPlaylistID);
 
     for (let i = 0; i < ArrayOfLists.length; i++) {
-        var Id = "songsinplaylist" + currentPlaylistID;
         if (ArrayOfLists[i] == currentPlaylistID) {
+            var Id = "songsinplaylist" + currentPlaylistID;
+            alert(Id);
             $.ajax({
                 type: "POST",
                 url: '/Home/GetID',
                 dataType: "html",
                 data: {
                     dataID: currentPlaylistID,
-                    DIV: Id,
-                    AllPlaylists: playlistNumber,
                 },
                 success: function (data) {
-                    if (data == "Success") {
-                        alert('Your data updated');
-                    } else {
-                    }
                 },
                 error: function (jqXHR, textStatus) {
                     //alert(textStatus);
@@ -292,58 +258,20 @@ function showSongs(playlistNumber, currentPlaylistID) {
         }
     }
 
-
-    history.go(0);
-
-    setTimeout(function () {
-        history.go(0);
-    }, 2000);
-
-    setTimeout(function () {
-        history.go(0);
-    }, 3000);
-
-    setTimeout(function () {
-        history.go(0);
-    }, 4000);
-
-    setTimeout(function () {
-        document.getElementById("songsdefault").style.display = "none";
-        document.getElementById("home_first").style.display = "none";
-        document.getElementById(Id).style.display = "initial";
-        document.getElementById(Id).style.display = "contents";
-
-        for (let k = 0; k < ArrayOfLists.length; k++) {
-            if (ArrayOfLists[k] == currentPlaylistID || ArrayOfLists[k] === "" || ArrayOfLists[k] === null)
-            {
-                continue;
-            }
-            else {
-                var Id = "songsinplaylist" + ArrayOfLists[k];
-                document.getElementById(Id).style.display = "none";
-            }
-        }
-        history.go(0);
-    }, 5000);
+ 
+    document.getElementById("songsdefault").style.display = "none";
+    document.getElementById("home_first").style.display = "none";
+    document.getElementById("PlaylistsFromDB").style.display = "initial";
 }
 
 
 
 //this is the back button which will take you back to the user homepage
-function gobacktoplaylists(currentDIV) {
-    var ArrayOfLists = currentDIV.split('.');
+function gobacktoplaylists() {
     document.getElementById("home_first").style.display = "initial";
     document.getElementById("songsdefault").style.display = "none";
     document.getElementById("list_search_songs").style.display = "none";
-    for (let i = 0; i < ArrayOfLists.length; i++) {
-        if (ArrayOfLists[i] === null || ArrayOfLists[i] === "") {
-            continue;
-        }
-        else {
-            var Id = "songsinplaylist" + ArrayOfLists[i];
-            document.getElementById(Id).style.display = "none";
-        }
-    }
+    document.getElementById("PlaylistsFromDB").style.display = "none";
 }
 
 //this function will add the list item as playlist and will use the user input as the playlist's name 

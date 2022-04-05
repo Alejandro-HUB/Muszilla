@@ -50,6 +50,7 @@ namespace Muszilla.Controllers                                                  
             string id = "";
             FetchPlaylistData();
             FetchSongData();
+            GetListofPlaylistIDs();
             ConnectionString();
             con.Open();
             com.Connection = con;
@@ -89,9 +90,8 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
-                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
+                GetListofPlaylistIDs();
                 FetchPlaylistData();
                 FetchSongData();
                 return View("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
@@ -100,21 +100,60 @@ namespace Muszilla.Controllers                                                  
         }
 
         [HttpPost]
-        public IActionResult GetID(string dataID, string DIV, string AllPlaylists)
+        public IActionResult GetID(string dataID)
         {
             FetchPlaylistData();
-            FetchSongData();
-            if (!string.IsNullOrEmpty(dataID) && !string.IsNullOrEmpty(DIV))
+            GetListofPlaylistIDs();
+            String id;
+            id = HttpContext.Session.GetString("User_ID");
+            if (!string.IsNullOrEmpty(dataID))
             {
-                HttpContext.Session.SetString("AllPlaylists", AllPlaylists);
-                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
+                ConnectionString();
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "update Consumer set CurrentPlaylistID = '" + dataID + "'  where User_ID ='" + id + "'";
+                com.ExecuteNonQuery();
+                con.Close();
                 HttpContext.Session.SetString("CurrentPlaylistID", dataID);
-                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-                HttpContext.Session.SetString("CurrentDIV", DIV);
-                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
+                FetchSongData();
+                return RedirectToAction("Update", Tuple.Create(consumer, storage, songsModel, playlistModel));
             }
-            playlistModel.Clicked_Playlist = true;
-            return View("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            return RedirectToAction("Update", Tuple.Create(consumer, storage, songsModel, playlistModel));
+        }
+
+        public void GetListofPlaylistIDs()
+        {
+            ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+            List<ListofIDsModel> PlaylistsFromDB = new List<ListofIDsModel>();
+            ConnectionString();
+            String id;
+            id = HttpContext.Session.GetString("User_ID");
+
+            if (PlaylistsFromDB.Count > 0)
+            {
+                PlaylistsFromDB.Clear();
+            }
+            try
+            {
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "select c.CurrentPlaylistID, p.Playlist_ID  from consumer c, Playlist p where User_ID ='" + id + "'";
+                dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    PlaylistsFromDB.Add(new ListofIDsModel()
+                    {
+                        IdsToBeHidden = dr["Playlist_ID"].ToString(),
+                        Current_Playlist_ID = dr["CurrentPlaylistID"].ToString(),
+                    });
+                }
+                con.Close();
+                playlistModel.ListofIDs = PlaylistsFromDB;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpPost]
@@ -143,9 +182,7 @@ namespace Muszilla.Controllers                                                  
             HttpContext.Session.SetString("FirstName", empty);
             HttpContext.Session.SetString("LastName", empty);
             HttpContext.Session.SetString("Picture", empty);
-            HttpContext.Session.SetString("AllPlaylists", empty);
             HttpContext.Session.SetString("CurrentPlaylistID", empty);
-            HttpContext.Session.SetString("CurrentDIV", empty);
             ViewBag.Message = "Log out successful!";
             return View("Index");
         }
@@ -155,6 +192,7 @@ namespace Muszilla.Controllers                                                  
             string id = "";
             FetchPlaylistData();
             FetchSongData();
+            GetListofPlaylistIDs();
             id = HttpContext.Session.GetString("User_ID");
             ConnectionString();
             con.Open();
@@ -188,9 +226,7 @@ namespace Muszilla.Controllers                                                  
                 con.Close();
                 return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
             }
-            ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-            ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             con.Close();
             return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
@@ -216,18 +252,14 @@ namespace Muszilla.Controllers                                                  
                     return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
                 }
             }
-            ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-            ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
 
 
         private void FetchPlaylistData()
         {
-            ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-            ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
             List<PlaylistModel> PlaylistsFromDB = new List<PlaylistModel>();
             ConnectionString();
             String id;
@@ -274,9 +306,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
-                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
                 FetchPlaylistData();
                 FetchSongData();
             }
@@ -305,9 +335,7 @@ namespace Muszilla.Controllers                                                  
                 con.Close();
 
                 songsModel.searchedSongsList = songListFromDB;
-                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
                 return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
             }
             catch (Exception ex)
@@ -329,9 +357,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
-                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
                 FetchPlaylistData();
                 FetchSongData();
             }
@@ -368,9 +394,7 @@ namespace Muszilla.Controllers                                                  
                 }
 
                 songsModel.searchedSongsList = songListFromDB;
-                ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-                ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
                 return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
             }
             catch (Exception ex)
@@ -381,23 +405,34 @@ namespace Muszilla.Controllers                                                  
 
         private void FetchSongData()
         {
-            ViewBag.AllPlaylists = HttpContext.Session.GetString("AllPlaylists");
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-            ViewBag.CurrentDIV = HttpContext.Session.GetString("CurrentDIV");
+            FetchPlaylistData();
+            GetListofPlaylistIDs();
+
             List<SongsModel> songListFromDB = new List<SongsModel>();
             ConnectionString();
             String id;
-            String currentPlaylist;
+            String currentPlaylist = "";
             id = HttpContext.Session.GetString("User_ID");
-            currentPlaylist = HttpContext.Session.GetString("CurrentPlaylistID");
 
-
-            if (songListFromDB.Count > 0)
-            {
-                songListFromDB.Clear();
-            }
             try
             {
+                //Get current playlistID
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "select CurrentPlaylistID from Consumer where User_ID ='" + id + "'";
+                dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    currentPlaylist = dr["CurrentPlaylistID"].ToString();
+                }
+                con.Close();
+
+                //Fetch songs
+                if (songListFromDB.Count > 0)
+                {
+                    songListFromDB.Clear();
+                }
                 con.Open();
                 com.Connection = con;
                 com.CommandText = "select * from Songs where Song_Owner ='" + id + "' and Song_Playlist_ID ='" + currentPlaylist + "'";
