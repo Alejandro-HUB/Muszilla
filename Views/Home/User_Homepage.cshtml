@@ -343,12 +343,12 @@
     <!-- this list of songs will appear when the user will try to search something in the search bar-->
     <div id="list_search_songs">
         <p id="results">Your Search Results: </p>
-        <button id="backtoplaylists" onclick="gobacktoplaylists('@ViewBag.AllPlaylists')"> Go Back</button>
+        <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
         <main>
             <div class="box content" id="imageUpload">
                 <div>
                     <form asp-action="searchForAllSongs" class="" id="image-upload">
-                        <button type="submit" name="Song_Name" id="uploadsongs" onclick="showSearchedSong('@ViewBag.AllPlaylists')" class="form-control">Search for all songs</button>
+                        <button type="submit" name="Song_Name" id="uploadsongs" onclick="showSearchedSong()" class="form-control">Search for all songs</button>
                     </form>
                 </div>
             </div>
