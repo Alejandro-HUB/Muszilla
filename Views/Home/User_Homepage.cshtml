@@ -129,6 +129,14 @@
         <span id="currentPlayListClicked" style="display:none;"></span>
     </div>
 
+    <div id="loading">
+        @if (@ViewBag.Pass_word != "")
+        {
+            <p id="PlaylistNameDefault">Please Wait...</p>
+            <center><div id="loaderWheel" class="loader"></div></center>
+        }
+    </div>
+
 
     <!-- this is the default playlist for each user thta contains a default list of songs for testing -->
     <div id="songsdefault">

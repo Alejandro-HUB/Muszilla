@@ -257,11 +257,24 @@ function showSongs(playlistNumber, currentPlaylistID, Playlist_Name) {
         }
     }
 
- 
     document.getElementById("songsdefault").style.display = "none";
     document.getElementById("home_first").style.display = "none";
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("loading").style.display = "hidden";
     document.getElementById("PlaylistsFromDB").style.display = "initial";
     document.getElementById("PlaylistName").innerHTML = Playlist_Name;
+}
+
+function PageLoading()
+{
+    setTimeout(function () {
+        location.reload();
+    }, 2000);
+    document.getElementById("songsdefault").style.display = "none";
+    document.getElementById("home_first").style.display = "none";
+    document.getElementById("PlaylistsFromDB").style.display = "none";
+    document.getElementById("loading").style.display = "initial";
+    document.getElementById("loaderWheel").style.visibility = "visible";
 }
 
 
