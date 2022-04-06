@@ -42,7 +42,7 @@ namespace Muszilla.Helpers
 
                 var ContainsSongs = songListFromDB.Where(x => x.Song_Name == IncomingSong);
 
-                if (ContainsSongs == null)
+                if (ContainsSongs == null || ContainsSongs.Count() == 0)
                 {
                     return false;
                 }
