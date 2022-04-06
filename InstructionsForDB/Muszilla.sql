@@ -32,12 +32,12 @@ CREATE TABLE [dbo].[Playlist](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Songs]    Script Date: 4/22/2021 6:44:08 PM ******/
+/****** Object:  Table [dbo].[Songs_Users]    Script Date: 4/22/2021 6:44:08 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Songs](
+CREATE TABLE [dbo].[Songs_Users](
 	[Song_ID] [int] IDENTITY(1,1) NOT NULL,
 	[Song_Name] [varchar](max) NULL,
 	[Song_Audio] [varchar](max) NULL,
@@ -47,6 +47,23 @@ CREATE TABLE [dbo].[Songs](
 (
 	[Song_ID] ASC
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Songs]    Script Date: 4/5/2022 11:04:16 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Songs](
+	[SongID] [int] IDENTITY(1,1) NOT NULL,
+	[SongName] [varchar](max) NULL,
+	[SongAudio] [varchar](max) NULL,
+ CONSTRAINT [PKSongs] PRIMARY KEY CLUSTERED 
+(
+	[Song_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[SongsPlaylistR]    Script Date: 4/22/2021 6:44:08 PM ******/
@@ -93,10 +110,10 @@ REFERENCES [dbo].[Consumer] ([User_ID])
 GO
 ALTER TABLE [dbo].[Playlist] CHECK CONSTRAINT [User_FK]
 GO
-ALTER TABLE [dbo].[Songs]  WITH CHECK ADD  CONSTRAINT [FK_Songs_Owner] FOREIGN KEY([Song_Owner])
+ALTER TABLE [dbo].[Songs_Users]  WITH CHECK ADD  CONSTRAINT [FK_Songs_Owner] FOREIGN KEY([Song_Owner])
 REFERENCES [dbo].[Consumer] ([User_ID])
 GO
-ALTER TABLE [dbo].[Songs] CHECK CONSTRAINT [FK_Songs_Owner]
+ALTER TABLE [dbo].[Songs_Users] CHECK CONSTRAINT [FK_Songs_Owner]
 GO
 ALTER TABLE [dbo].[SongsPlaylistR]  WITH CHECK ADD  CONSTRAINT [FK__SongsPlay__playl__72C60C4A] FOREIGN KEY([playlistID])
 REFERENCES [dbo].[Playlist] ([Playlist_ID])
@@ -104,7 +121,7 @@ GO
 ALTER TABLE [dbo].[SongsPlaylistR] CHECK CONSTRAINT [FK__SongsPlay__playl__72C60C4A]
 GO
 ALTER TABLE [dbo].[SongsPlaylistR]  WITH CHECK ADD  CONSTRAINT [FK__SongsPlay__songs__71D1E811] FOREIGN KEY([songsID])
-REFERENCES [dbo].[Songs] ([Song_ID])
+REFERENCES [dbo].[Songs_Users] ([Song_ID])
 GO
 ALTER TABLE [dbo].[SongsPlaylistR] CHECK CONSTRAINT [FK__SongsPlay__songs__71D1E811]
 GO
