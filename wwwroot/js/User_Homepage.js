@@ -64,7 +64,7 @@ function showAccount() {
 
 //this function displays these default songs when a user searches something
 function showSearchedSong() {
-    
+
     document.getElementById("list_search_songs").style.display = "initial";
     document.getElementById("topPicks").style.display = "none";
     document.getElementById("featured").style.display = "none";
@@ -226,10 +226,70 @@ searchbutton.addEventListener("click", function () {
 
 //this will show the default list of songs in the default playlist
 function showSongsDefault() {
-    
+
     document.getElementById("songsdefault").style.display = "initial";
     document.getElementById("home_first").style.display = "none";
     document.getElementById("PlaylistsFromDB").style.display = "none";
+}
+
+function deleteSongs(songToDeleteID, songNameDelete) {
+
+    $.ajax({
+        type: "POST",
+        url: '/Home/deleteSong',
+        dataType: "html",
+        data: {
+            deleteSong: songToDeleteID,
+            songName: songNameDelete
+        },
+        success: function (data) {
+            alert("Deleting song: " + songNameDelete);
+            window.location.reload();
+        },
+        error: function (jqXHR, textStatus) {
+            //alert(textStatus);
+        }
+
+    }); 
+}
+
+
+function AddSongToPlaylist(songToAddAudio, songNameAdd) {
+    document.getElementById("songsdefault").style.display = "none";
+    document.getElementById("home_first").style.display = "none";
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("loading").style.display = "hidden";
+    document.getElementById("PlaylistsFromDB").style.display = "none"; 
+    document.getElementById("list_add_songs_to_playlist").style.display = "initial";
+    sessionStorage.setItem("songAudioAdd", songToAddAudio);
+    sessionStorage.setItem("songNameAdd", songNameAdd);
+}
+
+
+function selectPlaylist(ToPlaylistAddID, ToPlaylistName)
+{
+    $.ajax({
+        type: "POST",
+        url: '/Home/addSongToPlaylist',
+        dataType: "html",
+        data: {
+            PlaylistID: ToPlaylistAddID,
+            songName: sessionStorage.getItem("songNameAdd"),
+            addSongAudio: sessionStorage.getItem("songAudioAdd"),
+            playListName: ToPlaylistName
+        },
+        success: function (data) {
+            let songNameAdded = sessionStorage.getItem("songNameAdd");
+            document.getElementById("list_add_songs_to_playlist").style.display = "none";
+            document.getElementById("home_first").style.display = "initial";
+            alert(data + " ID: " + ToPlaylistAddID);
+            window.location.reload();
+        },
+        error: function (jqXHR, textStatus) {
+            //alert(textStatus);
+        }
+
+    });
 }
 
 //this will show the second playlist adn the list of songs in it
@@ -269,8 +329,7 @@ function showSongs(playlistNumber, currentPlaylistID, Playlist_Name) {
     document.getElementById("PlaylistName").innerHTML = Playlist_Name;
 }
 
-function PageLoading()
-{
+function PageLoading() {
     setTimeout(function () {
         location.reload();
     }, 2000);
@@ -289,6 +348,7 @@ function gobacktoplaylists() {
     document.getElementById("songsdefault").style.display = "none";
     document.getElementById("list_search_songs").style.display = "none";
     document.getElementById("PlaylistsFromDB").style.display = "none";
+    document.getElementById("list_add_songs_to_playlist").style.display = "none";
 }
 
 //this function will add the list item as playlist and will use the user input as the playlist's name 

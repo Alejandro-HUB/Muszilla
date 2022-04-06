@@ -17,6 +17,7 @@ using javax.jws;
 using com.sun.tools.@internal.ws.processor.model;
 using System.Text.Json;
 using System.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace Muszilla.Controllers                                                            //**This controller handles the CRUD functionalities** By Alejandro Lopez
 {
@@ -35,6 +36,9 @@ namespace Muszilla.Controllers                                                  
         SongsModel songsModel = new SongsModel();
         ConsumerModel consumer = new ConsumerModel();
         AzureStorageConfig storage = new AzureStorageConfig();
+
+        //DB Helper
+        DBHelper dBHelper = new DBHelper();
 
         public IActionResult Index()
         {
@@ -128,6 +132,101 @@ namespace Muszilla.Controllers                                                  
             return jsonString;
         }
 
+        [HttpPost]
+        public string addSongToPlaylist(string addSongAudio, string songName, string PlaylistID, string playListName)
+        {
+            string id = HttpContext.Session.GetString("User_ID");
+            ConnectionString();
+
+            if (!dBHelper.ContainsSongUsersTable(songName, PlaylistID, id))
+            {
+                //Repopulate data so it is not null
+                if (HttpContext.Session.GetString("Email") != null)
+                {
+                    ViewBag.Email = HttpContext.Session.GetString("Email");
+                    ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
+                    ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
+                    ViewBag.LastName = HttpContext.Session.GetString("LastName");
+                    ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                    ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                    FetchPlaylistData();
+                    FetchSongData();
+                }
+                try
+                {
+                    con.Open();
+                    com.Connection = con;
+
+                    if (!string.IsNullOrEmpty(songName))
+                    {
+                        com.CommandText = "insert into Songs_Users(Song_Name, Song_Audio, Song_Owner, Song_Playlist_ID) values('" + songName + "', '" + addSongAudio + "', '" + id + "', '" + PlaylistID + "')";
+
+                        com.ExecuteNonQuery();
+                        con.Close();
+                    }
+                    else
+                    {
+                        con.Close();
+                    }
+                    ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                    return "SUCCESS: " + "ADDED: " + songName + " TO " + playListName;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                return "FAIL: " + songName + " ALREADY EXISTS IN " + playListName;
+            }
+        }
+
+
+
+        [HttpPost]
+        public string deleteSong(string deleteSong, string songName)
+        {
+            ConnectionString();
+
+            //Repopulate data so it is not null
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("Email");
+                ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
+                ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
+                ViewBag.LastName = HttpContext.Session.GetString("LastName");
+                ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                FetchPlaylistData();
+                FetchSongData();
+            }
+            try
+            {
+                con.Open();
+                com.Connection = con;
+
+                if (!string.IsNullOrEmpty(deleteSong))
+                {
+                    com.CommandText = "delete from dbo.Songs_Users where Song_ID = '" + deleteSong + "'";
+
+                    com.ExecuteNonQuery();
+                    con.Close();
+                }
+                else
+                {
+                    con.Close();
+                }
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.Message = "Deleted song: " + songName;
+                return deleteSong;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void GetListofPlaylistIDs()
         {
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
@@ -167,18 +266,29 @@ namespace Muszilla.Controllers                                                  
         public IActionResult Create(Register add) // Adding a new user inside the database
         {
             string connection = Muszilla.Properties.Resources.ConnectionString;
-            using (SqlConnection con = new SqlConnection(connection))
+            bool validEmail = false;
+            if (new EmailAddressAttribute().IsValid(add.Email))
             {
-                string query = "insert into Consumer(FirstName, LastName, Email, Pass_word) values('" + add.FirstName + "', '" + add.LastName + "', '" + add.Email + "', '" + add.Pass_word + "')";
-                using (SqlCommand com = new SqlCommand(query, con))
-                {
-                    con.Open();
-                    com.ExecuteNonQuery();
-                    ViewBag.Message = "New User inserted succesfully!";
-                }
-                con.Close();
-                return View("Index");
+                validEmail = true;
             }
+
+            if (validEmail)
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    string query = "insert into Consumer(FirstName, LastName, Email, Pass_word) values('" + add.FirstName + "', '" + add.LastName + "', '" + add.Email + "', '" + add.Pass_word + "')";
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        con.Open();
+                        com.ExecuteNonQuery();
+                        ViewBag.Message = "New User inserted succesfully!";
+                    }
+                    con.Close();
+                    return View("Index");
+                }
+            }
+            ViewBag.Message = "Please enter a valid email. Example: email@domain.com";
+            return View("Index");
         }
         public IActionResult Logout() //Returns to the login page and clears the session
         {
@@ -332,16 +442,16 @@ namespace Muszilla.Controllers                                                  
                 {
                     con.Open();
                     com.Connection = con;
-                    com.CommandText = currentQuery + " order by Song_Name";
+                    com.CommandText = currentQuery + " order by SongName";
 
                     dr = com.ExecuteReader();
                     while (dr.Read())
                     {
                         songListFromDB.Add(new SongsModel()
                         {
-                            Song_ID = dr["Song_ID"].ToString(),
-                            Song_Name = dr["Song_Name"].ToString(),
-                            Song_Audio = dr["Song_Audio"].ToString()
+                            Song_ID = dr["SongID"].ToString(),
+                            Song_Name = dr["SongName"].ToString(),
+                            Song_Audio = dr["SongAudio"].ToString()
                         });
                     }
                     con.Close();
@@ -395,9 +505,9 @@ namespace Muszilla.Controllers                                                  
                     {
                         songListFromDB.Add(new SongsModel()
                         {
-                            Song_ID = dr["Song_ID"].ToString(),
-                            Song_Name = dr["Song_Name"].ToString(),
-                            Song_Audio = dr["Song_Audio"].ToString()
+                            Song_ID = dr["SongID"].ToString(),
+                            Song_Name = dr["SongName"].ToString(),
+                            Song_Audio = dr["SongAudio"].ToString()
                         });
                     }
                     con.Close();
@@ -441,7 +551,7 @@ namespace Muszilla.Controllers                                                  
             {
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "select TOP(100) * from dbo.Songs order by Song_Name";
+                com.CommandText = "select TOP(100) * from dbo.Songs order by SongName";
                 HttpContext.Session.SetString("CurrentSearchQuery", "select TOP(100) * from dbo.Songs");
 
                 dr = com.ExecuteReader();
@@ -449,9 +559,9 @@ namespace Muszilla.Controllers                                                  
                 {
                     songListFromDB.Add(new SongsModel()
                     {
-                        Song_ID = dr["Song_ID"].ToString(),
-                        Song_Name = dr["Song_Name"].ToString(),
-                        Song_Audio = dr["Song_Audio"].ToString()
+                        Song_ID = dr["SongID"].ToString(),
+                        Song_Name = dr["SongName"].ToString(),
+                        Song_Audio = dr["SongAudio"].ToString()
                     });
                 }
                 con.Close();
@@ -496,16 +606,16 @@ namespace Muszilla.Controllers                                                  
 
                 if (!string.IsNullOrEmpty(songModelSearch.Song_Name))
                 {
-                    com.CommandText = "select TOP(100) * from dbo.Songs where Song_Name like '%" + songModelSearch.Song_Name + "%' order by Song_Name";
+                    com.CommandText = "select TOP(100) * from dbo.Songs where SongName like '%" + songModelSearch.Song_Name + "%' order by SongName";
 
                     dr = com.ExecuteReader();
                     while (dr.Read())
                     {
                         songListFromDB.Add(new SongsModel()
                         {
-                            Song_ID = dr["Song_ID"].ToString(),
-                            Song_Name = dr["Song_Name"].ToString(),
-                            Song_Audio = dr["Song_Audio"].ToString()
+                            Song_ID = dr["SongID"].ToString(),
+                            Song_Name = dr["SongName"].ToString(),
+                            Song_Audio = dr["SongAudio"].ToString()
                         });
                     }
                     con.Close();
@@ -557,7 +667,7 @@ namespace Muszilla.Controllers                                                  
                 }
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "select * from Songs where Song_Owner ='" + id + "' and Song_Playlist_ID ='" + currentPlaylist + "'";
+                com.CommandText = "select * from Songs_Users where Song_Owner ='" + id + "' and Song_Playlist_ID ='" + currentPlaylist + "'";
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {

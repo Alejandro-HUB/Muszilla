@@ -242,6 +242,9 @@
                                 @Html.DisplayFor(modelItem => item.Song_Name)
                                 <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
                                 <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
+                                <div>
+                                    <button value="Delete" onclick="deleteSongs('@item.Song_ID', '@item.Song_Name')" type="submit" id="" class="DeleteButton">Delete</button>
+                                </div>
                             </td>
                         }
                     </tr>
@@ -388,6 +391,38 @@
                                 @Html.DisplayFor(modelItem => item.Song_Name)
                                 <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
                                 <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
+                                <div>
+                                    <button value="Add" onclick="AddSongToPlaylist('@item.Song_Audio', '@item.Song_Name')" type="button" id="" class="DeleteButton">Add</button>
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                </table>
+            </div>
+        }
+    </div>
+
+    <!-- this list of playlist will appear when the user will try to add a new song to a playlist-->
+    <div id="list_add_songs_to_playlist">
+        <p id="AddToPlaylist">Select a playlist to add your song to: </p>
+        <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
+        @if (@ViewBag.Pass_word != "" && Model.Item4.Playlists != null)
+        {
+
+            <div class="container3">
+                <table>
+                    <tr Style="color: white;">
+                        <th>
+                            <!-- Html.DisplayNameFor(model => model.Item3.Song_Name) -->
+                    </th>
+                    </tr>
+                    <tr Style="color: white;" class="items">
+                        @foreach (var item in Model.Item4.Playlists)
+                        {
+                            //For each Playlist generate a button
+                            <td onclick="selectPlaylist('@item.Playlist_ID', '@item.Playlist_Name')">
+                                @Html.DisplayFor(modelItem => item.Playlist_Name)
+                                <span id="@item.Playlist_ID@item.Playlist_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Playlist_Name)</span>
                             </td>
                         }
                     </tr>

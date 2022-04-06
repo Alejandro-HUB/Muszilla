@@ -19,8 +19,11 @@ namespace Muszilla.Controllers
         SqlConnection con = new SqlConnection();
         SqlCommand com = new SqlCommand();
         SqlDataReader dr;
+        bool failedSongTableInsert = false;
         // make sure that appsettings.json is filled with the necessary details of the azure storage
         private readonly AzureStorageConfig storageConfig = null;
+        //DB Helper
+        DBHelper dBHelper = new DBHelper();
 
         public SongsController(IOptions<AzureStorageConfig> config)
         {
@@ -61,6 +64,9 @@ namespace Muszilla.Controllers
                         }
                         else if (StorageHelper.IsAudio(formFile)) //Checks if the file is an audio file
                         {
+                            //Set flag to true 
+                            isAudio = true;
+
                             //Check if the song's name has invalid characters
                             bool InvalidFileName = CleanString.IsValidFilename(formFile.FileName);
 
@@ -102,7 +108,7 @@ namespace Muszilla.Controllers
                             }
                             
                             url = "https://devstorageale.blob.core.windows.net/muszilla/" + Song_Name;
-                            if (formFile.Length > 0)
+                            if (formFile.Length > 0 && !dBHelper.ContainsSongTable(Song_Name))
                             {
                                 using (Stream stream = formFile.OpenReadStream())
                                 {
@@ -119,7 +125,7 @@ namespace Muszilla.Controllers
                 }
 
                 //                                                                          ** Start logic for Uploading Songs **
-                if (isUploaded && isAudio) //Upload procedure for a song
+                if (isAudio) //Inserting a song into the database
                 {
                     string connection = Muszilla.Properties.Resources.ConnectionString;
                     if (HttpContext.Session.GetString("Email") != null)
@@ -128,25 +134,62 @@ namespace Muszilla.Controllers
                         {
                             email = HttpContext.Session.GetString("Email");
                             id = HttpContext.Session.GetString("User_ID");
-                            currentPlaylist = HttpContext.Session.GetString("CurrentPlaylistID");
+                            //currentPlaylist = HttpContext.Session.GetString("CurrentPlaylistID");
 
-                            string query = "insert into Songs(Song_Name, Song_Audio, Song_Owner, Song_Playlist_ID) values('" + Song_Name + "', '" + url + "', '" + id + "', '" + currentPlaylist + "')";
-                            using (SqlCommand com = new SqlCommand(query, con))
+                            //Check if the song already exists in the MAIN Song table
+                            if (!dBHelper.ContainsSongTable(Song_Name))
                             {
+                                //Get current playlistID from DB - Uncomment if Needed
                                 con.Open();
-                                com.ExecuteNonQuery();
-                                HttpContext.Session.SetString("Song_Name", Song_Name);
-                                HttpContext.Session.SetString("Song_Audio", url);
+                                com.Connection = con;
+                                com.CommandText = "select CurrentPlaylistID from Consumer where User_ID ='" + id + "'";
+                                dr = com.ExecuteReader();
+                                while (dr.Read())
+                                {
+                                    currentPlaylist = dr["CurrentPlaylistID"].ToString();
+                                }
                                 con.Close();
-                                ViewBag.Message = "New User inserted succesfully!";
+                                //Insert to Song Users Table
+                                string query = "insert into Songs_Users(Song_Name, Song_Audio, Song_Owner, Song_Playlist_ID) values('" + Song_Name + "', '" + url + "', '" + id + "', '" + currentPlaylist + "')";
+                                using (SqlCommand com = new SqlCommand(query, con))
+                                {
+                                    con.Open();
+                                    com.ExecuteNonQuery();
+                                    HttpContext.Session.SetString("Song_Name", Song_Name);
+                                    HttpContext.Session.SetString("Song_Audio", url);
+                                    con.Close();
+                                }
+
+                                //Insert to MAIN Song Table
+                                string query2 = "insert into Songs(SongName, SongAudio) values('" + Song_Name + "', '" + url + "')";
+                                using (SqlCommand com = new SqlCommand(query2, con))
+                                {
+                                    con.Open();
+                                    com.ExecuteNonQuery();
+                                    con.Close();
+                                    failedSongTableInsert = false;
+                                }
                             }
+                            else
+                            {
+                                failedSongTableInsert = true;
+                            }
+
                         }
                     }
                     else
                     {
                         ViewBag.Message = "Error";
                     }
-                    return new AcceptedResult();
+                    if (!failedSongTableInsert)
+                    {
+                        return new AcceptedResult();
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Song already exists, please check our database.";
+                        return BadRequest("Song already exists, please check our database.");
+                    }
                 }
                 //                                                                          ** End logic for Uploading Songs **
 
@@ -158,5 +201,6 @@ namespace Muszilla.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        
     }
 }
