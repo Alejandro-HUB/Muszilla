@@ -59,6 +59,7 @@ namespace Muszilla.Controllers                                                  
             FetchSongData();
             GetListofPlaylistIDs();
             ConnectionString();
+            acc.Pass_word = HashHelper.GetHashString(acc.Pass_word);
             con.Open();
             com.Connection = con;
             com.CommandText = "select User_ID, Email, Pass_word, FirstName, LastName, Picture from Consumer where Email = '" + acc.Email + "' and Pass_word = '" + acc.Pass_word + "'";
@@ -274,6 +275,9 @@ namespace Muszilla.Controllers                                                  
 
             if (validEmail)
             {
+                //Hash password
+                add.Pass_word = HashHelper.GetHashString(add.Pass_word);
+
                 using (SqlConnection con = new SqlConnection(connection))
                 {
                     string query = "insert into Consumer(FirstName, LastName, Email, Pass_word) values('" + add.FirstName + "', '" + add.LastName + "', '" + add.Email + "', '" + add.Pass_word + "')";
@@ -335,6 +339,9 @@ namespace Muszilla.Controllers                                                  
             }
             if (edit.Pass_word != null)
             {
+                //Hash password
+                edit.Pass_word = HashHelper.GetHashString(edit.Pass_word);
+
                 com.CommandText = "update Consumer set Pass_word = '" + edit.Pass_word + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
                 HttpContext.Session.SetString("Pass_word", edit.Pass_word);
