@@ -354,8 +354,12 @@
     <!-- this list of songs will appear when the user will try to search something in the search bar-->
     <div id="list_search_songs">
         <p id="Sort">Sort by:</p>
-        <button type="submit" asp-action="sortSongsByName" id="" class="SortName"> Name </button>
-        <button type="submit" asp-action="sortSongsByDate" id="" class="SortByDate"> Date </button>
+        <form class="form-horizontal" asp-action="sortSongsByName">
+            <button type="submit" id="" class="SortName"> Name </button>
+        </form>
+        <form asp-action="sortSongsByDate">
+            <button type="submit" id="" class="SortByDate"> Date </button>
+        </form>
         <p id="results">Your Search Results: </p>
         <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
         <main>

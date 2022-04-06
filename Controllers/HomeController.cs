@@ -16,6 +16,7 @@ using System.IO;
 using javax.jws;
 using com.sun.tools.@internal.ws.processor.model;
 using System.Text.Json;
+using System.Data;
 
 namespace Muszilla.Controllers                                                            //**This controller handles the CRUD functionalities** By Alejandro Lopez
 {
@@ -189,6 +190,7 @@ namespace Muszilla.Controllers                                                  
             HttpContext.Session.SetString("LastName", empty);
             HttpContext.Session.SetString("Picture", empty);
             HttpContext.Session.SetString("CurrentPlaylistID", empty);
+            HttpContext.Session.SetString("CurrentSearchQuery", empty);
             ViewBag.Message = "Log out successful!";
             return View("Index");
         }
@@ -300,15 +302,115 @@ namespace Muszilla.Controllers                                                  
         }
 
 
-        public IActionResult sortSongsByName(string buttonName)
+        public IActionResult sortSongsByName()
         {
+            List<SongsModel> songListFromDB = new List<SongsModel>();
+            var currentQuery = HttpContext.Session.GetString("CurrentSearchQuery");
 
+            //Repopulate data so it is not null
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("Email");
+                ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
+                ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
+                ViewBag.LastName = HttpContext.Session.GetString("LastName");
+                ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                FetchPlaylistData();
+                FetchSongData();
+            }
+
+            if (currentQuery != null)
+            {
+                ConnectionString();
+
+                if (songListFromDB.Count > 0)
+                {
+                    songListFromDB.Clear();
+                }
+                try
+                {
+                    con.Open();
+                    com.Connection = con;
+                    com.CommandText = currentQuery + " order by Song_Name";
+
+                    dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        songListFromDB.Add(new SongsModel()
+                        {
+                            Song_ID = dr["Song_ID"].ToString(),
+                            Song_Name = dr["Song_Name"].ToString(),
+                            Song_Audio = dr["Song_Audio"].ToString()
+                        });
+                    }
+                    con.Close();
+
+                    songsModel.searchedSongsList = songListFromDB;
+                    ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                    return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
             return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
 
-        public IActionResult sortSongsByDate(string buttonName)
+        public IActionResult sortSongsByDate()
         {
+            List<SongsModel> songListFromDB = new List<SongsModel>();
+            var currentQuery = HttpContext.Session.GetString("CurrentSearchQuery");
 
+            //Repopulate data so it is not null
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("Email");
+                ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
+                ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
+                ViewBag.LastName = HttpContext.Session.GetString("LastName");
+                ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                FetchPlaylistData();
+                FetchSongData();
+            }
+
+            if (currentQuery != null)
+            {
+                ConnectionString();
+
+                if (songListFromDB.Count > 0)
+                {
+                    songListFromDB.Clear();
+                }
+                try
+                {
+                    con.Open();
+                    com.Connection = con;
+                    com.CommandText = currentQuery;
+
+                    dr = com.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        songListFromDB.Add(new SongsModel()
+                        {
+                            Song_ID = dr["Song_ID"].ToString(),
+                            Song_Name = dr["Song_Name"].ToString(),
+                            Song_Audio = dr["Song_Audio"].ToString()
+                        });
+                    }
+                    con.Close();
+
+                    songsModel.searchedSongsList = songListFromDB;
+                    ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                    return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
             return PartialView("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
 
@@ -340,6 +442,7 @@ namespace Muszilla.Controllers                                                  
                 con.Open();
                 com.Connection = con;
                 com.CommandText = "select TOP(100) * from dbo.Songs order by Song_Name";
+                HttpContext.Session.SetString("CurrentSearchQuery", "select TOP(100) * from dbo.Songs");
 
                 dr = com.ExecuteReader();
                 while (dr.Read())
@@ -436,7 +539,7 @@ namespace Muszilla.Controllers                                                  
 
             try
             {
-                //Get current playlistID
+                //Get current playlistID from DB - Uncomment if Needed
                 con.Open();
                 com.Connection = con;
                 com.CommandText = "select CurrentPlaylistID from Consumer where User_ID ='" + id + "'";
