@@ -282,7 +282,7 @@ function selectPlaylist(ToPlaylistAddID, ToPlaylistName)
             let songNameAdded = sessionStorage.getItem("songNameAdd");
             document.getElementById("list_add_songs_to_playlist").style.display = "none";
             document.getElementById("home_first").style.display = "initial";
-            alert(data + " ID: " + ToPlaylistAddID);
+            alert(data);
             window.location.reload();
         },
         error: function (jqXHR, textStatus) {
