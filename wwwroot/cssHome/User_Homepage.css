@@ -15,6 +15,13 @@ body {
     width: 100%;
 }
 
+.GoogleIcon {
+    width:100px;
+    height:fit-content;
+    margin-left: 500px;
+    margin-top: 290px;
+}
+
 .sidebar {
     height: 575px;
     width: 250px;
