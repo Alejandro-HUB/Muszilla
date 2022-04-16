@@ -11,6 +11,8 @@ CREATE TABLE [dbo].[Consumer](
 	[Pass_word] [varchar](50) NULL,
 	[CreatedDate] [datetime] NULL,
 	[Picture] [varchar](max) NULL,
+	[CurrentPlaylistID] [int] NULL,
+	[isGoogleUser] [int] NULL,
  CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
 (
 	[User_ID] ASC
