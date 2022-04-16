@@ -281,57 +281,60 @@
             <img id="userImage" src="@ViewBag.Picture" onerror="if (this.src != '/Pictures/emptyImage.png') this.src = '/Pictures/emptyImage.png';" />
             <!--This is the button to upload images-->
             <!-- Client side libs required  -->
-            <main>
-                <div class="box content" id="imageUpload">
-                    <div>
-                        <form action="/api/images/upload"
+            if (@ViewBag.isGoogleUser.ToString().Contains("0"))
+            {
+                <main>
+                    <div class="box content" id="imageUpload">
+                        <div>
+                            <form action="/api/images/upload"
                           class="dropzone"
                           id="image-upload"
                           method="post"
                           enctype="multipart/form">
-                            <div class="dz-message needsclick">
-                                <span class="note needsclick">
-                                    <input asp-for="Item1.Picture" name="Picture" class="form-control" accept="image/*">
-                                </span>
-                            </div>
-                        </form>
+                                <div class="dz-message needsclick">
+                                    <span class="note needsclick">
+                                        <input asp-for="Item1.Picture" name="Picture" class="form-control" accept="image/*">
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </main>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
-            <script>
-                // Grab links for images from backend api
-                function fetchImageLinks() {
-                    // Fetch images
-                    $.get(function (fetchedImageLinks) {
-                        console.log(fetchedImageLinks)
-                    });
-                }
-                // Start first interval
-                fetchImageLinks()
-                /* Dropzone */
-                // "imageUpload" is the camelized version of the HTML element's ID
-                Dropzone.options.imageUpload = {
-                    addRemoveLinks: true,
-                    paramName: "files", // The name that will be used to transfer the file
-                    dictDefaultMessage: "Drop files here or Click to Upload",
-                    createImageThumbnails: false,
-                    dictRemoveFileConfirmation: false,
-
-
-                    init: function () {
-                        myDropzone = this;
-                        myDropzone.on("success", function (file, response) {
-                            file.previewElement.remove();
-                            console.log("Success");
+                </main>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+                <script>
+                        // Grab links for images from backend api
+                    function fetchImageLinks() {
+                        // Fetch images
+                        $.get(function (fetchedImageLinks) {
+                            console.log(fetchedImageLinks)
                         });
-                    },
-                    removedfile: function (file) {
-                        file.previewElement.remove();
                     }
-                };
-            </script>
+                    // Start first interval
+                    fetchImageLinks()
+                    /* Dropzone */
+                    // "imageUpload" is the camelized version of the HTML element's ID
+                    Dropzone.options.imageUpload = {
+                        addRemoveLinks: true,
+                        paramName: "files", // The name that will be used to transfer the file
+                        dictDefaultMessage: "Drop files here or Click to Upload",
+                        createImageThumbnails: false,
+                        dictRemoveFileConfirmation: false,
+
+
+                        init: function () {
+                            myDropzone = this;
+                            myDropzone.on("success", function (file, response) {
+                                file.previewElement.remove();
+                                console.log("Success");
+                            });
+                        },
+                        removedfile: function (file) {
+                            file.previewElement.remove();
+                        }
+                    };
+                </script>
+            }
             <!--This is the button to upload images-->
         }
 
@@ -365,17 +368,20 @@
                     <p id="p">
                         Password:
                         <!-- this gets the user's password-->
-                        <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
+                <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
                         <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
                     </p>
                     <p id="edit_four">(Click to edit)</p>
                 }
                 else
                 {
-                   <img id="" src="/Pictures/google.png" class="GoogleIcon" />                     
+                    <img id="" src="/Pictures/google.png" class="GoogleIcon" />
                 }
 
-                <button type="submit" value="Save" onclick="" id="saveInfo" class="savebtn">Save Changes</button>
+                if (@ViewBag.isGoogleUser.ToString().Contains("0"))
+                {
+                    <button type="submit" value="Save" onclick="" id="saveInfo" class="savebtn">Save Changes</button>
+                }
             }
         </form>
     </div>
