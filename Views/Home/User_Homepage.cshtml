@@ -342,39 +342,54 @@
         <form class="form-horizontal" asp-action="Update">
             @if (@ViewBag.Email != "")
             {
-                <p id="f">
+                if (@ViewBag.isGoogleUser.ToString().Contains("0"))
+                {
+                    <p id="f">
+                        First Name:
+                        <!-- this gets the user's first name-->
+                        <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
+                    </p>
+                    <p id="edit_one">(Click to edit)</p>
+
+                    <p id="l">
+                        Last Name:
+                        <!-- this gets the user's last name-->
+                        <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName">
+                    </p>
+                    <p id="edit_two">(Click to edit)</p>
+
+                    <p id="e">
+                        Your Email:
+                        <!-- this gets the user's email-->
+                        <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email">
+                    </p>
+                    <p id="edit_three">(Click to edit)</p>
+                    <p id="p">
+                        Password:
+                        <!-- this gets the user's password-->
+                        <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
+                        <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
+                    </p>
+                }
+                else
+                {
+                    <p id="f">
                     First Name:
                     <!-- this gets the user's first name-->
-                <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
+                    <input id="fn" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName" readonly>
                 </p>
-                <p id="edit_one">(Click to edit)</p>
 
                 <p id="l">
                     Last Name:
                     <!-- this gets the user's last name-->
-                <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName">
+                    <input id="ln" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName" readonly>
                 </p>
-                <p id="edit_two">(Click to edit)</p>
 
                 <p id="e">
                     Your Email:
                     <!-- this gets the user's email-->
-                <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email">
+                    <input id="UEmail" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email" readonly>
                 </p>
-                <p id="edit_three">(Click to edit)</p>
-
-                if (@ViewBag.isGoogleUser.ToString().Contains("0"))
-                {
-                    <p id="p">
-                        Password:
-                        <!-- this gets the user's password-->
-                <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
-                        <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
-                    </p>
-                    <p id="edit_four">(Click to edit)</p>
-                }
-                else
-                {
                     <img id="" src="/Pictures/google.png" class="GoogleIcon" />
                 }
 
