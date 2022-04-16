@@ -5,6 +5,9 @@
 
 <link rel="stylesheet" type="text/css" href="/css/Login_And_Signup.css" />
 <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="/js/LoginPage.js"></script>
+<meta name="google-signin-client_id" content="749316061457-lijhl1omteei71ntbfn4j0860ste6rdg.apps.googleusercontent.com">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- This logo was created by hand by Natalia, so there is no link-->
@@ -34,6 +37,7 @@
                 <input asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" placeholder="Email" required>     <!-- this gets the user's email-->
                 <input asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" placeholder="Password" required>             <!-- this gets the user's passsword-->
                 <button type="submit" value="Login" onclick="">Login</button>
+                <div class="g-signin2 GoogleLoginButton" data-onsuccess="onSignIn"></div>
                 <button type="button" class="btn" onclick="showRegistration()">I'm New Here</button>                     <!-- this will call the function to show the registration form -->
                 <p id="forgotPassword">Forgot Password?<a id="link" href=""><em>Click here</em></a></p>                 <!-- does not work, wanted to implement but had no time -->
             </form>
@@ -54,35 +58,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    
-    var x = document.getElementById("cb");           //back of card
-    var y = document.getElementById("cf");          //front of card
-
-    //this function will show the registration form if it is not already displaying
-    function showRegistration() {
-        if (x.style.display === "none") {
-            x.style.display = "block";
-            y.style.display = "none";
-            document.getElementById('loginForm').reset();
-        }
-        else {
-            x.style.display = "none";
-        }
-    }
-
-    //this function will show the login form if it is not already displaying
-    function showLogin() {
-        if (y.style.display === "none") {
-            y.style.display = "block";
-            x.style.display = "none";
-            document.getElementById('registration').reset();
-        }
-        else {
-            y.style.display = "none";
-        }
-    }
-</script>
 
 @if (ViewBag.Message != null)
 {

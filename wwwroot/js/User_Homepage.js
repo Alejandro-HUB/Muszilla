@@ -292,7 +292,7 @@ function selectPlaylist(ToPlaylistAddID, ToPlaylistName)
     });
 }
 
-//this will show the second playlist adn the list of songs in it
+//This function will show the playlists and the list of songs in them
 function showSongs(playlistNumber, currentPlaylistID, Playlist_Name) {
     var ArrayOfLists = playlistNumber.split('.');
 

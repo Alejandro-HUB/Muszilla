@@ -19,6 +19,43 @@ namespace Muszilla.Helpers
         SqlConnection con = new SqlConnection();
         SqlCommand com = new SqlCommand();
         SqlDataReader dr;
+
+        public bool ContainsGoogleUser(string IncomingUser)
+        {
+            List<RegisterGoogle> UsersFromDB = new List<RegisterGoogle>();
+            string connection = Muszilla.Properties.Resources.ConnectionString;
+            using (SqlConnection con = new SqlConnection(connection))
+            {
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "select * from dbo.Consumer where isGoogleUser = '1'";
+                dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    UsersFromDB.Add(new RegisterGoogle()
+                    {
+                        FirstName = dr["FirstName"].ToString(),
+                        LastName = dr["LastName"].ToString(),
+                        ImageURL = dr["Picture"].ToString(),
+                        Email = dr["Email"].ToString()
+                    });
+                }
+                con.Close();
+
+                var ContainsUsers = UsersFromDB.Where(x => x.Email == IncomingUser);
+
+                if (ContainsUsers == null || ContainsUsers.Count() == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+
         public bool ContainsSongTable(string IncomingSong)
         {
             List<SongsModel> songListFromDB = new List<SongsModel>();

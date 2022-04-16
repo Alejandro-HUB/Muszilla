@@ -39,4 +39,12 @@ namespace Muszilla.Models
         [StringLength(100, ErrorMessage = "The {0} must at least be {2} characters long.", MinimumLength = 6)]
         public string Pass_word { get; set; }
     }
+
+    public class RegisterGoogle
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ImageURL { get; set; }
+        public string Email { get; set; }
+    }
 }

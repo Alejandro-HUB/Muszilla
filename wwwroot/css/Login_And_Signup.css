@@ -80,6 +80,21 @@ body {
     opacity: 1;
 }
 
+.GoogleLoginButton {
+    position: relative;
+    margin-left: 145px;
+    margin-top: -15px;
+    width: fit-content;
+    height: fit-content;
+    min-width: min-content;
+    border: groove;
+    border-width: 3px;
+}
+
+    .GoogleLoginButton:hover {
+        border-width: 3.5px;
+    }
+
 /* email input */
 .cardFront input[type = "email"] {
     border: 0;
@@ -160,7 +175,9 @@ body {
     transition: 0.25s;
     font-style: normal;
     cursor: pointer;
-    margin: 80px auto;
+    position: absolute;
+    margin-top: 10px;
+    margin-left:80px;
 }
 
 .btn1 {
@@ -182,6 +199,7 @@ body {
 }
 
     .btn:hover, .btn1:hover {
+        margin-left: 70px;
         width: 290px;
         font-size: 14px;
         border-color: white;
@@ -196,7 +214,7 @@ body {
     font-size: 14px;
     font-style: normal;
     font-weight: normal;
-    margin: -78px auto;
+    margin: 60px auto;
 }
 
 #link {

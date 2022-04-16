@@ -62,24 +62,34 @@ namespace Muszilla.Controllers                                                  
             acc.Pass_word = HashHelper.GetHashString(acc.Pass_word);
             con.Open();
             com.Connection = con;
-            com.CommandText = "select User_ID, Email, Pass_word, FirstName, LastName, Picture from Consumer where Email = '" + acc.Email + "' and Pass_word = '" + acc.Pass_word + "'";
+            com.CommandText = "select User_ID, Email, Pass_word, FirstName, LastName, Picture, isGoogleUser from Consumer where Email = '" + acc.Email + "' and Pass_word = '" + acc.Pass_word + "'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
-                fn = dr["FirstName"].ToString();
-                ln = dr["LastName"].ToString();
-                url = dr["Picture"].ToString();
-                id = dr["User_ID"].ToString();
-                con.Close();
-                HttpContext.Session.SetString("User_ID", id);
-                HttpContext.Session.SetString("Email", acc.Email);
-                HttpContext.Session.SetString("Pass_word", acc.Pass_word);
-                HttpContext.Session.SetString("FirstName", fn);
-                HttpContext.Session.SetString("LastName", ln);
-                HttpContext.Session.SetString("Picture", url);
+                if (dr["isGoogleUser"].ToString() == "0")
+                {
+                    fn = dr["FirstName"].ToString();
+                    ln = dr["LastName"].ToString();
+                    url = dr["Picture"].ToString();
+                    id = dr["User_ID"].ToString();
+                    con.Close();
+                    HttpContext.Session.SetString("User_ID", id);
+                    HttpContext.Session.SetString("Email", acc.Email);
+                    HttpContext.Session.SetString("Pass_word", acc.Pass_word);
+                    HttpContext.Session.SetString("FirstName", fn);
+                    HttpContext.Session.SetString("LastName", ln);
+                    HttpContext.Session.SetString("Picture", url);
 
 
-                return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel));
+                    return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel));
+                }
+                else
+                {
+                    con.Close();
+                    ViewBag.Message = "Please login using Google";
+                    return View("Index");
+                }
+
             }
             else
             {
@@ -280,7 +290,7 @@ namespace Muszilla.Controllers                                                  
 
                 using (SqlConnection con = new SqlConnection(connection))
                 {
-                    string query = "insert into Consumer(FirstName, LastName, Email, Pass_word) values('" + add.FirstName + "', '" + add.LastName + "', '" + add.Email + "', '" + add.Pass_word + "')";
+                    string query = "insert into Consumer(FirstName, LastName, Email, Pass_word, isGoogleUser) values('" + add.FirstName + "', '" + add.LastName + "', '" + add.Email + "', '" + add.Pass_word + "', '0')";
                     using (SqlCommand com = new SqlCommand(query, con))
                     {
                         con.Open();
@@ -294,6 +304,77 @@ namespace Muszilla.Controllers                                                  
             ViewBag.Message = "Please enter a valid email. Example: email@domain.com";
             return View("Index");
         }
+
+        [HttpPost]
+        public IActionResult GoogleLogin(string FirstName, string LastName, string ImageURL, string email) // Adding a new user inside the database
+        {
+            string connection = Muszilla.Properties.Resources.ConnectionString;
+            string ID = string.Empty;
+
+            if (!dBHelper.ContainsGoogleUser(email))
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    string query = "insert into Consumer(FirstName, LastName, Email, Picture, isGoogleUser) values('" + FirstName + "', '" + LastName + "', '" + email + "', '" + ImageURL + "', '1')";
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        con.Open();
+                        com.ExecuteNonQuery();
+                        ViewBag.Message = "New User inserted succesfully!";
+                    }
+                    con.Close();
+
+                    GetListofPlaylistIDs();
+
+
+                    con.Open();
+                    com.Connection = con;
+                    com.CommandText = "select User_ID from dbo.Consumer where Email = '" + email + "'";
+                    dr = com.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        ID = dr["User_ID"].ToString();
+                    }
+                    con.Close();
+
+                    HttpContext.Session.SetString("User_ID", ID);
+                    HttpContext.Session.SetString("Email", email);
+                    HttpContext.Session.SetString("FirstName", FirstName);
+                    HttpContext.Session.SetString("LastName", LastName);
+                    HttpContext.Session.SetString("Picture", ImageURL);
+
+
+                    return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel));
+                }
+            }
+            else
+            {
+                GetListofPlaylistIDs();
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    con.Open();
+                    com.Connection = con;
+                    com.CommandText = "select User_ID from dbo.Consumer where Email = '" + email + "'";
+                    dr = com.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        ID = dr["User_ID"].ToString();
+                    }
+                    con.Close();
+                }
+
+                HttpContext.Session.SetString("User_ID", ID);
+                HttpContext.Session.SetString("Email", email);
+                HttpContext.Session.SetString("FirstName", FirstName);
+                HttpContext.Session.SetString("LastName", LastName);
+                HttpContext.Session.SetString("Picture", ImageURL);
+
+
+                return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel));
+            }
+
+        }
+
         public IActionResult Logout() //Returns to the login page and clears the session
         {
             string empty = "";

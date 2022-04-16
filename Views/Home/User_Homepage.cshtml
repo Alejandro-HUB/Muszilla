@@ -4,16 +4,18 @@
 @{
     ViewData["Title"] = "User Homepage";
 }
-@if (ViewBag.Pass_word != "")
+@if (ViewBag.Email != "")
 {
     <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/cssHome/User_Homepage.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="/js/User_Homepage.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="749316061457-lijhl1omteei71ntbfn4j0860ste6rdg.apps.googleusercontent.com">
 }
 <body onload="changeHashOnLoad(); ">
     <!-- This logo was created by hand by Natalia, so there is no link-->
-    @if (@ViewBag.Pass_word != "")
+    @if (@ViewBag.Email != "")
     {
         <div id="logo">
             <img src="/Pictures/officialMuszillaLogo.jpg" width="250px" alt="Image Of Muszilla logo">
@@ -21,7 +23,7 @@
     }
 
     <!-- Current PlaylistID-->
-    @if (@ViewBag.Pass_word != "")
+    @if (@ViewBag.Email != "")
     {
         <div class="sidebar">
 
@@ -58,11 +60,28 @@
             -->
             <!-- this is the logout button within the sidebar -->
         <div>
-                <button type="button" class="logoutbtn" onclick="location.href='@Url.Action("Logout", "Home")'" id="logout">LOG OUT</button>
+                <script type="text/javascript">
+                    function signOut() {
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        auth2.signOut().then(function () {
+                            auth2.disconnect();
+                            window.location = '/Home/Logout';
+                        });
+
+                    }
+
+                    function onLoad() {
+                        gapi.load('auth2', function() {
+                            gapi.auth2.init();
+                        });
+                    }
+                </script>
+                <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+                <button type="button" class="logoutbtn" href="#" onclick="signOut()" id="logout">LOG OUT</button>
             </div>
         </div>
     }
-    @if (@ViewBag.Pass_word != "")
+    @if (@ViewBag.Email != "")
     {
         <!-- these are the 3 buttons in the top right corner of the user homepage where they can listen to top picked, and featured music and check out our genres-->
         <div>
@@ -76,7 +95,7 @@
     <!-- this is the actual home page container, that contains user information, their photo, and their list of playlists-->
     <div id="home_first">
 
-        @if (@ViewBag.Pass_word != "")
+        @if (@ViewBag.Email != "")
         {
             <!-- This image is from Pixabay by Stephanie Edwards and the Link is: https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/ -->
             <img id="userImage" src="@ViewBag.Picture" onerror="if (this.src != '/Pictures/emptyImage.png') this.src = '/Pictures/emptyImage.png';" />
@@ -96,7 +115,7 @@
 
         <!-- here we display the user's playlists -->
         <form id="f1">
-            @if (@ViewBag.Pass_word != "")
+            @if (@ViewBag.Email != "")
             {
                 //List of Playlist IDs
                 string result = "";
@@ -130,7 +149,7 @@
     </div>
 
     <div id="loading">
-        @if (@ViewBag.Pass_word != "")
+        @if (@ViewBag.Email != "")
         {
             <p id="PlaylistNameDefault">Please Wait...</p>
             <center><div id="loaderWheel" class="loader"></div></center>
@@ -140,7 +159,7 @@
 
     <!-- this is the default playlist for each user thta contains a default list of songs for testing -->
     <div id="songsdefault">
-        @if (@ViewBag.Pass_word != "")
+        @if (@ViewBag.Email != "")
         {
             <p id="PlaylistNameDefault">Playlist 1 (Default)</p>
             <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
@@ -165,7 +184,7 @@
     <!-- this is an empty playlist where the user can upload their songs and play them too -->
 
     <div id='PlaylistsFromDB' class="Playlists">
-        @if (@ViewBag.Pass_word != "")
+        @if (@ViewBag.Email != "")
         {
             <!-- this is the back button that takes the user back to their homscreen-->
             <p id="PlaylistName"></p>
@@ -256,7 +275,7 @@
 
     <!-- this is the code for the account screen so the user can access their account information and make changes to it-->
     <div id="account_screen">
-        @if (@ViewBag.Pass_word != "")
+        @if (@ViewBag.Email != "")
         {
             <img id="userImage" src="@ViewBag.Picture" onerror="if (this.src != '/Pictures/emptyImage.png') this.src = '/Pictures/emptyImage.png';" />
             <!--This is the button to upload images-->
@@ -317,7 +336,7 @@
 
         <!-- the functions below are to fetch the user's account information from the database and fill that into their respective areas -->
         <form class="form-horizontal" asp-action="Update">
-            @if (@ViewBag.Pass_word != "")
+            @if (@ViewBag.Email != "")
             {
                 <p id="f">
                     First Name:
@@ -374,7 +393,7 @@
                 </div>
             </div>
         </main>
-        @if (@ViewBag.Pass_word != "" && Model.Item3.searchedSongsList != null)
+        @if (@ViewBag.Email != "" && Model.Item3.searchedSongsList != null)
         {
 
             <div class="container1">
@@ -406,7 +425,7 @@
     <div id="list_add_songs_to_playlist">
         <p id="AddToPlaylist">Select a playlist to add your song to: </p>
         <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
-        @if (@ViewBag.Pass_word != "" && Model.Item4.Playlists != null)
+        @if (@ViewBag.Email != "" && Model.Item4.Playlists != null)
         {
 
             <div class="container3">
@@ -433,7 +452,7 @@
 
     <!-- this is the top picks button with top picked songs -->
     <div id="topPicks">
-        @if (@ViewBag.Pass_word != "")
+        @if (@ViewBag.Email != "")
         {
             <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
             <a onclick="localAudio('Acoustic Breeze')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Acoustic Breeze</p></a>
@@ -447,7 +466,7 @@
 
     <!-- this is the featured button that shows the featured songs-->
     <div id="featured">
-        @if (@ViewBag.Pass_word != "")
+        @if (@ViewBag.Email != "")
         {
             <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
             <a onclick="localAudio('Buddy')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Buddy</p></a>
@@ -461,7 +480,7 @@
 
     <!--- this is the genres button that shows the songs genres we have -->
     <div class="genreInfo" id="genres">
-        @if (@ViewBag.Pass_word != "")
+        @if (@ViewBag.Email != "")
         {
             <!-- Photo is from Pexels by cottonbro and the link is: https://www.pexels.com/photo/persons-hand-doing-peace-sign-4629625/ -->
             <div><img src="/Pictures/rock.jpg" id="rock" /><p id="info1">ROCK</p></div>
@@ -491,7 +510,7 @@
 
     <!-- below is the audio player -->
     <div id="audio_container">
-        @if (@ViewBag.Pass_word != "")
+        @if (@ViewBag.Email != "")
         {
             <audio controls id="audio_player" src="audio/demo.mp3">
                 <div>
@@ -510,7 +529,7 @@
         };
     </script>
 }
-@if (@ViewBag.Pass_word == "")
+@if (@ViewBag.Email == "")
 {
     <script>alert("Please log in again");</script>
 }
