@@ -55,19 +55,37 @@ namespace Muszilla.Controllers                                                  
             string ln = "";
             string url = "";
             string id = "";
+            string isGoogleUser = "";
             FetchPlaylistData();
             FetchSongData();
             GetListofPlaylistIDs();
             ConnectionString();
             acc.Pass_word = HashHelper.GetHashString(acc.Pass_word);
+
             con.Open();
             com.Connection = con;
-            com.CommandText = "select User_ID, Email, Pass_word, FirstName, LastName, Picture, isGoogleUser from Consumer where Email = '" + acc.Email + "' and Pass_word = '" + acc.Pass_word + "'";
+            com.CommandText = "select isGoogleUser from dbo.Consumer where Email = '" + acc.Email + "'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
-                if (dr["isGoogleUser"].ToString() == "0")
+                isGoogleUser = dr["isGoogleUser"].ToString();
+            }
+            con.Close();
+
+            if (isGoogleUser.Contains("1"))
+            {
+                ViewBag.Message = "Please login using Google";
+                return View("Index");
+            }
+            else
+            {
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "select User_ID, Email, Pass_word, FirstName, LastName, Picture, isGoogleUser from Consumer where Email = '" + acc.Email + "' and Pass_word = '" + acc.Pass_word + "'";
+                dr = com.ExecuteReader();
+                if (dr.Read())
                 {
+
                     fn = dr["FirstName"].ToString();
                     ln = dr["LastName"].ToString();
                     url = dr["Picture"].ToString();
@@ -79,24 +97,18 @@ namespace Muszilla.Controllers                                                  
                     HttpContext.Session.SetString("FirstName", fn);
                     HttpContext.Session.SetString("LastName", ln);
                     HttpContext.Session.SetString("Picture", url);
-
+                    HttpContext.Session.SetString("isGoogleUser", isGoogleUser);
 
                     return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel));
+
                 }
                 else
                 {
                     con.Close();
-                    ViewBag.Message = "Please login using Google";
+                    ViewBag.Message = "Email or Password Incorrect";
                     return View("Index");
                 }
-
-            }
-            else
-            {
-                con.Close();
-                ViewBag.Message = "Email or Password Incorrect";
-                return View("Index");
-            }
+            } 
         }
 
         public IActionResult Homepage() // Gets all the strings to show the user's information in their session
@@ -109,6 +121,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 GetListofPlaylistIDs();
                 FetchPlaylistData();
                 FetchSongData();
@@ -160,6 +173,7 @@ namespace Muszilla.Controllers                                                  
                     ViewBag.LastName = HttpContext.Session.GetString("LastName");
                     ViewBag.Picture = HttpContext.Session.GetString("Picture");
                     ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                    ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                     FetchPlaylistData();
                     FetchSongData();
                 }
@@ -209,6 +223,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
             }
@@ -342,6 +357,7 @@ namespace Muszilla.Controllers                                                  
                     HttpContext.Session.SetString("FirstName", FirstName);
                     HttpContext.Session.SetString("LastName", LastName);
                     HttpContext.Session.SetString("Picture", ImageURL);
+                    HttpContext.Session.SetString("isGoogleUser", "1");
 
 
                     return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel));
@@ -368,6 +384,7 @@ namespace Muszilla.Controllers                                                  
                 HttpContext.Session.SetString("FirstName", FirstName);
                 HttpContext.Session.SetString("LastName", LastName);
                 HttpContext.Session.SetString("Picture", ImageURL);
+                HttpContext.Session.SetString("isGoogleUser", "1");
 
 
                 return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel));
@@ -386,6 +403,7 @@ namespace Muszilla.Controllers                                                  
             HttpContext.Session.SetString("Picture", empty);
             HttpContext.Session.SetString("CurrentPlaylistID", empty);
             HttpContext.Session.SetString("CurrentSearchQuery", empty);
+            HttpContext.Session.SetString("isGoogleUser", empty);
             ViewBag.Message = "Log out successful!";
             return View("Index");
         }
@@ -514,6 +532,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
             }
@@ -570,6 +589,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
             }
@@ -626,6 +646,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
             }
@@ -678,6 +699,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.LastName = HttpContext.Session.GetString("LastName");
                 ViewBag.Picture = HttpContext.Session.GetString("Picture");
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
             }

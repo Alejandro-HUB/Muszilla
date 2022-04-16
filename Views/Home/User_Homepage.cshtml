@@ -359,13 +359,16 @@
                 </p>
                 <p id="edit_three">(Click to edit)</p>
 
-                <p id="p">
-                    Password:
-                    <!-- this gets the user's password-->
-                <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
-                    <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
-                </p>
-                <p id="edit_four">(Click to edit)</p>
+                if (@ViewBag.isGoogleUser.ToString().Contains("0"))
+                {
+                    <p id="p">
+                        Password:
+                        <!-- this gets the user's password-->
+                        <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
+                        <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
+                    </p>
+                    <p id="edit_four">(Click to edit)</p>
+                }
 
                 <button type="submit" value="Save" onclick="" id="saveInfo" class="savebtn">Save Changes</button>
             }
