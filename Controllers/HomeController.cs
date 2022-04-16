@@ -370,6 +370,32 @@ namespace Muszilla.Controllers                                                  
                 {
                     con.Open();
                     com.Connection = con;
+
+                    if (FirstName != null)
+                    {
+                        com.CommandText = "update Consumer set FirstName = '" + FirstName + "'  where User_ID ='" + ID + "'";
+                        com.ExecuteNonQuery();
+                    }
+                    if (LastName != null)
+                    {
+                        com.CommandText = "update Consumer set LastName = '" + LastName + "'  where User_ID ='" + ID + "'";
+                        com.ExecuteNonQuery();
+                    }
+                    if (ImageURL != null)
+                    {
+                        com.CommandText = "update Consumer set Picture = '" + ImageURL + "'  where User_ID ='" + ID + "'";
+                        com.ExecuteNonQuery();
+                    }
+                    if (email != null)
+                    {
+                        com.CommandText = "update Consumer set Email = '" + email + "'  where User_ID ='" + ID + "'";
+                        com.ExecuteNonQuery();
+                    }
+
+                    con.Close();
+
+                    con.Open();
+                    com.Connection = con;
                     com.CommandText = "select User_ID from dbo.Consumer where Email = '" + email + "'";
                     dr = com.ExecuteReader();
                     if (dr.Read())
