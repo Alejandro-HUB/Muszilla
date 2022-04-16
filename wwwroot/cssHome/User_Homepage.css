@@ -542,11 +542,10 @@ input {
 #AddToPlaylist {
     border: none;
     box-shadow: none;
-    font-family: helvetica;
-    font-weight: normal;
-    top: 100px;
-    margin-left: 500px;
+    font-weight: bold;
+    margin: 30px auto;
     color: white;
+    text-align: center;
 }
 
 #PlaylistName {
