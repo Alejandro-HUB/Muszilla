@@ -253,6 +253,27 @@ function deleteSongs(songToDeleteID, songNameDelete) {
     }); 
 }
 
+function deletePlaylists(PlaylistToDeleteID, PlaylistNameDelete) {
+
+    $.ajax({
+        type: "POST",
+        url: '/Home/deletePlaylist',
+        dataType: "html",
+        data: {
+            deletePlaylist: PlaylistToDeleteID,
+            PlaylistName: PlaylistNameDelete
+        },
+        success: function (data) {
+            alert("Deleting playlist: " + PlaylistNameDelete);
+            window.location.reload();
+        },
+        error: function (jqXHR, textStatus) {
+            //alert(textStatus);
+        }
+
+    });
+}
+
 
 function AddSongToPlaylist(songToAddAudio, songNameAdd) {
     document.getElementById("songsdefault").style.display = "none";

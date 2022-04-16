@@ -650,6 +650,34 @@ input {
         outline: 0;
     }
 
+.deletePlaylists {
+    text-align: center;
+    width: 30px;
+    position: absolute;
+    border: 2px solid #33CCFF;
+    font-weight: bold;
+    background: rgba(0,0,0);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: -23px;
+    margin-left: 780px;
+    float: right;
+    height: 30px;
+    background-image: url("/Pictures/trash.png");
+    background-size: cover;
+}
+    .deletePlaylists:hover {
+        background-image: url("/Pictures/trash_init.png");
+        color: #fff;
+        border: 2px solid white;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .deletePlaylists:focus {
+        outline: 0;
+    }
+
 .DeleteButton {
     text-align: center;
     width: 30px;
@@ -1019,6 +1047,7 @@ ul.items {
     margin-left: 20px;
     width: 897px;
     height: 160px;
+    position:absolute;
     overflow-y: auto;
     overflow-x: hidden;
 }

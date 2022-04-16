@@ -138,6 +138,9 @@
                                 <td onclick="showSongs('@result', '@item.Playlist_ID', '@item.Playlist_Name');">
                                     @Html.DisplayFor(modelItem => item.Playlist_Name)
                                     <span id="@item.Playlist_ID@item.Playlist_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Playlist_Name)</span>
+                                    <div>
+                                        <button value="Delete" onclick="deletePlaylists('@item.Playlist_ID', '@item.Playlist_Name')" type="submit" id="" class="deletePlaylists"></button>
+                                    </div>
                                 </td>
                             }
                         </tr>

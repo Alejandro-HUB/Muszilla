@@ -207,7 +207,54 @@ namespace Muszilla.Controllers                                                  
             }
         }
 
+        [HttpPost]
+        public string deletePlaylist(string deletePlaylist, string PlaylistName)
+        {
+            ConnectionString();
 
+            //Repopulate data so it is not null
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("Email");
+                ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
+                ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
+                ViewBag.LastName = HttpContext.Session.GetString("LastName");
+                ViewBag.Picture = HttpContext.Session.GetString("Picture");
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
+                FetchPlaylistData();
+                FetchSongData();
+            }
+            try
+            {
+                con.Open();
+                com.Connection = con;
+
+                if (!string.IsNullOrEmpty(deletePlaylist))
+                {
+                    com.CommandText = "delete from dbo.Songs_Users where Song_Playlist_ID = '" + deletePlaylist + "'";
+
+                    com.ExecuteNonQuery();
+                    con.Close();
+
+                    con.Open();
+                    com.CommandText = "delete from dbo.Playlist where Playlist_ID = '" + deletePlaylist + "'";
+                    com.ExecuteNonQuery();
+                    con.Close();
+                }
+                else
+                {
+                    con.Close();
+                }
+                ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+                ViewBag.Message = "Deleted playlist: " + PlaylistName;
+                return deletePlaylist;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         [HttpPost]
         public string deleteSong(string deleteSong, string songName)
