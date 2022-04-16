@@ -365,3 +365,7 @@ function anotherSong() {
     li.appendChild(document.createTextNode('Another Song'));
     document.getElementById("moreSongs").appendChild(li);
 }
+
+function downloadSong(song) {
+    window.open(song, '_blank');
+}

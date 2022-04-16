@@ -262,6 +262,7 @@
                                 <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
                                 <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
                                 <div>
+                                    <button value="Add" onclick="downloadSong('@item.Song_Audio')" type="button" id="" class="DownloadButton"></button>
                                     <button value="Delete" onclick="deleteSongs('@item.Song_ID', '@item.Song_Name')" type="submit" id="" class="DeleteButton"></button>
                                 </div>
                             </td>
@@ -414,6 +415,7 @@
                                 <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
                                 <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
                                 <div>
+                                    <button value="Add" onclick="downloadSong('@item.Song_Audio')" type="button" id="" class="DownloadButton"></button>
                                     <button value="Add" onclick="AddSongToPlaylist('@item.Song_Audio', '@item.Song_Name')" type="button" id="" class="AddButton"></button>
                                 </div>
                             </td>
