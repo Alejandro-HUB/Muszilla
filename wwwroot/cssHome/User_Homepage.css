@@ -588,26 +588,55 @@ input {
         outline: 0;
     }
 
-.DeleteButton {
+.AddButton {
     text-align: center;
-    background-color: black;
-    border: 2px solid #33CCFF;
-    border-radius: 30px;
-    width: 70px;
+    width: 30px;
     position: absolute;
-    background-color: #33CCFF;
-    color: black;
+    border: 2px solid #33CCFF;
     font-weight: bold;
+    background: rgba(0,0,0);
     text-decoration: none;
     font-size: 14px;
-    margin-top: -20px;
-    margin-left: 750px;
+    margin-top: -23px;
+    margin-left: 780px;
     float: right;
-    height:fit-content;
+    height: 30px;
+    background-image: url("/Pictures/crossicon.png");
+    background-size: cover;
 }
-    .DeleteButton:hover {
-        background: #33CCFF;
+    .AddButton:hover {
+        background-image: url("/Pictures/crossicon_init.png");
         color: #fff;
+        border: 2px solid white;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .AddButton:focus {
+        outline: 0;
+    }
+
+.DeleteButton {
+    text-align: center;
+    width: 30px;
+    position: absolute;
+    border: 2px solid #33CCFF;
+    font-weight: bold;
+    background: rgba(0,0,0);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: -23px;
+    margin-left: 780px;
+    float: right;
+    height: 30px;
+    background-image: url("/Pictures/trash.png");
+    background-size: cover;
+}
+
+    .DeleteButton:hover {
+        background-image: url("/Pictures/trash_init.png");
+        color: #fff;
+        border: 2px solid white;
         cursor: pointer;
         box-shadow: none;
     }
