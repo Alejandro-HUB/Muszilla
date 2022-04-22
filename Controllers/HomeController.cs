@@ -372,6 +372,7 @@ namespace Muszilla.Controllers                                                  
         {
             string connection = Muszilla.Properties.Resources.ConnectionString;
             string ID = string.Empty;
+            string picture = string.Empty;
 
             if (!dBHelper.ContainsGoogleUser(email))
             {
@@ -391,11 +392,12 @@ namespace Muszilla.Controllers                                                  
 
                     con.Open();
                     com.Connection = con;
-                    com.CommandText = "select User_ID from dbo.Consumer where Email = '" + email + "'";
+                    com.CommandText = "select User_ID, Picture from dbo.Consumer where Email = '" + email + "'";
                     dr = com.ExecuteReader();
                     if (dr.Read())
                     {
                         ID = dr["User_ID"].ToString();
+                        picture = dr["Picture"].ToString();
                     }
                     con.Close();
 
@@ -443,20 +445,39 @@ namespace Muszilla.Controllers                                                  
 
                     con.Open();
                     com.Connection = con;
-                    com.CommandText = "select User_ID from dbo.Consumer where Email = '" + email + "'";
+                    com.CommandText = "select User_ID, Picture from dbo.Consumer where Email = '" + email + "'";
                     dr = com.ExecuteReader();
                     if (dr.Read())
                     {
                         ID = dr["User_ID"].ToString();
+                        picture = dr["Picture"].ToString();
                     }
                     con.Close();
+                }
+
+                if (string.IsNullOrEmpty(ImageURL))
+                {
+                    HttpContext.Session.SetString("Picture", picture);
+                }
+                else if (picture != ImageURL && !string.IsNullOrEmpty(ImageURL))
+                {
+                    con.Open();
+                    com.Connection = con;
+                    com.CommandText = "UPDATE Consumer SET Picture = '" + ImageURL + "' where Email = '" + email + "'";
+                    dr = com.ExecuteReader();
+                    com.ExecuteNonQuery();
+                    con.Close();
+                    HttpContext.Session.SetString("Picture", ImageURL);
+                }
+                else
+                {
+                    HttpContext.Session.SetString("Picture", ImageURL);
                 }
 
                 HttpContext.Session.SetString("User_ID", ID);
                 HttpContext.Session.SetString("Email", email);
                 HttpContext.Session.SetString("FirstName", FirstName);
                 HttpContext.Session.SetString("LastName", LastName);
-                HttpContext.Session.SetString("Picture", ImageURL);
                 HttpContext.Session.SetString("isGoogleUser", "1");
 
 

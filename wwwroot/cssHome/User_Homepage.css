@@ -595,17 +595,17 @@ input {
 
 .AddButton {
     text-align: center;
-    width: 30px;
     position: absolute;
     border: 2px solid #33CCFF;
     font-weight: bold;
     background: rgba(0,0,0);
     text-decoration: none;
     font-size: 14px;
-    margin-top: -23px;
+    margin-top: -20.5px;
     margin-left: 780px;
     float: right;
-    height: 30px;
+    height: 25px;
+    width: 25px;
     background-image: url("/Pictures/crossicon.png");
     background-size: cover;
 }
@@ -621,19 +621,48 @@ input {
         outline: 0;
     }
 
-.DownloadButton {
+.PlayButton {
     text-align: center;
-    width: 30px;
     position: absolute;
     border: 2px solid #33CCFF;
     font-weight: bold;
     background: rgba(0,0,0);
     text-decoration: none;
     font-size: 14px;
-    margin-top: -23px;
+    margin-top: -20.5px;
+    margin-left: 700px;
+    float: right;
+    height: 25px;
+    width: 25px;
+    background-image: url("/Pictures/playicon.png");
+    background-size: cover;
+}
+
+    .PlayButton:hover {
+        background-image: url("/Pictures/playicon_init.png");
+        color: #fff;
+        border: 2px solid white;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .PlayButton:focus {
+        outline: 0;
+    }
+
+.DownloadButton {
+    text-align: center;
+    position: absolute;
+    border: 2px solid #33CCFF;
+    font-weight: bold;
+    background: rgba(0,0,0);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: -20.5px;
     margin-left: 740px;
     float: right;
-    height: 30px;
+    height: 25px;
+    width: 25px;
     background-image: url("/Pictures/download.png");
     background-size: cover;
 }
@@ -652,17 +681,17 @@ input {
 
 .deletePlaylists {
     text-align: center;
-    width: 30px;
     position: absolute;
     border: 2px solid #33CCFF;
     font-weight: bold;
     background: rgba(0,0,0);
     text-decoration: none;
     font-size: 14px;
-    margin-top: -23px;
+    margin-top: -20.5px;
     margin-left: 780px;
     float: right;
-    height: 30px;
+    height: 25px;
+    width: 25px;
     background-image: url("/Pictures/trash.png");
     background-size: cover;
 }
@@ -680,17 +709,17 @@ input {
 
 .DeleteButton {
     text-align: center;
-    width: 30px;
     position: absolute;
     border: 2px solid #33CCFF;
     font-weight: bold;
     background: rgba(0,0,0);
     text-decoration: none;
     font-size: 14px;
-    margin-top: -23px;
+    margin-top: -20.5px;
     margin-left: 780px;
     float: right;
-    height: 30px;
+    height: 25px;
+    width: 25px;
     background-image: url("/Pictures/trash.png");
     background-size: cover;
 }
@@ -852,6 +881,7 @@ tr, td {
     box-shadow: 0px 0px 5px 3px #33CCFF;
 }
 
+/*
     .container3 td:hover, .container3 td:focus {
         font-size: 15px;
         color: #33CCFF;
@@ -859,6 +889,7 @@ tr, td {
         border: 3px solid white;
         box-shadow: 0px 0px 5px 3px white;
     }
+*/
 
 .container3 li {
     margin-left: 10px;
@@ -950,6 +981,7 @@ tr, td {
     box-shadow: 0px 0px 5px 3px #33CCFF;
 }
 
+    /*
     .container1 td:hover, .container1 td:focus {
         font-size: 15px;
         color: #33CCFF;
@@ -957,7 +989,7 @@ tr, td {
         border: 3px solid white;
         box-shadow: 0px 0px 5px 3px white;
     }
-
+*/
     .container1 li {
         margin-left: 10px;
         margin-bottom: 12px;
