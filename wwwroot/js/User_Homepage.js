@@ -57,7 +57,7 @@ function showAccount() {
     document.getElementById("account_screen").style.display = "initial";
 }
 
-//this function displays these default songs when a user searches something
+//this function displays songs when a user searches something
 function showSearchedSong() {
 
     document.getElementById("list_search_songs").style.display = "initial";
@@ -73,7 +73,8 @@ var aAudio;
 var bAudio;
 
 //in this function a song name is passed, which is played in the audio player and also showed in the now playing area
-function myAudioFunction1(song, id, audio) {
+function myAudioFunction1(song, id, audio, notUserPlaylistSong) {
+
     var check = document.getElementById(id + song).innerHTML;
     var audio = document.getElementById(id + audio).innerHTML;
 
@@ -85,104 +86,47 @@ function myAudioFunction1(song, id, audio) {
         player.play();
         document.getElementById('song-name').innerHTML = check;
     }
+
+    if(notUserPlaylistSong === "true")
+    {
+        $.ajax({
+            type: "POST",
+            url: '/Home/UpdateSongPlayed',
+            dataType: "html",
+            data: {
+                SongID: id
+            },
+            success: function (data) {
+            },
+            error: function (jqXHR, textStatus) {
+                //alert(textStatus);
+            }
+
+        });
+    }
 }
 
-function playSong(song, audio) {
+function playSong(song, audio, id) {
     aAudio = audio;
     player = document.getElementById('audio_player');
     player.src = aAudio;
     player.play();
     document.getElementById('song-name').innerHTML = song;
-}
 
-function localAudio(song) {
-    if (song == 'Buddy') {
-        aAudio = '/Music/buddy.mp3';
-        player = document.getElementById('audio_player');
-        player.src = aAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'Buddy - By BenSound';
-    }
+    $.ajax({
+        type: "POST",
+        url: '/Home/UpdateSongPlayed',
+        dataType: "html",
+        data: {
+            songID: id
+        },
+        success: function (data) {
+        },
+        error: function (jqXHR, textStatus) {
+            //alert(textStatus);
+        }
 
-    else if (song == 'Cute') {
-        aAudio = '/Music/cute.mp3';
-        player = document.getElementById('audio_player');
-        player.src = aAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'Cute - By BenSound';
-    }
-
-    else if (song == 'Going Higher') {
-        aAudio = '/Music/goinghigher.mp3';
-        player = document.getElementById('audio_player');
-        player.src = aAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'Going Higher - By BenSound';
-    }
-
-    else if (song == 'Little Idea') {
-        aAudio = '/Music/littleidea.mp3';
-        player = document.getElementById('audio_player');
-        player.src = aAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'Little Idea - By BenSound';
-    }
-
-    else if (song == 'Ukulele') {
-        aAudio = '/Music/ukulele.mp3';
-        player = document.getElementById('audio_player');
-        player.src = aAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'Ukulele - By BenSound';
-    }
-
-    else if (song == 'Acoustic Breeze') {
-        bAudio = '/Music/acousticbreeze.mp3';
-        player = document.getElementById('audio_player');
-        player.src = bAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'Acoustic Breeze - By BenSound';
-    }
-
-    else if (song == 'DubStep') {
-        bAudio = '/Music/dubstep.mp3';
-        player = document.getElementById('audio_player');
-        player.src = bAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'DubStep - By BenSound';
-    }
-
-    else if (song == 'Energy') {
-        bAudio = '/Music/energy.mp3';
-        player = document.getElementById('audio_player');
-        player.src = bAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'Energy - By BenSound';
-    }
-
-    else if (song == 'Memories') {
-        bAudio = '/Music/memories.mp3';
-        player = document.getElementById('audio_player');
-        player.src = bAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'Memories - By BenSound';
-    }
-
-    else if (song == 'Slow Motion') {
-        bAudio = '/Music/slowmotion.mp3';
-        player = document.getElementById('audio_player');
-        player.src = bAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'Slow Motion - By BenSound';
-    }
-
-    else if (song == 'Jazzy Frenchy') {
-        bAudio = '/Music/jazzyfrenchy.mp3';
-        player = document.getElementById('audio_player');
-        player.src = bAudio;
-        player.play();
-        document.getElementById('song-name').innerHTML = 'Jazzy Frenchy - By BenSound';
-    }
+    });
 }
 
 //this function is for the user's image URL
@@ -225,14 +169,6 @@ searchbutton.addEventListener("click", function () {
         showSearchedSong();
     }
 });
-
-//this will show the default list of songs in the default playlist
-function showSongsDefault() {
-
-    document.getElementById("songsdefault").style.display = "initial";
-    document.getElementById("home_first").style.display = "none";
-    document.getElementById("PlaylistsFromDB").style.display = "none";
-}
 
 function deleteSongs(songToDeleteID, songNameDelete) {
 
@@ -283,6 +219,7 @@ function AddSongToPlaylist(songToAddAudio, songNameAdd) {
     document.getElementById("loading").style.display = "hidden";
     document.getElementById("PlaylistsFromDB").style.display = "none";
     document.getElementById("featured").style.display = "none";
+    document.getElementById("topPicks").style.display = "none";
     document.getElementById("list_add_songs_to_playlist").style.display = "initial";
     sessionStorage.setItem("songAudioAdd", songToAddAudio);
     sessionStorage.setItem("songNameAdd", songNameAdd);

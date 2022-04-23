@@ -87,7 +87,7 @@
         <div>
             <button type="button" class="btn1" onclick="showTopPicks()" id="tp"> TOP PICKS </button>
             <button type="button" class="btn2" onclick="showFeatured()" id="feat"> FEATURED </button>
-            <button type="button" class="btn3" onclick="showGenres()" id="gen"> GENRES </button>
+            <!--<button type="button" class="btn3" onclick="showGenres()" id="gen"> GENRES </button>-->
         </div>
     }
 
@@ -247,7 +247,7 @@
                                 <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
                                 <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
                                 <div>
-                                    <button value="Play" onclick="myAudioFunction1('@item.Song_Name', '@item.Song_ID', '@item.Song_Audio')" type="button" id="" class="PlayButton"></button>
+                                    <button value="Play" onclick="myAudioFunction1('@item.Song_Name', '@item.Song_ID', '@item.Song_Audio', 'false')" type="button" id="" class="PlayButton"></button>
                                     <button value="Add" onclick="downloadSong('@item.Song_Audio')" type="button" id="" class="DownloadButton"></button>
                                     <button value="Delete" onclick="deleteSongs('@item.Song_ID', '@item.Song_Name')" type="submit" id="" class="DeleteButton"></button>
                                 </div>
@@ -430,7 +430,7 @@
                                 <span id="@item.Song_ID@item.Song_Name" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Name)</span>
                                 <span id="@item.Song_ID@item.Song_Audio" style="display: none;" class="resize">@Html.DisplayFor(modelItem => item.Song_Audio)</span>
                                 <div>
-                                    <button value="Play" onclick="myAudioFunction1('@item.Song_Name', '@item.Song_ID', '@item.Song_Audio')" type="button" id="" class="PlayButton"></button>
+                                    <button value="Play" onclick="myAudioFunction1('@item.Song_Name', '@item.Song_ID', '@item.Song_Audio', 'true')" type="button" id="" class="PlayButton"></button>
                                     <button value="Download" onclick="downloadSong('@item.Song_Audio')" type="button" id="" class="DownloadButton"></button>
                                     <button value="Add" onclick="AddSongToPlaylist('@item.Song_Audio', '@item.Song_Name')" type="button" id="" class="AddButton"></button>
                                 </div>
@@ -480,12 +480,23 @@
         @if (@ViewBag.Email != "")
         {
             <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
-            <a onclick="localAudio('Acoustic Breeze')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">Acoustic Breeze</p></a>
-            <a onclick="localAudio('DubStep')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">DubStep</p></a>
-            <a onclick="localAudio('Energy')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">Energy</p></a>
-            <a onclick="localAudio('Memories')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">Memories</p></a>
-            <a onclick="localAudio('Slow Motion')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">Slow Motion</p></a>
-            <a onclick="localAudio('Jazzy Frenchy')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">Jazzy Frenchy</p></a>
+            <a onclick="playSong('@Model.Item3.TopPicked[0].Song_Name', '@Model.Item3.TopPicked[0].Song_Audio', '@Model.Item3.TopPicked[0].Song_ID')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">@Model.Item3.TopPicked[0].Song_Name</p></a>
+            <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.TopPicked[0].Song_Audio', '@Model.Item3.TopPicked[0].Song_Name')" type="button" id="" class="AddButtonTabs1"></button>
+
+            <a onclick="playSong('@Model.Item3.TopPicked[1].Song_Name', '@Model.Item3.TopPicked[1].Song_Audio', '@Model.Item3.TopPicked[1].Song_ID')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">@Model.Item3.TopPicked[1].Song_Name</p></a>
+            <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.TopPicked[1].Song_Audio', '@Model.Item3.TopPicked[1].Song_Name')" type="button" id="" class="AddButtonTabs2"></button>
+
+            <a onclick="playSong('@Model.Item3.TopPicked[2].Song_Name', '@Model.Item3.TopPicked[2].Song_Audio', '@Model.Item3.TopPicked[2].Song_ID')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">@Model.Item3.TopPicked[2].Song_Name</p></a>
+            <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.TopPicked[2].Song_Audio', '@Model.Item3.TopPicked[2].Song_Name')" type="button" id="" class="AddButtonTabs3"></button>
+
+            <a onclick="playSong('@Model.Item3.TopPicked[3].Song_Name', '@Model.Item3.TopPicked[3].Song_Audio', '@Model.Item3.TopPicked[3].Song_ID')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">@Model.Item3.TopPicked[3].Song_Name</p></a>
+            <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.TopPicked[3].Song_Audio', '@Model.Item3.TopPicked[3].Song_Name')" type="button" id="" class="AddButtonTabs4"></button>
+
+            <a onclick="playSong('@Model.Item3.TopPicked[4].Song_Name', '@Model.Item3.TopPicked[4].Song_Audio', '@Model.Item3.TopPicked[4].Song_ID')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">@Model.Item3.TopPicked[4].Song_Name</p></a>
+            <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.TopPicked[4].Song_Audio', '@Model.Item3.TopPicked[4].Song_Name')" type="button" id="" class="AddButtonTabs5"></button>
+
+            <a onclick="playSong('@Model.Item3.TopPicked[5].Song_Name', '@Model.Item3.TopPicked[5].Song_Audio', '@Model.Item3.TopPicked[5].Song_ID')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">@Model.Item3.TopPicked[5].Song_Name</p></a>
+            <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.TopPicked[5].Song_Audio', '@Model.Item3.TopPicked[5].Song_Name')" type="button" id="" class="AddButtonTabs6"></button>
         }
     </div>
 
@@ -494,17 +505,22 @@
         @if (@ViewBag.Email != "")
         {
             <!-- Photo is from Pexels by Garrett Morrow and the Link is: https://www.pexels.com/photo/top-view-photo-of-black-wireless-headphones-1649771/  -->
-            <a onclick="playSong('@Model.Item3.Featured[0].Song_Name', '@Model.Item3.Featured[0].Song_Audio')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">@Model.Item3.Featured[0].Song_Name</p></a>
+            <a onclick="playSong('@Model.Item3.Featured[0].Song_Name', '@Model.Item3.Featured[0].Song_Audio', '@Model.Item3.Featured[0].Song_ID')"><img class="btn01" src="/Pictures/headPhones.jpg" /><p id="item1">@Model.Item3.Featured[0].Song_Name</p></a>
             <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.Featured[0].Song_Audio', '@Model.Item3.Featured[0].Song_Name')" type="button" id="" class="AddButtonTabs1"></button>
-            <a onclick="playSong('@Model.Item3.Featured[1].Song_Name', '@Model.Item3.Featured[1].Song_Audio')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">@Model.Item3.Featured[1].Song_Name</p></a>
+
+            <a onclick="playSong('@Model.Item3.Featured[1].Song_Name', '@Model.Item3.Featured[1].Song_Audio', '@Model.Item3.Featured[1].Song_ID')"><img class="btn02" src="/Pictures/headPhones.jpg" /><p id="item2">@Model.Item3.Featured[1].Song_Name</p></a>
             <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.Featured[1].Song_Audio', '@Model.Item3.Featured[1].Song_Name')" type="button" id="" class="AddButtonTabs2"></button>
-            <a onclick="playSong('@Model.Item3.Featured[2].Song_Name', '@Model.Item3.Featured[2].Song_Audio')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">@Model.Item3.Featured[2].Song_Name</p></a>
+
+            <a onclick="playSong('@Model.Item3.Featured[2].Song_Name', '@Model.Item3.Featured[2].Song_Audio', '@Model.Item3.Featured[2].Song_ID')"><img class="btn03" src="/Pictures/headPhones.jpg" /><p id="item3">@Model.Item3.Featured[2].Song_Name</p></a>
             <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.Featured[2].Song_Audio', '@Model.Item3.Featured[2].Song_Name')" type="button" id="" class="AddButtonTabs3"></button>
-            <a onclick="playSong('@Model.Item3.Featured[3].Song_Name', '@Model.Item3.Featured[3].Song_Audio')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">@Model.Item3.Featured[3].Song_Name</p></a>
+
+            <a onclick="playSong('@Model.Item3.Featured[3].Song_Name', '@Model.Item3.Featured[3].Song_Audio', '@Model.Item3.Featured[3].Song_ID')"><img class="btn04" src="/Pictures/headPhones.jpg" /><p id="item4">@Model.Item3.Featured[3].Song_Name</p></a>
             <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.Featured[3].Song_Audio', '@Model.Item3.Featured[3].Song_Name')" type="button" id="" class="AddButtonTabs4"></button>
-            <a onclick="playSong('@Model.Item3.Featured[4].Song_Name', '@Model.Item3.Featured[4].Song_Audio')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">@Model.Item3.Featured[4].Song_Name</p></a>
+
+            <a onclick="playSong('@Model.Item3.Featured[4].Song_Name', '@Model.Item3.Featured[4].Song_Audio', '@Model.Item3.Featured[4].Song_ID')"><img class="btn05" src="/Pictures/headPhones.jpg" /><p id="item5">@Model.Item3.Featured[4].Song_Name</p></a>
             <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.Featured[4].Song_Audio', '@Model.Item3.Featured[4].Song_Name')" type="button" id="" class="AddButtonTabs5"></button>
-            <a onclick="playSong('@Model.Item3.Featured[5].Song_Name', '@Model.Item3.Featured[5].Song_Audio')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">@Model.Item3.Featured[5].Song_Name</p></a>
+
+            <a onclick="playSong('@Model.Item3.Featured[5].Song_Name', '@Model.Item3.Featured[5].Song_Audio', '@Model.Item3.Featured[5].Song_ID')"><img class="btn06" src="/Pictures/headPhones.jpg" /><p id="item6">@Model.Item3.Featured[5].Song_Name</p></a>
             <button value="Add" onclick="AddSongToPlaylist('@Model.Item3.Featured[5].Song_Audio', '@Model.Item3.Featured[5].Song_Name')" type="button" id="" class="AddButtonTabs6"></button>
         }
     </div>

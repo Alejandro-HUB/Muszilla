@@ -59,6 +59,7 @@ namespace Muszilla.Controllers                                                  
             FetchPlaylistData();
             FetchSongData();
             FeaturedSongs();
+            TopPickedSongs();
             GetListofPlaylistIDs();
             ConnectionString();
             acc.Pass_word = HashHelper.GetHashString(acc.Pass_word);
@@ -114,9 +115,6 @@ namespace Muszilla.Controllers                                                  
 
         public void FeaturedSongs()
         {
-            FetchPlaylistData();
-            GetListofPlaylistIDs();
-
             List<SongsModel> songListFromDB = new List<SongsModel>();
             ConnectionString();
 
@@ -150,6 +148,41 @@ namespace Muszilla.Controllers                                                  
             }
         }
 
+        public void TopPickedSongs()
+        {
+            List<SongsModel> songListFromDB = new List<SongsModel>();
+            ConnectionString();
+
+            try
+            {
+
+                //Fetch songs
+                if (songListFromDB.Count > 0)
+                {
+                    songListFromDB.Clear();
+                }
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "select TOP(6) * from Songs order by TimesPlayed desc";
+                dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    songListFromDB.Add(new SongsModel()
+                    {
+                        Song_ID = dr["SongID"].ToString(),
+                        Song_Name = dr["SongName"].ToString(),
+                        Song_Audio = dr["SongAudio"].ToString()
+                    });
+                }
+                con.Close();
+                songsModel.TopPicked = songListFromDB;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public IActionResult Homepage() // Gets all the strings to show the user's information in their session
         {
             if (HttpContext.Session.GetString("Email") != null)
@@ -165,10 +198,43 @@ namespace Muszilla.Controllers                                                  
                 FetchPlaylistData();
                 FetchSongData();
                 FeaturedSongs();
+                TopPickedSongs();
                 return View("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
             }
             return View(Tuple.Create(consumer, storage, songsModel));
         }
+
+        [HttpPost]
+        public void UpdateSongPlayed(string songID)
+        {
+            int CountValue = 0;
+            string fromDB = string.Empty;
+
+            if (!string.IsNullOrEmpty(songID))
+            {
+                ConnectionString();
+
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "select TimesPlayed from Songs where SongID = '" + songID + "'";
+                dr = com.ExecuteReader();
+                if (dr.Read())
+                {
+                    fromDB = dr["TimesPlayed"].ToString();
+                }
+                con.Close();
+
+                CountValue = Int32.Parse(fromDB);
+                CountValue += 1;
+
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "update Songs set TimesPlayed = '" + CountValue + "'  where SongID ='" + songID + "'";
+                com.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
 
         [HttpPost]
         public string GetID(string dataID)
@@ -189,11 +255,13 @@ namespace Muszilla.Controllers                                                  
                 HttpContext.Session.SetString("CurrentPlaylistID", dataID);
                 FetchSongData();
                 FeaturedSongs();
+                TopPickedSongs();
                 jsonString = JsonSerializer.Serialize(songsModel.songsList);
                 return jsonString;
             }
             FetchSongData();
             FeaturedSongs();
+            TopPickedSongs();
             jsonString = JsonSerializer.Serialize(songsModel.songsList);
             return jsonString;
         }
@@ -219,6 +287,7 @@ namespace Muszilla.Controllers                                                  
                     FetchPlaylistData();
                     FetchSongData();
                     FeaturedSongs();
+                    TopPickedSongs();
                 }
                 try
                 {
@@ -268,6 +337,7 @@ namespace Muszilla.Controllers                                                  
                 FetchPlaylistData();
                 FetchSongData();
                 FeaturedSongs();
+                TopPickedSongs();
             }
             try
             {
@@ -318,6 +388,7 @@ namespace Muszilla.Controllers                                                  
                 FetchPlaylistData();
                 FetchSongData();
                 FeaturedSongs();
+                TopPickedSongs();
             }
             try
             {
@@ -553,6 +624,7 @@ namespace Muszilla.Controllers                                                  
             FetchPlaylistData();
             FetchSongData();
             FeaturedSongs();
+            TopPickedSongs();
             GetListofPlaylistIDs();
             id = HttpContext.Session.GetString("User_ID");
             ConnectionString();
@@ -676,6 +748,7 @@ namespace Muszilla.Controllers                                                  
                 FetchPlaylistData();
                 FetchSongData();
                 FeaturedSongs();
+                TopPickedSongs();
             }
 
             if (currentQuery != null)
@@ -734,6 +807,7 @@ namespace Muszilla.Controllers                                                  
                 FetchPlaylistData();
                 FetchSongData();
                 FeaturedSongs();
+                TopPickedSongs();
             }
 
             if (currentQuery != null)
@@ -792,6 +866,7 @@ namespace Muszilla.Controllers                                                  
                 FetchPlaylistData();
                 FetchSongData();
                 FeaturedSongs();
+                TopPickedSongs();
             }
 
 
@@ -846,6 +921,7 @@ namespace Muszilla.Controllers                                                  
                 FetchPlaylistData();
                 FetchSongData();
                 FeaturedSongs();
+                TopPickedSongs();
             }
 
 
