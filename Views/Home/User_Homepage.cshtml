@@ -450,6 +450,10 @@
         {
 
             <div class="container4">
+                @if (Model.Item4.Playlists == null || Model.Item4.Playlists.Count() == 0)
+                {
+                    <p class="PlaceholderAddPlaylist">No Playlists</p>
+                }
                 <table>
                     <tr Style="color: white;">
                         <th>

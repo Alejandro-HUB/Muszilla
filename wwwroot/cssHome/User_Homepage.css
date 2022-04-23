@@ -646,6 +646,21 @@ input {
     position: absolute;
 }
 
+.PlaceholderAddPlaylist {
+    text-align: center;
+    font-size: 14px;
+    left: 360px;
+    top: 100px;
+    width: 170px;
+    font-size: large;
+    color: gainsboro;
+    background-color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    position: absolute;
+}
+
 .PlayButton {
     text-align: center;
     position: absolute;
