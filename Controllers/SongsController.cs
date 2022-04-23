@@ -161,7 +161,7 @@ namespace Muszilla.Controllers
                                 }
 
                                 //Insert to MAIN Song Table
-                                string query2 = "insert into Songs(SongName, SongAudio) values('" + Song_Name + "', '" + url + "')";
+                                string query2 = "insert into Songs(SongName, SongAudio, TimesPlayed) values('" + Song_Name + "', '" + url + "', '0')";
                                 using (SqlCommand com = new SqlCommand(query2, con))
                                 {
                                     con.Open();
