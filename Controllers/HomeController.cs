@@ -937,6 +937,7 @@ namespace Muszilla.Controllers                                                  
                 if (!string.IsNullOrEmpty(songModelSearch.Song_Name))
                 {
                     com.CommandText = "select TOP(100) * from dbo.Songs where SongName like '%" + songModelSearch.Song_Name + "%' order by SongName";
+                    HttpContext.Session.SetString("CurrentSearchQuery", "select TOP(100) * from dbo.Songs where SongName like '%" + songModelSearch.Song_Name + "%'");
 
                     dr = com.ExecuteReader();
                     while (dr.Read())
