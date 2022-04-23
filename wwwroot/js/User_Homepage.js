@@ -87,6 +87,14 @@ function myAudioFunction1(song, id, audio) {
     }
 }
 
+function playSong(song, audio) {
+    aAudio = audio;
+    player = document.getElementById('audio_player');
+    player.src = aAudio;
+    player.play();
+    document.getElementById('song-name').innerHTML = song;
+}
+
 function localAudio(song) {
     if (song == 'Buddy') {
         aAudio = '/Music/buddy.mp3';
@@ -273,7 +281,8 @@ function AddSongToPlaylist(songToAddAudio, songNameAdd) {
     document.getElementById("home_first").style.display = "none";
     document.getElementById("loading").style.display = "none";
     document.getElementById("loading").style.display = "hidden";
-    document.getElementById("PlaylistsFromDB").style.display = "none"; 
+    document.getElementById("PlaylistsFromDB").style.display = "none";
+    document.getElementById("featured").style.display = "none";
     document.getElementById("list_add_songs_to_playlist").style.display = "initial";
     sessionStorage.setItem("songAudioAdd", songToAddAudio);
     sessionStorage.setItem("songNameAdd", songNameAdd);

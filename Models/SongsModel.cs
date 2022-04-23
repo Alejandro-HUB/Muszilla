@@ -18,6 +18,7 @@ namespace Muszilla.Models
         public string Song_Owner { get; set; }
         public List<SongsModel> songsList { get; set; }
         public List<SongsModel> searchedSongsList { get; set; }
+        public List<SongsModel> Featured { get; set; }
 
     }
 }

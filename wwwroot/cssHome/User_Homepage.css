@@ -246,7 +246,6 @@ input {
         color: #fff;
         border: solid #33CCFF;
         cursor: pointer;
-        top: 45px;
         outline: 0;
         box-shadow: none;
     }
@@ -281,7 +280,6 @@ input {
         color: #fff;
         border: solid #33CCFF;
         cursor: pointer;
-        top: 45px;
         outline: 0;
         box-shadow: none;
     }
@@ -317,7 +315,6 @@ input {
         color: #fff;
         border: solid #33CCFF;
         cursor: pointer;
-        top: 45px;
         outline: 0;
         box-shadow: none;
     }
@@ -422,6 +419,7 @@ input {
     width: 200px;
     text-align: center;
     left: 100px;
+    font-size: small;
 }
 
 #item2 {
@@ -431,6 +429,7 @@ input {
     width: 200px;
     text-align: center;
     left: 430px;
+    font-size: small;
 }
 
 #item3 {
@@ -440,6 +439,7 @@ input {
     width: 200px;
     text-align: center;
     left: 760px;
+    font-size: small;
 }
 
 
@@ -450,6 +450,7 @@ input {
     width: 200px;
     text-align: center;
     left: 100px;
+    font-size: small;
 }
 
 #item5 {
@@ -459,6 +460,7 @@ input {
     left: 430px;
     width: 200px;
     text-align: center;
+    font-size: small;
 }
 
 #item6 {
@@ -468,6 +470,7 @@ input {
     width: 200px;
     text-align: center;
     left: 760px;
+    font-size: small;
 }
 
 
@@ -623,6 +626,180 @@ input {
         outline: 0;
     }
 
+
+.AddButtonTabs1 {
+    text-align: center;
+    position: absolute;
+    border: 2px solid #33CCFF;
+    font-weight: bold;
+    background: rgba(0,0,0);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 235px;
+    margin-left: 310px;
+    float: right;
+    height: 25px;
+    width: 25px;
+    background-image: url("/Pictures/crossicon.png");
+    background-size: cover;
+}
+
+    .AddButtonTabs1:hover {
+        background-image: url("/Pictures/crossicon_init.png");
+        color: #fff;
+        border: 2px solid white;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .AddButtonTabs1:focus {
+        outline: 0;
+    }
+
+.AddButtonTabs2 {
+    text-align: center;
+    position: absolute;
+    border: 2px solid #33CCFF;
+    font-weight: bold;
+    background: rgba(0,0,0);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 235px;
+    margin-left: 630px;
+    float: right;
+    height: 25px;
+    width: 25px;
+    background-image: url("/Pictures/crossicon.png");
+    background-size: cover;
+}
+
+    .AddButtonTabs2:hover {
+        background-image: url("/Pictures/crossicon_init.png");
+        color: #fff;
+        border: 2px solid white;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .AddButtonTabs2:focus {
+        outline: 0;
+    }
+
+.AddButtonTabs3 {
+    text-align: center;
+    position: absolute;
+    border: 2px solid #33CCFF;
+    font-weight: bold;
+    background: rgba(0,0,0);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 235px;
+    margin-left: 960px;
+    float: right;
+    height: 25px;
+    width: 25px;
+    background-image: url("/Pictures/crossicon.png");
+    background-size: cover;
+}
+
+    .AddButtonTabs3:hover {
+        background-image: url("/Pictures/crossicon_init.png");
+        color: #fff;
+        border: 2px solid white;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .AddButtonTabs3:focus {
+        outline: 0;
+    }
+
+.AddButtonTabs4 {
+    text-align: center;
+    position: absolute;
+    border: 2px solid #33CCFF;
+    font-weight: bold;
+    background: rgba(0,0,0);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 470px;
+    margin-left: 310px;
+    float: right;
+    height: 25px;
+    width: 25px;
+    background-image: url("/Pictures/crossicon.png");
+    background-size: cover;
+}
+
+    .AddButtonTabs4:hover {
+        background-image: url("/Pictures/crossicon_init.png");
+        color: #fff;
+        border: 2px solid white;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .AddButtonTabs4:focus {
+        outline: 0;
+    }
+
+.AddButtonTabs5 {
+    text-align: center;
+    position: absolute;
+    border: 2px solid #33CCFF;
+    font-weight: bold;
+    background: rgba(0,0,0);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 470px;
+    margin-left: 630px;
+    float: right;
+    height: 25px;
+    width: 25px;
+    background-image: url("/Pictures/crossicon.png");
+    background-size: cover;
+}
+
+    .AddButtonTabs5:hover {
+        background-image: url("/Pictures/crossicon_init.png");
+        color: #fff;
+        border: 2px solid white;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .AddButtonTabs5:focus {
+        outline: 0;
+    }
+
+.AddButtonTabs6 {
+    text-align: center;
+    position: absolute;
+    border: 2px solid #33CCFF;
+    font-weight: bold;
+    background: rgba(0,0,0);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 470px;
+    margin-left: 960px;
+    float: right;
+    height: 25px;
+    width: 25px;
+    background-image: url("/Pictures/crossicon.png");
+    background-size: cover;
+}
+
+    .AddButtonTabs6:hover {
+        background-image: url("/Pictures/crossicon_init.png");
+        color: #fff;
+        border: 2px solid white;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    .AddButtonTabs6:focus {
+        outline: 0;
+    }
 
 .Placeholder {
     position: absolute;

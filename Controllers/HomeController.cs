@@ -58,6 +58,7 @@ namespace Muszilla.Controllers                                                  
             string isGoogleUser = "";
             FetchPlaylistData();
             FetchSongData();
+            FeaturedSongs();
             GetListofPlaylistIDs();
             ConnectionString();
             acc.Pass_word = HashHelper.GetHashString(acc.Pass_word);
@@ -111,6 +112,44 @@ namespace Muszilla.Controllers                                                  
             } 
         }
 
+        public void FeaturedSongs()
+        {
+            FetchPlaylistData();
+            GetListofPlaylistIDs();
+
+            List<SongsModel> songListFromDB = new List<SongsModel>();
+            ConnectionString();
+
+            try
+            {
+
+                //Fetch songs
+                if (songListFromDB.Count > 0)
+                {
+                    songListFromDB.Clear();
+                }
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "select TOP(6) * from Songs order by SongID desc";
+                dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    songListFromDB.Add(new SongsModel()
+                    {
+                        Song_ID = dr["SongID"].ToString(),
+                        Song_Name = dr["SongName"].ToString(),
+                        Song_Audio = dr["SongAudio"].ToString()
+                    });
+                }
+                con.Close();
+                songsModel.Featured = songListFromDB;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public IActionResult Homepage() // Gets all the strings to show the user's information in their session
         {
             if (HttpContext.Session.GetString("Email") != null)
@@ -125,6 +164,7 @@ namespace Muszilla.Controllers                                                  
                 GetListofPlaylistIDs();
                 FetchPlaylistData();
                 FetchSongData();
+                FeaturedSongs();
                 return View("User_Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
             }
             return View(Tuple.Create(consumer, storage, songsModel));
@@ -148,10 +188,12 @@ namespace Muszilla.Controllers                                                  
                 con.Close();
                 HttpContext.Session.SetString("CurrentPlaylistID", dataID);
                 FetchSongData();
+                FeaturedSongs();
                 jsonString = JsonSerializer.Serialize(songsModel.songsList);
                 return jsonString;
             }
             FetchSongData();
+            FeaturedSongs();
             jsonString = JsonSerializer.Serialize(songsModel.songsList);
             return jsonString;
         }
@@ -176,6 +218,7 @@ namespace Muszilla.Controllers                                                  
                     ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                     FetchPlaylistData();
                     FetchSongData();
+                    FeaturedSongs();
                 }
                 try
                 {
@@ -224,6 +267,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
+                FeaturedSongs();
             }
             try
             {
@@ -273,6 +317,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
+                FeaturedSongs();
             }
             try
             {
@@ -507,6 +552,7 @@ namespace Muszilla.Controllers                                                  
             string id = "";
             FetchPlaylistData();
             FetchSongData();
+            FeaturedSongs();
             GetListofPlaylistIDs();
             id = HttpContext.Session.GetString("User_ID");
             ConnectionString();
@@ -629,6 +675,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
+                FeaturedSongs();
             }
 
             if (currentQuery != null)
@@ -686,6 +733,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
+                FeaturedSongs();
             }
 
             if (currentQuery != null)
@@ -743,6 +791,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
+                FeaturedSongs();
             }
 
 
@@ -796,6 +845,7 @@ namespace Muszilla.Controllers                                                  
                 ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
                 FetchPlaylistData();
                 FetchSongData();
+                FeaturedSongs();
             }
 
 
