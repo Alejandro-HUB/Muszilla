@@ -16,8 +16,8 @@ body {
 }
 
 .GoogleIcon {
-    width:100px;
-    height:fit-content;
+    width: 100px;
+    height: fit-content;
     margin-left: 500px;
     margin-top: 290px;
 }
@@ -520,6 +520,7 @@ input {
     top: 100px;
     left: 350px;
 }
+
     #list_add_songs_to_playlist #results {
         border: none;
         box-shadow: none;
@@ -609,6 +610,7 @@ input {
     background-image: url("/Pictures/crossicon.png");
     background-size: cover;
 }
+
     .AddButton:hover {
         background-image: url("/Pictures/crossicon_init.png");
         color: #fff;
@@ -620,6 +622,29 @@ input {
     .AddButton:focus {
         outline: 0;
     }
+
+
+.Placeholder {
+    position: absolute;
+    margin-top: -200px;
+    margin-left: 250px;
+    block-size: fit-content;
+}
+
+.PlaceholderSongs {
+    text-align: center;
+    font-size: 14px;
+    left: 460px;
+    top: 240px;
+    width: 170px;
+    font-size:large;
+    color: gainsboro;
+    background-color: black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    position: absolute;
+}
 
 .PlayButton {
     text-align: center;
@@ -695,6 +720,7 @@ input {
     background-image: url("/Pictures/trash.png");
     background-size: cover;
 }
+
     .deletePlaylists:hover {
         background-image: url("/Pictures/trash_init.png");
         color: #fff;
@@ -967,19 +993,19 @@ tr, td {
     overflow-x: hidden;
 }
 
-.container1 td {
-    margin-left: 10px;
-    margin-bottom: 12px;
-    font-size: 14px;
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    color: white;
-    float: initial;
-    width: 850px;
-    border: 3px solid #33CCFF;
-    box-shadow: 0px 0px 5px 3px #33CCFF;
-}
+    .container1 td {
+        margin-left: 10px;
+        margin-bottom: 12px;
+        font-size: 14px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: white;
+        float: initial;
+        width: 850px;
+        border: 3px solid #33CCFF;
+        box-shadow: 0px 0px 5px 3px #33CCFF;
+    }
 
     /*
     .container1 td:hover, .container1 td:focus {
@@ -1079,7 +1105,7 @@ ul.items {
     margin-left: 20px;
     width: 897px;
     height: 160px;
-    position:absolute;
+    position: absolute;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -1105,26 +1131,26 @@ ul.items {
             box-shadow: 0px 0px 5px 3px white;
         }
 
-.container2 li {
-    margin-left: 10px;
-    margin-bottom: 12px;
-    font-size: 14px;
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    color: white;
-    float: initial;
-    width: 850px;
-    border: 3px solid #33CCFF;
-    box-shadow: 0px 0px 5px 3px #33CCFF;
-}
-
-    .container2 li:hover, .container2 li:focus {
-        color: #33CCFF;
-        cursor: pointer;
-        border: 3px solid white;
-        box-shadow: 0px 0px 5px 3px white;
+    .container2 li {
+        margin-left: 10px;
+        margin-bottom: 12px;
+        font-size: 14px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: white;
+        float: initial;
+        width: 850px;
+        border: 3px solid #33CCFF;
+        box-shadow: 0px 0px 5px 3px #33CCFF;
     }
+
+        .container2 li:hover, .container2 li:focus {
+            color: #33CCFF;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0px 0px 5px 3px white;
+        }
 
 ::-webkit-scrollbar {
     width: 7px;

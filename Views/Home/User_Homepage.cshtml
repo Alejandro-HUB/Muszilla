@@ -121,6 +121,10 @@
                 string result = "";
 
                 <div class="container2">
+                    @if (Model.Item4.Playlists.Count() == 0)
+                    {
+                        <p class="Placeholder">No Playlists</p>
+                    }
                     <table class="items">
                         <tr Style="color: white;">
                             <th>
@@ -128,7 +132,6 @@
                             </th>
                         </tr>
                         <tr Style="color: white;" class="items">
-                            <td onclick="showSongsDefault()">Playlist 1 (Default)</td>
                             @foreach (var item in Model.Item4.Playlists)
                             {
                                 //Populate list with PlaylistIDs
@@ -159,31 +162,6 @@
         }
     </div>
 
-
-    <!-- this is the default playlist for each user thta contains a default list of songs for testing -->
-    <div id="songsdefault">
-        @if (@ViewBag.Email != "")
-        {
-            <p id="PlaylistNameDefault">Playlist 1 (Default)</p>
-            <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
-
-            <div class="container3">
-                <ul class="items">
-                    <li onclick="localAudio('Going Higher')">Going Higher</li>
-                    <li onclick="localAudio('Ukulele')">Ukulele</li>
-                    <li onclick="localAudio('Memories')">Memories</li>
-                    <li onclick="localAudio('Jazzy Frenchy')">Jazzy Frenchy</li>
-                    <li onclick="localAudio('Energy')">Energy</li>
-                    <li onclick="localAudio('Acoustic Breeze')">Acoustic Breeze</li>
-                    <li onclick="localAudio('Little Idea')">Little Idea</li>
-                    <li onclick="localAudio('Slow Motion')">Slow Motion</li>
-                    <li onclick="localAudio('Buddy')">Buddy</li>
-                    <li onclick="localAudio('Cute')">Cute</li>
-                </ul>
-            </div>
-        }
-    </div>
-
     <!-- this is an empty playlist where the user can upload their songs and play them too -->
 
     <div id='PlaylistsFromDB' class="Playlists">
@@ -191,6 +169,10 @@
         {
             <!-- this is the back button that takes the user back to their homscreen-->
             <p id="PlaylistName"></p>
+            @if (Model.Item3.songsList.Count() == 0)
+            {
+                <p class="PlaceholderSongs">No Songs</p>
+            }
 
             <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
             <form class="form-horizontal" asp-action="Homepage">
@@ -351,27 +333,27 @@
                     <p id="f">
                         First Name:
                         <!-- this gets the user's first name-->
-                        <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
+                <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName">
                     </p>
                     <p id="edit_one">(Click to edit)</p>
 
                     <p id="l">
                         Last Name:
                         <!-- this gets the user's last name-->
-                        <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName">
+                <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName">
                     </p>
                     <p id="edit_two">(Click to edit)</p>
 
                     <p id="e">
                         Your Email:
                         <!-- this gets the user's email-->
-                        <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email">
+                <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email">
                     </p>
                     <p id="edit_three">(Click to edit)</p>
                     <p id="p">
                         Password:
                         <!-- this gets the user's password-->
-                        <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
+                <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control" type="password" style="color:white;" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
                         <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
                     </p>
                     <p id="edit_four">(Click to edit)</p>
@@ -379,22 +361,22 @@
                 else
                 {
                     <p id="f">
-                    First Name:
-                    <!-- this gets the user's first name-->
-                    <input id="fn" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName" readonly>
-                </p>
+                        First Name:
+                        <!-- this gets the user's first name-->
+                <input id="fn" type="text" autocomplete="off" style="color:white;" placeholder="@ViewBag.FirstName" readonly>
+                    </p>
 
-                <p id="l">
-                    Last Name:
-                    <!-- this gets the user's last name-->
-                    <input id="ln" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName" readonly>
-                </p>
+                    <p id="l">
+                        Last Name:
+                        <!-- this gets the user's last name-->
+                <input id="ln" class="form-control" type="text" autocomplete="off" style="color:white" placeholder="@ViewBag.LastName" readonly>
+                    </p>
 
-                <p id="e">
-                    Your Email:
-                    <!-- this gets the user's email-->
-                    <input id="UEmail" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email" readonly>
-                </p>
+                    <p id="e">
+                        Your Email:
+                        <!-- this gets the user's email-->
+                <input id="UEmail" class="form-control" type="email" autocomplete="off" style="color:white;" placeholder="@ViewBag.Email" readonly>
+                    </p>
                     <img id="" src="/Pictures/google.png" class="GoogleIcon" />
                 }
 
@@ -418,6 +400,10 @@
         </form>
         <p id="results">Your Search Results: </p>
         <button id="backtoplaylists" onclick="gobacktoplaylists()"> Go Back</button>
+        @if (Model.Item3.searchedSongsList == null || Model.Item3.searchedSongsList.Count() == 0)
+        {
+            <p class="PlaceholderSongs">Search for Songs</p>
+        }
         <main>
             <div class="box content" id="imageUpload">
                 <div>
@@ -429,7 +415,6 @@
         </main>
         @if (@ViewBag.Email != "" && Model.Item3.searchedSongsList != null)
         {
-
             <div class="container1">
                 <table>
                     <tr Style="color: white;">
