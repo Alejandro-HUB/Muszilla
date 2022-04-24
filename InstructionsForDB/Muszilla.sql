@@ -62,26 +62,12 @@ CREATE TABLE [dbo].[Songs](
 	[SongID] [int] IDENTITY(1,1) NOT NULL,
 	[SongName] [varchar](max) NULL,
 	[SongAudio] [varchar](max) NULL,
+	[TimesPlayed] [int] NULL,
  CONSTRAINT [PKSongs] PRIMARY KEY CLUSTERED 
 (
 	[SongID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[SongsPlaylistR]    Script Date: 4/22/2021 6:44:08 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[SongsPlaylistR](
-	[playlistID] [int] NOT NULL,
-	[songsID] [int] NOT NULL,
- CONSTRAINT [UQ__SongsPla__D33CFDCC64875F67] UNIQUE NONCLUSTERED 
-(
-	[songsID] ASC,
-	[playlistID] ASC
-)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[sysdiagrams]    Script Date: 4/22/2021 6:44:08 PM ******/
 SET ANSI_NULLS ON
