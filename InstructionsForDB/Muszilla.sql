@@ -103,15 +103,5 @@ REFERENCES [dbo].[Consumer] ([User_ID])
 GO
 ALTER TABLE [dbo].[Songs_Users] CHECK CONSTRAINT [FK_Songs_Owner]
 GO
-ALTER TABLE [dbo].[SongsPlaylistR]  WITH CHECK ADD  CONSTRAINT [FK__SongsPlay__playl__72C60C4A] FOREIGN KEY([playlistID])
-REFERENCES [dbo].[Playlist] ([Playlist_ID])
-GO
-ALTER TABLE [dbo].[SongsPlaylistR] CHECK CONSTRAINT [FK__SongsPlay__playl__72C60C4A]
-GO
-ALTER TABLE [dbo].[SongsPlaylistR]  WITH CHECK ADD  CONSTRAINT [FK__SongsPlay__songs__71D1E811] FOREIGN KEY([songsID])
-REFERENCES [dbo].[Songs_Users] ([Song_ID])
-GO
-ALTER TABLE [dbo].[SongsPlaylistR] CHECK CONSTRAINT [FK__SongsPlay__songs__71D1E811]
-GO
 EXEC sys.sp_addextendedproperty @name=N'microsoft_database_tools_support', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'sysdiagrams'
 GO
