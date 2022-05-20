@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConnectionString" xml:space="preserve">
-    <value>Data Source=aws-dev-alejandro.cbar8pduafgh.us-east-1.rds.amazonaws.com,1433;Initial Catalog=MuszillaDB;Persist Security Info=True;User ID=admin;Password=479638alM</value>
+    <value>Data Source=aws-dev-alejandro.cbar8pduafgh.us-east-1.rds.amazonaws.com,1433;Initial Catalog=MuszillaDB;Persist Security Info=True;User ID=admin;Password=*67cFeuqL$]xySKr</value>
     <comment>SQL Server Connection</comment>
   </data>
 </root>
