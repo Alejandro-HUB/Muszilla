@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using Azure.Storage.Blobs;
 
 namespace Muszilla.Controllers
 {
@@ -35,6 +36,7 @@ namespace Muszilla.Controllers
             string ImageName = "";
             string email = "";
             string id = "";
+            string pictureToDelete = "";
 
 
             try
@@ -126,6 +128,8 @@ namespace Muszilla.Controllers
                         {
                             email = HttpContext.Session.GetString("Email");
                             id = HttpContext.Session.GetString("User_ID");
+                            pictureToDelete= HttpContext.Session.GetString("Picture");
+                       
                             string query = "update Consumer set Picture = '" + url + "'  where Email ='" + email + "'";
                             using (SqlCommand com = new SqlCommand(query, con))
                             {
@@ -135,6 +139,7 @@ namespace Muszilla.Controllers
                                 con.Close();
                             }
                         }
+                        DeleteBlob(pictureToDelete);
                     }
                     else
                     {
@@ -150,6 +155,24 @@ namespace Muszilla.Controllers
                 return BadRequest(ex.Message);
             }
               
+        }
+        public void DeleteBlob(string deleteFile)
+        {
+             
+            BlobContainerClient containerC = new BlobContainerClient("DefaultEndpointsProtocol=https;AccountName=devstorageale;AccountKey=l2Fo6os7kVCIZZ992p5NavyHar3SjUMQStiV1Ac89NLSJOOTPu6RAlmf9QoRGnoILvPZpYYePFkl+AStmsx10w==;EndpointSuffix=core.windows.net", "muszilla");
+            var allBlobs = containerC.GetBlobs();
+            string[] nameFinder=deleteFile.Split('/');
+            string file2Del=nameFinder[nameFinder.GetUpperBound(0)];
+            foreach (var blob in allBlobs)
+            {
+                
+                if (blob.Name == file2Del) 
+                {
+                    var blobClient = containerC.GetBlobClient(blob.Name);
+                    blobClient.Delete();
+                }
+            }
+
         }
 
         // GET /api/images/thumbnails
