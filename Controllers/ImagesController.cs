@@ -18,7 +18,7 @@ namespace Muszilla.Controllers
         public string url = "";
         SqlConnection con = new SqlConnection();
         SqlCommand com = new SqlCommand();
-        SqlDataReader dr;
+        
         // make sure that appsettings.json is filled with the necessary details of the azure storage
         private readonly AzureStorageConfig storageConfig = null;
 
@@ -159,7 +159,7 @@ namespace Muszilla.Controllers
         public void DeleteBlob(string deleteFile)
         {
              
-            BlobContainerClient containerC = new BlobContainerClient("DefaultEndpointsProtocol=https;AccountName=devstorageale;AccountKey=l2Fo6os7kVCIZZ992p5NavyHar3SjUMQStiV1Ac89NLSJOOTPu6RAlmf9QoRGnoILvPZpYYePFkl+AStmsx10w==;EndpointSuffix=core.windows.net", "muszilla");
+            BlobContainerClient containerC = new BlobContainerClient(Muszilla.Properties.Resources.AzureContainerString, "muszilla");
             var allBlobs = containerC.GetBlobs();
             string[] nameFinder=deleteFile.Split('/');
             string file2Del=nameFinder[nameFinder.GetUpperBound(0)];

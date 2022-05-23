@@ -61,6 +61,15 @@ namespace Muszilla.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DefaultEndpointsProtocol=https;AccountName=devstorageale;AccountKey=l2Fo6os7kVCIZZ992p5NavyHar3SjUMQStiV1Ac89NLSJOOTPu6RAlmf9QoRGnoILvPZpYYePFkl+AStmsx10w==;EndpointSuffix=core.windows.net.
+        /// </summary>
+        internal static string AzureContainerString {
+            get {
+                return ResourceManager.GetString("AzureContainerString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data Source=aws-dev-alejandro.cbar8pduafgh.us-east-1.rds.amazonaws.com,1433;Initial Catalog=MuszillaDB;Persist Security Info=True;User ID=admin;Password=*67cFeuqL$]xySKr.
         /// </summary>
         internal static string ConnectionString {
