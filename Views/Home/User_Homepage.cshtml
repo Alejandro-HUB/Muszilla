@@ -186,7 +186,7 @@
             <main>
                 <div class="box content" id="imageUpload">
                     <div>
-                        <form action="/api/songs/upload" class="dropzone" id="image-upload" method="post" enctype="multipart/form">
+                        <form action="/api/songs/upload" class="dropzone" id="blob-upload" method="post" enctype="multipart/form">
                             <div class="dz-message needsclick">
                                 <span class="note needsclick">
                                     <input asp-for="Item3.Song_Audio" name="Picture" id="uploadsongs" class="form-control" placeholder="Upload" accept="audio/*">
@@ -210,19 +210,21 @@
                 fetchImageLinks()
                 /* Dropzone */
                 // "songUpload" is the camelized version of the HTML element's ID
-                Dropzone.options.imageUpload = {
+                Dropzone.options.blobUpload = {
                     addRemoveLinks: true,
                     paramName: "files", // The name that will be used to transfer the file
                     dictDefaultMessage: "Drop files here or Click to Upload",
                     createImageThumbnails: false,
                     dictRemoveFileConfirmation: false,
-
+                    
 
                     init: function () {
                         myDropzone = this;
                         myDropzone.on("success", function (file, response) {
+
                             file.previewElement.remove();
                             console.log("Success");
+                            
                         });
                     },
                     removedfile: function (file) {
@@ -272,54 +274,51 @@
                 <main>
                     <div class="box content" id="imageUpload">
                         <div>
-                            <form action="/api/images/upload"
-                          class="dropzone"
-                          id="image-upload"
-                          method="post"
-                          enctype="multipart/form">
+                            <form action="/api/images/upload" class="dropzone" id="imgUpload" method="post" enctype="multipart/form" onclick="return false">
                                 <div class="dz-message needsclick">
                                     <span class="note needsclick">
-                                        <input asp-for="Item1.Picture" name="Picture" class="form-control" accept="image/*">
+                                        <input asp-for="Item1.Picture" name="Picture" id="uploadimgs" class="form-control" accept="image/*" >
                                     </span>
                                 </div>
                             </form>
                         </div>
                     </div>
-                </main>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
-                <script>
-                        // Grab links for images from backend api
-                    function fetchImageLinks() {
-                        // Fetch images
-                        $.get(function (fetchedImageLinks) {
-                            console.log(fetchedImageLinks)
-                        });
-                    }
-                    // Start first interval
-                    fetchImageLinks()
-                    /* Dropzone */
-                    // "imageUpload" is the camelized version of the HTML element's ID
-                    Dropzone.options.imageUpload = {
-                        addRemoveLinks: true,
-                        paramName: "files", // The name that will be used to transfer the file
-                        dictDefaultMessage: "Drop files here or Click to Upload",
-                        createImageThumbnails: false,
-                        dictRemoveFileConfirmation: false,
+                    <script>
+                // Grab links for the songs from backend api
+                function fetchImageLinks() {
+                    // Fetch songs
+                    $.get(function (fetchedImageLinks) {
+                        console.log(fetchedImageLinks)
+                    });
+                }
+                // Start first interval
+                fetchImageLinks()
+                /* Dropzone */
+                // "songUpload" is the camelized version of the HTML element's ID
+                Dropzone.options.imgUpload = {
+                    addRemoveLinks: true,
+                    paramName: "files", // The name that will be used to transfer the file
+                    dictDefaultMessage: "Drop files here or Click to Upload",
+                    createImageThumbnails: false,
+                    dictRemoveFileConfirmation: false,
+                    
 
+                    init: function () {
+                        myDropzone = this;
+                        myDropzone.on("success", function (file, response) {
 
-                        init: function () {
-                            myDropzone = this;
-                            myDropzone.on("success", function (file, response) {
-                                file.previewElement.remove();
-                                console.log("Success");
-                            });
-                        },
-                        removedfile: function (file) {
                             file.previewElement.remove();
-                        }
-                    };
-                </script>
+                            console.log("Success");
+                            
+                        });
+                    },
+                    removedfile: function (file) {
+                        file.previewElement.remove();
+                    }
+                };
+            </script>
+                </main>
+
             }
             <!--This is the button to upload images-->
         }
