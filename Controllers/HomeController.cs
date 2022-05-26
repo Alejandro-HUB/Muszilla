@@ -5,13 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Muszilla.Models;
+using Alody.Models;
 using System.Data.SqlClient;
 using Sitecore.FakeDb;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Session;
 using Microsoft.Extensions.Options;
-using Muszilla.Helpers;
+using Alody.Helpers;
 using System.IO;
 using javax.jws;
 using com.sun.tools.@internal.ws.processor.model;
@@ -19,7 +19,7 @@ using System.Text.Json;
 using System.Data;
 using System.ComponentModel.DataAnnotations;
 
-namespace Muszilla.Controllers                                                            //**This controller handles the CRUD functionalities** By Alejandro Lopez
+namespace Alody.Controllers                                                            //**This controller handles the CRUD functionalities** By Alejandro Lopez
 {
     public class HomeController : Controller
     {
@@ -46,8 +46,8 @@ namespace Muszilla.Controllers                                                  
         }
         public void ConnectionString()
         {
-            con.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
-            connect.ConnectionString = Muszilla.Properties.Resources.ConnectionString;
+            con.ConnectionString = Alody.Properties.Resources.ConnectionString;
+            connect.ConnectionString = Alody.Properties.Resources.ConnectionString;
         }
         public IActionResult Verify(ConsumerModel acc, SongsModel song) //Checks if the user's email and password matches one inside the database
         {
@@ -454,7 +454,7 @@ namespace Muszilla.Controllers                                                  
         [HttpPost]
         public IActionResult Create(Register add) // Adding a new user inside the database
         {
-            string connection = Muszilla.Properties.Resources.ConnectionString;
+            string connection = Alody.Properties.Resources.ConnectionString;
             bool validEmail = false;
             if (new EmailAddressAttribute().IsValid(add.Email))
             {
@@ -486,7 +486,7 @@ namespace Muszilla.Controllers                                                  
         [HttpPost]
         public IActionResult GoogleLogin(string FirstName, string LastName, string ImageURL, string email) // Adding a new user inside the database
         {
-            string connection = Muszilla.Properties.Resources.ConnectionString;
+            string connection = Alody.Properties.Resources.ConnectionString;
             string ID = string.Empty;
             string picture = string.Empty;
 
@@ -673,7 +673,7 @@ namespace Muszilla.Controllers                                                  
             {
                 String id;
                 id = HttpContext.Session.GetString("User_ID");
-                string connection = Muszilla.Properties.Resources.ConnectionString;
+                string connection = Alody.Properties.Resources.ConnectionString;
 
                 using (SqlConnection con = new SqlConnection(connection))
                 {

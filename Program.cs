@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 
-namespace Muszilla
+namespace Alody
 {
     public class Program
     {

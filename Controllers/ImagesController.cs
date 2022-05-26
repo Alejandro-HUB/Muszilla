@@ -1,5 +1,5 @@
-using Muszilla.Helpers;
-using Muszilla.Models;
+using Alody.Helpers;
+using Alody.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Azure.Storage.Blobs;
 
-namespace Muszilla.Controllers
+namespace Alody.Controllers
 {
     [Route("api/[controller]")]
     public class ImagesController : Controller //This is the controller than handles the file upload 
@@ -94,7 +94,7 @@ namespace Muszilla.Controllers
                             {
                                 ImageName = formFile.FileName;
                             }
-                            url = "https://devstorageale.blob.core.windows.net/muszilla/" + ImageName;
+                            url = "https://devstorageale.blob.core.windows.net/Alody/" + ImageName;
 
                             if (formFile.Length > 0)
                             {
@@ -121,7 +121,7 @@ namespace Muszilla.Controllers
                 if (isUploaded&&isImage) //Upload procedure for an image
                 {
                    
-                    string connection = Muszilla.Properties.Resources.ConnectionString;
+                    string connection = Alody.Properties.Resources.ConnectionString;
                     if (HttpContext.Session.GetString("Email") != null)
                     {
                         using (SqlConnection con = new SqlConnection(connection))
@@ -159,7 +159,7 @@ namespace Muszilla.Controllers
         public void DeleteBlob(string deleteFile)
         {
              
-            BlobContainerClient containerC = new BlobContainerClient(Muszilla.Properties.Resources.AzureContainerString, "muszilla");
+            BlobContainerClient containerC = new BlobContainerClient(Alody.Properties.Resources.AzureContainerString, "Alody");
             var allBlobs = containerC.GetBlobs();
             string[] nameFinder=deleteFile.Split('/');
             string file2Del=nameFinder[nameFinder.GetUpperBound(0)];

@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Muszilla.Models;
+using Alody.Models;
 
-namespace Muszilla
+namespace Alody
 {
     public class Startup
     {

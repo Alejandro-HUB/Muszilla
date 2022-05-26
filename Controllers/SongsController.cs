@@ -1,5 +1,5 @@
-﻿using Muszilla.Helpers;
-using Muszilla.Models;
+﻿using Alody.Helpers;
+using Alody.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace Muszilla.Controllers
+namespace Alody.Controllers
 {
     [Route("api/songs")]
     public class SongsController : Controller //This is the controller than handles the file upload 
@@ -107,7 +107,7 @@ namespace Muszilla.Controllers
                                 Song_Name = formFile.FileName;
                             }
                             
-                            url = "https://devstorageale.blob.core.windows.net/muszilla/" + Song_Name;
+                            url = "https://devstorageale.blob.core.windows.net/Alody/" + Song_Name;
                             if (formFile.Length > 0 && !dBHelper.ContainsSongTable(Song_Name))
                             {
                                 using (Stream stream = formFile.OpenReadStream())
@@ -127,7 +127,7 @@ namespace Muszilla.Controllers
                 //                                                                          ** Start logic for Uploading Songs **
                 if (isAudio) //Inserting a song into the database
                 {
-                    string connection = Muszilla.Properties.Resources.ConnectionString;
+                    string connection = Alody.Properties.Resources.ConnectionString;
                     if (HttpContext.Session.GetString("Email") != null)
                     {
                         using (SqlConnection con = new SqlConnection(connection))

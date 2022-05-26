@@ -1,5 +1,5 @@
-﻿using Muszilla.Helpers;
-using Muszilla.Models;
+﻿using Alody.Helpers;
+using Alody.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 using System.Linq;
 
 
-namespace Muszilla.Helpers
+namespace Alody.Helpers
 {
     public class DBHelper
     {
@@ -23,7 +23,7 @@ namespace Muszilla.Helpers
         public bool ContainsGoogleUser(string IncomingUser)
         {
             List<RegisterGoogle> UsersFromDB = new List<RegisterGoogle>();
-            string connection = Muszilla.Properties.Resources.ConnectionString;
+            string connection = Alody.Properties.Resources.ConnectionString;
             using (SqlConnection con = new SqlConnection(connection))
             {
                 con.Open();
@@ -59,7 +59,7 @@ namespace Muszilla.Helpers
         public bool ContainsSongTable(string IncomingSong)
         {
             List<SongsModel> songListFromDB = new List<SongsModel>();
-            string connection = Muszilla.Properties.Resources.ConnectionString;
+            string connection = Alody.Properties.Resources.ConnectionString;
             using (SqlConnection con = new SqlConnection(connection))
             {
                 con.Open();
@@ -94,7 +94,7 @@ namespace Muszilla.Helpers
         public bool ContainsSongUsersTable(string IncomingSong, string IncomingPlaylistID, string userID)
         {
             List<SongsModel> songListFromDB = new List<SongsModel>();
-            string connection = Muszilla.Properties.Resources.ConnectionString;
+            string connection = Alody.Properties.Resources.ConnectionString;
             using (SqlConnection con = new SqlConnection(connection))
             {
                 con.Open();

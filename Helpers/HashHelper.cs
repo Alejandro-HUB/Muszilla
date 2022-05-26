@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Muszilla.Helpers
+namespace Alody.Helpers
 {
     public class HashHelper
     {

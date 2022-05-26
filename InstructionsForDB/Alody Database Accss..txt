@@ -1,4 +1,4 @@
-How to Connect to Muszilla Azure Database.
+How to Connect to Alody Azure Database.
 Since the project is being hosted on a cloud server, all you have to do is run the VS file and the program should run.
 
 If you want to acess the database itself to see the raw data you will first need to dowload Microsoft SQL Server Management Studio.

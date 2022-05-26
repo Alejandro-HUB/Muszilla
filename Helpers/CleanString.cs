@@ -5,19 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Muszilla.Models;
+using Alody.Models;
 using System.Data.SqlClient;
 using Sitecore.FakeDb;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Session;
 using Microsoft.Extensions.Options;
-using Muszilla.Helpers;
+using Alody.Helpers;
 using System.IO;
 using javax.jws;
 using System.Text.RegularExpressions;
 using System.Text;
 
-namespace Muszilla.Helpers
+namespace Alody.Helpers
 {
     public class CleanString
     {

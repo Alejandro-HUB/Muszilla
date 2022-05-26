@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Muszilla.Models
+namespace Alody.Models
 {
     public class SongsModel
     {

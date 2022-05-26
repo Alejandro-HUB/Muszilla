@@ -68,7 +68,7 @@
     <Content Update="crdentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="muszilla-7ed7d4c36260.json">
+    <Content Update="Alody-7ed7d4c36260.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

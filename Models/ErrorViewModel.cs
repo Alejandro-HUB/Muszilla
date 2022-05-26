@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Muszilla.Models
+namespace Alody.Models
 {
     public class ErrorViewModel
     {
