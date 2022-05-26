@@ -107,7 +107,7 @@ namespace Alody.Controllers
                                 Song_Name = formFile.FileName;
                             }
                             
-                            url = "https://devstorageale.blob.core.windows.net/Alody/" + Song_Name;
+                            url = "https://devstorageale.blob.core.windows.net/muszilla/" + Song_Name;
                             if (formFile.Length > 0 && !dBHelper.ContainsSongTable(Song_Name))
                             {
                                 using (Stream stream = formFile.OpenReadStream())

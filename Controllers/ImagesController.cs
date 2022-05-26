@@ -94,7 +94,7 @@ namespace Alody.Controllers
                             {
                                 ImageName = formFile.FileName;
                             }
-                            url = "https://devstorageale.blob.core.windows.net/Alody/" + ImageName;
+                            url = "https://devstorageale.blob.core.windows.net/muszilla/" + ImageName;
 
                             if (formFile.Length > 0)
                             {
