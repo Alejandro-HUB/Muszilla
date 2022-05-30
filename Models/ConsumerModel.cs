@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace Alody.Models
 {
+    public class LoginSingupModel
+    {
+        public ConsumerModel ConsumerModel { get; set; }
+        public Register     RegisterModel { get; set; }
+    }
     public class ConsumerModel //Model for the user tables
     {
         public string User_ID { get; set; }
