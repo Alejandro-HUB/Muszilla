@@ -35,6 +35,10 @@ namespace Alody.Controllers                                                     
         PlaylistModel playlistModel = new PlaylistModel();
         SongsModel songsModel = new SongsModel();
         ConsumerModel consumer = new ConsumerModel();
+        Register reg = new Register();
+        LoginSingupModel login = new LoginSingupModel();
+
+
         AzureStorageConfig storage = new AzureStorageConfig();
 
         //DB Helper
@@ -42,15 +46,21 @@ namespace Alody.Controllers                                                     
 
         public IActionResult Index()
         {
-            return View();
+           
+            return View(login);
         }
+
         public void ConnectionString()
         {
             con.ConnectionString = Alody.Properties.Resources.ConnectionString;
             connect.ConnectionString = Alody.Properties.Resources.ConnectionString;
         }
-        public IActionResult Verify(ConsumerModel acc, SongsModel song) //Checks if the user's email and password matches one inside the database
+        public IActionResult Verify([Bind(Prefix ="ConsumerModel")] ConsumerModel acc, SongsModel song) //Checks if the user's email and password matches one inside the database
         {
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine("Go");
+            }
             string fn = "";
             string ln = "";
             string url = "";
@@ -452,10 +462,11 @@ namespace Alody.Controllers                                                     
         }
 
         [HttpPost]
-        public IActionResult Create(Register add) // Adding a new user inside the database
+        public IActionResult Create([Bind(Prefix = "RegisterModel")] Register add) // Adding a new user inside the database
         {
             string connection = Alody.Properties.Resources.ConnectionString;
             bool validEmail = false;
+            string test= add.Email;
             if (new EmailAddressAttribute().IsValid(add.Email))
             {
                 validEmail = true;
@@ -476,7 +487,7 @@ namespace Alody.Controllers                                                     
                         ViewBag.Message = "New User inserted succesfully!";
                     }
                     con.Close();
-                    return View("Index");
+                    return View("Index",  login);
                 }
             }
             ViewBag.Message = "Please enter a valid email. Example: email@domain.com";
