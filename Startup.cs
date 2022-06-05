@@ -51,7 +51,7 @@ namespace Alody
             app.UseCookiePolicy();
             app.UseStaticFiles();
             app.UseSession();
-
+            
             app.UseRouting();
             app.UseAuthorization();
 
@@ -59,7 +59,7 @@ namespace Alody
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Login}/{id=UrlParameter.Optional}");
             });
         }
     }
