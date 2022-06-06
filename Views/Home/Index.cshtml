@@ -5,12 +5,14 @@
 @{
         ViewData["Title"] = "User Homepage";
 }
+<!DOCTYPE html>
+<html lang="en" class="app">
 <head>  
   <meta charset="utf-8" />
   <title>Musik | Web Application</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
- <link rel="stylesheet" href="/css2/js/jPlayer/jplayer.flat.css" type="text/css" />
+  <link rel="stylesheet" href="/css2/js/jPlayer/jplayer.flat.css" type="text/css" />
   <link rel="stylesheet" href="/css2/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="/css2/animate.css" type="text/css" />
   <link rel="stylesheet" href="/css2/font-awesome.min.css" type="text/css" />
@@ -22,6 +24,7 @@
     <script src="js/ie/respond.min.js"></script>
     <script src="js/ie/excanvas.js"></script>
   <![endif]-->
+ 
 </head>
 <body class="">
   <section class="vbox">
@@ -118,7 +121,7 @@
               </li>
               <li class="divider"></li>
               <li>
-                 <button type="button" class="logoutbtn" href="#" onclick="signOut()" id="logout">LOG OUT</button>
+                <a href="modal.lockme.html" data-toggle="ajaxModal" >Logout</a>
               </li>
             </ul>
           </li>
@@ -1327,27 +1330,9 @@
       </section>
     </section>    
   </section>
-          <div>
-                <script type="text/javascript">
-                    function signOut() {
-                        var auth2 = gapi.auth2.getAuthInstance();
-                        auth2.signOut().then(function () {
-                            auth2.disconnect();
-                            window.location = '/Home/Logout';
-                        });
-                    }
-                    function onLoad() {
-                        gapi.load('auth2', function() {
-                            gapi.auth2.init();
-                        });
-                    }
-                </script>
-                <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-                <button type="button" class="logoutbtn" href="#" onclick="signOut()" id="logout">LOG OUT</button>
-            </div>
   <script src="/css2/js/jquery.min.js"></script>
   <!-- Bootstrap -->
-<script src="/css2/js/bootstrap.js"></script>
+  <script src="/css2/js/bootstrap.js"></script>
   <!-- App -->
   <script src="/css2/js/app.js"></script>  
   <script src="/css2/js/slimscroll/jquery.slimscroll.min.js"></script>
@@ -1356,3 +1341,4 @@
   <script type="text/javascript" src="/css2/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
   <script type="text/javascript" src="/css2/js/jPlayer/demo.js"></script>
 </body>
+</html>
