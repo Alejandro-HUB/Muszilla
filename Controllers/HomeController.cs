@@ -55,7 +55,6 @@ namespace Alody.Controllers                                                     
 
             return View("Login/Signup",login);
         }
-
         public void ConnectionString()
         {
             con.ConnectionString = Alody.Properties.Resources.ConnectionString;
@@ -632,7 +631,7 @@ namespace Alody.Controllers                                                     
             HttpContext.Session.SetString("CurrentSearchQuery", empty);
             HttpContext.Session.SetString("isGoogleUser", empty);
             ViewBag.Message = "Log out successful!";
-            return View("Login/Signin");
+            return RedirectToAction("Login");
         }
 
         public IActionResult Update(ConsumerModel edit) //Updates fields inside the database

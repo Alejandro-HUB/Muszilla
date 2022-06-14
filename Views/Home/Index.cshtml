@@ -98,7 +98,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img src="@ViewBag.Picture" alt="...">
+                <img style="height:40px;" src="@ViewBag.Picture" alt="...">
               </span>
               @ViewBag.FirstName @ViewBag.LastName <b class="caret"></b>
             </a>
@@ -121,13 +121,14 @@
               </li>
               <li class="divider"></li>
               <li>
-                <a href="modal.lockme.html" data-toggle="ajaxModal" >Logout</a>
+                <a href="@Url.Action("Logout","Home")" >Logout</a>
               </li>
             </ul>
           </li>
         </ul>
       </div>      
     </header>
+
     <section>
       <section class="hbox stretch">
         <!-- .aside -->
