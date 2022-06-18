@@ -121,7 +121,26 @@
               </li>
               <li class="divider"></li>
               <li>
-                <a href="@Url.Action("Logout","Home")" >Logout</a>
+                
+                <script type="text/javascript">
+                    function signOut() {
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        auth2.signOut().then(function () {
+                            auth2.disconnect();
+                            window.location = '/Home/Logout';
+                        });
+
+                    }
+                    function onLoad() {
+                        gapi.load('auth2', function() {
+                            gapi.auth2.init();
+                        });
+                    }
+                </script>
+                <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+               <a href="#" onclick="signOut()" >Logout</a>
+           
+       
               </li>
             </ul>
           </li>
@@ -146,7 +165,7 @@
                       Discover
                     </li>
                     <li>
-                      <a href="index.html">
+                      <a href="@Url.Action("Homepage","Home")">
                         <i class="icon-disc icon text-success"></i>
                         <span class="font-bold">What's new</span>
                       </a>
@@ -1341,5 +1360,7 @@
   <script type="text/javascript" src="/css2/js/jPlayer/jquery.jplayer.min.js"></script>
   <script type="text/javascript" src="/css2/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
   <script type="text/javascript" src="/css2/js/jPlayer/demo.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 </body>
 </html>

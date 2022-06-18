@@ -70,6 +70,22 @@ namespace Alody.Controllers                                                     
             TopPickedSongs();
             return View("Profile/Profile", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
+        public IActionResult Settings()
+        {
+            ViewBag.Email = HttpContext.Session.GetString("Email");
+            ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
+            ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
+            ViewBag.LastName = HttpContext.Session.GetString("LastName");
+            ViewBag.Picture = HttpContext.Session.GetString("Picture");
+            ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+            ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
+            GetListofPlaylistIDs();
+            FetchPlaylistData();
+            FetchSongData();
+            FeaturedSongs();
+            TopPickedSongs();
+            return View("Settings/Settings", Tuple.Create(consumer, storage, songsModel, playlistModel));
+        }
         public void ConnectionString()
         {
             con.ConnectionString = Alody.Properties.Resources.ConnectionString;
