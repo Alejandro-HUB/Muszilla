@@ -26,7 +26,7 @@
   <![endif]-->
  
 </head>
-<body class="">
+<body onload="tryReload()" class="">
   <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
       <div class="navbar-header aside bg-info nav-xs">
@@ -105,7 +105,7 @@
             <ul class="dropdown-menu animated fadeInRight">            
               <li>
                 <span class="arrow top"></span>
-                <a href="#">Settings</a>
+                <a href="@Url.Action("Settings","Home")">Settings</a>
               </li>
               <li>
                 <a href="@Url.Action("Profile","Home")" >Profile</a>
@@ -120,27 +120,8 @@
                 <a href="docs.html">Help</a>
               </li>
               <li class="divider"></li>
-              <li>
-                
-                <script type="text/javascript">
-                    function signOut() {
-                        var auth2 = gapi.auth2.getAuthInstance();
-                        auth2.signOut().then(function () {
-                            auth2.disconnect();
-                            window.location = '/Home/Logout';
-                        });
-
-                    }
-                    function onLoad() {
-                        gapi.load('auth2', function() {
-                            gapi.auth2.init();
-                        });
-                    }
-                </script>
-                <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-               <a href="#" onclick="signOut()" >Logout</a>
-           
-       
+              <li>              
+               <a href="@Url.Action("Logout","Home")"  >Logout</a>
               </li>
             </ul>
           </li>
@@ -482,7 +463,7 @@
                     <ul class="dropdown-menu animated fadeInRight aside text-left">                      
                       <li>
                         <span class="arrow bottom hidden-nav-xs"></span>
-                        <a href="#">Settings</a>
+                         <a href="@Url.Action("Settings","Home")">Settings</a>
                       </li>
                       <li>
                         <a href="@Url.Action("Profile","Home")" >Profile</a>
@@ -1362,5 +1343,31 @@
   <script type="text/javascript" src="/css2/js/jPlayer/demo.js"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+  <script type="text/javascript">
+       function tryReload(){
+           var perfEntries = performance.getEntriesByType("navigation");
+
+        if (perfEntries[0].type === "back_forward") {
+             location.reload(true);
+             
+        }
+        else if(perfEntries[0].type === "reload")
+        {
+            var email='@ViewData["Email"]';
+             if(email==''){
+                 console.log("Success");
+                 alert("Your session has ended please login again!");
+                 location.href='@Url.Action("Login","Home")';   
+             }
+             else{
+                 console.log("Fail2");
+             }
+        }
+        else{
+            console.log("Fail1");
+        }
+        };
+  </script>
 </body>
+
 </html>

@@ -26,7 +26,7 @@
     <script src="js/ie/excanvas.js"></script>
   <![endif]-->
 </head>
-<body class="">
+<body onload="tryReload()" class="">
   <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
       <div class="navbar-header aside bg-info dk">
@@ -100,12 +100,12 @@
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
                 <img src="@ViewBag.Picture" alt="...">
               </span>
-              @ViewBag.FirsName @ViewBag.LastName <b class="caret"></b>
+              @ViewBag.FirstName @ViewBag.LastName <b class="caret"></b>
             </a>
             <ul class="dropdown-menu animated fadeInRight">            
               <li>
                 <span class="arrow top"></span>
-                <a href="#">Settings</a>
+                 <a href="@Url.Action("Settings","Home")">Settings</a>
               </li>
               <li>
                 <a href="profile.html">Profile</a>
@@ -212,7 +212,7 @@
                       </span>
                       <span class="hidden-nav-xs clear">
                         <span class="block m-l">
-                          <strong class="font-bold text-lt"> @ViewBag.FirsName @ViewBag.LastName</strong> 
+                          <strong class="font-bold text-lt"> @ViewBag.FirstName @ViewBag.LastName</strong> 
                           <b class="caret"></b>
                         </span>
                         <span class="text-muted text-xs block m-l">Art Director</span>
@@ -221,7 +221,7 @@
                     <ul class="dropdown-menu animated fadeInRight aside text-left">                      
                       <li>
                         <span class="arrow bottom hidden-nav-xs"></span>
-                        <a href="#">Settings</a>
+                         <a href="@Url.Action("Settings","Home")">Settings</a>
                       </li>
                       <li>
                         <a href="profile.html">Profile</a>
@@ -258,7 +258,7 @@
                             <img src="@ViewBag.Picture" class="img-circle">
                           </a>
                           <div>
-                            <div class="h3 m-t-xs m-b-xs"> @ViewBag.FirsName @ViewBag.LastName</div>
+                            <div class="h3 m-t-xs m-b-xs"> @ViewBag.FirstName @ViewBag.LastName</div>
                             <small class="text-muted"><i class="fa fa-map-marker"></i> London, UK</small>
                           </div>                
                         </div>
@@ -490,5 +490,31 @@
   <script type="text/javascript" src="/css2/js/jPlayer/jquery.jplayer.min.js"></script>
   <script type="text/javascript" src="/css2/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
   <script type="text/javascript" src="/css2/js/jPlayer/demo.js"></script>
+  <script type="text/javascript">
+       function tryReload(){
+           var perfEntries = performance.getEntriesByType("navigation");
+
+        if (perfEntries[0].type === "back_forward") {
+             location.reload(true);
+             
+        }
+        else if(perfEntries[0].type === "reload")
+        {
+            var email='@ViewData["Email"]';
+             if(email==''){
+                 console.log("Success");
+                 alert("Your session has ended please login again!");
+                 location.href='@Url.Action("Login","Home")';   
+             }
+             else{
+                 console.log("Fail2");
+             }
+        }
+        else{
+            console.log("Fail1");
+        }
+        };
+  </script>
 </body>
+
 </html>
