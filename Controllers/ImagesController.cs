@@ -158,20 +158,11 @@ namespace Alody.Controllers
         }
         public void DeleteBlob(string deleteFile)
         {
-             
-            BlobContainerClient containerC = new BlobContainerClient(Alody.Properties.Resources.AzureContainerString, "Alody");
-            var allBlobs = containerC.GetBlobs();
-            string[] nameFinder=deleteFile.Split('/');
-            string file2Del=nameFinder[nameFinder.GetUpperBound(0)];
-            foreach (var blob in allBlobs)
-            {
-                
-                if (blob.Name == file2Del) 
-                {
-                    var blobClient = containerC.GetBlobClient(blob.Name);
-                    blobClient.Delete();
-                }
-            }
+
+            BlobClient blobClient = new BlobClient(Alody.Properties.Resources.AzureContainerString, "Alody", deleteFile);
+            blobClient.DeleteIfExistsAsync();
+
+
 
         }
 
