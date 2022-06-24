@@ -54,6 +54,23 @@ namespace Alody.Controllers                                                     
 
             return View("Login/Signup",login);
         }
+        public IActionResult Help()
+        {
+
+            ViewBag.Email = HttpContext.Session.GetString("Email");
+            ViewBag.Pass_word = HttpContext.Session.GetString("Pass_word");
+            ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
+            ViewBag.LastName = HttpContext.Session.GetString("LastName");
+            ViewBag.Picture = HttpContext.Session.GetString("Picture");
+            ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
+            ViewBag.isGoogleUser = HttpContext.Session.GetString("isGoogleUser");
+            GetListofPlaylistIDs();
+            FetchPlaylistData();
+            FetchSongData();
+            FeaturedSongs();
+            TopPickedSongs();
+            return View("Help/HelpPage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+        }
         public IActionResult Profile()
         {
             ViewBag.Email = HttpContext.Session.GetString("Email");

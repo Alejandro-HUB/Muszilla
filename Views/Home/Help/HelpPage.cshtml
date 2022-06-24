@@ -3,7 +3,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, AuthoringTagHelpers
 @{
-    ViewData["Title"] = "User Settings";
+    ViewData["Title"] = "Help";
 }
 <!DOCTYPE html>
 <html lang="en" class="app">
@@ -117,8 +117,7 @@
                                 </a>
                             </li>
                             <li>
-                               <a href="@Url.Action("Help","Home")">Help</a>
-                                 
+                                <a href="@Url.Action("Help","Home")">Help</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -234,7 +233,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                           <a href="@Url.Action("Help","Home")">Help</a>
+                                            <a href="@Url.Action("Help","Home")">Help</a>
                                         </li>
                                         <li class="divider"></li>
                                         <li>
@@ -247,139 +246,76 @@
                     </section>
                 </aside>
                 <!-- /.aside -->
-                <section id="content">
-                    <section class="vbox">
-                        <section class="scrollable">
-                            <section class="hbox stretch">
-                                <aside class="bg-white">
-                                    <section class="vbox">
-                                        <header class="header bg-light lt">
-                                            <ul class="nav nav-tabs nav-white">
-                                                <li class="active"><a href="#general" data-toggle="tab">General</a></li>
-                                                <li class=""><a href="#advanced" data-toggle="tab">Advanced</a></li>
-                                                <li class=""><a href="#others" data-toggle="tab">Others</a></li>
-                                            </ul>
-                                        </header>
-                                        <section class="scrollable">
-                                            <div class="tab-content">
-                                                <div class="tab-pane active" id="general">
-                                                    <div class="box content">
-                                                        <div class="box">
+                <aside class="bg-white">
+                  <section class="vbox">
+                    <header class="header bg-light lt">
+                      <ul class="nav nav-tabs nav-white">
+                        <li class="active"><a href="#FAQ" data-toggle="tab">FAQ</a></li>
+                        <li class=""><a href="#Contact" data-toggle="tab">Contact US</a></li>
+                        <li class=""><a href="#about" data-toggle="tab">About</a></li>
+                      </ul>
+                    </header>
+                    <section class="scrollable">
 
-                                                            <form asp-controller="Images" asp-action="Upload" class="dropzone" id="imgUpload" method="post" enctype="multipart/form" onclick="return false">
-                                                                <div class="dz-message needsclick">
-                                                                    <span class="note needsclick">
-                                                                        <input asp-for="Item1.Picture" name="Picture" id="imgUpload" class="form-control" accept="image/*">
-                                                                    </span>
-                                                                </div>
-                                                            </form>
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="FAQ">
+                           <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
+                            <li class="list-group-item">
 
 
-                                                            <img class="clickableDZ" src="@ViewBag.Picture" />
 
-                                                        </div>
+                                <strong class="block">Question 1:</strong>
+                                <small>Answer 1</small>
 
-                                                        <div class="rect">
-                                                            <form class="form-horizontal" asp-action="Update">
-
-
-                                                                <p id="f">
-                                                                    First Name:
-                                                                    <!-- this gets the user's first name-->
-                                                                    <input id="fn" asp-for="Item1.FirstName" name="FirstName" class="form-control text " type="text" autocomplete="off" placeholder="@ViewBag.FirstName">
-                                                                </p>
-                                                                <p id="edit_one">(Click to edit)</p>
-
-                                                                <p id="l">
-                                                                    Last Name:
-                                                                    <!-- this gets the user's last name-->
-                                                                    <input id="ln" asp-for="Item1.LastName" name="LastName" class="form-control text" type="text" autocomplete="off" placeholder="@ViewBag.LastName">
-                                                                </p>
-                                                                <p id="edit_two">(Click to edit)</p>
-
-                                                                <p id="e">
-                                                                    Your Email:
-                                                                    <!-- this gets the user's email-->
-                                                                    <input id="UEmail" asp-for="Item1.Email" name="Email" class="form-control text" type="email" autocomplete="off" placeholder="@ViewBag.Email">
-                                                                </p>
-                                                                <p id="edit_three">(Click to edit)</p>
-                                                                <p id="p">
-                                                                    Password:
-                                                                    <!-- this gets the user's password-->
-                                                                    <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control text" type="password" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
-                                                                    <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
-                                                                </p>
-                                                                <p id="edit_four">(Click to edit)</p>
-
-                                                                <button type="submit" value="Save" onclick="" id="saveInfo" class="savebtn">Save Changes</button>
-
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
-                                                    <script>
-
-                                                    // Grab links for the songs from backend api
-                                                    function fetchImageLinks() {
-                                                        // Fetch songs
-                                                        $.get(function (fetchedImageLinks) {
-                                                            console.log(fetchedImageLinks)
-                                                        });
-                                                    }
-                                                    // Start first interval
-                                                    fetchImageLinks()
-                                                    /* Dropzone */
-                                                    // "songUpload" is the camelized version of the HTML element's ID
-                                                    Dropzone.options.imgUpload = {
-                                                        addRemoveLinks: true,
-                                                        paramName: "files", // The name that will be used to transfer the file
-                                                        dictDefaultMessage: "Drop files here or Click to Upload",
-                                                        createImageThumbnails: false,
-                                                        dictRemoveFileConfirmation: false,
-                                                        
+                            </li>
+                            <li class="list-group-item">
+                              <strong class="block">Question 2:</strong>
+                                <small>Answer 2</small>
+                            </li>
+                            <li class="list-group-item">
+                               <strong class="block">Question 3:</strong>
+                                <small>Answer 3</small>
+                            </li>
+                            <li class="list-group-item">
+                               <strong class="block">Question 4:</strong>
+                                <small>Answer 4</small>
+                              </a>
+                            </li>
+                            <li class="list-group-item">
+                              <strong class="block">Question 5:</strong>
+                                <small>Answer 5</small>
+                              </a>
+                            </li>
+                            <li class="list-group-item">
+                            <strong class="block">Question 6:</strong>
+                                <small>Answer 6</small>
+                            </li>
+                            <li class="list-group-item">
+                               <strong class="block">Question 7:</strong>
+                                <small>Answer 7</small>
+                            </li>
 
 
-                                                        init: function () {
-                                                            myDropzone = this;
-
-                                                          
-
-                                                            myDropzone.on("success", function (file, response) {
-                                                                $(".dz-success-mark svg").css("display", "none");
-                                                                $(".dz-error-mark").css("display", "none");
-                                                                file.previewElement.remove();
-                                                                console.log("Success");
-
-                                                            });
-                                                            myDropzone.on("error", function (file, response) {
-                                                                $(".dz-success-mark svg").css("display", "none");
-                                                                $(".dz-error-mark").css("background", "red");
-                                                                file.previewElement.remove();
-                                                                console.log("Success");
-
-                                                            });
-                                                        },
-                                                        removedfile: function (file) {
-                                                            file.previewElement.remove();
-                                                        }
-                                                    };
-                                                    </script>
-                                                </div>
-                                                <div class="tab-pane" id="advanced">
-                                                    <div class="text-center wrapper">
-                                                        <i class="fa fa-spinner fa fa-spin fa fa-large"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane" id="others">
-                                                    <div class="text-center wrapper">
-                                                        <i class="fa fa-spinner fa fa-spin fa fa-large"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </section>
-                                </aside>
+                          </ul>
+                        </div>
+                        <div class="tab-pane" id="Contact">
+                          <div class="text-center wrapper">
+                           
+                             <strong class="block">You can contact us using the information below: </strong>
+                                                             <small>Alody@gmail.com</small>
+                                                             <small>954-XXX-XXXX</small>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="about">
+                          <div class="text-center wrapper">
+                            <h2 class="block">The website provides access to a song database with which the user can interact through a GUI. To create a web application that connects to a database on a server through a web API made in .NET core.</h2>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </section>
+                </aside>
 
                             </section>
                         </section>

@@ -80,4 +80,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Home\Notifications\" />
+  </ItemGroup>
+
 </Project>
