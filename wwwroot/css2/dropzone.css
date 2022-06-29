@@ -253,25 +253,52 @@
     left: 0;
     grid-column: 1;
     grid-row: 1;
-    border:1px dashed #000;
 }
 
-.box {
-    position:relative;
+.boxer {
+    position: relative;
     height: 310px;
-    width: 220px;
-    display:grid;
-    top:50px;
-    left:50px;
-   
+    width: 310px;
+    display: grid;
+    top: 50px;
+    left: 50px;
+    cursor: pointer;
 }
+.boxer .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position:absolute ;
+    z-index: 1;
+}
+
+    .boxer:hover .tooltiptext {
+        visibility: visible;
+        
+    }
+
+.boxer :hover {
+    border-radius: 50%;
+    background-color: blue;
+    opacity: 0.1;
+}
+
 .rect {
     position: relative;
     top: -300px;
     left: 500px;
 }
+
 .dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * {
-    cursor: pointer
+    cursor: pointer;
+    opacity: 0;
 }
 
-   
+.form-control{
+    width:500px;
+}

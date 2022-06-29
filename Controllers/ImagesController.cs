@@ -158,10 +158,13 @@ namespace Alody.Controllers
         }
         public void DeleteBlob(string deleteFile)
         {
+            string[] fileToDel=deleteFile.Split('/');
+            BlobClient blobClient = new BlobClient(Alody.Properties.Resources.AzureContainerString, "muszilla", fileToDel[fileToDel.Length-1]);
+           
 
-            BlobClient blobClient = new BlobClient(Alody.Properties.Resources.AzureContainerString, "Alody", deleteFile);
             blobClient.DeleteIfExistsAsync();
 
+            
 
 
         }

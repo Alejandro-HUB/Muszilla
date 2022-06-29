@@ -117,8 +117,8 @@
                                 </a>
                             </li>
                             <li>
-                               <a href="@Url.Action("Help","Home")">Help</a>
-                                 
+                                <a href="@Url.Action("Help","Home")">Help</a>
+
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -234,7 +234,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                           <a href="@Url.Action("Help","Home")">Help</a>
+                                            <a href="@Url.Action("Help","Home")">Help</a>
                                         </li>
                                         <li class="divider"></li>
                                         <li>
@@ -264,20 +264,25 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="general">
                                                     <div class="box content">
-                                                        <div class="box">
+
+                                                        <div class="boxer">
 
                                                             <form asp-controller="Images" asp-action="Upload" class="dropzone" id="imgUpload" method="post" enctype="multipart/form" onclick="return false">
                                                                 <div class="dz-message needsclick">
                                                                     <span class="note needsclick">
-                                                                        <input asp-for="Item1.Picture" name="Picture" id="imgUpload" class="form-control" accept="image/*">
+                                                                        <input asp-for="Item1.Picture" name="Picture" id="imgUpload"  accept="image/*">
                                                                     </span>
+
                                                                 </div>
                                                             </form>
 
 
                                                             <img class="clickableDZ" src="@ViewBag.Picture" />
-
+                                                            <span class="tooltiptext">Click here to upload an avatar picture.</span>
                                                         </div>
+
+
+
 
                                                         <div class="rect">
                                                             <form class="form-horizontal" asp-action="Update">
@@ -320,50 +325,52 @@
                                                     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
                                                     <script>
 
-                                                    // Grab links for the songs from backend api
-                                                    function fetchImageLinks() {
-                                                        // Fetch songs
-                                                        $.get(function (fetchedImageLinks) {
-                                                            console.log(fetchedImageLinks)
-                                                        });
-                                                    }
-                                                    // Start first interval
-                                                    fetchImageLinks()
-                                                    /* Dropzone */
-                                                    // "songUpload" is the camelized version of the HTML element's ID
-                                                    Dropzone.options.imgUpload = {
-                                                        addRemoveLinks: true,
-                                                        paramName: "files", // The name that will be used to transfer the file
-                                                        dictDefaultMessage: "Drop files here or Click to Upload",
-                                                        createImageThumbnails: false,
-                                                        dictRemoveFileConfirmation: false,
-                                                        
-
-
-                                                        init: function () {
-                                                            myDropzone = this;
-
-                                                          
-
-                                                            myDropzone.on("success", function (file, response) {
-                                                                $(".dz-success-mark svg").css("display", "none");
-                                                                $(".dz-error-mark").css("display", "none");
-                                                                file.previewElement.remove();
-                                                                console.log("Success");
-
+                                                        // Grab links for the songs from backend api
+                                                        function fetchImageLinks() {
+                                                            // Fetch songs
+                                                            $.get(function (fetchedImageLinks) {
+                                                                console.log(fetchedImageLinks)
                                                             });
-                                                            myDropzone.on("error", function (file, response) {
-                                                                $(".dz-success-mark svg").css("display", "none");
-                                                                $(".dz-error-mark").css("background", "red");
-                                                                file.previewElement.remove();
-                                                                console.log("Success");
-
-                                                            });
-                                                        },
-                                                        removedfile: function (file) {
-                                                            file.previewElement.remove();
                                                         }
-                                                    };
+                                                        // Start first interval
+                                                        fetchImageLinks()
+                                                        /* Dropzone */
+                                                        // "songUpload" is the camelized version of the HTML element's ID
+                                                        Dropzone.options.imgUpload = {
+                                                            addRemoveLinks: true,
+                                                            paramName: "files", // The name that will be used to transfer the file
+                                                            dictDefaultMessage: "Drop files here or Click to Upload",
+                                                            createImageThumbnails: false,
+                                                            dictRemoveFileConfirmation: false,
+
+
+
+                                                            init: function () {
+                                                                myDropzone = this;
+
+                                                                
+
+                                                                myDropzone.on("success", function (file, response) {
+                                                                    $(".dz-success-mark svg").css("display", "none");
+                                                                    $(".dz-error-mark").css("display", "none");
+                                                                    file.previewElement.remove();
+                                                                    console.log("Success");
+                                                                    fetcher=fetch(file);
+                                                                    fetcher.then(location.reload(true));
+
+                                                                });
+                                                                myDropzone.on("error", function (file, response) {
+                                                                    $(".dz-success-mark svg").css("display", "none");
+                                                                    $(".dz-error-mark").css("background", "red");
+                                                                    file.previewElement.remove();
+                                                                    console.log("Success");
+
+                                                                });
+                                                            },
+                                                            removedfile: function (file) {
+                                                                file.previewElement.remove();
+                                                            }
+                                                        };
                                                     </script>
                                                 </div>
                                                 <div class="tab-pane" id="advanced">
