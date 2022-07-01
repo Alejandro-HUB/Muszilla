@@ -3301,12 +3301,14 @@ a.bg-light:focus {
   min-width: 120px;
 }
 .avatar {
-  position: relative;
-  display: block;
-  border-radius: 500px;
-  white-space: nowrap;
+    
+    position: relative;
+    display: block;
+    border-radius: 500px;
+    white-space: nowrap;
 }
 .avatar img {
+  height: 40px;
   border-radius: 500px;
   width: 100%;
 }
@@ -3351,8 +3353,9 @@ a.bg-light:focus {
   background-color: #fad733;
 }
 .thumb-lg {
-  width: 128px;
-  display: inline-block;
+    width: 200px;
+    height: 200px;
+    display: inline-block;
 }
 .thumb-md {
   width: 64px;
@@ -3363,6 +3366,7 @@ a.bg-light:focus {
   display: inline-block;
 }
 .thumb-sm {
+  height:40px;  
   width: 40px;
   display: inline-block;
 }
@@ -3380,7 +3384,7 @@ a.bg-light:focus {
 .thumb-md img,
 .thumb-lg img,
 .thumb-btn img {
-  height: auto;
+  height: 100%;
   max-width: 100%;
   vertical-align: middle;
 }
@@ -3913,4 +3917,7 @@ fieldset[disabled] .i-checks input + i:before {
   100% {
     height: 65%;
   }
+}
+.form-control.text{
+    color:black;
 }

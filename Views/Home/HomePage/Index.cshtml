@@ -26,14 +26,14 @@
   <![endif]-->
  
 </head>
-<body class="">
+<body onload="tryReload()" class="">
   <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
       <div class="navbar-header aside bg-info nav-xs">
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
           <i class="icon-list"></i>
         </a>
-        <a href="index.html" class="navbar-brand text-lt">
+        <a href="@Url.Action("Homepage","Home")" class="navbar-brand text-lt">
           <i class="icon-earphones"></i>
           <img src="/css2/images/logo.png" alt="." class="hide">
           <span class="hidden-nav-xs m-l-sm">Musik</span>
@@ -89,8 +89,8 @@
                   </a>
                 </div>
                 <div class="panel-footer text-sm">
-                  <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
-                  <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+                  
+                  <a href="@Url.Action("Notifications","Home")" data-toggle="class:show animated fadeInRight">See all the notifications</a>
                 </div>
               </section>
             </section>
@@ -98,30 +98,30 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img style="height:40px;" src="@ViewBag.Picture" alt="...">
+                <img src="@ViewBag.Picture" alt="...">
               </span>
               @ViewBag.FirstName @ViewBag.LastName <b class="caret"></b>
             </a>
             <ul class="dropdown-menu animated fadeInRight">            
               <li>
                 <span class="arrow top"></span>
-                <a href="#">Settings</a>
+                <a href="@Url.Action("Settings","Home")">Settings</a>
               </li>
               <li>
-                <a href="profile.html">Profile</a>
+                <a href="@Url.Action("Profile","Home")" >Profile</a>
               </li>
               <li>
-                <a href="#">
+                <a href="@Url.Action("Notifications","Home")">
                   <span class="badge bg-danger pull-right">3</span>
                   Notifications
                 </a>
               </li>
               <li>
-                <a href="docs.html">Help</a>
+                <a href="@Url.Action("Help","Home")">Help</a>
               </li>
               <li class="divider"></li>
-              <li>
-                <a href="@Url.Action("Logout","Home")" >Logout</a>
+              <li>              
+               <a href="@Url.Action("Logout","Home")"  >Logout</a>
               </li>
             </ul>
           </li>
@@ -146,7 +146,7 @@
                       Discover
                     </li>
                     <li>
-                      <a href="index.html">
+                      <a href="@Url.Action("Homepage","Home")">
                         <i class="icon-disc icon text-success"></i>
                         <span class="font-bold">What's new</span>
                       </a>
@@ -362,7 +362,7 @@
                       </a>
                       <ul class="nav dk text-sm">
                         <li >
-                          <a href="profile.html" class="auto">                                                        
+                          <a href="@Url.Action("Profile","Home")"  class="auto">                                                        
                             <i class="fa fa-angle-right text-xs"></i>
 
                             <span>Profile</span>
@@ -463,23 +463,23 @@
                     <ul class="dropdown-menu animated fadeInRight aside text-left">                      
                       <li>
                         <span class="arrow bottom hidden-nav-xs"></span>
-                        <a href="#">Settings</a>
+                         <a href="@Url.Action("Settings","Home")">Settings</a>
                       </li>
                       <li>
-                        <a href="profile.html">Profile</a>
+                        <a href="@Url.Action("Profile","Home")" >Profile</a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href="@Url.Action("Notifications","Home")">
                           <span class="badge bg-danger pull-right">3</span>
                           Notifications
                         </a>
                       </li>
                       <li>
-                        <a href="docs.html">Help</a>
+                        <a href="@Url.Action("Help","Home")">Help</a>
                       </li>
                       <li class="divider"></li>
                       <li>
-                        <a href="modal.lockme.html" data-toggle="ajaxModal" >Logout</a>
+                         <a href="@Url.Action("Logout","Home")" >Logout</a>
                       </li>
                     </ul>
                   </div>
@@ -1341,5 +1341,33 @@
   <script type="text/javascript" src="/css2/js/jPlayer/jquery.jplayer.min.js"></script>
   <script type="text/javascript" src="/css2/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
   <script type="text/javascript" src="/css2/js/jPlayer/demo.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+  <script type="text/javascript">
+       function tryReload(){
+           var perfEntries = performance.getEntriesByType("navigation");
+
+        if (perfEntries[0].type === "back_forward") {
+             location.reload(true);
+             
+        }
+        else if(perfEntries[0].type === "reload")
+        {
+            var email='@ViewData["Email"]';
+             if(email==''){
+                 console.log("Success");
+                 alert("Your session has ended please login again!");
+                 location.href='@Url.Action("Login","Home")';   
+             }
+             else{
+                 console.log("Fail2");
+             }
+        }
+        else{
+            console.log("Fail1");
+        }
+        };
+  </script>
 </body>
+
 </html>
