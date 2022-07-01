@@ -87,6 +87,10 @@ namespace Alody.Controllers                                                     
             TopPickedSongs();
             return View("Profile/Profile", Tuple.Create(consumer, storage, songsModel, playlistModel));
         }
+        public IActionResult Notifications()
+        {
+            return Redirect(Url.Action("Profile", "Home") + "#Notifications");
+        }
         public IActionResult Settings()
         {
             ViewBag.Email = HttpContext.Session.GetString("Email");

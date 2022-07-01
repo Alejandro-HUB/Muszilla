@@ -89,8 +89,8 @@
                   </a>
                 </div>
                 <div class="panel-footer text-sm">
-                  <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
-                  <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+                  
+                  <a href="@Url.Action("Notifications","Home")" data-toggle="class:show animated fadeInRight">See all the notifications</a>
                 </div>
               </section>
             </section>
@@ -111,7 +111,7 @@
                 <a href="@Url.Action("Profile","Home")" >Profile</a>
               </li>
               <li>
-                <a href="#">
+                <a href="@Url.Action("Notifications","Home")">
                   <span class="badge bg-danger pull-right">3</span>
                   Notifications
                 </a>
@@ -469,7 +469,7 @@
                         <a href="@Url.Action("Profile","Home")" >Profile</a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href="@Url.Action("Notifications","Home")">
                           <span class="badge bg-danger pull-right">3</span>
                           Notifications
                         </a>

@@ -3353,8 +3353,9 @@ a.bg-light:focus {
   background-color: #fad733;
 }
 .thumb-lg {
-  width: 128px;
-  display: inline-block;
+    width: 200px;
+    height: 200px;
+    display: inline-block;
 }
 .thumb-md {
   width: 64px;
