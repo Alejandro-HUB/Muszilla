@@ -22,6 +22,13 @@ body {
     margin-top: 290px;
 }
 
+.nowPlaying {
+    color: white;
+    font-size: 14px;
+    padding-left: 23px;
+    overflow:hidden;
+}
+
 .sidebar {
     height: 575px;
     width: 250px;
@@ -420,6 +427,7 @@ input {
     text-align: center;
     left: 100px;
     font-size: small;
+    overflow: hidden;
 }
 
 #item2 {
@@ -430,6 +438,7 @@ input {
     text-align: center;
     left: 430px;
     font-size: small;
+    overflow: hidden;
 }
 
 #item3 {
@@ -440,6 +449,7 @@ input {
     text-align: center;
     left: 760px;
     font-size: small;
+    overflow: hidden;
 }
 
 
@@ -451,6 +461,7 @@ input {
     text-align: center;
     left: 100px;
     font-size: small;
+    overflow: hidden;
 }
 
 #item5 {
@@ -461,6 +472,7 @@ input {
     width: 200px;
     text-align: center;
     font-size: small;
+    overflow: hidden;
 }
 
 #item6 {
@@ -471,6 +483,7 @@ input {
     text-align: center;
     left: 760px;
     font-size: small;
+    overflow: hidden;
 }
 
 
