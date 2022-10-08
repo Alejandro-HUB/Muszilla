@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'Muszilla'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AF5B8B0310364E6D833A4DED65F8EBD3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FD1D654B27F345368BE2B48A7BEB8907 }}
           package: .
