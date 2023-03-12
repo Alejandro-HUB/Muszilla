@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/bin
+/Muszilla.csproj
+/Muszilla.csproj.user
+/Muszilla.sln
+/Properties/PublishProfiles/Muszilla - Web Deploy.pubxml.user
+/Properties/PublishProfiles/Muszilla - Web Deploy.pubxml
+/obj
