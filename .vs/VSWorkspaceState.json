@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\DBContext\\bin"
   ],
-  "SelectedNode": "\\Alody.sln",
+  "SelectedNode": "\\.github",
   "PreviewInSolutionExplorer": false
 }
