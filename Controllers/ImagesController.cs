@@ -130,7 +130,7 @@ namespace Muszilla.Controllers
                             id = HttpContext.Session.GetString("User_ID");
                             pictureToDelete= HttpContext.Session.GetString("Picture");
                        
-                            string query = "update Consumer set Picture = '" + url + "'  where Email ='" + email + "'";
+                            string query = "update dbo.[User] set Picture = '" + url + "'  where Email ='" + email + "'";
                             using (SqlCommand com = new SqlCommand(query, con))
                             {
                                 con.Open();

@@ -28,7 +28,7 @@ namespace Muszilla.Helpers
             {
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "select * from dbo.Consumer where isGoogleUser = '1'";
+                com.CommandText = "select * from dbo.[User] where isGoogleUser = '1'";
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
@@ -99,7 +99,7 @@ namespace Muszilla.Helpers
             {
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "select * from dbo.Songs_Users where Song_Playlist_ID = '"+ IncomingPlaylistID + "' and Song_Owner = '" + userID + "' order by Song_Name";
+                com.CommandText = "select * from dbo.SongsUsers where Song_Playlist_ID = '"+ IncomingPlaylistID + "' and Song_Owner = '" + userID + "' order by Song_Name";
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {

@@ -142,7 +142,7 @@ namespace Muszilla.Controllers
                                 //Get current playlistID from DB - Uncomment if Needed
                                 con.Open();
                                 com.Connection = con;
-                                com.CommandText = "select CurrentPlaylistID from Consumer where User_ID ='" + id + "'";
+                                com.CommandText = "select CurrentPlaylistID from dbo.[User] where User_ID ='" + id + "'";
                                 dr = com.ExecuteReader();
                                 while (dr.Read())
                                 {
@@ -150,7 +150,7 @@ namespace Muszilla.Controllers
                                 }
                                 con.Close();
                                 //Insert to Song Users Table
-                                string query = "insert into Songs_Users(Song_Name, Song_Audio, Song_Owner, Song_Playlist_ID) values('" + Song_Name + "', '" + url + "', '" + id + "', '" + currentPlaylist + "')";
+                                string query = "insert into SongsUsers(Song_Name, Song_Audio, Song_Owner, Song_Playlist_ID) values('" + Song_Name + "', '" + url + "', '" + id + "', '" + currentPlaylist + "')";
                                 using (SqlCommand com = new SqlCommand(query, con))
                                 {
                                     con.Open();

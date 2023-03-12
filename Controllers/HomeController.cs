@@ -66,7 +66,7 @@ namespace Muszilla.Controllers                                                  
 
             con.Open();
             com.Connection = con;
-            com.CommandText = "select isGoogleUser from dbo.Consumer where Email = '" + acc.Email + "'";
+            com.CommandText = "select isGoogleUser from dbo.[User] where Email = '" + acc.Email + "'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
@@ -83,7 +83,7 @@ namespace Muszilla.Controllers                                                  
             {
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "select User_ID, Email, Pass_word, FirstName, LastName, Picture, isGoogleUser from Consumer where Email = '" + acc.Email + "' and Pass_word = '" + acc.Pass_word + "'";
+                com.CommandText = "select User_ID, Email, Password, FirstName, LastName, Picture, isGoogleUser from dbo.[User] where Email = '" + acc.Email + "' and Password = '" + acc.Pass_word + "'";
                 dr = com.ExecuteReader();
                 if (dr.Read())
                 {
@@ -249,7 +249,7 @@ namespace Muszilla.Controllers                                                  
                 ConnectionString();
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "update Consumer set CurrentPlaylistID = '" + dataID + "'  where User_ID ='" + id + "'";
+                com.CommandText = "update dbo.[User] set CurrentPlaylistID = '" + dataID + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
                 con.Close();
                 HttpContext.Session.SetString("CurrentPlaylistID", dataID);
@@ -296,7 +296,7 @@ namespace Muszilla.Controllers                                                  
 
                     if (!string.IsNullOrEmpty(songName))
                     {
-                        com.CommandText = "insert into Songs_Users(Song_Name, Song_Audio, Song_Owner, Song_Playlist_ID) values('" + songName + "', '" + addSongAudio + "', '" + id + "', '" + PlaylistID + "')";
+                        com.CommandText = "insert into SongsUsers(Song_Name, Song_Audio, Song_Owner, Song_Playlist_ID) values('" + songName + "', '" + addSongAudio + "', '" + id + "', '" + PlaylistID + "')";
 
                         com.ExecuteNonQuery();
                         con.Close();
@@ -346,7 +346,7 @@ namespace Muszilla.Controllers                                                  
 
                 if (!string.IsNullOrEmpty(deletePlaylist))
                 {
-                    com.CommandText = "delete from dbo.Songs_Users where Song_Playlist_ID = '" + deletePlaylist + "'";
+                    com.CommandText = "delete from dbo.SongsUsers where Song_Playlist_ID = '" + deletePlaylist + "'";
 
                     com.ExecuteNonQuery();
                     con.Close();
@@ -397,7 +397,7 @@ namespace Muszilla.Controllers                                                  
 
                 if (!string.IsNullOrEmpty(deleteSong))
                 {
-                    com.CommandText = "delete from dbo.Songs_Users where Song_ID = '" + deleteSong + "'";
+                    com.CommandText = "delete from dbo.SongsUsers where Song_ID = '" + deleteSong + "'";
 
                     com.ExecuteNonQuery();
                     con.Close();
@@ -432,7 +432,7 @@ namespace Muszilla.Controllers                                                  
             {
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "select c.CurrentPlaylistID, p.Playlist_ID  from consumer c, Playlist p where User_ID ='" + id + "'";
+                com.CommandText = "select u.CurrentPlaylistID, p.Playlist_ID  from dbo.[User] u, Playlist p where User_ID ='" + id + "'";
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
@@ -468,7 +468,7 @@ namespace Muszilla.Controllers                                                  
 
                 using (SqlConnection con = new SqlConnection(connection))
                 {
-                    string query = "insert into Consumer(FirstName, LastName, Email, Pass_word, isGoogleUser) values('" + add.FirstName + "', '" + add.LastName + "', '" + add.Email + "', '" + add.Pass_word + "', '0')";
+                    string query = "insert into dbo.[User](FirstName, LastName, Email, Password, isGoogleUser) values('" + add.FirstName + "', '" + add.LastName + "', '" + add.Email + "', '" + add.Pass_word + "', '0')";
                     using (SqlCommand com = new SqlCommand(query, con))
                     {
                         con.Open();
@@ -508,7 +508,7 @@ namespace Muszilla.Controllers                                                  
 
                     con.Open();
                     com.Connection = con;
-                    com.CommandText = "select User_ID, Picture from dbo.Consumer where Email = '" + email + "'";
+                    com.CommandText = "select User_ID, Picture from dbo.[User] where Email = '" + email + "'";
                     dr = com.ExecuteReader();
                     if (dr.Read())
                     {
@@ -538,22 +538,22 @@ namespace Muszilla.Controllers                                                  
 
                     if (FirstName != null)
                     {
-                        com.CommandText = "update Consumer set FirstName = '" + FirstName + "'  where User_ID ='" + ID + "'";
+                        com.CommandText = "update dbo.[User] set FirstName = '" + FirstName + "'  where User_ID ='" + ID + "'";
                         com.ExecuteNonQuery();
                     }
                     if (LastName != null)
                     {
-                        com.CommandText = "update Consumer set LastName = '" + LastName + "'  where User_ID ='" + ID + "'";
+                        com.CommandText = "update dbo.[User] set LastName = '" + LastName + "'  where User_ID ='" + ID + "'";
                         com.ExecuteNonQuery();
                     }
                     if (ImageURL != null)
                     {
-                        com.CommandText = "update Consumer set Picture = '" + ImageURL + "'  where User_ID ='" + ID + "'";
+                        com.CommandText = "update dbo.[User] set Picture = '" + ImageURL + "'  where User_ID ='" + ID + "'";
                         com.ExecuteNonQuery();
                     }
                     if (email != null)
                     {
-                        com.CommandText = "update Consumer set Email = '" + email + "'  where User_ID ='" + ID + "'";
+                        com.CommandText = "update dbo.[User] set Email = '" + email + "'  where User_ID ='" + ID + "'";
                         com.ExecuteNonQuery();
                     }
 
@@ -561,7 +561,7 @@ namespace Muszilla.Controllers                                                  
 
                     con.Open();
                     com.Connection = con;
-                    com.CommandText = "select User_ID, Picture from dbo.Consumer where Email = '" + email + "'";
+                    com.CommandText = "select User_ID, Picture from dbo.[User] where Email = '" + email + "'";
                     dr = com.ExecuteReader();
                     if (dr.Read())
                     {
@@ -632,19 +632,19 @@ namespace Muszilla.Controllers                                                  
             com.Connection = con;
             if (edit.FirstName != null)
             {
-                com.CommandText = "update Consumer set FirstName = '" + edit.FirstName + "'  where User_ID ='" + id + "'";
+                com.CommandText = "update dbo.[User] set FirstName = '" + edit.FirstName + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
                 HttpContext.Session.SetString("FirstName", edit.FirstName);
             }
             if (edit.LastName != null)
             {
-                com.CommandText = "update Consumer set LastName = '" + edit.LastName + "'  where User_ID ='" + id + "'";
+                com.CommandText = "update dbo.[User] set LastName = '" + edit.LastName + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
                 HttpContext.Session.SetString("LastName", edit.LastName);
             }
             if (edit.Email != null)
             {
-                com.CommandText = "update Consumer set Email = '" + edit.Email + "'  where User_ID ='" + id + "'";
+                com.CommandText = "update dbo.[User] set Email = '" + edit.Email + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
                 HttpContext.Session.SetString("Email", edit.Email);
             }
@@ -653,7 +653,7 @@ namespace Muszilla.Controllers                                                  
                 //Hash password
                 edit.Pass_word = HashHelper.GetHashString(edit.Pass_word);
 
-                com.CommandText = "update Consumer set Pass_word = '" + edit.Pass_word + "'  where User_ID ='" + id + "'";
+                com.CommandText = "update dbo.[User] set Password = '" + edit.Pass_word + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
                 HttpContext.Session.SetString("Pass_word", edit.Pass_word);
             }
@@ -983,7 +983,7 @@ namespace Muszilla.Controllers                                                  
                 //Get current playlistID from DB - Uncomment if Needed
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "select CurrentPlaylistID from Consumer where User_ID ='" + id + "'";
+                com.CommandText = "select CurrentPlaylistID from dbo.[User] where User_ID ='" + id + "'";
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
@@ -998,7 +998,7 @@ namespace Muszilla.Controllers                                                  
                 }
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "select * from Songs_Users where Song_Owner ='" + id + "' and Song_Playlist_ID ='" + currentPlaylist + "'";
+                com.CommandText = "select * from SongsUsers where Song_Owner ='" + id + "' and Song_Playlist_ID ='" + currentPlaylist + "'";
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
