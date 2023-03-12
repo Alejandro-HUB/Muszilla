@@ -1,7 +1,7 @@
 ﻿@using Alody.Models;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, AuthoringTagHelpers
-@model Alody.Models.LoginSingupModel
+@model Alody.Models.UserModel
 
 @{
     ViewData["Title"] = "Sign in Page";
@@ -36,12 +36,12 @@
         </header>
        <form asp-controller="Home" asp-action="Verify" method="post">
          <div class="form-group">
-            <input asp-for="ConsumerModel.Email" placeholder="Email" class="form-control rounded input-lg text-center no-border" 
+            <input asp-for="Email" placeholder="Email" class="form-control rounded input-lg text-center no-border" 
             name="Email" type="email" autocomplete="off" required="required">
           </div>
 
            <div class="form-group">
-            <input asp-for="ConsumerModel.Pass_word" placeholder="Password" class="form-control rounded input-lg text-center no-border" 
+            <input asp-for="Password" placeholder="Password" class="form-control rounded input-lg text-center no-border" 
             name="Pass_word" type="password" autocomplete="off" required="required">
           </div>
 

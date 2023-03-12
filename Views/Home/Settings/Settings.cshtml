@@ -1,5 +1,5 @@
 ﻿@using Alody.Models
-@model Tuple<Alody.Models.ConsumerModel,Alody.Models.AzureStorageConfig,Alody.Models.SongsModel,Alody.Models.PlaylistModel>
+@model Tuple<Alody.Models.UserModel,Alody.Models.AzureStorageConfig,Alody.Models.SongsModel,Alody.Models.PlaylistModel>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, AuthoringTagHelpers
 @{
@@ -270,7 +270,7 @@
                                                             <form asp-controller="Images" asp-action="Upload" class="dropzone" id="imgUpload" method="post" enctype="multipart/form" onclick="return false">
                                                                 <div class="dz-message needsclick">
                                                                     <span class="note needsclick">
-                                                                        <input asp-for="Item1.Picture" name="Picture" id="imgUpload"  accept="image/*">
+                                                                        <input asp-for="Item1.ImageURL" name="Picture" id="imgUpload"  accept="image/*">
                                                                     </span>
 
                                                                 </div>
@@ -311,7 +311,7 @@
                                                                 <p id="p">
                                                                     Password:
                                                                     <!-- this gets the user's password-->
-                                                                    <input id="UPassword" asp-for="Item1.Pass_word" name="Pass_word" class="form-control text" type="password" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
+                                                                    <input id="UPassword" asp-for="Item1.Password" name="Pass_word" class="form-control text" type="password" autocomplete="off" placeholder="@ViewBag.Pass_word"><br /><br />
                                                                     <input style="color:white;" contenteditable="true" type="checkbox" onclick="showPassword()" id="SPassword">Show Password
                                                                 </p>
                                                                 <p id="edit_four">(Click to edit)</p>

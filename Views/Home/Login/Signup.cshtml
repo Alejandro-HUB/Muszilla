@@ -1,7 +1,7 @@
 ﻿@using Alody.Models;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, AuthoringTagHelpers
-@model Alody.Models.LoginSingupModel
+@model Alody.Models.UserModel
 
 @{
     ViewData["Title"] = "Login Page";
@@ -37,23 +37,23 @@
         <form asp-controller="Home" asp-action="Create" method="post">
             <div aps-validation-summary="ValidationSumarry.All" class="text-danger"></div>
           <div class="form-group">
-            <input asp-for="RegisterModel.FirstName" placeholder="FirstName" class="form-control rounded input-lg text-center no-border" 
+            <input asp-for="FirstName" placeholder="FirstName" class="form-control rounded input-lg text-center no-border" 
             name="FirstName" type="text" autocomplete="off" required="required">
           </div>
 
 
            <div class="form-group">
-            <input asp-for="RegisterModel.LastName" placeholder="LastName" class="form-control rounded input-lg text-center no-border" 
+            <input asp-for="LastName" placeholder="LastName" class="form-control rounded input-lg text-center no-border" 
             name="LastName" type="text" autocomplete="off" required="required">
           </div>
 
           <div class="form-group">
-            <input asp-for="RegisterModel.Email" placeholder="Email" class="form-control rounded input-lg text-center no-border" 
+            <input asp-for="Email" placeholder="Email" class="form-control rounded input-lg text-center no-border" 
             name="Email" type="email" autocomplete="off" required="required">
           </div>
 
            <div class="form-group">
-            <input asp-for="RegisterModel.Pass_word" placeholder="Password" class="form-control rounded input-lg text-center no-border" 
+            <input asp-for="Password" placeholder="Password" class="form-control rounded input-lg text-center no-border" 
             name="Pass_word" type="password" autocomplete="off" required="required">
           </div>
 

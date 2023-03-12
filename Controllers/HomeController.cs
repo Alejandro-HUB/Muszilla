@@ -18,6 +18,7 @@ using com.sun.tools.@internal.ws.processor.model;
 using System.Text.Json;
 using System.Data;
 using System.ComponentModel.DataAnnotations;
+using DBContext;
 
 namespace Alody.Controllers                                                            //**This controller handles the CRUD functionalities** By Alejandro Lopez
 {
@@ -33,10 +34,6 @@ namespace Alody.Controllers                                                     
         SqlCommand command = new SqlCommand();
         PlaylistModel playlistModel = new PlaylistModel();
         SongsModel songsModel = new SongsModel();
-        ConsumerModel consumer = new ConsumerModel();
-        Register reg = new Register();
-        LoginSingupModel login = new LoginSingupModel();
-
 
         AzureStorageConfig storage = new AzureStorageConfig();
 
@@ -47,12 +44,12 @@ namespace Alody.Controllers                                                     
         public IActionResult Login()
         {
 
-            return View("Login/Signin",login);
+            return View("Login/Signin");
         }
         public IActionResult Signup()
         {
 
-            return View("Login/Signup",login);
+            return View("Login/Signup");
         }
         public IActionResult Help()
         {
@@ -69,7 +66,7 @@ namespace Alody.Controllers                                                     
             FetchSongData();
             FeaturedSongs();
             TopPickedSongs();
-            return View("Help/HelpPage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            return View("Help/HelpPage", Tuple.Create(storage, songsModel, playlistModel));
         }
         public IActionResult Profile()
         {
@@ -85,7 +82,7 @@ namespace Alody.Controllers                                                     
             FetchSongData();
             FeaturedSongs();
             TopPickedSongs();
-            return View("Profile/Profile", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            return View("Profile/Profile", Tuple.Create(storage, songsModel, playlistModel));
         }
         public IActionResult Notifications()
         {
@@ -105,79 +102,12 @@ namespace Alody.Controllers                                                     
             FetchSongData();
             FeaturedSongs();
             TopPickedSongs();
-            return View("Settings/Settings", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            return View("Settings/Settings", Tuple.Create(storage, songsModel, playlistModel));
         }
         public void ConnectionString()
         {
             con.ConnectionString = Alody.Properties.Resources.ConnectionString;
             connect.ConnectionString = Alody.Properties.Resources.ConnectionString;
-        }
-        public IActionResult Verify( ConsumerModel acc, SongsModel song) //Checks if the user's email and password matches one inside the database
-        {
-            if (ModelState.IsValid)
-            {
-                Console.WriteLine("Go");
-            }
-            string fn = "";
-            string ln = "";
-            string url = "";
-            string id = "";
-            string isGoogleUser = "";
-            FetchPlaylistData();
-            FetchSongData();
-            FeaturedSongs();
-            TopPickedSongs();
-            GetListofPlaylistIDs();
-            ConnectionString();
-            acc.Pass_word = HashHelper.GetHashString(acc.Pass_word);
-
-            con.Open();
-            com.Connection = con;
-            com.CommandText = "select isGoogleUser from dbo.Consumer where Email = '" + acc.Email + "'";
-            dr = com.ExecuteReader();
-            if (dr.Read())
-            {
-                isGoogleUser = dr["isGoogleUser"].ToString();
-            }
-            con.Close();
-
-            if (isGoogleUser.Contains("1"))
-            {
-                ViewBag.Message = "Please login using Google";
-                return View("Login/Signin");
-            }
-            else
-            {
-                con.Open();
-                com.Connection = con;
-                com.CommandText = "select User_ID, Email, Pass_word, FirstName, LastName, Picture, isGoogleUser from Consumer where Email = '" + acc.Email + "' and Pass_word = '" + acc.Pass_word + "'";
-                dr = com.ExecuteReader();
-                if (dr.Read())
-                {
-
-                    fn = dr["FirstName"].ToString();
-                    ln = dr["LastName"].ToString();
-                    url = dr["Picture"].ToString();
-                    id = dr["User_ID"].ToString();
-                    con.Close();
-                    HttpContext.Session.SetString("User_ID", id);
-                    HttpContext.Session.SetString("Email", acc.Email);
-                    HttpContext.Session.SetString("Pass_word", acc.Pass_word);
-                    HttpContext.Session.SetString("FirstName", fn);
-                    HttpContext.Session.SetString("LastName", ln);
-                    HttpContext.Session.SetString("Picture", url);
-                    HttpContext.Session.SetString("isGoogleUser", isGoogleUser);
-
-                    return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel));
-
-                }
-                else
-                {
-                    con.Close();
-                    ViewBag.Message = "Email or Password Incorrect";
-                    return View("Login/Signin");
-                }
-            } 
         }
 
         public void FeaturedSongs()
@@ -266,9 +196,9 @@ namespace Alody.Controllers                                                     
                 FetchSongData();
                 FeaturedSongs();
                 TopPickedSongs();
-                return View("HomePage/Index", Tuple.Create(consumer, storage, songsModel, playlistModel));
+                return View("HomePage/Index", Tuple.Create(storage, songsModel, playlistModel));
             }
-            return View(Tuple.Create(consumer, storage, songsModel));
+            return View(Tuple.Create(storage, songsModel));
         }
 
         [HttpPost]
@@ -519,7 +449,7 @@ namespace Alody.Controllers                                                     
         }
 
         [HttpPost]
-        public IActionResult Create(Register add) // Adding a new user inside the database
+        public IActionResult Create(UserModel add) // Adding a new user inside the database
         {
             string connection = Alody.Properties.Resources.ConnectionString;
             bool validEmail = false;
@@ -532,11 +462,11 @@ namespace Alody.Controllers                                                     
             if (validEmail)
             {
                 //Hash password
-                add.Pass_word = HashHelper.GetHashString(add.Pass_word);
+                add.Password = HashHelper.GetHashString(add.Password);
 
                 using (SqlConnection con = new SqlConnection(connection))
                 {
-                    string query = "insert into Consumer(FirstName, LastName, Email, Pass_word, isGoogleUser) values('" + add.FirstName + "', '" + add.LastName + "', '" + add.Email + "', '" + add.Pass_word + "', '0')";
+                    string query = "insert into Consumer(FirstName, LastName, Email, Pass_word, isGoogleUser) values('" + add.FirstName + "', '" + add.LastName + "', '" + add.Email + "', '" + add.Password + "', '0')";
                     using (SqlCommand com = new SqlCommand(query, con))
                     {
                         con.Open();
@@ -544,7 +474,7 @@ namespace Alody.Controllers                                                     
                         ViewBag.Message = "New User inserted succesfully!";
                     }
                     con.Close();
-                    return View("Login/Signin",  login);
+                    return View("Login/Signin");
                 }
             }
             ViewBag.Message = "Please enter a valid email. Example: email@domain.com";
@@ -593,7 +523,7 @@ namespace Alody.Controllers                                                     
                     HttpContext.Session.SetString("isGoogleUser", "1");
 
 
-                    return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel));
+                    return RedirectToAction("Homepage", Tuple.Create(storage, songsModel));
                 }
             }
             else
@@ -665,7 +595,7 @@ namespace Alody.Controllers                                                     
                 HttpContext.Session.SetString("isGoogleUser", "1");
 
 
-                return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel));
+                return RedirectToAction("Homepage", Tuple.Create(storage, songsModel));
             }
 
         }
@@ -686,7 +616,7 @@ namespace Alody.Controllers                                                     
             return RedirectToAction("Login");
         }
 
-        public IActionResult Update(ConsumerModel edit) //Updates fields inside the database
+        public IActionResult Update(UserModel edit) //Updates fields inside the database
         {
             string id = "";
             FetchPlaylistData();
@@ -716,23 +646,23 @@ namespace Alody.Controllers                                                     
                 com.ExecuteNonQuery();
                 HttpContext.Session.SetString("Email", edit.Email);
             }
-            if (edit.Pass_word != null)
+            if (edit.Password != null)
             {
                 //Hash password
-                edit.Pass_word = HashHelper.GetHashString(edit.Pass_word);
+                edit.Password = HashHelper.GetHashString(edit.Password);
 
-                com.CommandText = "update Consumer set Pass_word = '" + edit.Pass_word + "'  where User_ID ='" + id + "'";
+                com.CommandText = "update Consumer set Pass_word = '" + edit.Password + "'  where User_ID ='" + id + "'";
                 com.ExecuteNonQuery();
-                HttpContext.Session.SetString("Pass_word", edit.Pass_word);
+                HttpContext.Session.SetString("Pass_word", edit.Password);
             }
             else
             {
                 con.Close();
-                return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+                return RedirectToAction("Homepage", Tuple.Create(storage, songsModel, playlistModel));
             }
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
             con.Close();
-            return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            return RedirectToAction("Homepage", Tuple.Create(storage, songsModel, playlistModel));
         }
 
         public IActionResult CreatePlaylist(PlaylistModel createPlaylist)
@@ -753,11 +683,11 @@ namespace Alody.Controllers                                                     
                         ViewBag.Message = "New Playlist inserted succesfully!";
                     }
                     con.Close();
-                    return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+                    return RedirectToAction("Homepage", Tuple.Create(storage, songsModel, playlistModel));
                 }
             }
             ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-            return RedirectToAction("Homepage", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            return RedirectToAction("Homepage", Tuple.Create(storage, songsModel, playlistModel));
         }
 
 
@@ -847,14 +777,14 @@ namespace Alody.Controllers                                                     
 
                     songsModel.searchedSongsList = songListFromDB;
                     ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-                    return PartialView("HomePage/Index", Tuple.Create(consumer, storage, songsModel, playlistModel));
+                    return PartialView("HomePage/Index", Tuple.Create(storage, songsModel, playlistModel));
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
             }
-            return PartialView("HomePage/Index", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            return PartialView("HomePage/Index", Tuple.Create(storage, songsModel, playlistModel));
         }
 
         public IActionResult sortSongsByDate()
@@ -906,14 +836,14 @@ namespace Alody.Controllers                                                     
 
                     songsModel.searchedSongsList = songListFromDB;
                     ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-                    return PartialView("HomePage/Index", Tuple.Create(consumer, storage, songsModel, playlistModel));
+                    return PartialView("HomePage/Index", Tuple.Create(storage, songsModel, playlistModel));
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
             }
-            return PartialView("HomePage/Index", Tuple.Create(consumer, storage, songsModel, playlistModel));
+            return PartialView("HomePage/Index", Tuple.Create(storage, songsModel, playlistModel));
         }
 
         public IActionResult searchForAllSongs()
@@ -963,7 +893,7 @@ namespace Alody.Controllers                                                     
 
                 songsModel.searchedSongsList = songListFromDB;
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-                return PartialView("HomePage/Index", Tuple.Create(consumer, storage, songsModel, playlistModel));
+                return PartialView("HomePage/Index", Tuple.Create(storage, songsModel, playlistModel));
             }
             catch (Exception ex)
             {
@@ -1026,7 +956,7 @@ namespace Alody.Controllers                                                     
 
                 songsModel.searchedSongsList = songListFromDB;
                 ViewBag.CurrentPlaylistID = HttpContext.Session.GetString("CurrentPlaylistID");
-                return PartialView("HomePage/Index", Tuple.Create(consumer, storage, songsModel, playlistModel));
+                return PartialView("HomePage/Index", Tuple.Create(storage, songsModel, playlistModel));
             }
             catch (Exception ex)
             {

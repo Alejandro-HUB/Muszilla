@@ -70,7 +70,7 @@ namespace Alody.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data Source=aws-dev-alejandro.cbar8pduafgh.us-east-1.rds.amazonaws.com,1433;Initial Catalog=MuszillaDB;Persist Security Info=True;User ID=admin;Password=*67cFeuqL$]xySKr.
+        ///   Looks up a localized string similar to Data Source=aws-dev-alejandro.cbar8pduafgh.us-east-1.rds.amazonaws.com,1433;Initial Catalog=MuszillaDB;Persist Security Info=True;User ID=admin;Password=Dgm!zZu3V_rVaer.
         /// </summary>
         internal static string ConnectionString {
             get {

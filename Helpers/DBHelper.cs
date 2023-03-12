@@ -22,7 +22,7 @@ namespace Alody.Helpers
 
         public bool ContainsGoogleUser(string IncomingUser)
         {
-            List<RegisterGoogle> UsersFromDB = new List<RegisterGoogle>();
+            List<UserModel> UsersFromDB = new List<UserModel>();
             string connection = Alody.Properties.Resources.ConnectionString;
             using (SqlConnection con = new SqlConnection(connection))
             {
@@ -32,7 +32,7 @@ namespace Alody.Helpers
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    UsersFromDB.Add(new RegisterGoogle()
+                    UsersFromDB.Add(new UserModel()
                     {
                         FirstName = dr["FirstName"].ToString(),
                         LastName = dr["LastName"].ToString(),
