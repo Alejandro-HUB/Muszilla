@@ -75,7 +75,7 @@ namespace Alody
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Login}/{id=UrlParameter.Optional}");
+                    pattern: "{controller=Login}/{action=Login}/{id=UrlParameter.Optional}");
             });
         }
     }
