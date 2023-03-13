@@ -1,14 +1,14 @@
-﻿/****** Object:  Table [dbo].[Consumer]    Script Date: 4/22/2021 6:44:08 PM ******/
+﻿/****** Object:  Table [dbo].[User]    Script Date: 4/22/2021 6:44:08 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Consumer](
+CREATE TABLE [dbo].[User](
 	[User_ID] [int] IDENTITY(1,1) NOT NULL,
 	[FirstName] [varchar](50) NULL,
 	[LastName] [varchar](50) NULL,
 	[Email] [varchar](50) NULL,
-	[Pass_word] [varchar](50) NULL,
+	[Password] [varchar](50) NULL,
 	[CreatedDate] [datetime] NULL,
 	[Picture] [varchar](max) NULL,
 	[CurrentPlaylistID] [int] NULL,
@@ -34,12 +34,12 @@ CREATE TABLE [dbo].[Playlist](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Songs_Users]    Script Date: 4/22/2021 6:44:08 PM ******/
+/****** Object:  Table [dbo].[SongsUsers]    Script Date: 4/22/2021 6:44:08 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Songs_Users](
+CREATE TABLE [dbo].[SongsUsers](
 	[Song_ID] [int] IDENTITY(1,1) NOT NULL,
 	[Song_Name] [varchar](max) NULL,
 	[Song_Audio] [varchar](max) NULL,
@@ -91,17 +91,17 @@ PRIMARY KEY CLUSTERED
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[Consumer] ADD  CONSTRAINT [DF_Users_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_Users_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
 GO
 ALTER TABLE [dbo].[Playlist]  WITH CHECK ADD  CONSTRAINT [User_FK] FOREIGN KEY([User_ID_FK])
-REFERENCES [dbo].[Consumer] ([User_ID])
+REFERENCES [dbo].[User] ([User_ID])
 GO
 ALTER TABLE [dbo].[Playlist] CHECK CONSTRAINT [User_FK]
 GO
-ALTER TABLE [dbo].[Songs_Users]  WITH CHECK ADD  CONSTRAINT [FK_Songs_Owner] FOREIGN KEY([Song_Owner])
-REFERENCES [dbo].[Consumer] ([User_ID])
+ALTER TABLE [dbo].[SongsUsers]  WITH CHECK ADD  CONSTRAINT [FK_Songs_Owner] FOREIGN KEY([Song_Owner])
+REFERENCES [dbo].[User] ([User_ID])
 GO
-ALTER TABLE [dbo].[Songs_Users] CHECK CONSTRAINT [FK_Songs_Owner]
+ALTER TABLE [dbo].[SongsUsers] CHECK CONSTRAINT [FK_Songs_Owner]
 GO
 EXEC sys.sp_addextendedproperty @name=N'microsoft_database_tools_support', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'sysdiagrams'
 GO

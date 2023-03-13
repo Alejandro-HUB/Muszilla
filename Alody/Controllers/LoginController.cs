@@ -3,6 +3,7 @@ using AutoMapper;
 using DBContext.Models;
 using Handlers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Requests;
 using Responses;
 using System.Threading.Tasks;
@@ -10,20 +11,21 @@ using ViewModels;
 
 namespace Alody.Controllers
 {
-    [Route("api/[controller]")]
     public class LoginController : Controller
     {
-        private MapperConfiguration _mapperConfiguration;
-        private Mapper _mapper;
+        private IMapper _mapper;
         private MuszillaDbContext _dbContext;
-        public LoginController(MapperConfiguration mapperConfiguration, MuszillaDbContext dbContext)
+        public LoginController(IMapper mapper, MuszillaDbContext dbContext)
         {
-            _mapperConfiguration = mapperConfiguration;
-            _mapper = new Mapper(mapperConfiguration);
+            _mapper = mapper;
             _dbContext = dbContext;
         }
-        [HttpPost]
-        [Route("Login")]
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult Login(UserModel user)
         {
             LoginRequestHandler handler = new LoginRequestHandler(_dbContext);

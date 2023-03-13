@@ -7,13 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Alody.Models;
 using System.Data.SqlClient;
-using Sitecore.FakeDb;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Session;
 using Microsoft.Extensions.Options;
 using Alody.Helpers;
 using System.IO;
-using javax.jws;
 using System.Text.RegularExpressions;
 using System.Text;
 

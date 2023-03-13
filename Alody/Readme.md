@@ -1,1 +1,0 @@
-The website provides access to a song database with which the user can interact through a GUI. To create a web application that connects to a database on a server through a web API made in .NET core.
