@@ -27,3 +27,5 @@
 /.vs/Alody/FileContentIndex/90b7d1cf-8771-4d29-b364-51c62c657047.vsidx
 /.vs/Alody/FileContentIndex/bc0cfb39-1427-4012-a65d-62fa06ee676a.vsidx
 /ProjectEvaluation
+/DBContext/obj
+/DBContext/bin/Debug/net6.0
