@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AzureContainerString" xml:space="preserve">
-    <value>DefaultEndpointsProtocol=https;AccountName=devstorageale;AccountKey=l2Fo6os7kVCIZZ992p5NavyHar3SjUMQStiV1Ac89NLSJOOTPu6RAlmf9QoRGnoILvPZpYYePFkl+AStmsx10w==;EndpointSuffix=core.windows.net</value>
-    <comment>Azure Blob Container</comment>
-  </data>
   <data name="ConnectionString" xml:space="preserve">
     <value>Data Source=aws-dev-alejandro.cbar8pduafgh.us-east-1.rds.amazonaws.com,1433;Initial Catalog=MuszillaDB;Persist Security Info=True;User ID=admin;Password=Dgm!zZu3V_rVaer</value>
     <comment>SQL Server Connection</comment>

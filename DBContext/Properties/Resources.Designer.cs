@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Alody.Properties {
+namespace DBContext.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Alody.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Alody.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DBContext.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,15 +57,6 @@ namespace Alody.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DefaultEndpointsProtocol=https;AccountName=devstorageale;AccountKey=l2Fo6os7kVCIZZ992p5NavyHar3SjUMQStiV1Ac89NLSJOOTPu6RAlmf9QoRGnoILvPZpYYePFkl+AStmsx10w==;EndpointSuffix=core.windows.net.
-        /// </summary>
-        internal static string AzureContainerString {
-            get {
-                return ResourceManager.GetString("AzureContainerString", resourceCulture);
             }
         }
         
