@@ -6,6 +6,10 @@ import LoginForm from "./components/Login";
 const AppRoutes = [
     {
         index: true,
+        element: <Home />
+    },
+    {
+        path: '/login',
         element: <LoginForm />
     },
     {
