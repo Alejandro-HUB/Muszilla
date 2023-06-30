@@ -28,4 +28,4 @@ Contributions to Muszilla are welcome! If you encounter any issues or have sugge
 
 ## License
 
-Muszilla is released under the [MIT License]([https://github.com/Alejandro-HUB/Muszilla/blob/main/LICENSE](https://github.com/Alejandro-HUB/Muszilla/blob/master/LICENSE)https://github.com/Alejandro-HUB/Muszilla/blob/master/LICENSE).
+Muszilla is released under the [MIT License](https://github.com/Alejandro-HUB/Muszilla/blob/master/LICENSE).
